@@ -101,10 +101,10 @@ window.PRODUCTS = [
       "DC load": "up to 20A (battery-free)"
     },
     "images": [
-      "https://www.zamzamstore.com.pk/cdn/shop/files/simtek-planet40-40a-mppt-solar-charge-controller-6-months-warranty-2436572.jpg?v=1784028553&width=1000",
-      "https://www.zamzamstore.com.pk/cdn/shop/files/simtek-planet40-40a-mppt-solar-charge-controller-6-months-warranty-6845162.jpg?v=1784028553&width=1000",
-      "https://www.zamzamstore.com.pk/cdn/shop/files/simtek-planet40-40a-mppt-solar-charge-controller-6-months-warranty-7820654.jpg?v=1784028552&width=1000",
-      "https://www.zamzamstore.com.pk/cdn/shop/files/simtek-planet40-40a-mppt-solar-charge-controller-6-months-warranty-4295996.png?v=1785246855&width=1000"
+      "images/products/simtek-planet40-1.jpg",
+      "images/products/simtek-planet40-2.jpg",
+      "images/products/simtek-planet40-3.jpg",
+      "images/products/simtek-planet40-4.jpg"
     ],
     "variants": [
       {
