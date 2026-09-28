@@ -132,6 +132,9 @@ function placeholderSvg(p, index) {
 </svg>`;
 }
 
+const toSrc = (x) => /^https?:/i.test(x) ? x : '/' + String(x).replace(/^\/+/, '');
+const toAbsUrl = (x) => /^https?:/i.test(x) ? x : SITE + '/' + String(x).replace(/^\/+/, '');
+
 function escapeXml(s) {
   return String(s).replace(/[<>&'"]/g, c => ({ '<':'&lt;', '>':'&gt;', '&':'&amp;', "'":'&apos;', '"':'&quot;' }[c]));
 }
@@ -143,6 +146,7 @@ fs.mkdirSync(path.join(ROOT, 'images', 'products'), { recursive: true });
 let placeholderCount = 0;
 for (const p of products) {
   p.images.forEach((img, i) => {
+    if (/^https?:/i.test(img)) return;   // remote photo - nothing to generate
     const abs = path.join(ROOT, img);
     // Only generate artwork when the real photo is not there yet.
     if (!fs.existsSync(abs)) {
@@ -264,7 +268,7 @@ fs.mkdirSync(path.join(ROOT, 'products'), { recursive: true });
 
 for (const p of products) {
   const url = `${SITE}/products/${p.slug}.html`;
-  const ogImg = `${SITE}/${p.images[0]}`;
+  const ogImg = toAbsUrl(p.images[0]);
   const offers = p.variants.map(v => ({
     '@type': 'Offer',
     name: v.name,
@@ -279,7 +283,7 @@ for (const p of products) {
     name: p.title.en,
     sku: p.sku,
     brand: { '@type': 'Brand', name: p.brand },
-    image: p.images.map(i => `${SITE}/${i}`),
+    image: p.images.map(i => toAbsUrl(i)),
     description: p.summary.en,
     category: p.category,
     offers: offers.length === 1 ? offers[0] : { '@type': 'AggregateOffer', lowPrice: Math.min(...offers.map(o => o.price)), highPrice: Math.max(...offers.map(o => o.price)), priceCurrency: 'PKR', offerCount: offers.length, offers },
@@ -304,9 +308,9 @@ ${siteHeader('shop')}
 
   <div class="pdp-page-grid">
     <div class="pdp-page-media">
-      <img id="pdpMainImg" class="pdp-main-img" src="/${p.images[0]}" alt="${escapeHtml(p.title.en)}" width="800" height="800" fetchpriority="high">
+      <img id="pdpMainImg" class="pdp-main-img" src="${toSrc(p.images[0])}" alt="${escapeHtml(p.title.en)}" width="800" height="800" fetchpriority="high">
       ${p.images.length > 1 ? `<div class="pdp-thumbs" role="group" aria-label="Product images">
-        ${p.images.map((img, i) => `<button type="button" class="pdp-thumb${i === 0 ? ' active' : ''}" data-image-index="${i}" aria-label="Show image ${i + 1}"><img src="/${img}" alt="" width="80" height="80" loading="lazy"></button>`).join('\n        ')}
+        ${p.images.map((img, i) => `<button type="button" class="pdp-thumb${i === 0 ? ' active' : ''}" data-image-index="${i}" aria-label="Show image ${i + 1}"><img src="${toSrc(img)}" alt="" width="80" height="80" loading="lazy"></button>`).join('\n        ')}
       </div>` : ''}
     </div>
 
@@ -384,7 +388,7 @@ ${siteHeader('shop')}
     <div class="related-grid">
       ${products.filter(x => x.category === p.category && x.id !== p.id).slice(0, 4).map(r => `
       <a class="related-card" href="/products/${r.slug}.html">
-        <img src="/${r.images[0]}" alt="${escapeHtml(r.title.en)}" width="200" height="200" loading="lazy">
+        <img src="${toSrc(r.images[0])}" alt="${escapeHtml(r.title.en)}" width="200" height="200" loading="lazy">
         <div class="related-title">${escapeHtml(r.title.en)}</div>
         <div class="related-price">Rs. ${r.price.toLocaleString('en-PK')}</div>
       </a>`).join('\n      ')}

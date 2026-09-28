@@ -79,6 +79,67 @@
           "extraCost": 0
         }
       ]
+    },
+    {
+      "id": 2,
+      "slug": "simtek-planet40-40a-mppt-solar-charge-controller",
+      "sku": "HRL-SOL-002",
+      "brand": "Simtek",
+      "category": "Solar",
+      "stock": 10,
+      "warranty": "6 months Simtek service warranty (as listed by the supplier).",
+      "title": {
+        "en": "Simtek Planet40 40A MPPT Solar Charge Controller (70 VOC)",
+        "ur": "سمٹیک Planet40 40A MPPT سولر چارج کنٹرولر (70 VOC)"
+      },
+      "price": 8000,
+      "oldPrice": 10500,
+      "summary": {
+        "en": "Economical high-efficiency MPPT solar charge controller, 40A output, 70V VOC, for 12V battery systems. Can run DC loads up to 20A without a battery.",
+        "ur": "کفایتی اور موثر MPPT سولر چارج کنٹرولر، 40A آؤٹ پٹ، 70V VOC، 12V بیٹری سسٹم کے لیے۔ بیٹری کے بغیر 20A تک DC لوڈ چلا سکتا ہے۔"
+      },
+      "features": {
+        "en": [
+          "Advanced MPPT technology - faster, more efficient charging",
+          "70 VOC, 40A output for high-voltage solar arrays",
+          "For 12V battery systems",
+          "Direct DC load support up to 20A - can run without a battery",
+          "DC load cutoff on low battery to prevent deep discharge",
+          "Fully automatic operation",
+          "Low-voltage and overheat protection",
+          "Works with all battery types"
+        ],
+        "ur": [
+          "جدید MPPT ٹیکنالوجی - تیز اور موثر چارجنگ",
+          "70 VOC، 40A آؤٹ پٹ",
+          "12V بیٹری سسٹم کے لیے",
+          "20A تک براہ راست DC لوڈ - بیٹری کے بغیر بھی چلتا ہے",
+          "لو بیٹری پر DC لوڈ کٹ آف",
+          "مکمل خودکار آپریشن",
+          "لو وولٹیج اور اوور ہیٹ پروٹیکشن",
+          "ہر قسم کی بیٹری کے ساتھ چلتا ہے"
+        ]
+      },
+      "specs": {
+        "Model": "Planet40 (ECO Series)",
+        "Type": "MPPT (non-hybrid)",
+        "Max charge current": "40A",
+        "Max PV input (VOC)": "70V",
+        "Battery system": "12V",
+        "DC load": "up to 20A (battery-free)"
+      },
+      "images": [
+        "https://www.zamzamstore.com.pk/cdn/shop/files/simtek-planet40-40a-mppt-solar-charge-controller-6-months-warranty-2436572.jpg?v=1784028553&width=1000",
+        "https://www.zamzamstore.com.pk/cdn/shop/files/simtek-planet40-40a-mppt-solar-charge-controller-6-months-warranty-6845162.jpg?v=1784028553&width=1000",
+        "https://www.zamzamstore.com.pk/cdn/shop/files/simtek-planet40-40a-mppt-solar-charge-controller-6-months-warranty-7820654.jpg?v=1784028552&width=1000",
+        "https://www.zamzamstore.com.pk/cdn/shop/files/simtek-planet40-40a-mppt-solar-charge-controller-6-months-warranty-4295996.png?v=1785246855&width=1000"
+      ],
+      "variants": [
+        {
+          "name": "Default (40A)",
+          "extraCost": 0
+        }
+      ]
     }
   ]
 }

@@ -121,7 +121,8 @@
     });
     return i;
   }
-  function $(sel, root) { return (root || document).querySelector(sel); }
+  function imgSrc(x) { return /^https?:/i.test(x) ? x : '/' + String(x).replace(/^\/+/, ''); }
+function $(sel, root) { return (root || document).querySelector(sel); }
   function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
   /* --------------------------------------------------------------- toast */
@@ -275,7 +276,7 @@
     modal = { productId: id, variantIndex: 0, qty: 1, imageIndex: 0 };
     var node = $('#pdpModal');
     var main = $('#pdpMainImg');
-    main.src = p.images[0];
+    main.src = imgSrc(p.images[0]);
     main.alt = p.title.en;
     $('#pdpTitle').textContent = p.title.en;
     $('#pdpBrand').textContent = p.brand + ' · SKU ' + p.sku;
@@ -290,7 +291,7 @@
           type: 'button', class: 'pdp-thumb' + (i === 0 ? ' active' : ''),
           'aria-label': 'Show image ' + (i + 1), 'aria-pressed': i === 0 ? 'true' : 'false',
           onclick: function () { selectImage(i); }
-        }, [img(src, '', { w: 80, h: 80 })]));
+        }, [img(imgSrc(src), '', { w: 80, h: 80 })]));
       });
     } else { thumbs.style.display = 'none'; }
 
@@ -321,7 +322,7 @@
     if (relSection) relSection.style.display = related.length ? '' : 'none';
     related.forEach(function (r) {
       rel.appendChild(el('a', { class: 'related-card', href: '/products/' + r.slug + '.html' }, [
-        img('/' + r.images[0], r.title.en, { w: 200, h: 200 }),
+        img(imgSrc(r.images[0]), r.title.en, { w: 200, h: 200 }),
         el('div', { class: 'related-title', text: r.title.en }),
         el('div', { class: 'related-price', text: money(r.price) })
       ]));
@@ -335,7 +336,7 @@
   function selectImage(i) {
     var p = findProduct(modal.productId);
     modal.imageIndex = i;
-    $('#pdpMainImg').src = p.images[i];
+    $('#pdpMainImg').src = imgSrc(p.images[i]);
     $$('#pdpThumbs .pdp-thumb').forEach(function (b, idx) {
       b.classList.toggle('active', idx === i);
       b.setAttribute('aria-pressed', idx === i ? 'true' : 'false');
@@ -410,7 +411,7 @@
         onclick: function () { openProductModal(p.id); }
       }, [
         d > 0 ? el('span', { class: 'discount-badge', text: '-' + d + '%' }) : null,
-        img(p.images[0], p.title.en, { class: 'product-image', w: 400, h: 400 }),
+        img(imgSrc(p.images[0]), p.title.en, { class: 'product-image', w: 400, h: 400 }),
         el('div', {}, [
           el('h3', { class: 'product-title', text: lang === 'ur' && p.title.ur ? p.title.ur : p.title.en }),
           el('div', { class: 'price-box' }, [
@@ -812,7 +813,7 @@
     $$('.pdp-thumb').forEach(function (b) {
       b.addEventListener('click', function () {
         var i = parseInt(b.dataset.imageIndex, 10);
-        $('#pdpMainImg').src = p.images[i];
+        $('#pdpMainImg').src = imgSrc(p.images[i]);
         $$('.pdp-thumb').forEach(function (x) { x.classList.toggle('active', x === b); });
       });
     });
