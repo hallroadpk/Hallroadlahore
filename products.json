@@ -1,11 +1,31 @@
 {
   "_comment": "SINGLE SOURCE OF TRUTH for the catalog. Edit this file, then run: npm run build. Never edit generated files (products.js, products/*.html, sitemap.xml).",
   "categories": [
-    { "id": "All",         "en": "All Products",    "ur": "تمام پروڈکٹس" },
-    { "id": "Inverters",   "en": "Inverters",       "ur": "انورٹرز" },
-    { "id": "Chargers",    "en": "Battery Chargers","ur": "بیٹری چارجرز" },
-    { "id": "Solar",       "en": "Solar Accessories","ur": "سولر ایکسیسریز" },
-    { "id": "WaterHeaters","en": "Water Heaters",   "ur": "واٹر ہیٹرز" }
+    {
+      "id": "All",
+      "en": "All Products",
+      "ur": "تمام پروڈکٹس"
+    },
+    {
+      "id": "Inverters",
+      "en": "Inverters",
+      "ur": "انورٹرز"
+    },
+    {
+      "id": "Chargers",
+      "en": "Battery Chargers",
+      "ur": "بیٹری چارجرز"
+    },
+    {
+      "id": "Solar",
+      "en": "Solar Accessories",
+      "ur": "سولر ایکسیسریز"
+    },
+    {
+      "id": "WaterHeaters",
+      "en": "Water Heaters",
+      "ur": "واٹر ہیٹرز"
+    }
   ],
   "products": [
     {
@@ -16,7 +36,10 @@
       "category": "WaterHeaters",
       "stock": 12,
       "warranty": "12 months manufacturer replacement warranty.",
-      "title": { "en": "Instant Electric Water Heater Tap - Digital Display", "ur": "انسٹنٹ الیکٹرک واٹر ہیٹر ٹیپ - ڈیجیٹل ڈسپلے" },
+      "title": {
+        "en": "Instant Electric Water Heater Tap - Digital Display",
+        "ur": "انسٹنٹ الیکٹرک واٹر ہیٹر ٹیپ - ڈیجیٹل ڈسپلے"
+      },
       "price": 2499,
       "oldPrice": 4500,
       "summary": {
@@ -39,239 +62,22 @@
           "معیاری کچن اور باتھ روم ٹیپ فٹنگ کے مطابق"
         ]
       },
-      "specs": { "Power": "3000W", "Voltage": "220V AC 50Hz", "Display": "Digital LED", "Material": "ABS + Stainless steel" },
+      "specs": {
+        "Power": "3000W",
+        "Voltage": "220V AC 50Hz",
+        "Display": "Digital LED",
+        "Material": "ABS + Stainless steel"
+      },
       "images": [
         "images/products/instant-electric-water-heater-tap-1.svg",
         "images/products/instant-electric-water-heater-tap-2.svg",
         "images/products/instant-electric-water-heater-tap-3.svg"
       ],
-      "variants": [ { "name": "White / 1 Pcs", "extraCost": 0 } ]
-    },
-    {
-      "id": 2,
-      "slug": "solar-panel-water-drainage-clips",
-      "sku": "HRL-SOL-002",
-      "brand": "Generic",
-      "category": "Solar",
-      "stock": 40,
-      "warranty": "No warranty (consumable accessory). 7-day replacement on manufacturing defect.",
-      "title": { "en": "Solar Panel Water Drainage Clips (Set)", "ur": "سولر پینل واٹر ڈرینج کلپس (سیٹ)" },
-      "price": 100,
-      "oldPrice": 250,
-      "summary": {
-        "en": "Stop rainwater pooling and dust build-up at the bottom edge of your solar panels. UV-resistant clip-on design.",
-        "ur": "سولر پینل کے نچلے کنارے پر بارش کا پانی اور مٹی جمع ہونے سے روکیں۔ یو وی ریزسٹنٹ کلپ آن ڈیزائن۔"
-      },
-      "features": {
-        "en": [
-          "Fits 30mm to 35mm thick solar panel frames",
-          "UV-resistant PP plastic, does not become brittle in sun",
-          "Snap-on installation, no drilling or tools required",
-          "Prevents permanent water staining and output loss"
-        ],
-        "ur": [
-          "30mm سے 35mm موٹے سولر پینل فریم کے مطابق",
-          "یو وی ریزسٹنٹ PP پلاسٹک، دھوپ میں کمزور نہیں ہوتا",
-          "آسان انسٹالیشن، ڈرلنگ یا اوزار کی ضرورت نہیں",
-          "پانی کے مستقل دھبوں اور آؤٹ پٹ کم ہونے سے بچاتا ہے"
-        ]
-      },
-      "specs": { "Material": "UV-resistant PP", "Fits frame": "30-35mm", "Colour": "Black" },
-      "images": [
-        "images/products/solar-panel-water-drainage-clips-1.svg",
-        "images/products/solar-panel-water-drainage-clips-2.svg"
-      ],
       "variants": [
-        { "name": "Set of 8 Clips", "extraCost": 0 },
-        { "name": "Set of 48 Clips", "extraCost": 400 }
-      ]
-    },
-    {
-      "id": 3,
-      "slug": "alkaram-pure-sine-wave-solar-inverter",
-      "sku": "HRL-INV-003",
-      "brand": "Alkaram",
-      "category": "Inverters",
-      "stock": 6,
-      "warranty": "12 months Alkaram warranty card included. 14-day shop replacement on dead-on-arrival units.",
-      "title": { "en": "Alkaram Pure Sine Wave Solar Inverter", "ur": "الکرم پیور سائن ویو سولر انورٹر" },
-      "price": 5890,
-      "oldPrice": 9000,
-      "summary": {
-        "en": "Alkaram pure sine wave solar inverter with built-in MPPT charge controller. Available from 2500W to 6000W.",
-        "ur": "بلٹ ان MPPT چارج کنٹرولر کے ساتھ الکرم پیور سائن ویو سولر انورٹر۔ 2500W سے 6000W تک دستیاب۔"
-      },
-      "features": {
-        "en": [
-          "12V / 24V DC input to 220V AC 50Hz output",
-          "Pure sine wave - safe for LED TVs, fridges and sensitive electronics",
-          "Built-in MPPT solar charge controller",
-          "LCD digital display with load and battery indicators",
-          "Automatic Utility / Solar / Battery source switching",
-          "Overload, short circuit and low battery protection"
-        ],
-        "ur": [
-          "12V / 24V DC ان پٹ سے 220V AC 50Hz آؤٹ پٹ",
-          "پیور سائن ویو - LED ٹی وی، فرج اور حساس الیکٹرانکس کے لیے محفوظ",
-          "بلٹ ان MPPT سولر چارج کنٹرولر",
-          "LCD ڈیجیٹل ڈسپلے",
-          "خودکار یوٹیلیٹی / سولر / بیٹری سوئچنگ",
-          "اوور لوڈ، شارٹ سرکٹ اور لو بیٹری پروٹیکشن"
-        ]
-      },
-      "specs": { "Waveform": "Pure Sine Wave", "Output": "220V AC 50Hz", "Controller": "MPPT built-in", "Display": "LCD" },
-      "images": [
-        "images/products/alkaram-pure-sine-wave-solar-inverter-1.svg",
-        "images/products/alkaram-pure-sine-wave-solar-inverter-2.svg"
-      ],
-      "variants": [
-        { "name": "2500W", "extraCost": 0 },
-        { "name": "3000W", "extraCost": 6000 },
-        { "name": "4000W", "extraCost": 7990 },
-        { "name": "5000W", "extraCost": 8560 },
-        { "name": "6000W", "extraCost": 13910 }
-      ]
-    },
-    {
-      "id": 4,
-      "slug": "30w-mini-inverter-mobile-wifi-router",
-      "sku": "HRL-INV-004",
-      "brand": "Generic",
-      "category": "Inverters",
-      "stock": 25,
-      "warranty": "14 days shop replacement warranty.",
-      "title": { "en": "30W Mini Inverter (For Mobile / WiFi Router)", "ur": "30 واٹ منی انورٹر (موبائل / وائی فائی روٹر)" },
-      "price": 699,
-      "oldPrice": 1200,
-      "summary": {
-        "en": "Compact 30W backup power source for load shedding. Keeps mobile charging and your WiFi router running.",
-        "ur": "لوڈشیڈنگ کے لیے کمپیکٹ 30W بیک اپ پاور۔ موبائل چارجنگ اور وائی فائی روٹر چلتا رہتا ہے۔"
-      },
-      "features": {
-        "en": [
-          "Powers mobile chargers and WiFi routers during load shedding",
-          "12V DC input to 220V AC output",
-          "Small, portable, plug-and-play",
-          "Ideal for students, remote work and small offices"
-        ],
-        "ur": [
-          "لوڈشیڈنگ میں موبائل چارجر اور وائی فائی روٹر چلاتا ہے",
-          "12V DC ان پٹ سے 220V AC آؤٹ پٹ",
-          "چھوٹا، پورٹیبل، پلگ اینڈ پلے",
-          "طلبہ، ریموٹ ورک اور چھوٹے دفاتر کے لیے بہترین"
-        ]
-      },
-      "specs": { "Output": "30W / 220V AC", "Input": "12V DC", "Type": "Portable mini inverter" },
-      "images": ["images/products/30w-mini-inverter-1.svg"],
-      "variants": [ { "name": "30W Standard", "extraCost": 0 } ]
-    },
-    {
-      "id": 5,
-      "slug": "alkaram-pi-3000w-pure-sine-wave-inverter",
-      "sku": "HRL-INV-005",
-      "brand": "Alkaram",
-      "category": "Inverters",
-      "stock": 4,
-      "warranty": "12 months Alkaram warranty card included. 14-day shop replacement on dead-on-arrival units.",
-      "title": { "en": "Alkaram PI-3000W Pure Sine Wave Inverter", "ur": "الکرم PI-3000W پیور سائن ویو انورٹر" },
-      "price": 13500,
-      "oldPrice": 18000,
-      "summary": {
-        "en": "Alkaram PI-3000W high-performance inverter for home and shop use. 3000W continuous pure sine wave output.",
-        "ur": "گھر اور دکان کے لیے الکرم PI-3000W ہائی پرفارمنس انورٹر۔ 3000W مسلسل پیور سائن ویو آؤٹ پٹ۔"
-      },
-      "features": {
-        "en": [
-          "3000W continuous pure sine wave output",
-          "12V DC input, 220V AC 50Hz output",
-          "Built-in cooling fan for long duty cycles",
-          "Runs LED TVs, fans, lights and fridges safely",
-          "Overload and short circuit protection"
-        ],
-        "ur": [
-          "3000W مسلسل پیور سائن ویو آؤٹ پٹ",
-          "12V DC ان پٹ، 220V AC 50Hz آؤٹ پٹ",
-          "بلٹ ان کولنگ فین",
-          "LED ٹی وی، پنکھے، لائٹس اور فرج محفوظ طریقے سے چلاتا ہے",
-          "اوور لوڈ اور شارٹ سرکٹ پروٹیکشن"
-        ]
-      },
-      "specs": { "Rated": "3000W continuous", "Waveform": "Pure Sine Wave", "Output": "220V AC 50Hz", "Cooling": "Built-in fan" },
-      "images": ["images/products/alkaram-pi-3000w-1.svg"],
-      "variants": [ { "name": "PI-3000W", "extraCost": 0 } ]
-    },
-    {
-      "id": 6,
-      "slug": "smart-12v-10a-battery-charger-auto-cut-off",
-      "sku": "HRL-CHG-006",
-      "brand": "Generic",
-      "category": "Chargers",
-      "stock": 18,
-      "warranty": "6 months shop replacement warranty.",
-      "title": { "en": "Smart 12V 10A Battery Charger (Auto Cut-Off)", "ur": "سمارٹ 12V 10A بیٹری چارجر (آٹو کٹ آف)" },
-      "price": 1999,
-      "oldPrice": 3200,
-      "summary": {
-        "en": "Fully automatic smart charger for 12V lead-acid and dry batteries. 10A charging with automatic cut-off when full.",
-        "ur": "12V لیڈ ایسڈ اور ڈرائی بیٹریوں کے لیے مکمل خودکار سمارٹ چارجر۔ 10A چارجنگ، فل ہونے پر خودکار کٹ آف۔"
-      },
-      "features": {
-        "en": [
-          "10A intelligent charging current",
-          "Automatic shut-off when the battery is fully charged",
-          "Short circuit and reverse polarity protection",
-          "Works with UPS, car, bike and solar lead-acid batteries",
-          "LED charge status indicator"
-        ],
-        "ur": [
-          "10A انٹیلیجنٹ چارجنگ کرنٹ",
-          "بیٹری فل ہونے پر خودکار شٹ آف",
-          "شارٹ سرکٹ اور ریورس پولیرٹی پروٹیکشن",
-          "UPS، کار، بائیک اور سولر لیڈ ایسڈ بیٹریوں کے لیے",
-          "LED چارج اسٹیٹس انڈیکیٹر"
-        ]
-      },
-      "specs": { "Current": "10A", "Voltage": "12V DC", "Cut-off": "Automatic", "Protection": "Short circuit, reverse polarity" },
-      "images": ["images/products/smart-12v-10a-battery-charger-1.svg"],
-      "variants": [ { "name": "12V / 10A", "extraCost": 0 } ]
-    },
-    {
-      "id": 7,
-      "slug": "3-stage-car-battery-charger-220v-12v",
-      "sku": "HRL-CHG-007",
-      "brand": "Generic",
-      "category": "Chargers",
-      "stock": 10,
-      "warranty": "6 months shop replacement warranty.",
-      "title": { "en": "3-Stage Car Battery Charger 220V to 12V", "ur": "3 اسٹیج کار بیٹری چارجر 220V سے 12V" },
-      "price": 1935,
-      "oldPrice": 3500,
-      "summary": {
-        "en": "Professional 3-stage automatic battery charger with 10A, 20A and 30A current options for cars, trucks and UPS batteries.",
-        "ur": "کار، ٹرک اور UPS بیٹریوں کے لیے 10A، 20A اور 30A کے ساتھ پروفیشنل 3 اسٹیج خودکار بیٹری چارجر۔"
-      },
-      "features": {
-        "en": [
-          "Three current options: 10A, 20A, 30A",
-          "3-stage smart charging (bulk, absorption, float)",
-          "Fits all car, truck and UPS lead-acid batteries",
-          "220V AC mains input, 12V DC output",
-          "Built-in overload protection"
-        ],
-        "ur": [
-          "تین کرنٹ آپشنز: 10A، 20A، 30A",
-          "3 اسٹیج سمارٹ چارجنگ",
-          "تمام کار، ٹرک اور UPS لیڈ ایسڈ بیٹریوں کے مطابق",
-          "220V AC مینز ان پٹ، 12V DC آؤٹ پٹ",
-          "بلٹ ان اوور لوڈ پروٹیکشن"
-        ]
-      },
-      "specs": { "Stages": "3-stage", "Current": "10A / 20A / 30A", "Input": "220V AC", "Output": "12V DC" },
-      "images": ["images/products/3-stage-car-battery-charger-1.svg"],
-      "variants": [
-        { "name": "10A Model", "extraCost": 0 },
-        { "name": "20A Model", "extraCost": 400 },
-        { "name": "30A Model", "extraCost": 800 }
+        {
+          "name": "White / 1 Pcs",
+          "extraCost": 0
+        }
       ]
     }
   ]

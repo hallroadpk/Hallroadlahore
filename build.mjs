@@ -415,6 +415,40 @@ ${urls.map(u => `  <url><loc>${u.loc}</loc><lastmod>${today}</lastmod><changefre
 </urlset>
 `);
 
+/* ------------------------------------------------- homepage ItemList JSON-LD */
+/* The homepage embeds an ItemList of product URLs. Regenerate it from the
+   catalog so it never goes stale as products are added or removed. */
+const indexPath = path.join(ROOT, 'index.html');
+let indexHtml = fs.readFileSync(indexPath, 'utf8');
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  '@id': `${SITE}/#catalog`,
+  name: 'Featured catalog',
+  numberOfItems: products.length,
+  itemListElement: products.map((p, i) => ({
+    '@type': 'ListItem', position: i + 1, name: p.title.en,
+    url: `${SITE}/products/${p.slug}.html`
+  }))
+};
+indexHtml = indexHtml.replace(
+  /(<script type="application\/ld\+json" id="catalog-jsonld">)[\s\S]*?(<\/script>)/,
+  (m, a, b) => a + '\n' + JSON.stringify(itemList, null, 2) + '\n' + b
+);
+fs.writeFileSync(indexPath, indexHtml);
+
+/* ------------------------------------------------------- prune orphaned art */
+/* Remove placeholder images no longer referenced by any product, so the repo
+   does not accumulate dead files when products are trimmed. Referenced files
+   (including real photos) are untouched. */
+const referenced = new Set();
+products.forEach(p => (p.images || []).forEach(i => referenced.add(path.join(ROOT, i))));
+const artDir = path.join(ROOT, 'images', 'products');
+for (const f of fs.readdirSync(artDir)) {
+  const abs = path.join(artDir, f);
+  if (!referenced.has(abs)) fs.rmSync(abs);
+}
+
 /* ------------------------------------------------------------------- report */
 console.log(`\nBuilt ${products.length} product pages, sitemap.xml, products.js, ${placeholderCount} placeholder image(s).\n`);
 if (warnings.length) { console.log('WARNINGS:'); warnings.forEach(w => console.log('  ! ' + w)); console.log(); }

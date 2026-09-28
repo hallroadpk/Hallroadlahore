@@ -717,11 +717,17 @@
     if (!txt) { p.remove(); return; }
     p.textContent = '🔥 ' + txt;
   }
+  /* Only show tabs for categories that actually have products (plus All). */
+  function presentCategories() {
+    var present = {};
+    PRODUCTS.forEach(function (p) { present[p.category] = 1; });
+    return CATEGORIES.filter(function (c) { return c.id === 'All' || present[c.id]; });
+  }
   function renderCategoryTabs() {
     var host = $('#categoryTabs');
     if (!host) return;
     host.textContent = '';
-    CATEGORIES.forEach(function (c) {
+    presentCategories().forEach(function (c) {
       host.appendChild(el('button', {
         class: 'cat-btn' + (c.id === 'All' ? ' active' : ''), type: 'button',
         'data-category': c.id, 'aria-pressed': c.id === 'All' ? 'true' : 'false',
@@ -907,6 +913,10 @@
     initStaticPage();
     initAnalytics();
     applyLanguage(lang);
+
+    /* Support deep links like /#Inverters or /#WaterHeaters (footer + breadcrumbs). */
+    var hash = (location.hash || '').replace('#', '');
+    if (hash && CATEGORIES.some(function (c) { return c.id === hash; })) filterCategory(hash);
 
     /* Recover an order that was started but never handed to WhatsApp. */
     try {
