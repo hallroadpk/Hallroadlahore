@@ -12,11 +12,10 @@ window.PRODUCTS = [
       "en": "Instant Electric Water Heater Tap - Digital Display",
       "ur": "انسٹنٹ الیکٹرک واٹر ہیٹر ٹیپ - ڈیجیٹل ڈسپلے"
     },
-    "price": 2499,
-    "oldPrice": 4500,
+    "price": 4499,
     "summary": {
-      "en": "Instant hot water within 3 seconds for kitchens and bathrooms. 3000W heating element with a digital LED temperature display.",
-      "ur": "رسوئی اور باتھ روم کے لیے 3 سیکنڈ میں گرم پانی۔ 3000W ہیٹنگ ایلیمینٹ اور ڈیجیٹل LED ٹمپریچر ڈسپلے۔"
+      "en": "Instant hot water within 3 seconds for kitchens and bathrooms. 3000W heating element with a digital LED temperature display. Available with or without a handheld shower set.",
+      "ur": "رسوئی اور باتھ روم کے لیے 3 سیکنڈ میں گرم پانی۔ 3000W ہیٹنگ ایلیمینٹ اور ڈیجیٹل LED ٹمپریچر ڈسپلے۔ شاور سیٹ کے ساتھ یا بغیر دستیاب۔"
     },
     "features": {
       "en": [
@@ -24,31 +23,39 @@ window.PRODUCTS = [
         "Digital LED temperature display",
         "360 degree rotating nozzle head",
         "Waterproof and shockproof design",
-        "Fits standard kitchen and bathroom tap fittings"
+        "Fits standard kitchen and bathroom tap fittings",
+        "Optional shower set: hand shower, steel hose and diverter valve"
       ],
       "ur": [
         "3000W تیز ہیٹنگ",
         "ڈیجیٹل LED ٹمپریچر ڈسپلے",
         "360 ڈگری گھومنے والا نوزل",
         "واٹر پروف اور شاک پروف ڈیزائن",
-        "معیاری کچن اور باتھ روم ٹیپ فٹنگ کے مطابق"
+        "معیاری کچن اور باتھ روم ٹیپ فٹنگ کے مطابق",
+        "اختیاری شاور سیٹ: ہینڈ شاور، اسٹیل پائپ اور ڈائیورٹر والو"
       ]
     },
     "specs": {
       "Power": "3000W",
       "Voltage": "220V AC 50Hz",
       "Display": "Digital LED",
-      "Material": "ABS + Stainless steel"
+      "Material": "ABS + Stainless steel",
+      "Options": "Without shower (Rs. 4,499) / With shower set (Rs. 5,499)"
     },
     "images": [
-      "images/products/instant-electric-water-heater-tap-1.svg",
-      "images/products/instant-electric-water-heater-tap-2.svg",
-      "images/products/instant-electric-water-heater-tap-3.svg"
+      "images/products/instant-electric-water-heater-tap-1.jpg",
+      "images/products/instant-electric-water-heater-tap-2.jpg",
+      "images/products/instant-electric-water-heater-tap-3.jpg",
+      "images/products/instant-electric-water-heater-tap-4.jpg"
     ],
     "variants": [
       {
-        "name": "White / 1 Pcs",
+        "name": "Without Shower",
         "extraCost": 0
+      },
+      {
+        "name": "With Shower Set",
+        "extraCost": 1000
       }
     ]
   },

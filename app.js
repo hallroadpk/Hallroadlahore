@@ -140,7 +140,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
   /* -------------------------------------------------------- product helpers */
   function findProduct(id) { for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].id === id) return PRODUCTS[i]; return null; }
   function variantPrice(p, vi) { return p.price + ((p.variants[vi] || {}).extraCost || 0); }
-  function variantOldPrice(p, vi) { return (p.oldPrice || 0) + ((p.variants[vi] || {}).extraCost || 0); }
+  function variantOldPrice(p, vi) { return p.oldPrice ? p.oldPrice + ((p.variants[vi] || {}).extraCost || 0) : 0; }
   /* The discount the buyer can actually get on the cheapest variant. */
   function honestDiscount(p) {
     var min = 0;
