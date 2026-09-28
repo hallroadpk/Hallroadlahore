@@ -1,0 +1,10 @@
+# https://hallroadlahore.com — robots.txt
+# Was 404 before; without this crawlers get no sitemap pointer.
+
+User-agent: *
+Allow: /
+
+# Do not index the order flow
+Disallow: /*?*order=
+
+Sitemap: https://hallroadlahore.com/sitemap.xml
