@@ -277,15 +277,26 @@ for (const p of products) {
   }));
   const jsonLd = JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: p.title.en,
-    sku: p.sku,
-    brand: { '@type': 'Brand', name: p.brand },
-    image: p.images.map(i => toAbsUrl(i)),
-    description: p.summary.en,
-    category: p.category,
-    offers: offers.length === 1 ? offers[0] : { '@type': 'AggregateOffer', lowPrice: Math.min(...offers.map(o => o.price)), highPrice: Math.max(...offers.map(o => o.price)), priceCurrency: 'PKR', offerCount: offers.length, offers },
-    additionalProperty: Object.entries(p.specs || {}).map(([k, v]) => ({ '@type': 'PropertyValue', name: k, value: String(v) }))
+    '@graph': [
+      {
+        '@type': 'Product',
+        name: p.title.en,
+        sku: p.sku,
+        brand: { '@type': 'Brand', name: p.brand },
+        image: p.images.map(i => toAbsUrl(i)),
+        description: p.summary.en,
+        category: p.category,
+        offers: offers.length === 1 ? offers[0] : { '@type': 'AggregateOffer', lowPrice: Math.min(...offers.map(o => o.price)), highPrice: Math.max(...offers.map(o => o.price)), priceCurrency: 'PKR', offerCount: offers.length, offers },
+        additionalProperty: Object.entries(p.specs || {}).map(([k, v]) => ({ '@type': 'PropertyValue', name: k, value: String(v) }))
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+          { '@type': 'ListItem', position: 2, name: p.title.en, item: url }
+        ]
+      }
+    ]
   });
 
   const html = `${head({
@@ -410,6 +421,7 @@ const urls = [
   { loc: `${SITE}/about.html`, pri: '0.5' },
   { loc: `${SITE}/shipping.html`, pri: '0.5' },
   { loc: `${SITE}/returns.html`, pri: '0.5' },
+  { loc: `${SITE}/#faq`, pri: '0.4' },
   { loc: `${SITE}/privacy.html`, pri: '0.3' },
   { loc: `${SITE}/terms.html`, pri: '0.3' }
 ];

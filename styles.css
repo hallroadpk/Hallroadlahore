@@ -492,3 +492,48 @@ header.site-header, header {
   .whatsapp-float-btn, .back-to-top, .top-ticker-wrapper, .promo-flash, .sticky-cart-bar, .toast-stack { display: none !important; }
   body { background: #fff; }
 }
+
+/* ---------- 18. Catalog toolbar (sort) ---------- */
+.catalog-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+.catalog-toolbar .section-heading { margin-bottom: 0; }
+.sort-select {
+  font: inherit; font-size: 14px; font-weight: 600; color: var(--ink);
+  background: #fff; border: 1px solid var(--line-2); border-radius: 10px;
+  padding: 10px 36px 10px 12px; cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230f172a' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
+.sort-select:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+/* ---------- 19. WhatsApp quick button on product cards ---------- */
+.product-card .wa-quick {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 10px; border-radius: 10px; font-size: 13px; font-weight: 800;
+  color: var(--green-dark); background: var(--green-bg); border: 1px solid #a7f3d0;
+  cursor: pointer; transition: background .15s ease;
+}
+.product-card .wa-quick:hover { background: var(--green); color: #fff; }
+
+/* ---------- 20. Hero WhatsApp CTA ---------- */
+.hero-cta.wa { background: var(--green); color: #fff; border-color: var(--green); }
+.hero-cta.wa:hover { background: var(--green-dark); border-color: var(--green-dark); }
+
+/* ---------- 21. FAQ ---------- */
+.faq-section { max-width: 1080px; margin: 0 auto; padding: 44px 20px 10px; }
+.faq-list { display: grid; gap: 10px; }
+.faq-list details {
+  background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  padding: 0; overflow: hidden;
+}
+.faq-list summary {
+  cursor: pointer; font-weight: 700; font-size: 15px; color: var(--ink);
+  padding: 14px 44px 14px 16px; list-style: none; position: relative;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: '+'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+  font-size: 20px; font-weight: 800; color: var(--green-dark); transition: transform .15s ease;
+}
+.faq-list details[open] summary::after { content: '−'; }
+.faq-list details p { padding: 0 16px 14px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.faq-list details p a { color: var(--green-dark); font-weight: 600; }

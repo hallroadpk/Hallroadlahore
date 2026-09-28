@@ -73,7 +73,7 @@
   "@type": "ItemList",
   "@id": "https://hallroadlahore.com/#catalog",
   "name": "Featured catalog",
-  "numberOfItems": 6,
+  "numberOfItems": 12,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -110,6 +110,42 @@
       "position": 6,
       "name": "Simtek Fully Automatic Battery Charger 12V 30A (3-Stage)",
       "url": "https://hallroadlahore.com/products/simtek-battery-charger-12v-30a.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "name": "Simtek MPPT Plus Hybrid 120A Solar Charge Controller (170 VOC)",
+      "url": "https://hallroadlahore.com/products/simtek-mppt-plus-hybrid-120a-solar-charge-controller.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "name": "Simtek Battery Charger 12V 20A Fully Automatic (LED Indicators)",
+      "url": "https://hallroadlahore.com/products/simtek-battery-charger-12v-20a.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "name": "Alkaram Power Inverter 2000W - 12V DC to 220V AC with Display",
+      "url": "https://hallroadlahore.com/products/alkaram-power-inverter-2000w-12v.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "Alkaram Power Inverter 3000W PI-3000W - 12V DC to 220V AC with Display",
+      "url": "https://hallroadlahore.com/products/alkaram-power-inverter-3000w-12v.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "name": "Alkaram Power Inverter 4000W PI-4000W - 12V DC to 220V AC with Display",
+      "url": "https://hallroadlahore.com/products/alkaram-power-inverter-4000w-12v.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "name": "Alkaram Power Inverter 6000W - 12V DC to 220V AC with Display Screen",
+      "url": "https://hallroadlahore.com/products/alkaram-power-inverter-6000w-12v.html"
     }
   ]
 }
@@ -176,6 +212,8 @@
   <div class="hero-cta-row">
     <a class="hero-cta" href="#main">Shop the catalog</a>
     <a class="hero-cta ghost" href="/tools/solar-calculator.html">Size my solar setup</a>
+    <a class="hero-cta wa" href="#" target="_blank" rel="noopener"
+       data-whatsapp="Assalam o Alaikum! I need help choosing a product from hallroadlahore.com.">Order on WhatsApp</a>
   </div>
 </section>
 
@@ -184,7 +222,10 @@
 
 <!-- 6. PRODUCTS -->
 <main id="main" class="catalog-container">
-  <h2 class="section-heading" id="catalogHeading">Featured Catalog</h2>
+  <div class="catalog-toolbar">
+    <h2 class="section-heading" id="catalogHeading">Featured Catalog</h2>
+    <select id="sortSelect" class="sort-select" aria-label="Sort products"></select>
+  </div>
   <div class="product-grid" id="productGrid"></div>
 </main>
 
@@ -258,7 +299,7 @@
   </div>
   <div class="cart-drawer-body" id="cartDrawerItems"></div>
   <div class="cart-drawer-footer">
-    <div class="cart-shipping-row"><span>Shipping</span><span id="cartShippingDisplay">Free nationwide</span></div>
+    <div class="cart-shipping-row"><span>Shipping</span><span id="cartShippingDisplay">From Rs. 150 - by region</span></div>
     <div class="cart-total-row"><span>Total</span><span id="cartTotalDisplay">Rs. 0</span></div>
     <button class="checkout-btn" type="button" data-action="open-checkout">Proceed to Checkout</button>
   </div>
@@ -309,6 +350,12 @@
         <p class="payment-note">For advance payment we share the account details after your order is confirmed.</p>
       </div>
 
+      <div class="form-group">
+        <label for="custNotes">Order Notes (optional)</label>
+        <textarea id="custNotes" name="notes" rows="2" maxlength="300"
+                  placeholder="e.g. landmark, preferred delivery time, gift message..."></textarea>
+      </div>
+
       <button type="submit" class="checkout-btn">Confirm Order via WhatsApp</button>
     </form>
   </div>
@@ -321,6 +368,41 @@
     <div id="confirmBody"></div>
   </div>
 </div>
+
+<!-- ============ FAQ ============ -->
+<section class="faq-section" id="faq" aria-labelledby="faqHeading">
+  <h2 class="section-heading" id="faqHeading">Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Do you deliver to my city? How much is delivery?</summary>
+      <p>Yes - we deliver nationwide via courier. Lahore is Rs. 150 (same/next day), Punjab Rs. 200, Sindh/KPK/Balochistan Rs. 250 and AJK/Gilgit-Baltistan Rs. 350. Orders are dispatched within 24 hours (Mon-Sat).</p>
+    </details>
+    <details>
+      <summary>How do I place an order?</summary>
+      <p>Add products to the cart, tap "Proceed to Checkout" and fill the form - your order opens in WhatsApp ready to send. No account needed. You can also order any product directly from its WhatsApp button.</p>
+    </details>
+    <details>
+      <summary>What payment methods do you accept?</summary>
+      <p>Cash on Delivery (COD) anywhere in Pakistan, or 30% advance via JazzCash / EasyPaisa to confirm the order - the rest is paid on delivery.</p>
+    </details>
+    <details>
+      <summary>Are these products original? What warranty do I get?</summary>
+      <p>Yes - we sell only original Simtek and Alkaram products sourced from Hall Road, Lahore. Every product shows its exact warranty on the product page (3-12 months on Simtek, 6 months shop warranty on Alkaram inverters).</p>
+    </details>
+    <details>
+      <summary>Can I return a product if it has a problem?</summary>
+      <p>Yes - you have 7 days. Manufacturing defects are collected and returned at our cost; change-of-mind returns are accepted unused in original packaging with courier paid by the customer. See the <a href="/returns.html">returns policy</a>.</p>
+    </details>
+    <details>
+      <summary>Which MPPT controller should I choose - 40A, 70A, 85A or 120A?</summary>
+      <p>It depends on your panel wattage and battery bank: 40A for small 12V setups (up to ~500W panels), 70A for 12V/24V systems up to ~1000W, 85A for larger 12V/24V arrays with 150V panel input, and 120A for the biggest home setups. Ask us on WhatsApp and we will size it free: use the <a href="/tools/solar-calculator.html">solar calculator</a>.</p>
+    </details>
+    <details>
+      <summary>What is the difference between a modified sine wave and pure sine wave inverter?</summary>
+      <p>Modified sine wave (Alkaram PI series) runs fans, lights, TVs, chargers and most tools at a much lower price. Pure sine wave is needed for sensitive electronics, inverter ACs and some refrigerators. Read our <a href="/blog/pure-sine-wave-vs-modified-sine-wave.html">full guide</a>.</p>
+    </details>
+  </div>
+</section>
 
 <!-- BACK TO TOP -->
 <button class="back-to-top" id="backToTop" type="button" data-action="scroll-top" aria-label="Back to top">↑</button>
@@ -341,7 +423,9 @@
       <h3>Shop</h3>
       <ul>
         <li><a href="/">All products</a></li>
-        <li><a href="/#WaterHeaters">Water heaters</a></li>
+        <li><a href="/#Inverters">Inverters</a></li>
+        <li><a href="/#Chargers">Battery chargers</a></li>
+        <li><a href="/#Solar">Solar MPPT controllers</a></li>
         <li><a href="/tools/solar-calculator.html">Solar calculator</a></li>
         <li><a href="/blog/">Buying guides</a></li>
       </ul>
@@ -351,6 +435,7 @@
       <ul>
         <li><a href="/shipping.html">Shipping &amp; delivery</a></li>
         <li><a href="/returns.html">Returns &amp; warranty</a></li>
+        <li><a href="/#faq">FAQ</a></li>
         <li><a href="/privacy.html">Privacy policy</a></li>
         <li><a href="/terms.html">Terms of sale</a></li>
       </ul>

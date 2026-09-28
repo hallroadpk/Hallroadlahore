@@ -165,6 +165,44 @@ ok('Escape closes modal', !d.getElementById('pdpModal').classList.contains('open
   ok('no runtime errors on product page', pr.errs.length === 0, pr.errs.join(' | ') || 'clean');
 }
 
+/* ---------------- 9. sorting, FAQ, order notes, breadcrumbs ---------------- */
+{
+  const cheapest = Math.min(...CATALOG.map(p => p.price));
+  d.getElementById('sortSelect').value = 'price-asc';
+  d.getElementById('sortSelect').dispatchEvent(new w.Event('change', { bubbles: true }));
+  const firstLabel = d.querySelector('#productGrid .product-card')?.getAttribute('aria-label') || '';
+  ok('Sort price-asc puts cheapest product first', firstLabel.includes(money(cheapest)), firstLabel);
+  d.getElementById('sortSelect').value = 'featured';
+  d.getElementById('sortSelect').dispatchEvent(new w.Event('change', { bubbles: true }));
+}
+ok('FAQ section on homepage (>=6 questions)', d.querySelectorAll('#faq details').length >= 6,
+   d.querySelectorAll('#faq details').length + ' questions');
+ok('Cart shipping shows real regional "from" fee', d.getElementById('cartShippingDisplay').textContent.indexOf('Rs. 150') !== -1,
+   d.getElementById('cartShippingDisplay').textContent);
+ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#productGrid .product-card .wa-quick').length === CATALOG.length);
+
+{
+  const r4 = boot(HTML);
+  const w4 = r4.w, d4 = r4.w.document;
+  w4.eval(`HRL.setCart([{id:${FIRST.id},variant:0,qty:1}]); HRL.saveCart(); HRL.updateCartUI(); HRL.openCheckoutModal();`);
+  d4.getElementById('custName').value = 'Ali Khan';
+  d4.getElementById('custPhone').value = '0300 1234567';
+  d4.getElementById('custCity').value = 'Lahore';
+  d4.getElementById('custAddress').value = 'House 1, Street 2, Model Town';
+  d4.getElementById('custNotes').value = 'Please call before delivery';
+  let url4 = null;
+  w4.open = (u) => { url4 = u; return {}; };
+  d4.getElementById('orderForm').dispatchEvent(new w4.Event('submit', { cancelable: true, bubbles: true }));
+  const dec4 = url4 ? decodeURIComponent(url4) : '';
+  ok('Order notes reach the WhatsApp message', dec4.indexOf('*Notes:* Please call before delivery') !== -1,
+     dec4.split('\n').filter(l => l.indexOf('Notes') !== -1).join(''));
+}
+{
+  const pr2 = boot(read(`products/${FIRST.slug}.html`));
+  const ld = pr2.w.document.querySelector('script[type="application/ld+json"]').textContent;
+  ok('Product page JSON-LD has BreadcrumbList', ld.indexOf('"BreadcrumbList"') !== -1);
+}
+
 console.log('\n================ TESTS: hallroadlahore.com (built) ================\n');
 let pass = 0;
 for (const r of results) { if (r.pass) pass++; console.log(`${r.pass ? 'PASS' : 'FAIL'}  ${r.n}${r.d ? '  [' + r.d + ']' : ''}`); }
