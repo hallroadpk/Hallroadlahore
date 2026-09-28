@@ -165,9 +165,7 @@ fs.writeFileSync(
 
 /* --------------------------------------------------------- shared page shell */
 const PAGE_CSS = '<link rel="stylesheet" href="/styles.css">';
-const FONT = '<link rel="preconnect" href="https://fonts.googleapis.com">' +
-             '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
-             '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap">';
+const FONT = ''; /* brand font is self-hosted in styles.css */
 
 function head({ title, description, canonical, image, jsonLd, lang = 'en' }) {
   return `<!DOCTYPE html>
@@ -406,6 +404,9 @@ const urls = [
   { loc: `${SITE}/`, pri: '1.0' },
   ...products.map(p => ({ loc: `${SITE}/products/${p.slug}.html`, pri: '0.8' })),
   { loc: `${SITE}/tools/solar-calculator.html`, pri: '0.7' },
+  { loc: `${SITE}/blog/`, pri: '0.6' },
+  { loc: `${SITE}/blog/how-to-choose-a-solar-inverter-in-pakistan.html`, pri: '0.6' },
+  { loc: `${SITE}/blog/pure-sine-wave-vs-modified-sine-wave.html`, pri: '0.6' },
   { loc: `${SITE}/about.html`, pri: '0.5' },
   { loc: `${SITE}/shipping.html`, pri: '0.5' },
   { loc: `${SITE}/returns.html`, pri: '0.5' },

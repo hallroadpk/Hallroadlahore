@@ -192,6 +192,11 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     if (badge) badge.textContent = String(cartCount());
     var totalEl = $('#cartTotalDisplay');
     if (totalEl) totalEl.textContent = money(cartTotal());
+    var ship = $('#cartShippingDisplay');
+    if (ship) {
+      var free = !CFG.shipping || CFG.shipping.freeShipping !== false;
+      ship.textContent = free ? t('free') + ' nationwide' : 'By region - confirmed on WhatsApp';
+    }
     var body = $('#cartDrawerItems');
     if (!body) return;
     body.textContent = '';
@@ -471,6 +476,11 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       ]));
     });
     box.appendChild(ul);
+    var freeShip = !CFG.shipping || CFG.shipping.freeShipping !== false;
+    box.appendChild(el('div', { class: 'cart-shipping-row', style: 'margin:0 0 8px;' }, [
+      el('span', { text: t('shipping') }),
+      el('span', { text: freeShip ? t('free') : 'By region - confirmed on WhatsApp' })
+    ]));
     box.appendChild(el('div', { class: 'order-summary-total' }, [
       el('span', { text: t('total') }),
       el('span', { text: money(cartTotal()) })
