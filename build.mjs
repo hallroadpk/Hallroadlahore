@@ -49,7 +49,7 @@ for (const p of products) {
 
 function discount(p, v) {
   const now = p.price + (v?.extraCost || 0);
-  const was = (p.oldPrice || 0) + (v?.extraCost || 0);
+  const was = p.oldPrice ? p.oldPrice + (v?.extraCost || 0) : 0; // no 'was' price -> no discount
   if (!was) return 0;
   return Math.round(((was - now) / was) * 100);
 }

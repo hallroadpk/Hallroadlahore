@@ -26,7 +26,7 @@ const PKR = new Intl.NumberFormat('en-PK');
 const money = n => 'Rs. ' + PKR.format(Math.round(n));
 function honestDiscount(p) {
   return Math.min(...p.variants.map(v => {
-    const now = p.price + (v.extraCost || 0), was = (p.oldPrice || 0) + (v.extraCost || 0);
+    const now = p.price + (v.extraCost || 0), was = p.oldPrice ? p.oldPrice + (v.extraCost || 0) : 0;
     return was > 0 ? Math.round(((was - now) / was) * 100) : 0;
   }));
 }
