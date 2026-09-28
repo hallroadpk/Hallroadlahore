@@ -112,6 +112,591 @@ window.PRODUCTS = [
         "extraCost": 0
       }
     ]
+  },
+  {
+    "id": 3,
+    "slug": "simtek-dc-king-70a-mppt-solar-charge-controller",
+    "sku": "HRL-SOL-003",
+    "brand": "Simtek",
+    "category": "Solar",
+    "stock": 8,
+    "warranty": "6 months official Simtek warranty.",
+    "title": {
+      "en": "Simtek DC King 70A MPPT Solar Charge Controller (110 VOC)",
+      "ur": "سیمٹیک ڈی کِنگ 70A MPPT سولر چارج کنٹرولر (110 VOC)"
+    },
+    "price": 14700,
+    "oldPrice": 18000,
+    "summary": {
+      "en": "ECO Series high-efficiency MPPT controller, 110 VOC, 70A output, for 12V and 24V battery systems. Runs DC loads up to 50A without a battery, with low-battery cutoff.",
+      "ur": "ای سی او سیریز کا موثر MPPT کنٹرولر، 110 VOC، 70A آؤٹ پٹ، 12V اور 24V بیٹری سسٹم کے لیے۔ بیٹری کے بغیر 50A تک DC لوڈ چلا سکتا ہے۔"
+    },
+    "features": {
+      "en": [
+        "Advanced MPPT technology - faster, more efficient charging",
+        "110 VOC, 70A output for high-voltage solar arrays",
+        "For 12V and 24V battery systems",
+        "Direct DC load support up to 50A - can run without a battery",
+        "DC load cutoff on low battery to prevent deep discharge",
+        "Dual LED + digital display for live monitoring",
+        "Low-voltage and overheat protection",
+        "Works with all battery types"
+      ],
+      "ur": [
+        "جدید MPPT ٹیکنالوجی - تیز اور موثر چارجنگ",
+        "110 VOC، 70A آؤٹ پٹ",
+        "12V اور 24V بیٹری سسٹم کے لیے",
+        "50A تک براہ راست DC لوڈ - بیٹری کے بغیر بھی چلتا ہے",
+        "لو بیٹری پر DC لوڈ کٹ آف",
+        "ڈوئل LED + ڈیجیٹل ڈسپلے",
+        "لو وولٹیج اور اوور ہیٹ پروٹیکشن",
+        "ہر قسم کی بیٹری کے ساتھ چلتا ہے"
+      ]
+    },
+    "specs": {
+      "Model": "DC King-70A (ECO Series)",
+      "Type": "MPPT (non-hybrid)",
+      "Max charge current": "70A",
+      "Max PV input (VOC)": "110V",
+      "Battery system": "12V / 24V",
+      "DC load": "up to 50A (battery-free)",
+      "Display": "Dual LED + digital"
+    },
+    "images": [
+      "images/products/simtek-dc-king-70a-1.jpg",
+      "images/products/simtek-dc-king-70a-2.jpg",
+      "images/products/simtek-dc-king-70a-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Default (70A)",
+        "extraCost": 0
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "simtek-mppt-plus-hybrid-85a-solar-charge-controller",
+    "sku": "HRL-SOL-004",
+    "brand": "Simtek",
+    "category": "Solar",
+    "stock": 6,
+    "warranty": "12 months official Simtek warranty.",
+    "title": {
+      "en": "Simtek MPPT Plus Hybrid 85A Solar Charge Controller (150 VOC)",
+      "ur": "سیمٹیک MPPT پلس ہائبرڈ 85A سولر چارج کنٹرولر (150 VOC)"
+    },
+    "price": 16800,
+    "oldPrice": 23500,
+    "summary": {
+      "en": "Simtek's MPPT Plus Hybrid flagship: 150 VOC, 85A output, automatic 12V/24V detection and a dual LCD & LED display for larger solar setups.",
+      "ur": "سیمٹیک کا فلیگ شپ MPPT پلس ہائبرڈ: 150 VOC، 85A آؤٹ پٹ، خودکار 12V/24V ڈیٹیکشن اور ڈوئل LCD و LED ڈسپلے۔"
+    },
+    "features": {
+      "en": [
+        "High-efficiency MPPT Plus hybrid technology",
+        "150 VOC, 85A output for large solar arrays",
+        "Automatic 12V/24V detection - no manual setup",
+        "Hybrid design: solar input, battery charging and DC load in one unit",
+        "Dual LCD & LED display for real-time monitoring",
+        "Runs DC loads with or without a battery",
+        "Overload and reverse polarity protection",
+        "12 months official Simtek warranty"
+      ],
+      "ur": [
+        "اعلیٰ کارکردگی والی MPPT پلس ہائبرڈ ٹیکنالوجی",
+        "150 VOC، 85A آؤٹ پٹ",
+        "خودکار 12V/24V ڈیٹیکشن - کسی سیٹنگ کی ضرورت نہیں",
+        "ہائبرڈ ڈیزائن: سولر، بیٹری چارجنگ اور DC لوڈ ایک ہی یونٹ میں",
+        "ڈوئل LCD اور LED ڈسپلے",
+        "بیٹری کے ساتھ یا بغیر DC لوڈ چلائیں",
+        "اوور لوڈ اور ریورس پولیرٹی پروٹیکشن",
+        "12 ماہ آفیشل سیمٹیک وارنٹی"
+      ]
+    },
+    "specs": {
+      "Model": "MPPT Plus Hybrid 85A",
+      "Type": "MPPT hybrid",
+      "Max charge current": "85A",
+      "Max PV input (VOC)": "150V",
+      "Battery system": "12V / 24V (auto detect)",
+      "Display": "Dual LCD + LED"
+    },
+    "images": [
+      "images/products/simtek-mppt-plus-85a-1.png",
+      "images/products/simtek-mppt-plus-85a-2.png",
+      "images/products/simtek-mppt-plus-85a-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Default (85A)",
+        "extraCost": 0
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "simtek-digital-battery-charger-12v-20a",
+    "sku": "HRL-CHG-005",
+    "brand": "Simtek",
+    "category": "Chargers",
+    "stock": 10,
+    "warranty": "3 months official Simtek warranty.",
+    "title": {
+      "en": "Simtek Digital Fully Automatic Battery Charger 12V 20A with Digital Meter",
+      "ur": "سیمٹیک ڈیجیٹل بیٹری چارجر 12V 20A (ڈیجیٹل میٹر کے ساتھ)"
+    },
+    "price": 7990,
+    "oldPrice": 8500,
+    "summary": {
+      "en": "Fully automatic 12V 20A switch-mode charger with a digital meter showing live voltage, current and charging status. Wide 80V-245V AC input for unstable areas.",
+      "ur": "مکمل خودکار 12V 20A چارجر، ڈیجیٹل میٹر پر وولٹیج، کرنٹ اور چارجنگ اسٹیٹس نظر آتی ہے۔ 80V-245V AC ان پٹ۔"
+    },
+    "features": {
+      "en": [
+        "Fully automatic smart charging for all 12V lead-acid batteries",
+        "Digital meter: live voltage, current and charging status",
+        "Wide input range 80V-245V AC - handles unstable voltage",
+        "Power factor 85% or higher - energy efficient",
+        "Reverse polarity, overcharge, overcurrent and overheat protection",
+        "LED charging status indicators",
+        "Can be used as a direct 12V DC power supply",
+        "Charges dry, wet and maintenance-free batteries"
+      ],
+      "ur": [
+        "تمام 12V لیڈ ایسڈ بیٹریز کے لیے مکمل خودکار چارجنگ",
+        "ڈیجیٹل میٹر: وولٹیج، کرنٹ اور چارجنگ اسٹیٹس",
+        "80V-245V AC ان پٹ - غیر مستحکم وولٹیج پر بھی کام کرتا ہے",
+        "پاور فیکٹر 85% یا زیادہ",
+        "ریورس پولیرٹی، اوور چارج، اوور کرنٹ اور اوور ہیٹ پروٹیکشن",
+        "LED چارجنگ انڈیکیٹرز",
+        "براہ راست 12V DC پاور سپلائی کے طور پر بھی استعمال ہوتا ہے",
+        "ڈرائی، وٹ اور مینٹیننس فری بیٹریز کے لیے"
+      ]
+    },
+    "specs": {
+      "Model": "Digital Battery Charger 12V 20A",
+      "Type": "Switch-mode fully automatic",
+      "Output": "12V 20A",
+      "Input": "80V-245V AC",
+      "Power factor": "85% or higher",
+      "Display": "Digital meter + LED indicators"
+    },
+    "images": [
+      "images/products/simtek-digital-charger-12v-20a-1.jpg",
+      "images/products/simtek-digital-charger-12v-20a-2.jpg",
+      "images/products/simtek-digital-charger-12v-20a-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Default (12V 20A)",
+        "extraCost": 0
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "simtek-battery-charger-12v-30a",
+    "sku": "HRL-CHG-006",
+    "brand": "Simtek",
+    "category": "Chargers",
+    "stock": 10,
+    "warranty": "3 months official Simtek warranty.",
+    "title": {
+      "en": "Simtek Fully Automatic Battery Charger 12V 30A (3-Stage)",
+      "ur": "سیمٹیک بیٹری چارجر 12V 30A (3 سٹیج)"
+    },
+    "price": 11550,
+    "oldPrice": 12500,
+    "summary": {
+      "en": "Fully automatic 12V 30A charger with 3-stage intelligent charging (bulk, absorption, float). Wide 80V-245V AC input, works as a DC power supply too.",
+      "ur": "مکمل خودکار 12V 30A چارجر، 3 سٹیج ذہین چارجنگ (بلک، ایبزارپشن، فلوٹ)۔ 80V-245V AC ان پٹ، DC پاور سپلائی بھی۔"
+    },
+    "features": {
+      "en": [
+        "3-stage intelligent charging: bulk, absorption, float",
+        "Fully automatic switch-mode design - plug and forget",
+        "Wide input range 80V-245V AC",
+        "LED indicators for battery level and charging status",
+        "Reverse polarity, overcharge, overcurrent and overheat protection",
+        "Works as a 12V DC power supply without a battery",
+        "Charges dry, wet, gel and maintenance-free batteries",
+        "Prolongs battery life with smart charging"
+      ],
+      "ur": [
+        "3 سٹیج ذہین چارجنگ: بلک، ایبزارپشن، فلوٹ",
+        "مکمل خودکار سوئچ موڈ ڈیزائن",
+        "80V-245V AC ان پٹ",
+        "بیٹری لیول اور چارجنگ اسٹیٹس کے لیے LED انڈیکیٹرز",
+        "ریورس پولیرٹی، اوور چارج، اوور کرنٹ اور اوور ہیٹ پروٹیکشن",
+        "بیٹری کے بغیر 12V DC پاور سپلائی کے طور پر بھی چلتا ہے",
+        "ڈرائی، وٹ، جیل اور مینٹیننس فری بیٹریز کے لیے",
+        "سمارٹ چارجنگ سے بیٹری کی عمر بڑھاتا ہے"
+      ]
+    },
+    "specs": {
+      "Model": "Battery Charger 12V 30A",
+      "Type": "3-stage fully automatic",
+      "Output": "12V 30A",
+      "Input": "80V-245V AC",
+      "Power factor": "85% or higher",
+      "Display": "LED indicators"
+    },
+    "images": [
+      "images/products/simtek-charger-12v-30a-1.jpg",
+      "images/products/simtek-charger-12v-30a-2.jpg",
+      "images/products/simtek-charger-12v-30a-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Default (12V 30A)",
+        "extraCost": 0
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "simtek-mppt-plus-hybrid-120a-solar-charge-controller",
+    "sku": "HRL-SOL-007",
+    "brand": "Simtek",
+    "category": "Solar",
+    "stock": 7,
+    "warranty": "12 months official Simtek warranty.",
+    "title": {
+      "en": "Simtek MPPT Plus Hybrid 120A Solar Charge Controller (170 VOC)",
+      "ur": "سیمٹیک MPPT پلس ہائبرڈ 120A سولر چارج کنٹرولر (170 VOC)"
+    },
+    "price": 23300,
+    "oldPrice": 29600,
+    "summary": {
+      "en": "Simtek's most powerful MPPT Plus Hybrid: 170 VOC, 120A output, automatic 12V/24V detection and dual LCD & LED display for large solar arrays.",
+      "ur": "سیمٹیک کا سب سے طاقتور MPPT پلس ہائبرڈ: 170 VOC، 120A آؤٹ پٹ، خودکار 12V/24V ڈیٹیکشن اور ڈوئل LCD و LED ڈسپلے۔"
+    },
+    "features": {
+      "en": [
+        "Highest capacity: 170 VOC, 120A output for big solar arrays",
+        "Automatic 12V/24V detection - no manual setup",
+        "Hybrid design: solar input, battery charging and DC load in one unit",
+        "Dual LCD & LED display for real-time monitoring",
+        "Runs DC loads with or without a battery",
+        "Overload and reverse polarity protection",
+        "12 months official Simtek warranty"
+      ],
+      "ur": [
+        "سب سے زیادہ صلاحیت: 170 VOC، 120A آؤٹ پٹ",
+        "خودکار 12V/24V ڈیٹیکشن",
+        "ہائبرڈ ڈیزائن: سولر، بیٹری چارجنگ اور DC لوڈ ایک یونٹ میں",
+        "ڈوئل LCD اور LED ڈسپلے",
+        "بیٹری کے ساتھ یا بغیر DC لوڈ",
+        "اوور لوڈ اور ریورس پولیرٹی پروٹیکشن",
+        "12 ماہ آفیشل سیمٹیک وارنٹی"
+      ]
+    },
+    "specs": {
+      "Model": "MPPT Plus Hybrid 120A",
+      "Type": "MPPT hybrid",
+      "Max charge current": "120A",
+      "Max PV input (VOC)": "170V",
+      "Battery system": "12V / 24V (auto detect)",
+      "Display": "Dual LCD + LED"
+    },
+    "images": [
+      "images/products/simtek-mppt-plus-120a-1.png",
+      "images/products/simtek-mppt-plus-120a-2.png",
+      "images/products/simtek-mppt-plus-120a-3.png"
+    ],
+    "variants": [
+      {
+        "name": "Default",
+        "extraCost": 0
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "simtek-battery-charger-12v-20a",
+    "sku": "HRL-CHG-008",
+    "brand": "Simtek",
+    "category": "Chargers",
+    "stock": 12,
+    "warranty": "3 months official Simtek warranty.",
+    "title": {
+      "en": "Simtek Battery Charger 12V 20A Fully Automatic (LED Indicators)",
+      "ur": "سیمٹیک بیٹری چارجر 12V 20A مکمل خودکار"
+    },
+    "price": 6750,
+    "oldPrice": 8000,
+    "summary": {
+      "en": "Fully automatic 12V 20A charger for all lead-acid batteries. Wide 80V-245V AC input, LED status indicators, full protection - the dependable everyday charger.",
+      "ur": "تمام لیڈ ایسڈ بیٹریز کے لیے مکمل خودکار 12V 20A چارجر۔ 80V-245V AC ان پٹ، LED انڈیکیٹرز، مکمل پروٹیکشن۔"
+    },
+    "features": {
+      "en": [
+        "Fully automatic charging for all 12V lead-acid batteries",
+        "Wide input range 80V-245V AC - handles unstable voltage",
+        "LED indicators for charging status and battery level",
+        "Reverse polarity, overcharge, overcurrent and overheat protection",
+        "Rugged metal body built for daily workshop use",
+        "3 months official Simtek warranty"
+      ],
+      "ur": [
+        "تمام 12V لیڈ ایسڈ بیٹریز کے لیے مکمل خودکار چارجنگ",
+        "80V-245V AC ان پٹ",
+        "چارجنگ اسٹیٹس کے لیے LED انڈیکیٹرز",
+        "ریورس پولیرٹی، اوور چارج، اوور کرنٹ اور اوور ہیٹ پروٹیکشن",
+        "مضبوط میٹل باڈی",
+        "3 ماہ آفیشل سیمٹیک وارنٹی"
+      ]
+    },
+    "specs": {
+      "Model": "Battery Charger 12V 20A",
+      "Type": "Fully automatic switch-mode",
+      "Output": "12V 20A",
+      "Input": "80V-245V AC",
+      "Display": "LED indicators"
+    },
+    "images": [
+      "images/products/simtek-charger-12v-20a-basic-1.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Default",
+        "extraCost": 0
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "alkaram-power-inverter-2000w-12v",
+    "sku": "HRL-INV-009",
+    "brand": "Alkaram",
+    "category": "Inverters",
+    "stock": 15,
+    "warranty": "6 months shop replacement warranty.",
+    "title": {
+      "en": "Alkaram Power Inverter 2000W - 12V DC to 220V AC with Display",
+      "ur": "الکرم پاور انورٹر 2000W - 12V ڈی سی سے 220V اے سی"
+    },
+    "price": 4999,
+    "oldPrice": 5999,
+    "summary": {
+      "en": "Compact Alkaram 2000W modified sine wave inverter, 12V DC to 220V AC with digital display and dual USB - ideal for fans, lights, TV and charging.",
+      "ur": "کمپیکٹ الکرم 2000W انورٹر، 12V ڈی سی سے 220V اے سی، ڈیجیٹل ڈسپلے اور ڈوئل USB - پنکھے، لائٹس، ٹی وی کے لیے۔"
+    },
+    "features": {
+      "en": [
+        "2000W output - runs fans, lights, TV and charger loads",
+        "12V DC to 220V AC conversion",
+        "Digital display for battery and load status",
+        "Dual USB charging ports (DC 5V/1A)",
+        "Low battery alarm with auto shutdown protects your battery",
+        "Overload and over-temperature protection",
+        "Lightweight aluminium body"
+      ],
+      "ur": [
+        "2000W آؤٹ پٹ - پنکھے، لائٹس، ٹی وی چلائیں",
+        "12V ڈی سی سے 220V اے سی",
+        "بیٹری اور لوڈ اسٹیٹس کے لیے ڈیجیٹل ڈسپلے",
+        "ڈوئل USB چارجنگ پورٹس",
+        "لو بیٹری الارم اور آٹو شٹ ڈاؤن",
+        "اوور لوڈ اور اوور ٹمپریچر پروٹیکشن",
+        "ہلکا ایلومینیم باڈی"
+      ]
+    },
+    "specs": {
+      "Model": "PI-2000W",
+      "Type": "Modified sine wave",
+      "Rated power": "2000W",
+      "Input": "12V DC (10.5-15V)",
+      "Output": "220V AC 50Hz",
+      "USB": "DC 5V/1A dual"
+    },
+    "images": [
+      "images/products/alkaram-2000w-1.jpg",
+      "images/products/alkaram-2000w-2.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Default",
+        "extraCost": 0
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "alkaram-power-inverter-3000w-12v",
+    "sku": "HRL-INV-010",
+    "brand": "Alkaram",
+    "category": "Inverters",
+    "stock": 10,
+    "warranty": "6 months shop replacement warranty.",
+    "title": {
+      "en": "Alkaram Power Inverter 3000W PI-3000W - 12V DC to 220V AC with Display",
+      "ur": "الکرم پاور انورٹر 3000W PI-3000W"
+    },
+    "price": 9999,
+    "oldPrice": 13999,
+    "summary": {
+      "en": "Alkaram 3000W modified sine wave inverter with digital display and USB - runs fridge, iron, all fans, washing machine and more from a 12V battery or solar setup.",
+      "ur": "الکرم 3000W انورٹر، ڈیجیٹل ڈسپلے اور USB کے ساتھ - 12V بیٹری سے فریج، استری، پنکھے، واشنگ مشین چلائیں۔"
+    },
+    "features": {
+      "en": [
+        "3000W output - fridge, iron, all fans, washing machine, drill",
+        "12V DC to 220V AC conversion, efficiency over 90%",
+        "Digital display: battery input, frequency, output, waveform",
+        "USB charging port (DC 5V/1A)",
+        "Smart soft start and intelligent temperature-control fan",
+        "Low battery alarm with auto shutdown",
+        "Overload and short circuit protection"
+      ],
+      "ur": [
+        "3000W آؤٹ پٹ - فریج، استری، پنکھے، واشنگ مشین، ڈرل",
+        "12V ڈی سی سے 220V اے سی، 90% سے زیادہ کارکردگی",
+        "ڈیجیٹل ڈسپلے",
+        "USB چارجنگ پورٹ",
+        "اسمارٹ سافٹ اسٹارٹ اور ٹمپریچر کنٹرول فین",
+        "لو بیٹری الارم اور آٹو شٹ ڈاؤن",
+        "اوور لوڈ اور شارٹ سرکٹ پروٹیکشن"
+      ]
+    },
+    "specs": {
+      "Model": "PI-3000W",
+      "Type": "Modified sine wave",
+      "Rated power": "3000W",
+      "Input": "12V DC (10.5-15V)",
+      "Output": "230V AC 50Hz +/-2Hz",
+      "Efficiency": "> 90%",
+      "USB": "DC 5V/1A"
+    },
+    "images": [
+      "images/products/alkaram-3000w-1.png",
+      "images/products/alkaram-3000w-2.jpg",
+      "images/products/alkaram-3000w-3.png"
+    ],
+    "variants": [
+      {
+        "name": "Default",
+        "extraCost": 0
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "slug": "alkaram-power-inverter-4000w-12v",
+    "sku": "HRL-INV-011",
+    "brand": "Alkaram",
+    "category": "Inverters",
+    "stock": 8,
+    "warranty": "6 months shop replacement warranty.",
+    "title": {
+      "en": "Alkaram Power Inverter 4000W PI-4000W - 12V DC to 220V AC with Display",
+      "ur": "الکرم پاور انورٹر 4000W PI-4000W"
+    },
+    "price": 13999,
+    "oldPrice": 15999,
+    "summary": {
+      "en": "Alkaram 4000W inverter with display screen, USB and Type-C - heavy-duty 12V to 220V conversion for bigger home backup setups.",
+      "ur": "الکرم 4000W انورٹر، ڈسپلے اسکرین، USB اور ٹائپ-سی کے ساتھ - بڑے گھریلو بیک اپ کے لیے۔"
+    },
+    "features": {
+      "en": [
+        "4000W output for heavy home backup",
+        "12V DC to 220V AC, efficiency over 90%",
+        "Display screen for live battery and load info",
+        "USB plus USB Type-C charging ports",
+        "Universal socket fits all plug types",
+        "Smart soft start, quiet temperature-control cooling",
+        "Overload, over-temperature and short circuit protection"
+      ],
+      "ur": [
+        "4000W آؤٹ پٹ بھاری گھریلو بیک اپ کے لیے",
+        "12V ڈی سی سے 220V اے سی، 90% سے زیادہ کارکردگی",
+        "ڈسپلے اسکرین",
+        "USB اور USB ٹائپ-سی پورٹس",
+        "یونیورسل ساکٹ",
+        "اسمارٹ سافٹ اسٹارٹ اور ٹمپریچر کنٹرول کولنگ",
+        "اوور لوڈ، اوور ٹمپریچر اور شارٹ سرکٹ پروٹیکشن"
+      ]
+    },
+    "specs": {
+      "Model": "PI-4000W",
+      "Type": "Modified sine wave",
+      "Rated power": "4000W",
+      "Input": "12V DC (10.5-15V)",
+      "Output": "230V AC 50Hz +/-2Hz",
+      "Efficiency": "> 90%",
+      "Ports": "USB + Type-C"
+    },
+    "images": [
+      "images/products/alkaram-4000w-1.jpg",
+      "images/products/alkaram-4000w-2.jpg",
+      "images/products/alkaram-4000w-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Default",
+        "extraCost": 0
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "slug": "alkaram-power-inverter-6000w-12v",
+    "sku": "HRL-INV-012",
+    "brand": "Alkaram",
+    "category": "Inverters",
+    "stock": 5,
+    "warranty": "6 months shop replacement warranty.",
+    "title": {
+      "en": "Alkaram Power Inverter 6000W - 12V DC to 220V AC with Display Screen",
+      "ur": "الکرم پاور انورٹر 6000W - ڈسپلے اسکرین کے ساتھ"
+    },
+    "price": 22999,
+    "oldPrice": 24000,
+    "summary": {
+      "en": "The flagship Alkaram 6000W: serious 12V DC to 220V AC power for washing machines, pumps and heavy appliances, with a digital screen for live status.",
+      "ur": "فلیگ شپ الکرم 6000W: واشنگ مشین، پمپ اور بھاری آلات کے لیے طاقتور 12V سے 220V تبدیلی، ڈیجیٹل اسکرین کے ساتھ۔"
+    },
+    "features": {
+      "en": [
+        "6000W high power output - washing machine, pump, heavy appliances",
+        "12V DC to 220V AC conversion",
+        "Digital screen shows real-time voltage and load",
+        "Type-C port and big power switch",
+        "Overload and short circuit protection",
+        "Durable design for long-term use",
+        "Best for solar systems and heavy home or office backup"
+      ],
+      "ur": [
+        "6000W ہائی پاور آؤٹ پٹ - واشنگ مشین، پمپ، بھاری آلات",
+        "12V ڈی سی سے 220V اے سی",
+        "ڈیجیٹل اسکرین پر وولٹیج اور لوڈ",
+        "ٹائپ-سی پورٹ اور بڑا پاور سوئچ",
+        "اوور لوڈ اور شارٹ سرکٹ پروٹیکشن",
+        "پائیدار ڈیزائن",
+        "سولر سسٹم اور بھاری بیک اپ کے لیے بہترین"
+      ]
+    },
+    "specs": {
+      "Model": "PI-6000W",
+      "Type": "Modified sine wave",
+      "Rated power": "6000W",
+      "Input": "12V DC",
+      "Output": "220V AC 50Hz",
+      "Display": "Digital screen",
+      "Ports": "USB Type-C"
+    },
+    "images": [
+      "images/products/alkaram-6000w-1.jpg",
+      "images/products/alkaram-6000w-2.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Default",
+        "extraCost": 0
+      }
+    ]
   }
 ];
 window.CATEGORIES = [

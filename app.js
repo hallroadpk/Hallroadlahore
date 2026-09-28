@@ -37,6 +37,8 @@
     en: {
       addToCart: 'Add to Cart', viewDetails: 'View Details', cart: 'Cart', total: 'Total',
       shipping: 'Shipping', free: 'Free', checkout: 'Proceed to Checkout', yourCart: 'Your Shopping Cart',
+      sortBy: 'Sort by', sortFeatured: 'Featured', sortPriceLow: 'Price: Low to High', sortPriceHigh: 'Price: High to Low',
+      shipFrom: 'From %f - by region', quickWa: 'WhatsApp',
       emptyCart: 'Your cart is empty.', completeOrder: 'Complete Your Order', fullName: 'Full Name',
       phone: 'WhatsApp / Mobile Number', city: 'City', address: 'Complete Delivery Address',
       payment: 'Payment Method', confirm: 'Confirm Order', noResults: 'No products found.',
@@ -60,6 +62,8 @@
     ur: {
       addToCart: 'کارٹ میں شامل کریں', viewDetails: 'تفصیلات دیکھیں', cart: 'کارٹ', total: 'کل رقم',
       shipping: 'ڈیلیوری', free: 'مفت', checkout: 'چیک آؤٹ کریں', yourCart: 'آپ کا کارٹ',
+      sortBy: 'ترتیب', sortFeatured: 'فیچرڈ', sortPriceLow: 'قیمت: کم سے زیادہ', sortPriceHigh: 'قیمت: زیادہ سے کم',
+      shipFrom: '%f سے - علاقے کے مطابق', quickWa: 'واٹس ایپ',
       emptyCart: 'آپ کا کارٹ خالی ہے۔', completeOrder: 'آرڈر مکمل کریں', fullName: 'پورا نام',
       phone: 'واٹس ایپ / موبائل نمبر', city: 'شہر', address: 'مکمل ڈیلیوری ایڈریس',
       payment: 'ادائیگی کا طریقہ', confirm: 'آرڈر کنفرم کریں', noResults: 'کوئی پروڈکٹ نہیں ملی۔',
@@ -154,6 +158,42 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     return { text: t('inStock'), cls: '' };
   }
 
+  /* Shipping is charged by region; show the honest "from" fee everywhere. */
+  function lowestShipFee() {
+    var rates = (CFG.shipping && CFG.shipping.rates) || [];
+    var min = Infinity;
+    rates.forEach(function (r) { if (r.fee < min) min = r.fee; });
+    return isFinite(min) ? min : null;
+  }
+  function shipNote() {
+    var free = !CFG.shipping || CFG.shipping.freeShipping !== false;
+    if (free) return t('free') + ' nationwide';
+    var f = lowestShipFee();
+    return f != null ? t('shipFrom').replace('%f', money(f)) : 'By region - confirmed on WhatsApp';
+  }
+
+  /* ================================================================ SORTING */
+  var sortMode = 'featured';
+  try { sortMode = localStorage.getItem('hallroad_sort') || 'featured'; } catch (e) {}
+  function applySort(list) {
+    if (sortMode === 'price-asc') { var a = list.slice(); a.sort(function (x, y) { return x.price - y.price; }); return a; }
+    if (sortMode === 'price-desc') { var b = list.slice(); b.sort(function (x, y) { return y.price - x.price; }); return b; }
+    return list;
+  }
+  function initSort() {
+    var sel = $('#sortSelect');
+    if (!sel) return;
+    sel.appendChild(new Option(t('sortFeatured'), 'featured'));
+    sel.appendChild(new Option(t('sortPriceLow'), 'price-asc'));
+    sel.appendChild(new Option(t('sortPriceHigh'), 'price-desc'));
+    sel.value = sortMode;
+    sel.addEventListener('change', function () {
+      sortMode = sel.value;
+      try { localStorage.setItem('hallroad_sort', sortMode); } catch (e) {}
+      renderProducts();
+    });
+  }
+
   /* ================================================================= CART */
   var cart = loadCart();
 
@@ -193,10 +233,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     var totalEl = $('#cartTotalDisplay');
     if (totalEl) totalEl.textContent = money(cartTotal());
     var ship = $('#cartShippingDisplay');
-    if (ship) {
-      var free = !CFG.shipping || CFG.shipping.freeShipping !== false;
-      ship.textContent = free ? t('free') + ' nationwide' : 'By region - confirmed on WhatsApp';
-    }
+    if (ship) ship.textContent = shipNote();
     var body = $('#cartDrawerItems');
     if (!body) return;
     body.textContent = '';
@@ -395,7 +432,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
   function renderProducts() {
     var grid = $('#productGrid');
     if (!grid) return;
-    var list = PRODUCTS.filter(function (p) {
+    var list = applySort(PRODUCTS.filter(function (p) {
       if (currentCategory !== 'All' && p.category !== currentCategory) return false;
       if (!searchTerm) return true;
       var q = searchTerm.toLowerCase();
@@ -404,12 +441,14 @@ function $(sel, root) { return (root || document).querySelector(sel); }
                  Object.keys(p.specs || {}).join(' '),
                  Object.values(p.specs || {}).join(' ')].join(' ').toLowerCase();
       return hay.indexOf(q) !== -1;
-    });
+    }));
     grid.textContent = '';
     if (!list.length) { grid.appendChild(el('p', { class: 'empty-state', text: t('noResults') })); return; }
     list.forEach(function (p) {
       var d = honestDiscount(p);
       var st = stockLabel(p);
+      var waMsg = 'Assalam o Alaikum! I want to order: ' + (lang === 'ur' && p.title.ur ? p.title.ur : p.title.en) +
+                  ' - ' + money(p.price) + ' (hallroadlahore.com)';
       var card = el('button', {
         class: 'product-card', type: 'button',
         'aria-label': p.title.en + ', ' + money(p.price),
@@ -425,7 +464,15 @@ function $(sel, root) { return (root || document).querySelector(sel); }
           ]),
           st ? el('span', { class: 'stock-chip ' + st.cls, text: st.text }) : null
         ]),
-        el('span', { class: 'btn-add-cart', text: t('viewDetails'), 'aria-hidden': 'true' })
+        el('span', { class: 'btn-add-cart', text: t('viewDetails'), 'aria-hidden': 'true' }),
+        el('span', {
+          class: 'wa-quick', text: t('quickWa'), 'aria-hidden': 'true', title: 'Order on WhatsApp',
+          onclick: function (ev) {
+            ev.stopPropagation();
+            var num = (CFG.contact && CFG.contact.whatsapp) || '923396202062';
+            window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(waMsg), '_blank', 'noopener');
+          }
+        })
       ]);
       grid.appendChild(card);
     });
@@ -476,10 +523,9 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       ]));
     });
     box.appendChild(ul);
-    var freeShip = !CFG.shipping || CFG.shipping.freeShipping !== false;
     box.appendChild(el('div', { class: 'cart-shipping-row', style: 'margin:0 0 8px;' }, [
       el('span', { text: t('shipping') }),
-      el('span', { text: freeShip ? t('free') : 'By region - confirmed on WhatsApp' })
+      el('span', { text: shipNote() })
     ]));
     box.appendChild(el('div', { class: 'order-summary-total' }, [
       el('span', { text: t('total') }),
@@ -529,6 +575,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     ];
     order.items.forEach(function (i) { lines.push('• ' + i.title + ' (x' + i.qty + ') - ' + money(i.lineTotal)); });
     lines.push('', '*Total:* ' + money(order.total));
+    if (order.notes) lines.push('', '*Notes:* ' + order.notes);
     lines.push('Sent from ' + (CFG.brand ? CFG.brand.url : location.origin));
     return lines.join('\n');
   }
@@ -543,6 +590,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     var address = ($('#custAddress').value || '').trim();
     var paySel = $('#paymentMethod');
     var payment = paySel.options[paySel.selectedIndex].textContent.trim();
+    var notes = (($('#custNotes') || {}).value || '').trim().slice(0, 300);
 
     /* Validate — an order you cannot call back is worse than no order. */
     if (setFieldError('custName', name.length < 3 ? t('errName') : '')) return;
@@ -562,7 +610,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       id: 'HRL-' + new Date().toISOString().slice(2, 10).replace(/-/g, '') + '-' + String(Date.now()).slice(-4),
       at: new Date().toISOString(),
       name: name, phone: '92' + digits, phoneDisplay: phoneDisplay, city: city, address: address,
-      payment: payment, items: items, total: cartTotal(),
+      payment: payment, notes: notes, items: items, total: cartTotal(),
       source: location.pathname
     };
     order.message = buildOrderMessage(order);
@@ -920,6 +968,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     renderTicker(); renderPromo(); renderReviews(); renderTrust();
     renderPaymentOptions(); renderWhatsappLinks(); renderPhoneLinks();
     renderCategoryTabs(); renderProducts(); updateCartUI();
+    initSort();
     bindActions();
     initStaticPage();
     initAnalytics();
