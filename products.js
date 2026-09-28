@@ -59,7 +59,7 @@ window.PRODUCTS = [
     "brand": "Simtek",
     "category": "Solar",
     "stock": 10,
-    "warranty": "6 months Simtek service warranty (as listed by the supplier).",
+    "warranty": "3 months official Simtek warranty.",
     "title": {
       "en": "Simtek Planet40 40A MPPT Solar Charge Controller (70 VOC)",
       "ur": "سمٹیک Planet40 40A MPPT سولر چارج کنٹرولر (70 VOC)"

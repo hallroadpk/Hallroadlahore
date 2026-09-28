@@ -56,10 +56,10 @@ window.SITE_CONFIG = {
      COD in Pakistan normally carries a courier fee. Pick ONE and delete the other.
      Set freeShipping: false and fill the rates if you charge for delivery.        */
   shipping: {
-    freeShipping: true,
+    freeShipping: false,   // free shipping removed - delivery charged by region
     /* Used only when freeShipping is false */
     rates: [
-      { en: "Lahore (same day / next day)", ur: "لاہور",            fee: 0 },
+      { en: "Lahore (same day / next day)", ur: "لاہور",            fee: 150 },
       { en: "Punjab",                       ur: "پنجاب",            fee: 200 },
       { en: "Sindh / KPK / Balochistan",    ur: "سندھ / کے پی کے",  fee: 250 },
       { en: "AJK / Gilgit-Baltistan",       ur: "آزاد کشمیر / گلگت", fee: 350 }

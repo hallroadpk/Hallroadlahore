@@ -57,15 +57,16 @@
   <h2>Order processing</h2>
   <p>Orders confirmed on WhatsApp before 3:00pm (Mon-Sat) are packed and handed to the courier the same day. Orders after 3:00pm, on Sunday or on public holidays are dispatched the next working morning.</p>
 
-  <!-- TODO: OWNER — the previous version of the site claimed "Free Shipping
-       Nationwide" in the ticker. COD parcels in Pakistan normally carry a
-       courier fee. Decide ONE of the following and delete the rest, then update
-       site.config.js (shipping.freeShipping / shipping.rates) to match. -->
-  <div class="warn-callout">
-    <strong>Shop owner — decide this before going live:</strong> is delivery genuinely free nationwide, or do you charge the courier fee?
-    If you charge it, set <code>freeShipping: false</code> and the per-region fees in <code>site.config.js</code>, and update the table above.
-    Advertising free shipping and then charging on delivery is the most common cause of refused COD parcels.
-  </div>
+  <h2>Delivery charges</h2>
+  <p>Delivery is charged at cost by region. The exact charge for your city is confirmed on WhatsApp before you pay, and is added to your order total.</p>
+  <table>
+    <tr><th>Region</th><th>Delivery charge</th></tr>
+    <tr><td>Lahore</td><td>Rs. 150</td></tr>
+    <tr><td>Punjab (other cities)</td><td>Rs. 200</td></tr>
+    <tr><td>Sindh, KPK, Balochistan</td><td>Rs. 250</td></tr>
+    <tr><td>AJK, Gilgit-Baltistan</td><td>Rs. 350</td></tr>
+  </table>
+  <div class="info-callout">These charges are set in <code>site.config.js</code> (<code>shipping.rates</code>) — edit them there and the cart and checkout will update automatically.</div>
 
   <h2>Cash on Delivery</h2>
   <p>COD is available nationwide. You pay the rider in cash when the parcel reaches you. Please keep the exact amount ready — riders do not always carry change for large notes.</p>
