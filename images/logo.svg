@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 80" width="440" height="80" role="img" aria-label="Hall Road Lahore - Pakistan's premier online store">
+  <title>Hall Road Lahore</title>
+  <defs>
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF0055"/>
+      <stop offset="16%" stop-color="#FF6B35"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="50%" stop-color="#25D366"/>
+      <stop offset="66%" stop-color="#00C6FF"/>
+      <stop offset="83%" stop-color="#0072FF"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+  </defs>
+  <!-- Bolt mark, so the logo still reads when the webfont has not loaded -->
+  <path d="M26 14 L14 40 h9 l-3 22 L34 34 h-9 z" fill="url(#rainbow)"/>
+  <text x="46" y="44" font-family="'Plus Jakarta Sans',system-ui,-apple-system,sans-serif" font-weight="900" font-size="32" fill="url(#rainbow)" letter-spacing="-0.5">HALLROAD <tspan font-weight="800" font-size="21" fill="#0f172a" letter-spacing="0">Lahore.com</tspan></text>
+  <text x="48" y="65" font-family="'Plus Jakarta Sans',system-ui,-apple-system,sans-serif" font-weight="700" font-size="10.5" fill="#64748b" letter-spacing="1.4">SOLAR INVERTERS &amp; BATTERY CHARGERS</text>
+</svg>

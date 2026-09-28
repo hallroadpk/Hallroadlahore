@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar &amp; Inverter Size Calculator for Pakistan | Hall Road Lahore</title>
+<meta name="description" content="Free calculator: enter your appliances and hours of use to find the right inverter size, battery capacity (Ah) and solar panel wattage for your home in Pakistan.">
+<link rel="canonical" href="https://hallroadlahore.com/tools/solar-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hall Road Lahore">
+<meta property="og:title" content="Solar &amp; Inverter Size Calculator for Pakistan">
+<meta property="og:description" content="Find the right inverter, battery and panel size for your home. Free, no sign-up.">
+<meta property="og:url" content="https://hallroadlahore.com/tools/solar-calculator.html">
+<meta property="og:image" content="https://hallroadlahore.com/images/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Solar & Inverter Size Calculator",
+"url":"https://hallroadlahore.com/tools/solar-calculator.html","applicationCategory":"UtilityApplication",
+"operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"PKR"},
+"description":"Enter your appliances and daily hours to size an inverter, battery bank and solar array for a Pakistani home."}
+</script>
+</head>
+<body class="page-static">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="header-content">
+    <a class="brand-link" href="/" aria-label="Hall Road Lahore - home">
+      <img src="/images/logo.svg" alt="Hall Road Lahore" width="220" height="52" class="brand-logo-img">
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/">Shop</a>
+      <a href="/tools/solar-calculator.html" aria-current="page">Solar Calculator</a>
+      <a href="/about.html">About</a>
+      <a href="/shipping.html">Shipping</a>
+      <a href="/returns.html">Returns</a>
+    </nav>
+    <button class="cart-btn-head" type="button" data-action="open-cart" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+      Cart <span class="cart-count" id="cartBadge" aria-live="polite">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="main" style="max-width:1000px;">
+  <h1>Solar &amp; Inverter Size Calculator</h1>
+  <p class="lede">Add your appliances and how many hours a day you run them. We will tell you the inverter size, battery capacity and panel wattage you need — and you can send the result to us on WhatsApp for an exact quote.</p>
+
+  <div class="info-callout">
+    This is a sizing guide, not an electrical design. For loads above about 5&nbsp;kW, or three-phase supply, have a qualified electrician confirm the final design.
+  </div>
+
+  <div class="calc-grid">
+    <section class="calc-panel" aria-labelledby="calcInputs">
+      <h2 id="calcInputs">1. Your appliances</h2>
+      <div id="applianceList"></div>
+      <button type="button" class="btn-secondary" id="addAppliance">+ Add appliance</button>
+
+      <h3 style="margin-top:22px;">Backup time</h3>
+      <div class="form-group">
+        <label for="backupHours">How many hours of backup do you need per day?</label>
+        <input type="number" id="backupHours" value="6" min="1" max="24" step="1">
+      </div>
+
+      <h3>System voltage</h3>
+      <div class="form-group">
+        <label for="systemVoltage">Battery bank voltage</label>
+        <select id="systemVoltage">
+          <option value="12">12V (small systems up to about 1000W)</option>
+          <option value="24" selected>24V (1000W - 3000W)</option>
+          <option value="48">48V (3000W and above)</option>
+        </select>
+      </div>
+
+      <h3>Location</h3>
+      <div class="form-group">
+        <label for="citySelect">Peak sun hours for your city</label>
+        <select id="citySelect">
+          <option value="5.6">Karachi / Hyderabad — about 5.6 hrs</option>
+          <option value="5.4" selected>Lahore / Punjab plains — about 5.4 hrs</option>
+          <option value="5.5">Multan / Bahawalpur — about 5.5 hrs</option>
+          <option value="5.3">Islamabad / Rawalpindi — about 5.3 hrs</option>
+          <option value="5.0">Peshawar / KPK — about 5.0 hrs</option>
+          <option value="5.8">Quetta / Balochistan — about 5.8 hrs</option>
+          <option value="6.0">Gilgit-Baltistan — about 6.0 hrs</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="calc-panel" aria-labelledby="calcResults" aria-live="polite">
+      <h2 id="calcResults">2. What you need</h2>
+      <div class="calc-result-row"><span>Total connected load</span><span class="val" id="rLoad">0 W</span></div>
+      <div class="calc-result-row"><span>Daily energy use</span><span class="val" id="rEnergy">0 Wh</span></div>
+      <div class="calc-result-row big"><span>Inverter size</span><span class="val" id="rInverter">—</span></div>
+      <div class="calc-result-row big"><span>Battery capacity</span><span class="val" id="rBattery">—</span></div>
+      <div class="calc-result-row"><span>Batteries needed</span><span class="val" id="rBatteryCount">—</span></div>
+      <div class="calc-result-row big"><span>Solar array</span><span class="val" id="rPanels">—</span></div>
+      <div class="calc-result-row"><span>Suggested panels</span><span class="val" id="rPanelCount">—</span></div>
+
+      <p style="font-size:12.5px;color:#64748b;margin-top:14px;">Sized with a 25% inverter headroom, 80% inverter efficiency and 50% maximum battery discharge to protect battery life.</p>
+
+      <button type="button" class="checkout-btn" id="sendToWhatsapp" style="margin-top:16px;">Send this setup to us on WhatsApp</button>
+      <a class="btn-secondary" href="/" style="display:block;text-align:center;text-decoration:none;margin-top:8px;">Browse inverters</a>
+    </section>
+  </div>
+
+  <h2 style="margin-top:36px;">How the numbers work</h2>
+  <ul>
+    <li><strong>Inverter size</strong> — your total connected load plus 25% headroom, so the inverter is not running at its limit. Motors (fridges, pumps, AC compressors) draw 3-7x their running wattage for a second at startup, which is why headroom matters.</li>
+    <li><strong>Battery capacity</strong> — daily energy use divided by the system voltage, then doubled because lead-acid batteries should not be discharged below 50%, then divided by 80% inverter efficiency.</li>
+    <li><strong>Solar array</strong> — daily energy use divided by your city's peak sun hours, then increased by 25% to cover cloudy days, dust on panels and cable losses.</li>
+  </ul>
+
+  <h2>Common Pakistani home setups</h2>
+  <table>
+    <tr><th>Typical load</th><th>Inverter</th><th>Battery</th><th>Panels</th></tr>
+    <tr><td>4 fans + 8 LED lights</td><td>1200W</td><td>200Ah / 24V</td><td>2 x 550W</td></tr>
+    <tr><td>Fans, lights + 1 LED TV + router</td><td>2000W</td><td>400Ah / 24V</td><td>4 x 550W</td></tr>
+    <tr><td>The above + fridge</td><td>3000W</td><td>600Ah / 24V</td><td>6 x 550W</td></tr>
+    <tr><td>Small home with 1 ton inverter AC</td><td>5000W</td><td>800Ah / 48V</td><td>10 x 550W</td></tr>
+  </table>
+
+  <p style="margin-top:24px;"><a href="/">← Back to all products</a></p>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div><div class="footer-brand">Hall Road Lahore</div><p>Hall Road, Lahore, Punjab, Pakistan.</p></div>
+    <div><h3>Shop</h3><ul><li><a href="/">All products</a></li><li><a href="/tools/solar-calculator.html">Solar calculator</a></li></ul></div>
+    <div><h3>Help</h3><ul>
+      <li><a href="/shipping.html">Shipping &amp; delivery</a></li>
+      <li><a href="/returns.html">Returns &amp; warranty</a></li>
+      <li><a href="/privacy.html">Privacy policy</a></li>
+      <li><a href="/terms.html">Terms of sale</a></li></ul></div>
+    <div><h3>Contact</h3><ul>
+      <li><a href="tel:03396202062"><span data-phone-display>0339 6202062</span></a></li>
+      <li><a href="mailto:gpower.pk1@gmail.com">gpower.pk1@gmail.com</a></li>
+      <li>Mon-Sat, 9:00am to 5:00pm</li></ul></div>
+  </div>
+  <p class="footer-legal">&copy; 2026 hallroadlahore.com. Prices in PKR and subject to change.</p>
+</footer>
+
+<script src="/site.config.js"></script>
+<script src="/products.js"></script>
+<script src="/app.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  var PRESETS = [
+    { name: 'Ceiling fan', w: 80 }, { name: 'LED bulb', w: 12 }, { name: 'LED TV 32"', w: 60 },
+    { name: 'WiFi router', w: 12 }, { name: 'Refrigerator (inverter)', w: 150 },
+    { name: 'Freezer', w: 200 }, { name: 'Water pump 0.5HP', w: 400 }, { name: 'Washing machine', w: 500 },
+    { name: 'Iron', w: 1000 }, { name: 'Microwave', w: 1200 }, { name: 'AC 1 ton (inverter)', w: 1100 },
+    { name: 'Desktop computer', w: 200 }, { name: 'Laptop charger', w: 65 }, { name: 'Other', w: 100 }
+  ];
+  var list = document.getElementById('applianceList');
+
+  function row(preset) {
+    var d = document.createElement('div');
+    d.className = 'appliance-row';
+    var sel = document.createElement('select');
+    sel.setAttribute('aria-label', 'Appliance');
+    PRESETS.forEach(function (p) {
+      var o = document.createElement('option');
+      o.value = p.name; o.textContent = p.name; o.dataset.w = p.w;
+      if (preset && preset.name === p.name) o.selected = true;
+      sel.appendChild(o);
+    });
+    var watts = document.createElement('input');
+    watts.type = 'number'; watts.min = '1'; watts.value = preset ? preset.w : 80;
+    watts.setAttribute('aria-label', 'Watts each');
+    var qty = document.createElement('input');
+    qty.type = 'number'; qty.min = '1'; qty.max = '99'; qty.value = preset ? preset.qty : 1;
+    qty.setAttribute('aria-label', 'Quantity');
+    var rm = document.createElement('button');
+    rm.type = 'button'; rm.className = 'rm'; rm.textContent = '✕';
+    rm.setAttribute('aria-label', 'Remove appliance');
+    rm.addEventListener('click', function () { d.remove(); calc(); });
+    sel.addEventListener('change', function () {
+      var opt = sel.options[sel.selectedIndex];
+      watts.value = opt.dataset.w; calc();
+    });
+    [watts, qty].forEach(function (n) { n.addEventListener('input', calc); });
+    d.append(sel, watts, qty, rm);
+    return d;
+  }
+
+  function add(preset) { list.appendChild(row(preset)); calc(); }
+  document.getElementById('addAppliance').addEventListener('click', function () { add(); });
+
+  [{ name: 'Ceiling fan', w: 80, qty: 4 }, { name: 'LED bulb', w: 12, qty: 8 }, { name: 'LED TV 32"', w: 60, qty: 1 }, { name: 'WiFi router', w: 12, qty: 1 }]
+    .forEach(function (p) { list.appendChild(row(p)); });
+
+  function calc() {
+    var load = 0, energy = 0;
+    var hours = Math.max(1, Math.min(24, parseFloat(document.getElementById('backupHours').value) || 6));
+    list.querySelectorAll('.appliance-row').forEach(function (r) {
+      var w = parseFloat(r.querySelectorAll('input')[0].value) || 0;
+      var q = parseFloat(r.querySelectorAll('input')[1].value) || 0;
+      load += w * q;
+      energy += w * q * hours;
+    });
+
+    var inverterRaw = load * 1.25;
+    var inverterSizes = [600, 1000, 1200, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 8000, 10000];
+    var inverter = inverterSizes.filter(function (s) { return s >= inverterRaw; })[0] || Math.ceil(inverterRaw / 1000) * 1000;
+
+    var volts = parseFloat(document.getElementById('systemVoltage').value) || 24;
+    var ahNeeded = (energy / 0.8) / volts / 0.5;           // efficiency, then 50% depth of discharge
+    var ahRounded = Math.max(100, Math.ceil(ahNeeded / 50) * 50);
+    var battCount = Math.max(1, Math.round((ahRounded * volts) / (200 * volts)) * (volts / 12));
+    battCount = Math.max(volts / 12, Math.ceil(ahRounded / 200) * (volts / 12));
+
+    var sun = parseFloat(document.getElementById('citySelect').value) || 5.4;
+    var panelW = (energy / sun) * 1.25;
+    var panelRounded = Math.ceil(panelW / 100) * 100;
+    var nPanels = Math.ceil(panelRounded / 550);
+
+    var f = function (n) { return new Intl.NumberFormat('en-PK').format(Math.round(n)); };
+    document.getElementById('rLoad').textContent = f(load) + ' W';
+    document.getElementById('rEnergy').textContent = f(energy) + ' Wh';
+    document.getElementById('rInverter').textContent = f(inverter) + ' W';
+    document.getElementById('rBattery').textContent = f(ahRounded) + ' Ah @ ' + volts + 'V';
+    document.getElementById('rBatteryCount').textContent = f(battCount) + ' x 200Ah';
+    document.getElementById('rPanels').textContent = f(panelRounded) + ' W';
+    document.getElementById('rPanelCount').textContent = nPanels + ' x 550W';
+
+    return {
+      load: load, energy: energy, hours: hours, inverter: inverter, volts: volts,
+      ah: ahRounded, battCount: battCount, panelW: panelRounded, nPanels: nPanels
+    };
+  }
+
+  ['backupHours', 'systemVoltage', 'citySelect'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', calc);
+  });
+  calc();
+
+  document.getElementById('sendToWhatsapp').addEventListener('click', function () {
+    var r = calc();
+    var num = (window.SITE_CONFIG && window.SITE_CONFIG.contact && window.SITE_CONFIG.contact.whatsapp) || '923396202062';
+    var msg = [
+      '*Solar setup enquiry - hallroadlahore.com*', '',
+      '*Load:* ' + r.load + ' W',
+      '*Backup needed:* ' + r.hours + ' hours/day',
+      '*Daily energy:* ' + r.energy + ' Wh', '',
+      '*Suggested system:*',
+      '- Inverter: ' + r.inverter + ' W',
+      '- Battery: ' + r.ah + ' Ah @ ' + r.volts + 'V (' + r.battCount + ' x 200Ah)',
+      '- Panels: ' + r.panelW + ' W (' + r.nPanels + ' x 550W)', '',
+      'Please quote this setup with delivery.'
+    ].join('\n');
+    window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  });
+})();
+</script>
+</body>
+</html>
