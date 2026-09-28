@@ -88,7 +88,8 @@ ok('Cart stores references {id,variant,qty}, not a price snapshot',
 w.eval(`HRL.openProductModal(${FIRST.id}); HRL.selectVariant(0);`);
 ok('Base price shown correctly', d.getElementById('pdpPriceCurrent').textContent === money(FIRST.price),
    d.getElementById('pdpPriceCurrent').textContent);
-const badge = d.querySelector('#productGrid .product-card .discount-badge');
+const firstCard = d.querySelector('#productGrid .product-card');
+const badge = firstCard && firstCard.querySelector('.discount-badge');
 ok('Discount badge shows the honest minimum (' + honestDiscount(FIRST) + '%)',
    honestDiscount(FIRST) === 0 ? !badge : (badge && badge.textContent === '-' + honestDiscount(FIRST) + '%'),
    'badge=' + (badge ? badge.textContent : 'none'));

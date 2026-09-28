@@ -12,8 +12,7 @@ window.PRODUCTS = [
       "en": "Instant Electric Water Heater Tap - Digital Display",
       "ur": "انسٹنٹ الیکٹرک واٹر ہیٹر ٹیپ - ڈیجیٹل ڈسپلے"
     },
-    "price": 2499,
-    "oldPrice": 4500,
+    "price": 4499,
     "summary": {
       "en": "Instant hot water within 3 seconds for kitchens and bathrooms. 3000W heating element with a digital LED temperature display.",
       "ur": "رسوئی اور باتھ روم کے لیے 3 سیکنڈ میں گرم پانی۔ 3000W ہیٹنگ ایلیمینٹ اور ڈیجیٹل LED ٹمپریچر ڈسپلے۔"
@@ -47,7 +46,11 @@ window.PRODUCTS = [
     ],
     "variants": [
       {
-        "name": "White / 1 Pcs",
+        "name": "Without Shower",
+        "extraCost": 0
+      },
+      {
+        "name": "With Shower Set",
         "extraCost": 0
       }
     ]
