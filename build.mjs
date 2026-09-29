@@ -89,6 +89,14 @@ const ART = {
       <rect x="240" y="508" width="54" height="52" rx="8" fill="#0f172a"/>
       <rect x="500" y="508" width="54" height="52" rx="8" fill="#0f172a"/>
     </g>`,
+  Bundles: `
+    <rect x="240" y="220" width="320" height="200" rx="16" fill="#1e293b"/>
+    <rect x="270" y="250" width="260" height="40" rx="8" fill="#0f172a"/>
+    <text x="400" y="275" font-size="18" font-weight="800" fill="#25d366" text-anchor="middle" font-family="monospace">BUNDLE SAVE</text>
+    <rect x="270" y="300" width="120" height="90" rx="10" fill="#334155"/><rect x="410" y="300" width="120" height="90" rx="10" fill="#334155"/>
+    <text x="330" y="345" font-size="12" font-weight="800" fill="#e2e8f0" text-anchor="middle">INVERTER</text>
+    <text x="470" y="345" font-size="12" font-weight="800" fill="#e2e8f0" text-anchor="middle">CLIPS</text>
+    <rect x="340" y="360" width="40" height="6" rx="3" fill="#25d366"/>`,
   WaterHeaters: `
     <rect x="330" y="200" width="140" height="120" rx="16" fill="#1e293b"/>
     <rect x="356" y="228" width="88" height="52" rx="8" fill="#0f172a"/>
@@ -414,6 +422,7 @@ ${FOOTER}
 const urls = [
   { loc: `${SITE}/`, pri: '1.0' },
   ...products.map(p => ({ loc: `${SITE}/products/${p.slug}.html`, pri: '0.8' })),
+  { loc: `${SITE}/track.html`, pri: '0.7' },
   { loc: `${SITE}/tools/solar-calculator.html`, pri: '0.7' },
   { loc: `${SITE}/blog/`, pri: '0.6' },
   { loc: `${SITE}/blog/how-to-choose-a-solar-inverter-in-pakistan.html`, pri: '0.6' },

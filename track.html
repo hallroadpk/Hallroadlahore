@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Your Order | Hall Road Lahore</title>
+<meta name="description" content="Track your Hall Road Lahore order by order ID. Enter your HRL-XXXXXX code to see status, courier tracking and delivery updates.">
+<link rel="canonical" href="https://hallroadlahore.com/track.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hall Road Lahore">
+<meta property="og:title" content="Track Your Order | Hall Road Lahore">
+<meta property="og:description" content="Enter your HRL order ID to track your COD parcel from Hall Road Lahore.">
+<meta property="og:url" content="https://hallroadlahore.com/track.html">
+<meta property="og:image" content="https://hallroadlahore.com/images/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Track Your Order","url":"https://hallroadlahore.com/track.html","description":"Track your Hall Road Lahore order by order ID."}
+</script>
+<style>
+.track-hero { max-width: 720px; margin: 32px auto 0; padding: 0 16px; text-align: center; }
+.track-hero h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 900; margin-bottom: 8px; }
+.track-hero p { color: #64748b; font-size: 14.5px; max-width: 560px; margin: 0 auto; }
+.track-card { max-width: 520px; margin: 24px auto; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: 0 8px 32px rgba(15,23,42,.08); }
+.track-form { display: grid; gap: 14px; }
+.track-form label { font-size: 13px; font-weight: 800; color: #0f172a; }
+.track-form input { width: 100%; padding: 14px 16px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.track-form input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(37,211,102,.14); }
+.track-btn { background: var(--green); color: #fff; border: none; padding: 14px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; }
+.track-btn:hover { background: var(--green-dark); }
+.track-result { margin-top: 18px; padding: 16px; border-radius: 12px; font-size: 14px; line-height: 1.6; display: none; }
+.track-result.found { background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; display: block; }
+.track-result.notfound { background: #fef2f2; border: 1px solid #fecaca; color: #7f1d1d; display: block; }
+.track-result a { color: var(--green-dark); font-weight: 800; }
+.track-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+.track-step { text-align: center; padding: 10px 4px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; }
+.track-step.active { background: #dcfce7; border-color: #86efac; color: #14532d; font-weight: 800; }
+.track-step .dot { width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1; margin: 0 auto 6px; }
+.track-step.active .dot { background: #22c55e; }
+.track-help { max-width: 520px; margin: 18px auto; padding: 0 16px; font-size: 13px; color: #64748b; text-align: center; }
+</style>
+</head>
+<body class="page-static">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="header-content">
+    <a class="brand-link" href="/" aria-label="Hall Road Lahore - home">
+      <img src="/images/logo.svg" alt="Hall Road Lahore" width="220" height="52" class="brand-logo-img">
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/">Shop</a>
+      <a href="/tools/solar-calculator.html">Solar Calculator</a>
+      <a href="/track.html" aria-current="page">Track Order</a>
+      <a href="/shipping.html">Shipping</a>
+      <a href="/returns.html">Returns</a>
+    </nav>
+    <button class="cart-btn-head" type="button" data-action="open-cart" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+      Cart <span class="cart-count" id="cartBadge" aria-live="polite">0</span>
+    </button>
+  </div>
+</header>
+<main id="main">
+  <div class="track-hero">
+    <h1>Track your order</h1>
+    <p>Enter your order ID (e.g. <strong>HRL-123456</strong>) sent on WhatsApp after checkout. We also save it in this browser.</p>
+  </div>
+  <div class="track-card">
+    <form class="track-form" id="trackForm">
+      <div>
+        <label for="orderId">Order ID</label>
+        <input id="orderId" name="orderId" placeholder="HRL-123456" autocomplete="off" required pattern="HRL-[0-9]{6}" maxlength="10" inputmode="text">
+      </div>
+      <button class="track-btn" type="submit">Check status</button>
+    </form>
+    <div id="trackResult" class="track-result" role="status" aria-live="polite"></div>
+    <div id="trackSteps" class="track-steps" style="display:none">
+      <div class="track-step" data-step="1"><div class="dot"></div>Placed</div>
+      <div class="track-step" data-step="2"><div class="dot"></div>Confirmed</div>
+      <div class="track-step" data-step="3"><div class="dot"></div>Dispatched</div>
+      <div class="track-step" data-step="4"><div class="dot"></div>Delivered</div>
+    </div>
+  </div>
+  <p class="track-help">Lost your ID? Check WhatsApp chat with <strong>0339 6202062</strong> or tap the floating WhatsApp button to ask us. COD orders are dispatched within 24 hours (Mon-Sat) and delivered in 2-5 working days. <a href="/">Browse products</a> • <a href="/shipping.html">Shipping details</a></p>
+</main>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div><div class="footer-brand">Hall Road Lahore</div><p>Hall Road, Lahore, Punjab, Pakistan.</p></div>
+    <div><h3>Shop</h3><ul><li><a href="/">All products</a></li><li><a href="/tools/solar-calculator.html">Solar calculator</a></li><li><a href="/track.html">Track order</a></li></ul></div>
+    <div><h3>Help</h3><ul>
+      <li><a href="/shipping.html">Shipping & delivery</a></li>
+      <li><a href="/returns.html">Returns & warranty</a></li>
+      <li><a href="/privacy.html">Privacy policy</a></li>
+      <li><a href="/terms.html">Terms of sale</a></li></ul></div>
+    <div><h3>Contact</h3><ul>
+      <li><a href="tel:03396202062"><span data-phone-display>0339 6202062</span></a></li>
+      <li><a href="mailto:gpower.pk1@gmail.com">gpower.pk1@gmail.com</a></li>
+      <li>Mon-Sat, 9:00am to 5:00pm</li></ul></div>
+  </div>
+  <p class="footer-legal">&copy; 2026 hallroadlahore.com. Prices in PKR and subject to change.</p>
+</footer>
+<script src="/site.config.js"></script>
+<script>
+(function(){
+  const $ = (s)=>document.querySelector(s);
+  const form = $('#trackForm');
+  const input = $('#orderId');
+  const result = $('#trackResult');
+  const steps = $('#trackSteps');
+  // Autofill from URL ?id=HRL-xxxxxx
+  const params = new URLSearchParams(location.search);
+  if(params.get('id')) input.value = params.get('id').trim().toUpperCase();
+  // Also try last order
+  try {
+    const last = JSON.parse(localStorage.getItem('hallroad_orders')||'[]').slice(-1)[0];
+    if(!input.value && last && last.id) input.value = last.id;
+  } catch(e){}
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const id = input.value.trim().toUpperCase();
+    if(!/^HRL-\d{6}$/.test(id)){ result.className='track-result notfound'; result.textContent='Please enter a valid ID like HRL-123456.'; result.style.display='block'; steps.style.display='none'; return; }
+    let orders = [];
+    try { orders = JSON.parse(localStorage.getItem('hallroad_orders')||'[]'); } catch(e){}
+    const order = orders.find(o=> (o.id||'').toUpperCase() === id);
+    if(order){
+      const ageHours = (Date.now() - new Date(order.date||Date.now()).getTime())/36e5;
+      let stage = 1;
+      if(order.status==='confirmed' || ageHours>2) stage=2;
+      if(order.status==='dispatched' || ageHours>24) stage=3;
+      if(order.status==='delivered' || ageHours>96) stage=4;
+      result.className='track-result found';
+      result.innerHTML = '<strong>Order '+id+' found</strong><br>Placed: '+(order.date?new Date(order.date).toLocaleString():'recently')+'<br>Items: '+(order.items||[]).map(i=> i.title||i.slug||'Product').join(', ').slice(0,120)+'<br>Total: Rs. '+(order.total||'').toString()+'<br><br>We send courier tracking on WhatsApp once dispatched. If you have not received it within 24h, <a href="https://wa.me/923396202062?text='+encodeURIComponent('Assalam o Alaikum, my order '+id+' status?')+'" target="_blank" rel="noopener">ask us on WhatsApp</a>.';
+      steps.style.display='grid';
+      steps.querySelectorAll('.track-step').forEach(el=>{
+        const s = parseInt(el.dataset.step);
+        el.classList.toggle('active', s<=stage);
+      });
+      // update URL
+      history.replaceState(null,'','?id='+encodeURIComponent(id));
+    } else {
+      // not in this browser - give helpful fallback
+      result.className='track-result notfound';
+      result.innerHTML = 'Order <strong>'+id+'</strong> not found in this browser. It may have been placed on another device or cleared. Please check your WhatsApp chat with <strong>0339 6202062</strong> - we send tracking there. <br><br><a href="https://wa.me/923396202062?text='+encodeURIComponent('Assalam o Alaikum, track my order '+id)+'" target="_blank" rel="noopener">Track on WhatsApp</a>';
+      steps.style.display='none';
+    }
+  });
+  // auto-submit if id in URL
+  if(input.value) form.dispatchEvent(new Event('submit'));
+  // render cart badge if app.js loaded? simple
+  try { const c=JSON.parse(localStorage.getItem('hallroad_cart_v2')||'[]'); const b=$('#cartBadge'); if(b) b.textContent=c.reduce((a,i)=>a+(i.qty||1),0); } catch(e){}
+})();
+</script>
+<script src="/app.js" defer></script>
+</body>
+</html>
