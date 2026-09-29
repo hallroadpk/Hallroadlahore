@@ -464,15 +464,24 @@ indexHtml = indexHtml.replace(
 fs.writeFileSync(indexPath, indexHtml);
 
 /* ------------------------------------------------------- prune orphaned art */
-/* Remove placeholder images no longer referenced by any product, so the repo
-   does not accumulate dead files when products are trimmed. Referenced files
-   (including real photos) are untouched. */
+/* Remove generated placeholder artwork (.svg) that no product references any
+   more, so the repo does not accumulate dead files when products are trimmed.
+   Real photos are NEVER auto-deleted: an unreferenced photo is only reported,
+   so removing a product from products.json cannot silently destroy an image. */
 const referenced = new Set();
 products.forEach(p => (p.images || []).forEach(i => referenced.add(path.join(ROOT, i))));
 const artDir = path.join(ROOT, 'images', 'products');
+const orphanedPhotos = [];
 for (const f of fs.readdirSync(artDir)) {
   const abs = path.join(artDir, f);
-  if (!referenced.has(abs)) fs.rmSync(abs);
+  if (referenced.has(abs)) continue;
+  if (f.toLowerCase().endsWith('.svg')) fs.rmSync(abs);  // generated placeholder art
+  else orphanedPhotos.push(f);                           // real photo - keep it
+}
+if (orphanedPhotos.length) {
+  console.log(`\nNote: ${orphanedPhotos.length} unreferenced photo(s) kept in images/products/:`);
+  orphanedPhotos.forEach(f => console.log('   - ' + f));
+  console.log('  (not used by any product - delete by hand if you are sure)');
 }
 
 /* ------------------------------------------------------------------- report */
