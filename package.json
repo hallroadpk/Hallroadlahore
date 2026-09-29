@@ -10,5 +10,10 @@
     "dev": "node tests/serve.mjs",
     "check": "npm run build && npm test"
   },
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "jsdom": "^29.1.1"
+  }
 }
