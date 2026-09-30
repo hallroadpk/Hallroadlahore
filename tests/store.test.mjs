@@ -204,6 +204,23 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
   ok('Product page JSON-LD has BreadcrumbList', ld.indexOf('"BreadcrumbList"') !== -1);
 }
 
+/* ---------------- 10. Info & Navigation Sidebar + Real Product Images ---------------- */
+{
+  const sb = d.getElementById('infoSidebar');
+  const sbBtn = d.querySelector('[data-action="open-sidebar"]');
+  ok('Header has Menu & Info sidebar button', !!sbBtn);
+  ok('Info & Navigation Sidebar exists in DOM', !!sb);
+  w.eval('HRL.toggleSidebar(true);');
+  ok('Sidebar opens on toggleSidebar(true)', sb.classList.contains('open') && sbBtn.getAttribute('aria-expanded') === 'true');
+  ok('Sidebar renders all present categories with product counts', d.querySelectorAll('#sidebarCategories [data-sidebar-cat]').length >= 5);
+  ok('Sidebar includes complete store info cards (shipping, payment, warranty, sizing)', d.querySelectorAll('#sidebarInfoCards details').length >= 4);
+  ok('Sidebar includes direct contact & WhatsApp support box', !!d.querySelector('.sidebar-contact-box'));
+  w.eval('HRL.toggleSidebar(false);');
+  ok('Sidebar closes on toggleSidebar(false)', !sb.classList.contains('open') && sbBtn.getAttribute('aria-expanded') === 'false');
+  ok('No bundles in catalog (products only)', !CATALOG.some(p => p.category === 'Bundles') && CATALOG.length === 17, `${CATALOG.length} products`);
+  ok('Every product image is a real photo (.jpg/.png, 0 .svg placeholders)', !CATALOG.some(p => p.images.some(img => img.endsWith('.svg'))));
+}
+
 console.log('\n================ TESTS: hallroadlahore.com (built) ================\n');
 let pass = 0;
 for (const r of results) { if (r.pass) pass++; console.log(`${r.pass ? 'PASS' : 'FAIL'}  ${r.n}${r.d ? '  [' + r.d + ']' : ''}`); }

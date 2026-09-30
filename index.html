@@ -63,7 +63,7 @@
       "name": "Hall Road Lahore",
       "publisher": { "@id": "https://hallroadlahore.com/#store" },
       "inLanguage": ["en-PK","ur-PK"]
-    },
+    }
   ]
 }
 </script>
@@ -73,7 +73,7 @@
   "@type": "ItemList",
   "@id": "https://hallroadlahore.com/#catalog",
   "name": "Featured catalog",
-  "numberOfItems": 19,
+  "numberOfItems": 17,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -176,18 +176,6 @@
       "position": 17,
       "name": "Solar Panel Water Drain Clips - Plastic (10 Pcs)",
       "url": "https://hallroadlahore.com/products/solar-panel-water-drain-clip-plastic-10pcs.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 18,
-      "name": "Bundle: Energy 1.5KW PV Inverter + Stainless Steel Drain Clips (10 Pcs)",
-      "url": "https://hallroadlahore.com/products/bundle-energy-1-5kw-with-steel-drain-clips.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 19,
-      "name": "Bundle: Simko 3.2KW PV Inverter Black Panther + Stainless Steel Drain Clips (10 Pcs)",
-      "url": "https://hallroadlahore.com/products/bundle-simko-3-2kw-with-steel-drain-clips.html"
     }
   ]
 }
@@ -197,144 +185,44 @@
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- 1. MOVING TICKER -->
-<div class="top-ticker-wrapper">
-  <div class="ticker-move-container">
-    <div class="ticker-single-line" id="tickerA"></div>
-    <div class="ticker-single-line" id="tickerB" aria-hidden="true"></div>
-  </div>
-</div>
-
-<!-- 2. PROMO BAR -->
-<div class="promo-flash"></div>
-
-<!-- 3. HEADER -->
-<header>
+<!-- 1. HEADER (Row 1: Sidebar Menu + Brand + Language + Cart | Row 2: Search) -->
+<header class="site-header">
   <div class="header-content">
-    <button class="brand-link" type="button" data-action="scroll-top" aria-label="Hall Road Lahore - back to top" style="background:none;border:none;padding:0;cursor:pointer;">
-      <img src="/images/logo.svg" alt="Hall Road Lahore" width="220" height="52" class="brand-logo-img">
-    </button>
+    <div class="header-top-row">
+      <button class="menu-btn-head" type="button" data-action="open-sidebar" aria-label="Open menu and store information" aria-controls="infoSidebar" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h14"/></svg>
+      </button>
 
-    <nav class="site-nav" aria-label="Main">
-      <a href="/" aria-current="page">Shop</a>
-      <a href="/tools/solar-calculator.html">Solar Calculator</a>
-      <a href="/track.html">Track Order</a>
-      <a href="/blog/">Guides</a>
-      <a href="/about.html">About</a>
-      <a href="/shipping.html">Shipping</a>
-      <a href="/returns.html">Returns</a>
-    </nav>
+      <button class="brand-link" type="button" data-action="scroll-top" aria-label="Hall Road Lahore - back to top" style="background:none;border:none;padding:0;cursor:pointer;">
+        <img src="/images/logo.svg" alt="Hall Road Lahore" width="195" height="36" class="brand-logo-img">
+      </button>
+
+      <div class="header-actions">
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">اردو</button>
+        <button class="cart-btn-head" type="button" data-action="open-cart">
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <span data-i18n="cart">Cart</span> <span class="cart-count" id="cartBadge" aria-live="polite">0</span>
+        </button>
+      </div>
+    </div>
 
     <div class="search-bar">
       <span class="search-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       </span>
       <label class="sr-only" for="searchInput">Search products</label>
       <input type="search" id="searchInput" placeholder="Search inverters, chargers, solar..." autocomplete="off">
     </div>
-
-    <div class="header-actions">
-      <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">اردو</button>
-      <button class="cart-btn-head" type="button" data-action="open-cart">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-        <span data-i18n="cart">Cart</span> <span class="cart-count" id="cartBadge" aria-live="polite">0</span>
-      </button>
-    </div>
   </div>
 </header>
 
-<!-- 4. HERO - Animated "Cut your WAPDA bill" -->
-<section class="hero-banner hero-animated">
-  <div class="hero-inner">
-    <div class="hero-content">
-      <span class="hero-eyebrow">Hall Road Lahore • Direct Import Prices</span>
-      <h1>Cut your WAPDA bill — run your home on solar</h1>
-      <p>Direct PV inverters that run <strong>without batteries</strong>, smart MPPT controllers & water drain clips — genuine stock from Hall Road, Cash on Delivery nationwide, dispatched within 24 hours.</p>
-      <div class="badge-pills">
-        <span class="pill"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> 100% Original</span>
-        <span class="pill"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Cash on Delivery</span>
-        <span class="pill"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Warranty on every product</span>
-      </div>
-      <div class="hero-cta-row">
-        <a class="hero-cta" href="#main">Shop the catalog</a>
-        <a class="hero-cta ghost" href="/tools/solar-calculator.html">Size my solar setup</a>
-        <a class="hero-cta wa" href="#" target="_blank" rel="noopener" data-whatsapp="Assalam o Alaikum! I need help choosing a product from hallroadlahore.com.">Order on WhatsApp</a>
-      </div>
-      <div class="hero-proof">
-        <span><strong>2,000+</strong> orders shipped</span>
-        <span>•</span>
-        <span>4.8★ customer rating</span>
-        <span>•</span>
-        <span>Hall Road Lahore since 2018</span>
-      </div>
-    </div>
-        <div class="hero-visual" aria-hidden="true">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="hero-dashboard">
-        <div class="dashboard-header">
-          <span class="live-dot" aria-hidden="true"></span> Live Solar Feed
-          <span class="dashboard-time">13:42 PKT • Hall Road Lahore</span>
-        </div>
-        <div class="dashboard-grid">
-          <div class="metric">
-            <span class="metric-label">Solar Input</span>
-            <span class="metric-value">1,840<span>W</span></span>
-            <div class="metric-bar"><div class="bar-fill bar-animate" style="--w:84%"></div></div>
-          </div>
-          <div class="metric">
-            <span class="metric-label">Home Load</span>
-            <span class="metric-value">1,220<span>W</span></span>
-            <div class="metric-bar"><div class="bar-fill bar-animate2" style="--w:56%"></div></div>
-          </div>
-          <div class="metric highlight">
-            <span class="metric-label">WAPDA Bill</span>
-            <span class="metric-value">Rs. 0</span>
-            <span class="metric-trend">↓ 73% this month</span>
-          </div>
-          <div class="metric">
-            <span class="metric-label">MPPT Efficiency</span>
-            <span class="metric-value">98<span>%</span></span>
-            <div class="metric-bar"><div class="bar-fill bar-animate3" style="--w:98%"></div></div>
-          </div>
-        </div>
-        <div class="dashboard-footer">
-          <svg viewBox="0 0 300 50" width="300" height="50" aria-hidden="true" class="sparkline">
-            <defs><linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22c55e" stop-opacity="0.35"/><stop offset="100%" stop-color="#22c55e" stop-opacity="0"/></linearGradient></defs>
-            <path d="M0 38 L30 32 L60 36 L90 18 L120 22 L150 12 L180 16 L210 8 L240 14 L270 6 L300 10 L300 50 L0 50 Z" fill="url(#sparkGrad)" opacity="0.9"/>
-            <path d="M0 38 L30 32 L60 36 L90 18 L120 22 L150 12 L180 16 L210 8 L240 14 L270 6 L300 10" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sparkline-path"/>
-            <circle cx="270" cy="6" r="3.5" fill="#22c55e" stroke="#fff" stroke-width="1.5" class="sparkline-dot"/>
-          </svg>
-          <span class="sparkline-label">Today's generation vs. last week</span>
-        </div>
-      </div>
-      <div class="hero-float-card card-bill">
-        <div class="float-icon">◯</div>
-        <div>
-          <strong>No Battery Needed</strong>
-          <span>Direct PV • 1-4 panels</span>
-        </div>
-      </div>
-      <div class="hero-float-card card-efficiency">
-        <div class="float-icon green">✓</div>
-        <div>
-          <strong> hallroadlahore.com</strong>
-          <span>Direct import • COD</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- subtle moving grid -->
-  <div class="hero-grid" aria-hidden="true"></div>
-</section>
-
-
-<!-- 5. CATEGORY TABS -->
+<!-- 2. CATEGORY TABS -->
 <div class="category-tabs-container" id="categoryTabs" role="group" aria-label="Filter by category"></div>
 
-<!-- 6. PRODUCTS -->
+<!-- 3. PRODUCTS -->
 <main id="main" class="catalog-container">
   <div class="catalog-toolbar">
-    <h2 class="section-heading" id="catalogHeading">Featured Catalog</h2>
+    <h1 class="section-heading" id="catalogHeading">All Products</h1>
     <select id="sortSelect" class="sort-select" aria-label="Sort products"></select>
   </div>
   <div class="product-grid" id="productGrid"></div>
@@ -402,6 +290,125 @@
     </div>
   </div>
 </div>
+
+<!-- ============ INFO & NAVIGATION SIDEBAR DRAWER ============ -->
+<div class="info-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="info-sidebar" id="infoSidebar" role="dialog" aria-modal="true" aria-labelledby="infoSidebarTitle" aria-hidden="true">
+  <div class="info-sidebar-header">
+    <div class="info-sidebar-top">
+      <div>
+        <h2 id="infoSidebarTitle" class="info-sidebar-brand">Hall Road Lahore</h2>
+        <p class="info-sidebar-sub" id="infoSidebarSub">All Store Information, Categories &amp; Policies</p>
+      </div>
+      <button type="button" class="info-sidebar-close" data-action="close-sidebar" aria-label="Close menu">✕</button>
+    </div>
+    <div class="info-sidebar-status" id="infoSidebarStatus">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Mon–Sat 9:00am–5:00pm • 24h Dispatch Nationwide</span>
+    </div>
+    <div class="info-sidebar-quick">
+      <a class="info-quick-btn" href="/track.html">Track Order</a>
+      <a class="info-quick-btn" href="/tools/solar-calculator.html">Solar Calc</a>
+      <button type="button" class="info-quick-btn" data-action="toggle-lang">اردو / EN</button>
+    </div>
+  </div>
+  <div class="info-sidebar-body" id="infoSidebarBody">
+    <div>
+      <div class="sidebar-section-title">Shop by Category</div>
+      <div class="sidebar-cat-list" id="sidebarCategories">
+        <button type="button" class="sidebar-cat-item active" data-sidebar-cat="All"><span>All Products</span><span class="sidebar-cat-count">17</span></button>
+        <button type="button" class="sidebar-cat-item" data-sidebar-cat="Inverters"><span>Inverters</span><span class="sidebar-cat-count">6</span></button>
+        <button type="button" class="sidebar-cat-item" data-sidebar-cat="Chargers"><span>Battery Chargers</span><span class="sidebar-cat-count">3</span></button>
+        <button type="button" class="sidebar-cat-item" data-sidebar-cat="Solar"><span>Solar Accessories</span><span class="sidebar-cat-count">7</span></button>
+        <button type="button" class="sidebar-cat-item" data-sidebar-cat="WaterHeaters"><span>Water Heaters</span><span class="sidebar-cat-count">1</span></button>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-title">Complete Store Information</div>
+      <div class="sidebar-info-cards" id="sidebarInfoCards">
+        <details class="sidebar-info-card" open>
+          <summary>Shipping &amp; Delivery Charges</summary>
+          <div class="sidebar-info-card-body">
+            <p>Dispatched within 24 hours (Mon–Sat). Delivered in 2–5 working days nationwide.</p>
+            <div class="sidebar-rate-row"><span>Lahore (same / next day)</span><strong>Rs. 150</strong></div>
+            <div class="sidebar-rate-row"><span>Punjab</span><strong>Rs. 200</strong></div>
+            <div class="sidebar-rate-row"><span>Sindh / KPK / Balochistan</span><strong>Rs. 250</strong></div>
+            <div class="sidebar-rate-row"><span>AJK / Gilgit-Baltistan</span><strong>Rs. 350</strong></div>
+            <p><a href="/shipping.html">Full shipping details →</a></p>
+          </div>
+        </details>
+
+        <details class="sidebar-info-card">
+          <summary>Payment Methods &amp; COD</summary>
+          <div class="sidebar-info-card-body">
+            <ul>
+              <li><strong>Cash on Delivery (COD):</strong> Pay cash to the rider when your parcel reaches your doorstep anywhere in Pakistan.</li>
+              <li><strong>JazzCash / EasyPaisa Advance:</strong> Send 30% advance to confirm the order; the rest is paid on delivery. Account details are shared after WhatsApp confirmation.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="sidebar-info-card">
+          <summary>Warranty &amp; 7-Day Returns</summary>
+          <div class="sidebar-info-card-body">
+            <ul>
+              <li><strong>Simtek MPPT 85A &amp; 120A:</strong> 12 months official warranty</li>
+              <li><strong>Simtek DC King 70A:</strong> 6 months official warranty</li>
+              <li><strong>Simtek Planet40 &amp; Chargers:</strong> 3 months official warranty</li>
+              <li><strong>Alkaram Inverters (2000W–6000W):</strong> 6 months shop warranty</li>
+              <li><strong>Direct PV Inverters &amp; Water Heater Tap:</strong> 7 days check/replacement warranty</li>
+              <li><strong>7-Day Returns:</strong> We pay return shipping on manufacturing defects. Refunds via JazzCash, EasyPaisa or bank transfer within 7 working days.</li>
+            </ul>
+            <p><a href="/returns.html">Full returns &amp; warranty policy →</a></p>
+          </div>
+        </details>
+
+        <details class="sidebar-info-card">
+          <summary>Solar &amp; Inverter Sizing Guide</summary>
+          <div class="sidebar-info-card-body">
+            <ul>
+              <li><strong>Direct Solar (No Battery):</strong> Energy 1.5KW (1–3 × 585W panels) or Simko 3.2KW Black Panther (2–4 × 585W panels).</li>
+              <li><strong>MPPT Controllers:</strong> 40A (70 VOC), 70A (110 VOC), 80A (100 VOC), 85A (150 VOC), 120A (170 VOC).</li>
+              <li><strong>12V Battery Inverters:</strong> Alkaram 2000W, 3000W, 4000W &amp; 6000W.</li>
+            </ul>
+            <p><a href="/tools/solar-calculator.html">Open Solar Size Calculator →</a></p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-title">All Pages &amp; Buying Guides</div>
+      <nav class="sidebar-nav-grid" aria-label="All site pages">
+        <a class="sidebar-nav-link" href="/">Shop Catalog</a>
+        <a class="sidebar-nav-link" href="/track.html">Track Order</a>
+        <a class="sidebar-nav-link" href="/tools/solar-calculator.html">Solar Calculator</a>
+        <a class="sidebar-nav-link" href="/blog/">Buying Guides</a>
+        <a class="sidebar-nav-link" href="/blog/how-to-choose-a-solar-inverter-in-pakistan.html">Inverter Guide</a>
+        <a class="sidebar-nav-link" href="/blog/pure-sine-wave-vs-modified-sine-wave.html">Sine Wave Guide</a>
+        <a class="sidebar-nav-link" href="/about.html">About Us</a>
+        <a class="sidebar-nav-link" href="/#faq">FAQ</a>
+        <a class="sidebar-nav-link" href="/shipping.html">Shipping Policy</a>
+        <a class="sidebar-nav-link" href="/returns.html">Returns Policy</a>
+        <a class="sidebar-nav-link" href="/privacy.html">Privacy Policy</a>
+        <a class="sidebar-nav-link" href="/terms.html">Terms of Sale</a>
+      </nav>
+    </div>
+
+    <div>
+      <div class="sidebar-section-title">Direct Contact &amp; Support</div>
+      <div class="sidebar-contact-box">
+        <div class="sidebar-contact-row"><span class="k">WhatsApp / Phone</span><a class="v" href="tel:03396202062">0339 6202062</a></div>
+        <div class="sidebar-contact-row"><span class="k">Email</span><a class="v" href="mailto:gpower.pk1@gmail.com">gpower.pk1@gmail.com</a></div>
+        <div class="sidebar-contact-row"><span class="k">TikTok</span><a class="v" href="https://www.tiktok.com/@gpower.pk" target="_blank" rel="noopener">@gpower.pk</a></div>
+        <div class="sidebar-contact-row"><span class="k">Working Hours</span><span class="v">Mon–Sat, 9am–5pm</span></div>
+        <div class="sidebar-contact-row"><span class="k">Location</span><span class="v">Hall Road, Lahore</span></div>
+        <a class="sidebar-wa-cta" href="https://wa.me/923396202062?text=Assalam%20o%20Alaikum!%20I%20have%20a%20question%20about%20hallroadlahore.com." target="_blank" rel="noopener" data-whatsapp="Assalam o Alaikum! I have a question about hallroadlahore.com.">Chat on WhatsApp Now</a>
+      </div>
+    </div>
+  </div>
+</aside>
 
 <!-- ============ CART DRAWER ============ -->
 <div class="cart-drawer-overlay" id="cartOverlay"></div>
@@ -524,7 +531,7 @@
 <!-- WHATSAPP FLOAT -->
 <a class="whatsapp-float-btn" data-whatsapp="Hello HallRoadLahore.com, I have a question about your products."
    target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.016 2.479 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="#ffffff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
 
 <footer class="site-footer">
