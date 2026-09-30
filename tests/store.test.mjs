@@ -234,8 +234,8 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
      clips.map(p => p && `${p.price}/${p.oldPrice}`).join(' '));
   ok('Drain clips: Size selector offers 30mm and 35mm',
      clips.every(p => p && JSON.stringify(p.sizes) === '[{"name":"30mm"},{"name":"35mm"}]'));
-  ok('Drain clips: 1 / 10 / 20 Pcs at extraCost 0 / 900 / 1900 = Rs. 99 / 999 / 1,999',
-     clips.every(p => p && JSON.stringify(p.variants.map(v => [v.name, v.extraCost])) === '[["1 Pcs",0],["10 Pcs",900],["20 Pcs",1900]]'),
+  ok('Drain clips: 1 / 10 / 20 Pcs at extraCost 0 / 800 / 1600 = Rs. 99 / 899 / 1,699',
+     clips.every(p => p && JSON.stringify(p.variants.map(v => [v.name, v.extraCost])) === '[["1 Pcs",0],["10 Pcs",800],["20 Pcs",1600]]'),
      clips.map(p => p && packSummary(p)).join(' | '));
   ok('Drain clip titles/specs no longer claim a fixed "10 Pcs" pack',
      clips.every(p => p && !/10 Pcs/.test(p.title.en) && !/10 عدد/.test(p.title.ur) && p.specs.Pack !== '10 Pcs'));
@@ -342,6 +342,11 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
   ok('Product page JSON-LD lists the available sizes',
      pd.querySelector('script[type="application/ld+json"]').textContent.indexOf(`"Available sizes","value":"${S.sizes.map(z => z.name).join(', ')}"`) !== -1);
   ok('Product page: no runtime errors with the size selector', pg.errs.length === 0, pg.errs.join(' | ') || 'clean');
+  ok('Product page has injected Cart Drawer & Checkout Modal (ensureCartAndCheckout)',
+     !!pd.getElementById('cartDrawer') && !!pd.getElementById('checkoutModal') && !!pd.getElementById('confirmModal'));
+  pd.querySelector('[data-action="buy-now"]').click();
+  ok('Product page: clicking "Order directly on WhatsApp" (buy-now) opens Checkout Modal without error',
+     pd.getElementById('checkoutModal').classList.contains('open') && pg.errs.length === 0, pg.errs.join(' | ') || 'open');
 }
 
 /* ---------------- 12. Moving ticker, promo bar + inline critical header CSS ---------------- */
@@ -380,6 +385,15 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
   const cssLink = src.querySelector('link[rel="stylesheet"][href="/styles.css"]');
   ok('Critical <style> is placed BEFORE /styles.css, so the full stylesheet still wins',
      !!styleEl && !!cssLink && (styleEl.compareDocumentPosition(cssLink) & 4) !== 0);   // 4 = DOCUMENT_POSITION_FOLLOWING
+
+  /* Shop identity, comparison table, FAQPage schema, clean sitemap */
+  const sitemapXml = read('sitemap.xml');
+  ok('sitemap.xml contains no fragment (#) URLs', sitemapXml.indexOf('#') === -1);
+  ok('Store identity includes G Power & Electronics and Shop No. 1, Sarwar Centre, Hall Road, Lahore',
+     live.w.SITE_CONFIG.brand.legalName === 'G Power & Electronics' &&
+     ld.body.textContent.indexOf('Shop No. 1, Sarwar Centre, Hall Road') !== -1);
+  ok('Homepage includes Quick Comparison table (#compareSection) and FAQPage JSON-LD',
+     !!ld.getElementById('compareSection') && HTML.indexOf('"@type": "FAQPage"') !== -1);
 }
 
 console.log('\n================ TESTS: hallroadlahore.com (built) ================\n');

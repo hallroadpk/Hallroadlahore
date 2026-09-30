@@ -254,7 +254,7 @@ const FOOTER = `<footer class="site-footer">
   <div class="footer-grid">
     <div>
       <div class="footer-brand">Hall Road Lahore</div>
-      <p>Hall Road, Lahore, Punjab, Pakistan.</p>
+      <p>G Power &amp; Electronics — Shop No. 1, Sarwar Centre, Hall Road, Lahore, Punjab, Pakistan.</p>
     </div>
     <div>
       <h3>Shop</h3>
@@ -306,10 +306,25 @@ for (const p of products) {
   const offers = p.variants.map(v => ({
     '@type': 'Offer',
     name: v.name,
+    url,
     priceCurrency: 'PKR',
     price: p.price + v.extraCost,
+    priceValidUntil: '2027-12-31',
+    itemCondition: 'https://schema.org/NewCondition',
     availability: p.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-    seller: { '@type': 'Organization', name: 'Hall Road Lahore' }
+    seller: { '@type': 'Organization', name: 'G Power & Electronics (Hall Road Lahore)' },
+    shippingDetails: {
+      '@type': 'OfferShippingDetails',
+      shippingRate: { '@type': 'MonetaryAmount', value: 150, currency: 'PKR' },
+      shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'PK' }
+    },
+    hasMerchantReturnPolicy: {
+      '@type': 'MerchantReturnPolicy',
+      applicableCountry: 'PK',
+      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+      merchantReturnDays: 7,
+      returnMethod: 'https://schema.org/ReturnByMail'
+    }
   }));
   const jsonLd = JSON.stringify({
     '@context': 'https://schema.org',
@@ -468,7 +483,6 @@ const urls = [
   { loc: `${SITE}/about.html`, pri: '0.5' },
   { loc: `${SITE}/shipping.html`, pri: '0.5' },
   { loc: `${SITE}/returns.html`, pri: '0.5' },
-  { loc: `${SITE}/#faq`, pri: '0.4' },
   { loc: `${SITE}/privacy.html`, pri: '0.3' },
   { loc: `${SITE}/terms.html`, pri: '0.3' }
 ];

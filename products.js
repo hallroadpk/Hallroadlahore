@@ -4,7 +4,7 @@ window.PRODUCTS = [
     "id": 1,
     "slug": "instant-electric-water-heater-tap-digital-display",
     "sku": "HRL-WH-001",
-    "brand": "Generic",
+    "brand": "G Power",
     "category": "WaterHeaters",
     "stock": 12,
     "warranty": "12 months manufacturer replacement warranty.",
@@ -889,7 +889,7 @@ window.PRODUCTS = [
     "id": 16,
     "slug": "solar-panel-water-drain-clip-stainless-steel-10pcs",
     "sku": "HRL-SOL-016",
-    "brand": "Generic",
+    "brand": "G Power",
     "category": "Solar",
     "stock": 50,
     "warranty": "7 days replacement if manufacturing defect.",
@@ -952,11 +952,11 @@ window.PRODUCTS = [
       },
       {
         "name": "10 Pcs",
-        "extraCost": 900
+        "extraCost": 800
       },
       {
         "name": "20 Pcs",
-        "extraCost": 1900
+        "extraCost": 1600
       }
     ]
   },
@@ -964,7 +964,7 @@ window.PRODUCTS = [
     "id": 17,
     "slug": "solar-panel-water-drain-clip-plastic-10pcs",
     "sku": "HRL-SOL-017",
-    "brand": "Generic",
+    "brand": "G Power",
     "category": "Solar",
     "stock": 70,
     "warranty": "7 days replacement if manufacturing defect.",
@@ -1026,11 +1026,11 @@ window.PRODUCTS = [
       },
       {
         "name": "10 Pcs",
-        "extraCost": 900
+        "extraCost": 800
       },
       {
         "name": "20 Pcs",
-        "extraCost": 1900
+        "extraCost": 1600
       }
     ]
   }

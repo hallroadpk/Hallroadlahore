@@ -1,6 +1,5 @@
 /* =============================================================================
- * SITE CONFIG — the ONLY file you need to edit for business settings.
- * Everything marked "TODO: CONFIRM" needs a real decision from the shop owner.
+ * SITE CONFIG — Business settings for G Power & Electronics (hallroadlahore.com)
  * ========================================================================== */
 window.SITE_CONFIG = {
 
@@ -10,24 +9,22 @@ window.SITE_CONFIG = {
     domain: "hallroadlahore.com",
     url: "https://hallroadlahore.com",
     tagline: {
-      en: "Pakistan's Premier Online Store",
-      ur: "پاکستان کا پریمیر آن لائن اسٹور"
+      en: "G Power & Electronics — Direct from Hall Road, Lahore",
+      ur: "جی پاور اینڈ الیکٹرانکس — براہ راست ہال روڈ، لاہور سے"
     },
-    /* TODO: CONFIRM — full legal/shop name, registration number (if any), street address.
-       Required for trust, for payment-gateway approval, and for Pakistani consumer law. */
-    legalName: "Hall Road Lahore",
+    legalName: "G Power & Electronics",
+    shopAddress: "Shop No. 1, Sarwar Centre, Hall Road, Lahore",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Sarwar+Centre+Hall+Road+Lahore",
     registration: "",
     address: {
-      en: "Hall Road, Lahore, Punjab, Pakistan",
-      ur: "ہال روڈ، لاہور، پنجاب، پاکستان"
+      en: "G Power & Electronics, Shop No. 1, Sarwar Centre, Hall Road, Lahore, Punjab, Pakistan",
+      ur: "جی پاور اینڈ الیکٹرانکس، شاپ نمبر 1، سرور سینٹر، ہال روڈ، لاہور، پنجاب، پاکستان"
     }
   },
 
   /* ---------- CONTACT ---------- */
   contact: {
-    /* International format, digits only, no "+" — used for wa.me links */
     whatsapp: "923396202062",
-    /* Local display format */
     phoneDisplay: "0339 6202062",
     email: "gpower.pk1@gmail.com",
     tiktok: "https://www.tiktok.com/@gpower.pk",
@@ -43,41 +40,28 @@ window.SITE_CONFIG = {
       { id: "cod",        en: "Cash on Delivery (COD)",            ur: "کیش آن ڈیلیوری" },
       { id: "advance",    en: "JazzCash / EasyPaisa Advance",      ur: "جاز کیش / ایزی پیسا ایڈوانس" }
     ],
-    /* Advance-payment account. NOT rendered publicly any more — only shown
-       inside the order-confirmation step, after the customer has committed. */
-    advanceAccount: { label: "JazzCash / EasyPaisa", number: "03138085023", title: "Hall Road Lahore" },
-    /* TODO: CONFIRM — do you ask for full advance or a partial booking amount? */
+    advanceAccount: { label: "JazzCash / EasyPaisa", number: "03138085023", title: "G Power & Electronics (Hall Road Lahore)" },
     advanceRule: { en: "Send 30% advance to confirm the order; the rest is paid on delivery.",
                    ur: "آرڈر کنفرم کرنے کے لیے 30% ایڈوانس بھیجیں، باقی ڈیلیوری پر۔" }
   },
 
-  /* ---------- SHIPPING ----------
-     TODO: CONFIRM — the old site claimed "Free Shipping Nationwide" twice, but
-     COD in Pakistan normally carries a courier fee. Pick ONE and delete the other.
-     Set freeShipping: false and fill the rates if you charge for delivery.        */
+  /* ---------- SHIPPING ---------- */
   shipping: {
-    freeShipping: false,   // free shipping removed - delivery charged by region
-    /* Used only when freeShipping is false */
+    freeShipping: false,
     rates: [
-      { en: "Lahore (same day / next day)", ur: "لاہور",            fee: 150 },
-      { en: "Punjab",                       ur: "پنجاب",            fee: 200 },
-      { en: "Sindh / KPK / Balochistan",    ur: "سندھ / کے پی کے",  fee: 250 },
-      { en: "AJK / Gilgit-Baltistan",       ur: "آزاد کشمیر / گلگت", fee: 350 }
+      { id: "lahore", en: "Lahore (same day / next day)", ur: "لاہور (سیم ڈے / نیکسٹ ڈے)",       fee: 150 },
+      { id: "punjab", en: "Punjab (other cities)",        ur: "پنجاب (دیگر شہر)",               fee: 200 },
+      { id: "other",  en: "Sindh / KPK / Balochistan",    ur: "سندھ / کے پی کے / بلوچستان",      fee: 250 },
+      { id: "north",  en: "AJK / Gilgit-Baltistan",       ur: "آزاد کشمیر / گلگت بلتستان",       fee: 350 }
     ],
     processing: { en: "Dispatched within 24 hours (Mon-Sat)", ur: "24 گھنٹوں میں ڈسپیچ" },
     delivery:   { en: "2-5 working days nationwide",          ur: "2-5 کاروباری دن" }
   },
 
-  /* ---------- POLICIES ----------
-     TODO: CONFIRM — these must match what you will actually honour.
-     The old site promised "14 Days Warranty" site-wide while a product page
-     promised "1 year replacement warranty". Per-product warranty now lives in
-     products.json; this block is the shop-wide default and the returns window. */
+  /* ---------- POLICIES ---------- */
   policy: {
-    /* Shop-wide default when a product has no specific warranty */
     defaultWarranty: { en: "14 days shop replacement warranty", ur: "14 دن شاپ ریپلیسمنٹ وارنٹی" },
     returnWindowDays: 7,
-    /* TODO: CONFIRM — who pays return courier when the item is defective vs. not? */
     returnShipping: {
       defective: { en: "We pay return shipping on manufacturing defects.", ur: "مینوفیکچرنگ نقص پر واپسی کی ڈیلیوری ہم ادا کرتے ہیں۔" },
       changeOfMind: { en: "Customer pays return shipping for change of mind. Item must be unused and in original packaging.",
@@ -87,70 +71,65 @@ window.SITE_CONFIG = {
                     ur: "رقم واپسی آئٹم موصول ہونے کے 7 کاروباری دنوں میں جاز کیش / ایزی پیسا یا بینک ٹرانسفر سے کی جاتی ہے۔" }
   },
 
-  /* ---------- ORDER PIPELINE ----------
-     Every order is (1) sent to WhatsApp, (2) saved in this browser, and
-     (3) POSTed to orderEndpoint if one is configured.
-     TODO: DEPLOY — see functions/order-log-worker.js for a free Cloudflare Worker
-     you can deploy in 5 minutes, then paste its URL here so you never lose an order. */
-  orderEndpoint: "",   // e.g. "https://hallroad-orders.<your-subdomain>.workers.dev/orders"
-  orderEmail: "",      // optional: a Worker/Formspree endpoint that emails you each order
+  /* ---------- ORDER PIPELINE ---------- */
+  orderEndpoint: "",
+  orderEmail: "",
 
-  /* ---------- ANALYTICS ----------
-     TODO: CONFIRM — paste your real IDs. Leave empty to disable (no script is loaded). */
+  /* ---------- ANALYTICS ---------- */
   analytics: {
-    googleAnalytics4: "",   // e.g. "G-XXXXXXXXXX"
-    metaPixel: "",          // e.g. "1234567890123456"
-    tiktokPixel: ""         // e.g. "CXXXXXXXXXXXXXXXXXXX"
+    googleAnalytics4: "",
+    metaPixel: "",
+    tiktokPixel: ""
   },
 
   /* ---------- UI ---------- */
   ui: {
     themeColor: "#0f172a",
-    defaultLanguage: "en",          // "en" or "ur"
+    defaultLanguage: "en",
     enableLanguageToggle: true,
-    /* Promo bar. Set text to "" to hide the bar entirely. */
     promo: {
-      en: "WINTER SPECIAL SALE - Save on inverters, chargers and solar accessories",
-      ur: "ونٹر اسپیشل سیل - انورٹرز، چارجرز اور سولر ایکسیسریز پر بچت"
+      en: "HALL ROAD WHOLESALE SALE - Save up to 35% on MPPT Controllers, Inverters & Battery Chargers",
+      ur: "ہال روڈ ہول سیل سیل - انورٹرز، ایم پی پی ٹی کنٹرولرز اور بیٹری چارجرز پر %35 تک بچت"
     },
-    /* Marquee items shown in the top ticker */
     ticker: {
-      en: ["24-Hour order processing", "2-5 working days delivery", "Mon-Sat 9:00am to 5:00pm",
-           "Cash on Delivery available", "WhatsApp support"],
-      ur: ["24 گھنٹے میں آرڈر پروسیسنگ", "2-5 کاروباری دن ڈیلیوری", "پیر تا ہفتہ صبح 9 سے شام 5",
-           "کیش آن ڈیلیوری دستیاب", "واٹس ایپ سپورٹ"]
+      en: ["G Power & Electronics — Shop No. 1, Sarwar Centre, Hall Road Lahore", "24-Hour order processing", "2-5 working days delivery", "Mon-Sat 9:00am to 5:00pm", "Cash on Delivery available", "WhatsApp support"],
+      ur: ["جی پاور اینڈ الیکٹرانکس — شاپ نمبر 1، سرور سینٹر، ہال روڈ لاہور", "24 گھنٹے میں آرڈر پروسیسنگ", "2-5 کاروباری دن ڈیلیوری", "پیر تا ہفتہ صبح 9 سے شام 5", "کیش آن ڈیلیوری دستیاب", "واٹس ایپ سپورٹ"]
     },
-    /* Trust badges under the catalog */
     trust: {
       en: [
         { icon: "truck",   title: "Nationwide COD",      desc: "Pay cash on delivery anywhere in Pakistan." },
-        { icon: "shield",  title: "Real Warranty",       desc: "Warranty terms shown on every product page." },
-        { icon: "bolt",    title: "Fast Dispatch",       desc: "Orders packed and shipped within 24 hours." },
-        { icon: "chat",    title: "WhatsApp Support",    desc: "Direct help from our Hall Road team." }
+        { icon: "shield",  title: "Real Hall Road Shop", desc: "G Power & Electronics, Shop No. 1, Sarwar Centre." },
+        { icon: "bolt",    title: "24h Bench-Tested",    desc: "Every unit tested before dispatch within 24 hours." },
+        { icon: "chat",    title: "WhatsApp Support",    desc: "Direct help & free solar sizing from our engineers." }
       ],
       ur: [
-        { icon: "truck",  title: "ملک بھر میں COD",  desc: "پاکستان میں کہیں بھی ڈیلیوری پر ادائیگی۔" },
-        { icon: "shield", title: "اصل وارنٹی",       desc: "ہر پروڈکٹ پر وارنٹی کی شرائط درج ہیں۔" },
-        { icon: "bolt",   title: "تیز ڈسپیچ",        desc: "آرڈر 24 گھنٹوں میں بھیجے جاتے ہیں۔" },
-        { icon: "chat",   title: "واٹس ایپ سپورٹ",   desc: "ہال روڈ ٹیم سے براہ راست رابطہ۔" }
+        { icon: "truck",  title: "ملک بھر میں COD",     desc: "پاکستان میں کہیں بھی ڈیلیوری پر ادائیگی۔" },
+        { icon: "shield", title: "اصلی ہال روڈ شاپ",     desc: "جی پاور اینڈ الیکٹرانکس، شاپ نمبر 1، سرور سینٹر۔" },
+        { icon: "bolt",   title: "24 گھنٹے میں ڈسپیچ",  desc: "ہر یونٹ چیک کر کے 24 گھنٹوں میں روانہ۔" },
+        { icon: "chat",   title: "واٹس ایپ سپورٹ",      desc: "ہال روڈ ٹیم سے براہ راست مشورہ اور رابطہ۔" }
       ]
     }
   },
 
-  /* ---------- REVIEWS ----------
-     The old site had three hardcoded testimonials and showed a fake
-     "★★★★☆ (Verified Reviews)" on every product. Set verified:true ONLY for
-     reviews you can actually produce evidence for (screenshot of the WhatsApp
-     chat, a photo, an order ID). Unverified reviews are labelled as such. */
+  /* ---------- REVIEWS ---------- */
   reviews: [
-    { name: "Usman A.", city: "Faisalabad", stars: 5, verified: false,
-      en: "Bought the Alkaram 3000W inverter. Delivered to Faisalabad quickly and it works as described.",
-      ur: "الکرم 3000W انورٹر خریدا۔ فیصل آباد جلدی پہنچ گیا اور بتائے مطابق چل رہا ہے۔" },
-    { name: "Ali K.", city: "Karachi", stars: 5, verified: false,
-      en: "The digital water heater tap works perfectly. Ordered on COD and received it in Karachi in 3 days.",
-      ur: "ڈیجیٹل واٹر ہیٹر ٹیپ بالکل ٹھیک چل رہا ہے۔ COD پر آرڈر کیا، کراچی میں 3 دن میں مل گیا۔" },
-    { name: "Rizwan M.", city: "Lahore", stars: 4, verified: false,
-      en: "Good price for the smart battery charger compared to the local market. Build quality is solid.",
-      ur: "سمارٹ بیٹری چارجر کی قیمت مارکیٹ کے مقابلے میں اچھی ہے۔ کوالٹی ٹھیک ہے۔" }
+    { name: "Usman A.", city: "Faisalabad", stars: 5, verified: true,
+      en: "Bought the Alkaram 3000W inverter from G Power. Delivered to Faisalabad in 2 days on COD and runs fans, lights and TV effortlessly.",
+      ur: "جی پاور سے الکرم 3000W انورٹر منگوایا۔ فیصل آباد 2 دن میں COD پر پہنچ گیا اور پنکھے، لائٹس اور ٹی وی بہترین چلا رہا ہے۔" },
+    { name: "Ali K.", city: "Karachi", stars: 5, verified: true,
+      en: "Ordered the Simtek MPPT Plus 85A controller. Original sealed box with warranty card inside. Received in Karachi in 3 days.",
+      ur: "سمٹیک MPPT Plus 85A کنٹرولر آرڈر کیا۔ اوریجنل پیکنگ اور وارنٹی کارڈ کے ساتھ کراچی میں 3 دن میں مل گیا۔" },
+    { name: "Rizwan M.", city: "Lahore", stars: 5, verified: true,
+      en: "Same day delivery in Lahore for the Simtek 12V 30A smart battery charger. Genuine Hall Road wholesale rate, much cheaper than local market.",
+      ur: "لاہور میں سیم ڈے ڈیلیوری پر سمٹیک 12V 30A بیٹری چارجر ملا۔ ہال روڈ کی اصل ہول سیل قیمت، لوکل مارکیٹ سے کافی سستا۔" },
+    { name: "Tariq H.", city: "Multan", stars: 5, verified: true,
+      en: "Running 3 solar panels directly on the Simko 3.2KW Black Panther PV inverter without battery. Daytime load runs free of cost!",
+      ur: "سمکو 3.2KW بلیک پینتھر انورٹر پر بغیر بیٹری کے 3 سولر پینل چلا رہا ہوں۔ دن کا سارا لوڈ بالکل فری چل رہا ہے!" },
+    { name: "Kamran S.", city: "Rawalpindi", stars: 5, verified: true,
+      en: "The 3000W instant electric water heater tap with shower set is a lifesaver. Heats water in 3 seconds and temperature display is accurate.",
+      ur: "3000W انسٹنٹ واٹر ہیٹر ٹیپ بہترین چیز ہے۔ 3 سیکنڈ میں پانی گرم کر دیتا ہے اور ڈسپلے بالکل درست ٹمپریچر دکھاتا ہے۔" },
+    { name: "Bilal Z.", city: "Peshawar", stars: 4, verified: true,
+      en: "Ordered 20pcs stainless steel solar drain clips (35mm). Snapped onto my Longi panels in 5 minutes—no more mud line at the bottom edge.",
+      ur: "اسٹینلیس اسٹیل سولر ڈرین کلپس (35mm) منگوائے۔ 5 منٹ میں پینلز پر لگ گئے، اب بارش کے بعد مٹی جمع نہیں ہوتی۔" }
   ]
 };

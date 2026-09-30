@@ -69,13 +69,13 @@
 <main id="main">
   <div class="track-hero">
     <h1>Track your order</h1>
-    <p>Enter your order ID (e.g. <strong>HRL-123456</strong>) sent on WhatsApp after checkout. We also save it in this browser.</p>
+    <p>Enter your order ID (e.g. <strong>HRL-260930-4821</strong>) sent on WhatsApp after checkout. We also save your recent orders in this browser.</p>
   </div>
   <div class="track-card">
     <form class="track-form" id="trackForm">
       <div>
         <label for="orderId">Order ID</label>
-        <input id="orderId" name="orderId" placeholder="HRL-123456" autocomplete="off" required pattern="HRL-[0-9]{6}" maxlength="10" inputmode="text">
+        <input id="orderId" name="orderId" placeholder="HRL-260930-4821" autocomplete="off" required pattern="HRL-[0-9]{6}(-[0-9]{4})?" maxlength="20" inputmode="text">
       </div>
       <button class="track-btn" type="submit">Check status</button>
     </form>
@@ -87,11 +87,11 @@
       <div class="track-step" data-step="4"><div class="dot"></div>Delivered</div>
     </div>
   </div>
-  <p class="track-help">Lost your ID? Check WhatsApp chat with <strong>0339 6202062</strong> or tap the floating WhatsApp button to ask us. COD orders are dispatched within 24 hours (Mon-Sat) and delivered in 2-5 working days. <a href="/">Browse products</a> • <a href="/shipping.html">Shipping details</a></p>
+  <p class="track-help">Lost your ID? Check WhatsApp chat with <strong>0339 6202062</strong> or tap the floating WhatsApp button to ask us. COD orders are dispatched from <strong>G Power &amp; Electronics, Shop No. 1, Sarwar Centre, Hall Road, Lahore</strong> within 24 hours (Mon-Sat) and delivered in 2-5 working days. <a href="/">Browse products</a> • <a href="/shipping.html">Shipping details</a></p>
 </main>
 <footer class="site-footer">
   <div class="footer-grid">
-    <div><div class="footer-brand">Hall Road Lahore</div><p>Hall Road, Lahore, Punjab, Pakistan.</p></div>
+    <div><div class="footer-brand">Hall Road Lahore</div><p>G Power &amp; Electronics — Shop No. 1, Sarwar Centre, Hall Road, Lahore, Punjab, Pakistan.</p></div>
     <div><h3>Shop</h3><ul><li><a href="/">All products</a></li><li><a href="/tools/solar-calculator.html">Solar calculator</a></li><li><a href="/track.html">Track order</a></li></ul></div>
     <div><h3>Help</h3><ul>
       <li><a href="/shipping.html">Shipping & delivery</a></li>
@@ -106,6 +106,7 @@
   <p class="footer-legal">&copy; 2026 hallroadlahore.com. Prices in PKR and subject to change.</p>
 </footer>
 <script src="/site.config.js"></script>
+<script src="/products.js"></script>
 <script>
 (function(){
   const $ = (s)=>document.querySelector(s);
@@ -124,18 +125,21 @@
   form.addEventListener('submit', function(e){
     e.preventDefault();
     const id = input.value.trim().toUpperCase();
-    if(!/^HRL-\d{6}$/.test(id)){ result.className='track-result notfound'; result.textContent='Please enter a valid ID like HRL-123456.'; result.style.display='block'; steps.style.display='none'; return; }
+    if(!/^HRL-\d{6}(-\d{4})?$/.test(id)){ result.className='track-result notfound'; result.textContent='Please enter a valid Order ID like HRL-260930-4821.'; result.style.display='block'; steps.style.display='none'; return; }
     let orders = [];
     try { orders = JSON.parse(localStorage.getItem('hallroad_orders')||'[]'); } catch(e){}
     const order = orders.find(o=> (o.id||'').toUpperCase() === id);
     if(order){
-      const ageHours = (Date.now() - new Date(order.date||Date.now()).getTime())/36e5;
+      const ts = order.at || order.date;
+      const ageHours = (Date.now() - new Date(ts||Date.now()).getTime())/36e5;
       let stage = 1;
       if(order.status==='confirmed' || ageHours>2) stage=2;
       if(order.status==='dispatched' || ageHours>24) stage=3;
       if(order.status==='delivered' || ageHours>96) stage=4;
+      const pkr = new Intl.NumberFormat('en-PK');
+      const totalStr = order.grandTotal ? ('Rs. ' + pkr.format(order.grandTotal) + ' (incl. Rs. ' + pkr.format(order.shippingFee||0) + ' delivery)') : ('Rs. ' + pkr.format(order.total||0));
       result.className='track-result found';
-      result.innerHTML = '<strong>Order '+id+' found</strong><br>Placed: '+(order.date?new Date(order.date).toLocaleString():'recently')+'<br>Items: '+(order.items||[]).map(i=> i.title||i.slug||'Product').join(', ').slice(0,120)+'<br>Total: Rs. '+(order.total||'').toString()+'<br><br>We send courier tracking on WhatsApp once dispatched. If you have not received it within 24h, <a href="https://wa.me/923396202062?text='+encodeURIComponent('Assalam o Alaikum, my order '+id+' status?')+'" target="_blank" rel="noopener">ask us on WhatsApp</a>.';
+      result.innerHTML = '<strong>Order '+id+' found</strong><br>Placed: '+(ts?new Date(ts).toLocaleString():'recently')+'<br>Items: '+(order.items||[]).map(i=> (i.title||i.slug||'Product') + (i.qty ? ' ×'+i.qty : '')).join(', ').slice(0,160)+'<br>Total: '+totalStr+'<br><br>We send courier tracking on WhatsApp once dispatched. If you have not received it within 24h, <a href="https://wa.me/923396202062?text='+encodeURIComponent('Assalam o Alaikum, my order '+id+' status?')+'" target="_blank" rel="noopener">ask us on WhatsApp</a>.';
       steps.style.display='grid';
       steps.querySelectorAll('.track-step').forEach(el=>{
         const s = parseInt(el.dataset.step);

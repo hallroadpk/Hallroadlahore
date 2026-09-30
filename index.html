@@ -28,7 +28,6 @@
 <meta name="format-detection" content="telephone=yes">
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="alternate" type="application/rss+xml" title="Hall Road Lahore" href="/sitemap.xml">
 
 <!-- Critical header CSS, inlined so the sticky header lays out correctly on first paint (and even if
      /styles.css is slow or fails to load). It sits BEFORE the stylesheet link on purpose: styles.css is the
@@ -73,13 +72,14 @@ html[dir="rtl"] .brand-link{margin-right:0;margin-left:auto}
       "@type": "Store",
       "@id": "https://hallroadlahore.com/#store",
       "name": "Hall Road Lahore",
+      "legalName": "G Power & Electronics",
       "url": "https://hallroadlahore.com/",
       "logo": "https://hallroadlahore.com/images/logo.svg",
       "image": "https://hallroadlahore.com/images/og-cover.png",
-      "description": "Original solar inverters, battery chargers and solar accessories direct from Hall Road, Lahore, with Cash on Delivery across Pakistan.",
+      "description": "Original solar inverters, battery chargers and solar accessories direct from G Power & Electronics, Shop No. 1, Sarwar Centre, Hall Road, Lahore, with Cash on Delivery across Pakistan.",
       "telephone": "+92-339-6202062",
       "email": "gpower.pk1@gmail.com",
-      "address": { "@type": "PostalAddress", "streetAddress": "Hall Road", "addressLocality": "Lahore", "addressRegion": "Punjab", "addressCountry": "PK" },
+      "address": { "@type": "PostalAddress", "streetAddress": "Shop No. 1, Sarwar Centre, Hall Road", "addressLocality": "Lahore", "addressRegion": "Punjab", "addressCountry": "PK" },
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -96,6 +96,47 @@ html[dir="rtl"] .brand-link{margin-right:0;margin-left:auto}
       "name": "Hall Road Lahore",
       "publisher": { "@id": "https://hallroadlahore.com/#store" },
       "inLanguage": ["en-PK","ur-PK"]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://hallroadlahore.com/#faqpage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you deliver to my city? How much is delivery?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes - we deliver nationwide via courier. Lahore is Rs. 150 (same/next day), Punjab Rs. 200, Sindh/KPK/Balochistan Rs. 250 and AJK/Gilgit-Baltistan Rs. 350. Orders are dispatched within 24 hours (Mon-Sat)." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I place an order?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Add products to the cart, tap Proceed to Checkout and fill the form - your order opens in WhatsApp ready to send. No account needed. You can also order any product directly from its WhatsApp button." }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment methods do you accept?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Cash on Delivery (COD) anywhere in Pakistan, or 30% advance via JazzCash / EasyPaisa to confirm the order - the rest is paid on delivery." }
+        },
+        {
+          "@type": "Question",
+          "name": "Are these products original? What warranty do I get?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes - we sell only original Simtek, Energy, Simko and Alkaram products sourced from G Power & Electronics, Shop No. 1, Sarwar Centre, Hall Road, Lahore. Every product shows its exact warranty on the product page." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I return a product if it has a problem?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes - you have 7 days. Manufacturing defects are collected and returned at our cost; change-of-mind returns are accepted unused in original packaging with courier paid by the customer." }
+        },
+        {
+          "@type": "Question",
+          "name": "Which MPPT controller should I choose - 40A, 70A, 85A or 120A?",
+          "acceptedAnswer": { "@type": "Answer", "text": "40A for small 12V setups (up to ~500W panels), 70A/80A for 12V/24V systems up to ~1000W, 85A for larger 12V/24V arrays with 150V panel input, and 120A for the biggest home setups up to 170V VOC." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a modified sine wave and pure sine wave inverter?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Modified sine wave (Alkaram PI series) runs fans, lights, TVs, chargers and most tools at a much lower price. Pure sine wave (Energy 1.5KW & Simko 3.2KW) is needed for sensitive electronics, motors and direct solar setups." }
+        }
+      ]
     }
   ]
 }
@@ -264,6 +305,116 @@ html[dir="rtl"] .brand-link{margin-right:0;margin-left:auto}
   </div>
   <div class="product-grid" id="productGrid"></div>
 </main>
+
+<!-- 6. QUICK COMPARISON TABLE -->
+<section class="compare-section" id="compareSection" aria-labelledby="compareHeading">
+  <div class="compare-head">
+    <div>
+      <h2 class="section-heading" id="compareHeading" style="margin-bottom:4px;">Quick Comparison: MPPT Controllers &amp; Solar Inverters</h2>
+      <p class="compare-sub">Not sure which model fits your solar panels or battery? Compare specs &amp; wholesale Hall Road prices side-by-side.</p>
+    </div>
+    <a class="compare-calc-btn" href="/tools/solar-calculator.html">Open Free Solar Calculator →</a>
+  </div>
+
+  <div class="compare-table-wrap" role="region" aria-labelledby="compareHeading" tabindex="0">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Category</th>
+          <th>Max Current / Power</th>
+          <th>Max Solar Input (VOC)</th>
+          <th>System / Battery</th>
+          <th>Warranty</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="/products/simtek-planet40-40a-mppt-solar-charge-controller.html"><strong>Simtek Planet40 MPPT</strong></a></td>
+          <td>MPPT Controller</td>
+          <td>40A</td>
+          <td>70V VOC</td>
+          <td>12V (20A battery-free DC)</td>
+          <td>3 Months Official</td>
+          <td><strong>Rs. 8,000</strong></td>
+          <td><button type="button" class="compare-order-btn" data-action="quick-view" data-product-id="2">View / Buy</button></td>
+        </tr>
+        <tr>
+          <td><a href="/products/energy-mppt-80a-solar-charge-controller.html"><strong>Energy MPPT 80A (98% Eff.)</strong></a></td>
+          <td>MPPT Controller</td>
+          <td>80A</td>
+          <td>100V VOC</td>
+          <td>12V / 24V Auto</td>
+          <td>Shop Check Warranty</td>
+          <td><strong>Rs. 8,500</strong></td>
+          <td><button type="button" class="compare-order-btn" data-action="quick-view" data-product-id="14">View / Buy</button></td>
+        </tr>
+        <tr>
+          <td><a href="/products/simtek-dc-king-70a-mppt-solar-charge-controller.html"><strong>Simtek DC King 70A MPPT</strong></a></td>
+          <td>MPPT Controller</td>
+          <td>70A</td>
+          <td>110V VOC</td>
+          <td>12V / 24V (Battery-free DC)</td>
+          <td>6 Months Official</td>
+          <td><strong>Rs. 14,700</strong></td>
+          <td><button type="button" class="compare-order-btn" data-action="quick-view" data-product-id="3">View / Buy</button></td>
+        </tr>
+        <tr>
+          <td><a href="/products/simtek-mppt-plus-hybrid-85a-solar-charge-controller.html"><strong>Simtek MPPT+ Hybrid 85A</strong></a></td>
+          <td>Hybrid MPPT</td>
+          <td>85A</td>
+          <td>150V VOC</td>
+          <td>12V / 24V (WAPDA + Solar)</td>
+          <td>12 Months Official</td>
+          <td><strong>Rs. 16,800</strong></td>
+          <td><button type="button" class="compare-order-btn" data-action="quick-view" data-product-id="4">View / Buy</button></td>
+        </tr>
+        <tr>
+          <td><a href="/products/simtek-mppt-plus-hybrid-120a-solar-charge-controller.html"><strong>Simtek MPPT+ Hybrid 120A</strong></a></td>
+          <td>Hybrid MPPT</td>
+          <td>120A</td>
+          <td>170V VOC</td>
+          <td>12V / 24V / 48V Hybrid</td>
+          <td>12 Months Official</td>
+          <td><strong>Rs. 23,300</strong></td>
+          <td><button type="button" class="compare-order-btn" data-action="quick-view" data-product-id="7">View / Buy</button></td>
+        </tr>
+        <tr>
+          <td><a href="/products/energy-1-5kw-pv-inverter-direct-solar-without-battery.html"><strong>Energy 1.5KW Direct PV</strong></a></td>
+          <td>Pure Sine PV Inverter</td>
+          <td>1500W (220V AC)</td>
+          <td>65V–150V (1–3 Panels)</td>
+          <td>No Battery Needed</td>
+          <td>7 Days Replacement</td>
+          <td><strong>Rs. 11,500</strong></td>
+          <td><button type="button" class="compare-order-btn" data-action="quick-view" data-product-id="13">View / Buy</button></td>
+        </tr>
+        <tr>
+          <td><a href="/products/simko-3-2kw-pv-inverter-black-panther.html"><strong>Simko 3.2KW Black Panther</strong></a></td>
+          <td>Pure Sine PV Inverter</td>
+          <td>3200W (230V AC)</td>
+          <td>80V–210V (2–4 Panels)</td>
+          <td>No Battery Needed</td>
+          <td>7 Days Replacement</td>
+          <td><strong>Rs. 17,000</strong></td>
+          <td><button type="button" class="compare-order-btn" data-action="quick-view" data-product-id="15">View / Buy</button></td>
+        </tr>
+        <tr>
+          <td><a href="/products/alkaram-power-inverter-2000w-12v.html"><strong>Alkaram 2000W–6000W Series</strong></a></td>
+          <td>12V Battery Inverter</td>
+          <td>2000W / 3000W / 4000W / 6000W</td>
+          <td>Runs from 12V Battery</td>
+          <td>12V DC to 220V AC</td>
+          <td>6 Months Shop Warranty</td>
+          <td><strong>From Rs. 4,999</strong></td>
+          <td><button type="button" class="compare-order-btn" data-action="quick-view" data-product-id="10">View / Buy</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
 <!-- 7. REVIEWS -->
 <section class="reviews-section" aria-labelledby="reviewsHeading">
@@ -443,11 +594,12 @@ html[dir="rtl"] .brand-link{margin-right:0;margin-left:auto}
     <div>
       <div class="sidebar-section-title">Direct Contact &amp; Support</div>
       <div class="sidebar-contact-box">
+        <div class="sidebar-contact-row"><span class="k">Shop Name</span><span class="v">G Power &amp; Electronics</span></div>
         <div class="sidebar-contact-row"><span class="k">WhatsApp / Phone</span><a class="v" href="tel:03396202062">0339 6202062</a></div>
         <div class="sidebar-contact-row"><span class="k">Email</span><a class="v" href="mailto:gpower.pk1@gmail.com">gpower.pk1@gmail.com</a></div>
         <div class="sidebar-contact-row"><span class="k">TikTok</span><a class="v" href="https://www.tiktok.com/@gpower.pk" target="_blank" rel="noopener">@gpower.pk</a></div>
         <div class="sidebar-contact-row"><span class="k">Working Hours</span><span class="v">Mon–Sat, 9am–5pm</span></div>
-        <div class="sidebar-contact-row"><span class="k">Location</span><span class="v">Hall Road, Lahore</span></div>
+        <div class="sidebar-contact-row"><span class="k">Location</span><span class="v">Shop No. 1, Sarwar Centre, Hall Road, Lahore</span></div>
         <a class="sidebar-wa-cta" href="https://wa.me/923396202062?text=Assalam%20o%20Alaikum!%20I%20have%20a%20question%20about%20hallroadlahore.com." target="_blank" rel="noopener" data-whatsapp="Assalam o Alaikum! I have a question about hallroadlahore.com.">Chat on WhatsApp Now</a>
       </div>
     </div>
@@ -552,7 +704,7 @@ html[dir="rtl"] .brand-link{margin-right:0;margin-left:auto}
     </details>
     <details>
       <summary>Are these products original? What warranty do I get?</summary>
-      <p>Yes - we sell only original Simtek and Alkaram products sourced from Hall Road, Lahore. Every product shows its exact warranty on the product page (3-12 months on Simtek, 6 months shop warranty on Alkaram inverters).</p>
+      <p>Yes - we sell only original Simtek, Energy, Simko and Alkaram products sourced directly from our shop (<strong>G Power &amp; Electronics, Shop No. 1, Sarwar Centre, Hall Road, Lahore</strong>). Every product shows its exact warranty on the product page (3-12 months on Simtek, 6 months shop warranty on Alkaram inverters).</p>
     </details>
     <details>
       <summary>Can I return a product if it has a problem?</summary>
@@ -582,7 +734,7 @@ html[dir="rtl"] .brand-link{margin-right:0;margin-left:auto}
   <div class="footer-grid">
     <div>
       <div class="footer-brand">Hall Road Lahore</div>
-      <p>Hall Road, Lahore, Punjab, Pakistan.</p>
+      <p>G Power &amp; Electronics — Shop No. 1, Sarwar Centre, Hall Road, Lahore, Punjab, Pakistan.</p>
     </div>
     <div>
       <h3>Shop</h3>

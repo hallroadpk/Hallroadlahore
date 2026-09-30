@@ -358,7 +358,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     var main = $('#pdpMainImg');
     main.src = imgSrc(p.images[0]);
     main.alt = p.title.en;
-    $('#pdpTitle').textContent = p.title.en;
+    $('#pdpTitle').textContent = L(p.title);
     $('#pdpBrand').textContent = p.brand + ' · SKU ' + p.sku;
     $('#pdpSummary').textContent = L(p.summary);
 
@@ -413,6 +413,49 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     feats.textContent = '';
     (L(p.features) || []).forEach(function (f) { feats.appendChild(el('li', { text: f })); });
 
+    var contentBox = feats.parentNode;
+    var specsDl = $('#pdpSpecs');
+    if (!specsDl && contentBox) {
+      specsDl = el('dl', { class: 'spec-table', id: 'pdpSpecs', style: 'margin:14px 0;' });
+      contentBox.insertBefore(specsDl, feats.nextSibling);
+    }
+    if (specsDl) {
+      specsDl.textContent = '';
+      var specKeys = Object.keys(p.specs || {});
+      specsDl.style.display = specKeys.length ? '' : 'none';
+      specKeys.forEach(function (k) {
+        specsDl.appendChild(el('div', {}, [
+          el('dt', { text: k }),
+          el('dd', { text: String(p.specs[k]) })
+        ]));
+      });
+    }
+
+    var pageLinkWrap = $('#pdpPageLinkWrap');
+    if (!pageLinkWrap && contentBox) {
+      pageLinkWrap = el('p', { class: 'pdp-summary', id: 'pdpPageLinkWrap', style: 'margin-top:8px;' }, [
+        el('a', { id: 'pdpPageLink', href: '/products/' + p.slug + '.html', style: 'color:var(--green-dark);font-weight:800;' })
+      ]);
+      contentBox.appendChild(pageLinkWrap);
+    }
+    var pageLink = $('#pdpPageLink');
+    if (pageLink) {
+      pageLink.href = '/products/' + p.slug + '.html';
+      pageLink.textContent = lang === 'ur' ? 'مکمل پروڈکٹ پیج اور شیئر لنک دیکھیں ←' : 'View full product page & shareable link →';
+    }
+
+    var stickyBar = node ? node.querySelector('.sticky-cart-bar') : null;
+    if (stickyBar && !stickyBar.querySelector('[data-action="buy-from-modal"]')) {
+      stickyBar.style.display = 'grid';
+      stickyBar.style.gridTemplateColumns = '1fr 1fr';
+      stickyBar.style.gap = '10px';
+      stickyBar.appendChild(el('button', {
+        class: 'checkout-btn', type: 'button', 'data-action': 'buy-from-modal',
+        style: 'background:var(--ink);color:#fff;',
+        text: lang === 'ur' ? 'فوری آرڈر (COD)' : 'Buy Now (COD)'
+      }));
+    }
+
     var warr = $('#pdpWarranty');
     if (warr) warr.textContent = p.warranty || (CFG.policy && CFG.policy.defaultWarranty ? L(CFG.policy.defaultWarranty) : '');
 
@@ -424,7 +467,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     related.forEach(function (r) {
       rel.appendChild(el('a', { class: 'related-card', href: '/products/' + r.slug + '.html' }, [
         img(imgSrc(r.images[0]), r.title.en, { w: 200, h: 200 }),
-        el('div', { class: 'related-title', text: r.title.en }),
+        el('div', { class: 'related-title', text: L(r.title) }),
         el('div', { class: 'related-price', text: money(r.price) })
       ]));
     });
@@ -483,6 +526,13 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     closeOverlay($('#pdpModal'));
     toggleCartDrawer(true);
   }
+  function buyFromModal() {
+    var p = findProduct(modal.productId);
+    if (!p) return;
+    addToCart(p.id, modal.variantIndex, modal.qty, modal.sizeIndex);
+    closeOverlay($('#pdpModal'));
+    openCheckoutModal();
+  }
   /* si = size index; only meaningful (and only stored) for products that define sizes. */
   function addToCart(id, vi, qty, si) {
     var p = findProduct(id);
@@ -520,7 +570,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     }));
     grid.textContent = '';
     if (!list.length) { grid.appendChild(el('p', { class: 'empty-state', text: t('noResults') })); return; }
-    list.forEach(function (p) {
+    list.forEach(function (p, idx) {
       var d = honestDiscount(p);
       var st = stockLabel(p);
       var waMsg = 'Assalam o Alaikum! I want to order: ' + (lang === 'ur' && p.title.ur ? p.title.ur : p.title.en) +
@@ -531,7 +581,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
         onclick: function () { openProductModal(p.id); }
       }, [
         d > 0 ? el('span', { class: 'discount-badge', text: '-' + d + '%' }) : null,
-        img(imgSrc(p.images[0]), p.title.en, { class: 'product-image', w: 400, h: 400 }),
+        img(imgSrc(p.images[0]), p.title.en, { class: 'product-image', w: 400, h: 400, eager: idx < 4 }),
         el('div', {}, [
           el('h3', { class: 'product-title', text: lang === 'ur' && p.title.ur ? p.title.ur : p.title.en }),
           el('div', { class: 'price-box' }, [
@@ -580,9 +630,34 @@ function $(sel, root) { return (root || document).querySelector(sel); }
   }
 
   /* ============================================================== CHECKOUT */
+  function selectedShippingRate() {
+    var rates = (CFG.shipping && CFG.shipping.rates) || [];
+    if (!rates.length) return { label: shipNote(), fee: 0 };
+    var sel = $('#custRegion');
+    var idx = sel ? parseInt(sel.value, 10) : 0;
+    var r = rates[idx] || rates[0];
+    return { label: L(r), fee: r.fee || 0 };
+  }
+
+  function autoDetectRegionFromCity(cityVal) {
+    var sel = $('#custRegion');
+    if (!sel || sel.dataset.userTouched === '1') return;
+    var c = String(cityVal || '').toLowerCase().trim();
+    if (!c) return;
+    var idx = 1; // default Punjab (200)
+    if (c.indexOf('lahore') !== -1 || c === 'lhr') idx = 0;
+    else if (/karachi|hyderabad|sukkur|larkana|peshawar|mardan|abbottabad|swat|kohat|quetta|gwadar|sindh|kpk|baloch/.test(c)) idx = 2;
+    else if (/muzaffarabad|mirpur|rawalakot|kotli|gilgit|skardu|hunza|chitral|ajk|kashmir/.test(c)) idx = 3;
+    if (sel.options[idx]) {
+      sel.value = String(idx);
+      renderOrderSummary();
+    }
+  }
+
   function openCheckoutModal() {
     if (!cart.length) { toast(t('errCart'), 'error'); return; }
     toggleCartDrawer(false);
+    ensureCartAndCheckout();
     var m = $('#checkoutModal');
     renderOrderSummary();
     openOverlay(m);
@@ -602,14 +677,22 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       ]));
     });
     box.appendChild(ul);
-    box.appendChild(el('div', { class: 'cart-shipping-row', style: 'margin:0 0 8px;' }, [
-      el('span', { text: t('shipping') }),
-      el('span', { text: shipNote() })
+    var ship = selectedShippingRate();
+    var sub = cartTotal();
+    box.appendChild(el('div', { class: 'cart-shipping-row', style: 'margin:0 0 6px;' }, [
+      el('span', { text: t('shipping') + (ship.label ? ' (' + ship.label + ')' : '') }),
+      el('span', { text: ship.fee ? money(ship.fee) : shipNote() })
     ]));
     box.appendChild(el('div', { class: 'order-summary-total' }, [
       el('span', { text: t('total') }),
-      el('span', { text: money(cartTotal()) })
+      el('span', { text: money(sub) })
     ]));
+    if (ship.fee > 0) {
+      box.appendChild(el('div', { class: 'order-summary-total', style: 'margin-top:4px;color:var(--green-dark);font-size:15px;' }, [
+        el('span', { text: lang === 'ur' ? 'کل قابل ادائیگی (ڈیلیوری سمیت)' : 'Grand Total (with Delivery)' }),
+        el('span', { text: money(sub + ship.fee) })
+      ]));
+    }
   }
 
   function normalizePhone(raw) {
@@ -654,6 +737,10 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     ];
     order.items.forEach(function (i) { lines.push('• ' + i.title + ' (x' + i.qty + ') - ' + money(i.lineTotal)); });
     lines.push('', '*Total:* ' + money(order.total));
+    if (order.shippingFee) {
+      lines.push('*Delivery (' + (order.shippingRegion || order.city) + '):* ' + money(order.shippingFee));
+      lines.push('*Grand Total (with Delivery):* ' + money(order.grandTotal || (order.total + order.shippingFee)));
+    }
     if (order.notes) lines.push('', '*Notes:* ' + order.notes);
     lines.push('Sent from ' + (CFG.brand ? CFG.brand.url : location.origin));
     return lines.join('\n');
@@ -668,7 +755,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     var city = ($('#custCity').value || '').trim();
     var address = ($('#custAddress').value || '').trim();
     var paySel = $('#paymentMethod');
-    var payment = paySel.options[paySel.selectedIndex].textContent.trim();
+    var payment = paySel && paySel.options[paySel.selectedIndex] ? paySel.options[paySel.selectedIndex].textContent.trim() : 'Cash on Delivery (COD)';
     var notes = (($('#custNotes') || {}).value || '').trim().slice(0, 300);
 
     /* Validate — an order you cannot call back is worse than no order. */
@@ -676,6 +763,9 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     if (setFieldError('custPhone', isValidPhone(phoneRaw) ? '' : t('errPhone'))) return;
     if (setFieldError('custCity', city.length < 2 ? t('errCity') : '')) return;
     if (setFieldError('custAddress', address.length < 10 ? t('errAddress') : '')) return;
+
+    autoDetectRegionFromCity(city);
+    var ship = selectedShippingRate();
 
     var digits = normalizePhone(phoneRaw);
     var phoneDisplay = '0' + digits.slice(0, 3) + ' ' + digits.slice(3);
@@ -685,11 +775,13 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       return { sku: line.product.sku, title: line.title, qty: c.qty, unit: line.unit, lineTotal: line.unit * c.qty };
     });
 
+    var subTotal = cartTotal();
     var order = {
       id: 'HRL-' + new Date().toISOString().slice(2, 10).replace(/-/g, '') + '-' + String(Date.now()).slice(-4),
       at: new Date().toISOString(),
       name: name, phone: '92' + digits, phoneDisplay: phoneDisplay, city: city, address: address,
-      payment: payment, notes: notes, items: items, total: cartTotal(),
+      payment: payment, notes: notes, items: items, total: subTotal,
+      shippingRegion: ship.label, shippingFee: ship.fee, grandTotal: subTotal + (ship.fee || 0),
       source: location.pathname
     };
     order.message = buildOrderMessage(order);
@@ -922,6 +1014,149 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     $$('[data-phone-display]').forEach(function (n) { n.textContent = (CFG.contact && CFG.contact.phoneDisplay) || ''; });
   }
 
+  /* Ensure Cart Drawer, Checkout Modal, Confirmation Modal, Delivery Region selector,
+     and Floating WhatsApp button exist on EVERY page (including /products/*.html,
+     track.html, solar-calculator.html, blog/*, about.html, shipping.html, etc.). */
+  function ensureCartAndCheckout() {
+    if (!$('#cartOverlay')) {
+      document.body.appendChild(el('div', { class: 'cart-drawer-overlay', id: 'cartOverlay' }));
+    }
+    if (!$('#cartDrawer')) {
+      var dr = el('aside', {
+        class: 'cart-drawer', id: 'cartDrawer', role: 'dialog',
+        'aria-modal': 'true', 'aria-labelledby': 'cartDrawerTitle', 'aria-hidden': 'true'
+      }, [
+        el('div', { class: 'cart-drawer-header' }, [
+          el('h2', { id: 'cartDrawerTitle', style: 'font-size:16px;font-weight:800;', text: t('yourCart') }),
+          el('button', {
+            type: 'button', 'data-action': 'close-cart', 'aria-label': t('closeCart'),
+            style: 'background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;', text: '✕'
+          })
+        ]),
+        el('div', { class: 'cart-drawer-body', id: 'cartDrawerItems' }),
+        el('div', { class: 'cart-drawer-footer' }, [
+          el('div', { class: 'cart-shipping-row' }, [
+            el('span', { text: t('shipping') }),
+            el('span', { id: 'cartShippingDisplay', text: shipNote() })
+          ]),
+          el('div', { class: 'cart-total-row' }, [
+            el('span', { text: t('total') }),
+            el('span', { id: 'cartTotalDisplay', text: 'Rs. 0' })
+          ]),
+          el('button', { class: 'checkout-btn', type: 'button', 'data-action': 'open-checkout', text: t('checkout') })
+        ])
+      ]);
+      document.body.appendChild(dr);
+    }
+
+    if (!$('#checkoutModal')) {
+      var cm = el('div', {
+        class: 'modal-overlay', id: 'checkoutModal', role: 'dialog',
+        'aria-modal': 'true', 'aria-labelledby': 'checkoutTitle', 'aria-hidden': 'true'
+      }, [
+        el('div', { class: 'modal-card' }, [
+          el('div', { class: 'modal-head' }, [
+            el('h2', { id: 'checkoutTitle', text: t('completeOrder') }),
+            el('button', {
+              type: 'button', 'data-action': 'close-checkout', 'aria-label': 'Close checkout',
+              style: 'background:none;border:none;font-size:20px;cursor:pointer;', text: '✕'
+            })
+          ]),
+          el('div', { class: 'order-summary-box', id: 'orderSummary' }),
+          el('form', { id: 'orderForm', novalidate: true }, [
+            el('div', { class: 'form-group' }, [
+              el('label', { for: 'custName', text: 'Full Name *' }),
+              el('input', { type: 'text', id: 'custName', name: 'name', required: true, autocomplete: 'name', placeholder: 'e.g. Ali Khan' }),
+              el('p', { class: 'field-error', id: 'err-custName' })
+            ]),
+            el('div', { class: 'form-group' }, [
+              el('label', { for: 'custPhone', text: 'WhatsApp / Mobile Number *' }),
+              el('input', {
+                type: 'tel', id: 'custPhone', name: 'phone', required: true, inputmode: 'numeric', autocomplete: 'tel',
+                pattern: '(03[0-9]{2}[\\s\\-]?[0-9]{7}|\\+?92\\s?3[0-9]{2}[\\s\\-]?[0-9]{7})',
+                placeholder: '0300 1234567', title: 'Pakistani mobile number, e.g. 0300 1234567'
+              }),
+              el('p', { class: 'field-error', id: 'err-custPhone' })
+            ]),
+            el('div', { class: 'form-group' }, [
+              el('label', { for: 'custCity', text: 'City *' }),
+              el('input', { type: 'text', id: 'custCity', name: 'city', required: true, autocomplete: 'address-level2', placeholder: 'e.g. Lahore' }),
+              el('p', { class: 'field-error', id: 'err-custCity' })
+            ]),
+            el('div', { class: 'form-group', id: 'regionFormGroup' }, [
+              el('label', { for: 'custRegion', text: 'Delivery Region' }),
+              el('select', { id: 'custRegion', name: 'region' })
+            ]),
+            el('div', { class: 'form-group' }, [
+              el('label', { for: 'custAddress', text: 'Complete Delivery Address *' }),
+              el('textarea', { id: 'custAddress', name: 'address', rows: '2', required: true, autocomplete: 'street-address', placeholder: 'House No, Street, Area...' }),
+              el('p', { class: 'field-error', id: 'err-custAddress' })
+            ]),
+            el('div', { class: 'form-group' }, [
+              el('label', { for: 'paymentMethod', text: 'Payment Method' }),
+              el('select', { id: 'paymentMethod', name: 'payment' }),
+              el('p', { class: 'payment-note', text: 'For advance payment we share the account details after your order is confirmed.' })
+            ]),
+            el('div', { class: 'form-group' }, [
+              el('label', { for: 'custNotes', text: 'Order Notes (optional)' }),
+              el('textarea', { id: 'custNotes', name: 'notes', rows: '2', maxlength: '300', placeholder: 'e.g. landmark, preferred delivery time, gift message...' })
+            ]),
+            el('button', { type: 'submit', class: 'checkout-btn', text: 'Confirm Order via WhatsApp' })
+          ])
+        ])
+      ]);
+      document.body.appendChild(cm);
+    } else if (!$('#custRegion')) {
+      /* Inject #custRegion into existing checkout form on index.html */
+      var cityGroup = $('#custCity') ? $('#custCity').closest('.form-group') : null;
+      if (cityGroup && cityGroup.parentNode) {
+        var rg = el('div', { class: 'form-group', id: 'regionFormGroup' }, [
+          el('label', { for: 'custRegion', text: 'Delivery Region' }),
+          el('select', { id: 'custRegion', name: 'region' })
+        ]);
+        cityGroup.parentNode.insertBefore(rg, cityGroup.nextSibling);
+      }
+    }
+
+    var regSel = $('#custRegion');
+    if (regSel && !regSel.options.length) {
+      var rates = (CFG.shipping && CFG.shipping.rates) || [];
+      rates.forEach(function (r, idx) {
+        regSel.appendChild(el('option', { value: String(idx), text: L(r) + ' — ' + money(r.fee) }));
+      });
+      regSel.addEventListener('change', function () {
+        regSel.dataset.userTouched = '1';
+        renderOrderSummary();
+      });
+    }
+
+    if (!$('#confirmModal')) {
+      var cfm = el('div', {
+        class: 'modal-overlay', id: 'confirmModal', role: 'dialog',
+        'aria-modal': 'true', 'aria-labelledby': 'confirmTitle', 'aria-hidden': 'true'
+      }, [
+        el('div', { class: 'modal-card' }, [
+          el('h2', { id: 'confirmTitle', class: 'sr-only', text: 'Order confirmation' }),
+          el('div', { id: 'confirmBody' })
+        ])
+      ]);
+      document.body.appendChild(cfm);
+    }
+
+    if (!$('.whatsapp-float-btn')) {
+      var num = (CFG.contact && CFG.contact.whatsapp) || '923396202062';
+      var waMsg = 'Hello HallRoadLahore.com, I have a question about your products.';
+      var waBtn = el('a', {
+        class: 'whatsapp-float-btn',
+        href: 'https://wa.me/' + num + '?text=' + encodeURIComponent(waMsg),
+        'data-whatsapp': waMsg,
+        target: '_blank', rel: 'noopener', 'aria-label': 'Chat with us on WhatsApp',
+        html: '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="#ffffff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>'
+      });
+      document.body.appendChild(waBtn);
+    }
+  }
+
   function ensureSidebar() {
     var hc = $('.header-top-row') || $('.header-content');
     if (hc && !hc.querySelector('[data-action="open-sidebar"]')) {
@@ -1015,11 +1250,12 @@ function $(sel, root) { return (root || document).querySelector(sel); }
           el('div', {
             html: '<div class="sidebar-section-title">Direct Contact &amp; Support</div>' +
               '<div class="sidebar-contact-box">' +
+                '<div class="sidebar-contact-row"><span class="k">Shop Name</span><span class="v">G Power &amp; Electronics</span></div>' +
                 '<div class="sidebar-contact-row"><span class="k">WhatsApp / Phone</span><a class="v" href="tel:03396202062">0339 6202062</a></div>' +
                 '<div class="sidebar-contact-row"><span class="k">Email</span><a class="v" href="mailto:gpower.pk1@gmail.com">gpower.pk1@gmail.com</a></div>' +
                 '<div class="sidebar-contact-row"><span class="k">TikTok</span><a class="v" href="https://www.tiktok.com/@gpower.pk" target="_blank" rel="noopener">@gpower.pk</a></div>' +
                 '<div class="sidebar-contact-row"><span class="k">Working Hours</span><span class="v">Mon–Sat, 9am–5pm</span></div>' +
-                '<div class="sidebar-contact-row"><span class="k">Location</span><span class="v">Hall Road, Lahore</span></div>' +
+                '<div class="sidebar-contact-row"><span class="k">Location</span><span class="v">Shop No. 1, Sarwar Centre, Hall Road, Lahore</span></div>' +
                 '<a class="sidebar-wa-cta" href="https://wa.me/923396202062?text=Assalam%20o%20Alaikum!%20I%20have%20a%20question%20about%20hallroadlahore.com." target="_blank" rel="noopener">Chat on WhatsApp Now</a>' +
               '</div>'
           })
@@ -1071,10 +1307,25 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     localStorage.setItem(LANG_KEY, lang);
     document.documentElement.lang = lang === 'ur' ? 'ur' : 'en';
     document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
+    /* Keep English-only static policy/guide pages left-to-right inside <main> so English
+       paragraphs and tables do not flip when Urdu is toggled in the header. */
+    var staticMain = document.body.classList.contains('page-static') ? $('#main') : null;
+    if (staticMain) staticMain.setAttribute('dir', 'ltr');
+    var faqSec = $('#faq');
+    if (faqSec) faqSec.setAttribute('dir', 'ltr');
+    var cmpSec = $('#compareSection');
+    if (cmpSec) cmpSec.setAttribute('dir', 'ltr');
     var btn = $('#langToggle');
     if (btn) btn.textContent = lang === 'ur' ? 'English' : 'اردو';
     var ph = $('#searchInput'); if (ph) ph.placeholder = t('searchPlaceholder');
     $$('[data-i18n]').forEach(function (n) { n.textContent = t(n.dataset.i18n); });
+    var regSel = $('#custRegion');
+    if (regSel && CFG.shipping && CFG.shipping.rates) {
+      CFG.shipping.rates.forEach(function (r, idx) {
+        if (regSel.options[idx]) regSel.options[idx].textContent = L(r) + ' — ' + money(r.fee);
+      });
+    }
+    renderPaymentOptions();
     renderTicker(); renderPromo(); renderCategoryTabs(); renderProducts();
     renderReviews(); renderTrust(); renderSidebar();
     var h = $('#catalogHeading');
@@ -1143,6 +1394,12 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       else if (a === 'qty-dec') { e.preventDefault(); changeQty(-1); }
       else if (a === 'close-pdp') { e.preventDefault(); closeOverlay($('#pdpModal')); }
       else if (a === 'add-from-modal') { e.preventDefault(); addFromModal(); }
+      else if (a === 'buy-from-modal') { e.preventDefault(); buyFromModal(); }
+      else if (a === 'quick-view') {
+        e.preventDefault();
+        var pid = parseInt(trigger.dataset.productId, 10);
+        if (pid) openProductModal(pid);
+      }
       else if (a === 'add-from-page') {
         e.preventDefault();
         addToCart(modal.productId, modal.variantIndex, parseInt(($('#qtyDisplay') || {}).textContent, 10) || 1, modal.sizeIndex);
@@ -1177,7 +1434,11 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       input.addEventListener('blur', function () {
         if (id === 'custPhone') setFieldError(id, isValidPhone(input.value) ? '' : t('errPhone'));
         else setFieldError(id, input.value.trim().length >= (id === 'custAddress' ? 10 : 3) ? '' : t(id === 'custName' ? 'errName' : id === 'custCity' ? 'errCity' : 'errAddress'));
+        if (id === 'custCity') autoDetectRegionFromCity(input.value);
       });
+      if (id === 'custCity') {
+        input.addEventListener('input', function () { autoDetectRegionFromCity(input.value); });
+      }
     });
 
     var form = $('#orderForm');
@@ -1197,10 +1458,11 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     var langBtn = $('#langToggle');
     if (langBtn) { langBtn.textContent = lang === 'ur' ? 'English' : 'اردو'; langBtn.hidden = !(CFG.ui && CFG.ui.enableLanguageToggle); }
 
+    ensureCartAndCheckout();
+    ensureSidebar(); renderSidebar();
     renderTicker(); renderPromo(); renderReviews(); renderTrust();
     renderPaymentOptions(); renderWhatsappLinks(); renderPhoneLinks();
     renderCategoryTabs(); renderProducts(); updateCartUI();
-    ensureSidebar(); renderSidebar();
     initSort();
     bindActions();
     initStaticPage();

@@ -21,6 +21,18 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // CORS preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
+        }
+      });
+    }
+
     // Health check
     if (request.method === 'GET' && url.pathname === '/ping') {
       return json({ ok: true, at: new Date().toISOString() });
@@ -48,9 +60,18 @@ export default {
       const record = {
         id: order.id,
         at: order.at || new Date().toISOString(),
-        name: order.name, phone: order.phone, city: order.city,
-        total: order.total, payment: order.payment,
-        items: order.items, source: order.source || 'site'
+        name: order.name,
+        phone: order.phone,
+        city: order.city,
+        address: order.address,
+        notes: order.notes || '',
+        shippingRegion: order.shippingRegion || '',
+        shippingFee: order.shippingFee || 0,
+        total: order.total,
+        grandTotal: order.grandTotal || order.total,
+        payment: order.payment,
+        items: order.items,
+        source: order.source || 'site'
       };
       // Key sorts by time so /orders reads newest-first-ish.
       await env.ORDERS.put('ord:' + record.at + ':' + record.id, JSON.stringify(record));
