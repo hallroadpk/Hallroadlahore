@@ -30,7 +30,9 @@ There is **no runtime dependency and no build server**. Everything a visitor nee
 | `title/summary/features` | `{ "en": …, "ur": … }` bilingual text |
 | `specs` | key/value table on the product page |
 | `images` | paths under `images/`. Put real photos here. |
-| `variants` | options with `extraCost` added to the base price |
+| `variants` | the priced options (e.g. pack sizes): each has a `name` and an `extraCost` added to the base `price`. The first one should be `0`. |
+| `variantLabel` | *(optional)* `{ "en": "Pack", "ur": "پیک" }` — the heading above the `variants` buttons. Defaults to "Select option". |
+| `sizes` | *(optional)* a Size selector, e.g. `[{ "name": "30mm" }, { "name": "35mm" }]`. A size never changes the price; the choice is shown in the cart and in the WhatsApp order. Leave it out for products that come in one size. |
 
 ### Adding real product photos
 

@@ -922,11 +922,11 @@
       "stock": 50,
       "warranty": "7 days replacement if manufacturing defect.",
       "title": {
-        "en": "Solar Panel Water Drain Clips - Stainless Steel (10 Pcs)",
-        "ur": "سولر پینل واٹر ڈرین کلپ - اسٹینلیس اسٹیل (10 عدد)"
+        "en": "Solar Panel Water Drain Clips - Stainless Steel",
+        "ur": "سولر پینل واٹر ڈرین کلپ - اسٹینلیس اسٹیل"
       },
-      "price": 850,
-      "oldPrice": 1200,
+      "price": 99,
+      "oldPrice": 100,
       "summary": {
         "en": "Stainless steel water drain clips that prevent mud and water accumulation at the bottom edge of solar panels. Improves self-cleaning during rain, prevents hot-spot and increases panel life. Fits framed panels 30-35mm, no tools needed.",
         "ur": "اسٹینلیس اسٹیل ڈرین کلپ جو پانی اور مٹی کو پینل کے نیچے جمع ہونے سے روکتا ہے۔ بارش میں خودکار صفائی، پینل کی زندگی بڑھائے۔"
@@ -938,21 +938,21 @@
           "Helps rain self-clean the panel, reduces manual cleaning",
           "Prevents hot-spot, improves long-term efficiency",
           "Fits 30-35mm framed panels, snap-on in seconds",
-          "Pack of 10 clips"
+          "Available in packs of 1, 10 or 20 clips"
         ],
         "ur": [
           "اسٹینلیس اسٹیل - زنگ سے محفوظ",
           "پانی اور مٹی جمع ہونے سے بچاتا ہے",
           "بارش میں خودکار صفائی",
           "پینل کی کارکردگی بہتر",
-          "10 عدد پیک"
+          "1، 10 یا 20 عدد کے پیک میں دستیاب"
         ]
       },
       "specs": {
         "Material": "Stainless Steel 304",
         "Compatibility": "30-35mm framed PV panels",
         "Function": "Water drain / mud prevention",
-        "Pack": "10 Pcs",
+        "Pack": "1 / 10 / 20 Pcs",
         "Installation": "Clip-on, no tools",
         "Warranty": "7 days"
       },
@@ -961,14 +961,30 @@
         "images/products/solar-drain-clip-steel-2.jpg",
         "images/products/solar-drain-clip-steel-3.jpg"
       ],
+      "sizes": [
+        {
+          "name": "30mm"
+        },
+        {
+          "name": "35mm"
+        }
+      ],
+      "variantLabel": {
+        "en": "Pack",
+        "ur": "پیک"
+      },
       "variants": [
         {
-          "name": "10 Pcs",
+          "name": "1 Pcs",
           "extraCost": 0
         },
         {
+          "name": "10 Pcs",
+          "extraCost": 900
+        },
+        {
           "name": "20 Pcs",
-          "extraCost": 750
+          "extraCost": 1900
         }
       ]
     },
@@ -981,11 +997,11 @@
       "stock": 70,
       "warranty": "7 days replacement if manufacturing defect.",
       "title": {
-        "en": "Solar Panel Water Drain Clips - Plastic (10 Pcs)",
-        "ur": "سولر پینل واٹر ڈرین کلپ - پلاسٹک (10 عدد)"
+        "en": "Solar Panel Water Drain Clips - Plastic",
+        "ur": "سولر پینل واٹر ڈرین کلپ - پلاسٹک"
       },
-      "price": 550,
-      "oldPrice": 800,
+      "price": 99,
+      "oldPrice": 100,
       "summary": {
         "en": "Economical plastic water drain clips for solar panels. Same drain function as stainless steel at a lower price - snaps onto 30-35mm frames and guides trapped water off the panel edge.",
         "ur": "سستی پلاسٹک ڈرین کلپ، اسی طرح پانی نکالتی ہے، کم قیمت میں۔"
@@ -997,21 +1013,21 @@
           "Fits 30-35mm framed panels",
           "Guides trapped water to drain off, no pooling",
           "Tool-free installation - clip on in seconds",
-          "Pack of 10 clips - economical choice"
+          "Available in packs of 1, 10 or 20 clips - economical choice"
         ],
         "ur": [
           "ہلکی پلاسٹک",
           "پانی نکالنے کا وہی کام",
           "30-35mm فریم",
           "آسان انسٹالیشن",
-          "10 عدد پیک"
+          "1، 10 یا 20 عدد کے پیک میں دستیاب"
         ]
       },
       "specs": {
         "Material": "High-strength Plastic",
         "Compatibility": "30-35mm framed PV panels",
         "Function": "Water drain / mud prevention",
-        "Pack": "10 Pcs",
+        "Pack": "1 / 10 / 20 Pcs",
         "Installation": "Clip-on, no tools"
       },
       "images": [
@@ -1019,14 +1035,30 @@
         "images/products/solar-drain-clip-plastic-2.jpg",
         "images/products/solar-drain-clip-plastic-3.jpg"
       ],
+      "sizes": [
+        {
+          "name": "30mm"
+        },
+        {
+          "name": "35mm"
+        }
+      ],
+      "variantLabel": {
+        "en": "Pack",
+        "ur": "پیک"
+      },
       "variants": [
         {
-          "name": "10 Pcs",
+          "name": "1 Pcs",
           "extraCost": 0
         },
         {
+          "name": "10 Pcs",
+          "extraCost": 900
+        },
+        {
           "name": "20 Pcs",
-          "extraCost": 450
+          "extraCost": 1900
         }
       ]
     }

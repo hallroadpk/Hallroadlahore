@@ -40,6 +40,27 @@ for (const p of products) {
   if (!p.warranty) warnings.push(`${p.slug}: no warranty field -> falls back to shop default`);
   if (!(p.images || []).length) errors.push(`${p.slug}: no images`);
   if (p.stock === undefined) warnings.push(`${p.slug}: no stock field`);
+  /* variants = the priced options (Pack, Option...). A non-numeric extraCost such as "900" would be
+     string-concatenated onto the price (99 + "900" -> "99900"), so refuse it loudly. */
+  (Array.isArray(p.variants) ? p.variants : []).forEach((v, i) => {
+    if (!v || typeof v.name !== 'string' || !v.name.trim()) errors.push(`${p.slug}: variants[${i}] needs a non-empty "name"`);
+    if (!v || !Number.isFinite(v.extraCost)) errors.push(`${p.slug}: variants[${i}].extraCost must be a number (0 for the base option)`);
+  });
+  /* sizes = optional price-neutral Size selector, e.g. [{ "name": "30mm" }, { "name": "35mm" }] */
+  if (p.sizes !== undefined) {
+    if (!Array.isArray(p.sizes) || !p.sizes.length) errors.push(`${p.slug}: "sizes" must be a non-empty array of { "name": ... }`);
+    else {
+      const seenSizes = new Set();
+      p.sizes.forEach((sz, i) => {
+        if (!sz || typeof sz.name !== 'string' || !sz.name.trim()) errors.push(`${p.slug}: sizes[${i}] needs a non-empty "name"`);
+        else if (seenSizes.has(sz.name)) errors.push(`${p.slug}: duplicate size "${sz.name}"`);
+        else seenSizes.add(sz.name);
+      });
+    }
+  }
+  if (p.variantLabel !== undefined && !(p.variantLabel && typeof p.variantLabel.en === 'string' && p.variantLabel.en.trim())) {
+    errors.push(`${p.slug}: "variantLabel" needs an "en" text, e.g. { "en": "Pack", "ur": "..." }`);
+  }
   if (p.oldPrice && p.oldPrice <= p.price) warnings.push(`${p.slug}: oldPrice ${p.oldPrice} is not above price ${p.price}`);
   const maxDisc = Math.max(...p.variants.map(v => discount(p, v)));
   const minDisc = Math.min(...p.variants.map(v => discount(p, v)));
@@ -280,6 +301,8 @@ fs.mkdirSync(path.join(ROOT, 'products'), { recursive: true });
 for (const p of products) {
   const url = `${SITE}/products/${p.slug}.html`;
   const ogImg = toAbsUrl(p.images[0]);
+  const hasSizes = Array.isArray(p.sizes) && p.sizes.length > 0;
+  const variantLegend = (p.variantLabel && p.variantLabel.en) || 'Select option';
   const offers = p.variants.map(v => ({
     '@type': 'Offer',
     name: v.name,
@@ -300,7 +323,10 @@ for (const p of products) {
         description: p.summary.en,
         category: p.category,
         offers: offers.length === 1 ? offers[0] : { '@type': 'AggregateOffer', lowPrice: Math.min(...offers.map(o => o.price)), highPrice: Math.max(...offers.map(o => o.price)), priceCurrency: 'PKR', offerCount: offers.length, offers },
-        additionalProperty: Object.entries(p.specs || {}).map(([k, v]) => ({ '@type': 'PropertyValue', name: k, value: String(v) }))
+        additionalProperty: [
+          ...Object.entries(p.specs || {}).map(([k, v]) => ({ '@type': 'PropertyValue', name: k, value: String(v) })),
+          ...(hasSizes ? [{ '@type': 'PropertyValue', name: 'Available sizes', value: p.sizes.map(sz => sz.name).join(', ') }] : [])
+        ]
       },
       {
         '@type': 'BreadcrumbList',
@@ -353,9 +379,16 @@ ${siteHeader('shop')}
       </div>
 
       <div class="pdp-buybox">
-        <fieldset class="variant-set">
-          <legend>Select option</legend>
-          <div class="variant-pills" id="variantPills" role="radiogroup" aria-label="Product options">
+        ${hasSizes ? `<fieldset class="variant-set">
+          <legend id="sizeLegend">Size</legend>
+          <div class="variant-pills" id="sizePills" role="radiogroup" aria-labelledby="sizeLegend">
+            ${p.sizes.map((sz, i) => `<button type="button" role="radio" aria-checked="${i === 0}" class="variant-pill${i === 0 ? ' selected' : ''}" data-size-index="${i}">${escapeHtml(sz.name)}</button>`).join('\n            ')}
+          </div>
+        </fieldset>
+
+        ` : ''}<fieldset class="variant-set">
+          <legend>${escapeHtml(variantLegend)}</legend>
+          <div class="variant-pills" id="variantPills" role="radiogroup" aria-label="${p.variantLabel ? escapeHtml(variantLegend) : 'Product options'}">
             ${p.variants.map((v, i) => `<button type="button" role="radio" aria-checked="${i === 0}" class="variant-pill${i === 0 ? ' selected' : ''}" data-variant-index="${i}">${escapeHtml(v.name)}${v.extraCost ? ` <span class="variant-up">+Rs. ${v.extraCost.toLocaleString('en-PK')}</span>` : ''}</button>`).join('\n            ')}
           </div>
         </fieldset>

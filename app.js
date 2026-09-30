@@ -43,7 +43,7 @@
       phone: 'WhatsApp / Mobile Number', city: 'City', address: 'Complete Delivery Address',
       payment: 'Payment Method', confirm: 'Confirm Order', noResults: 'No products found.',
       searchPlaceholder: 'Search inverters, chargers, solar...',
-      selectOption: 'Select option', quantity: 'Quantity', keyFeatures: 'Key features',
+      selectOption: 'Select option', size: 'Size', quantity: 'Quantity', keyFeatures: 'Key features',
       warranty: 'Warranty', description: 'Description', related: 'You may also like',
       orderSent: 'Order sent', weWillCall: 'We will confirm on WhatsApp shortly.',
       yourOrderId: 'Your order ID', copyOrder: 'Copy order text', copied: 'Copied to clipboard',
@@ -68,7 +68,7 @@
       phone: 'واٹس ایپ / موبائل نمبر', city: 'شہر', address: 'مکمل ڈیلیوری ایڈریس',
       payment: 'ادائیگی کا طریقہ', confirm: 'آرڈر کنفرم کریں', noResults: 'کوئی پروڈکٹ نہیں ملی۔',
       searchPlaceholder: 'انورٹر، چارجر، سولر تلاش کریں...',
-      selectOption: 'آپشن منتخب کریں', quantity: 'تعداد', keyFeatures: 'اہم خصوصیات',
+      selectOption: 'آپشن منتخب کریں', size: 'سائز', quantity: 'تعداد', keyFeatures: 'اہم خصوصیات',
       warranty: 'وارنٹی', description: 'تفصیل', related: 'یہ بھی دیکھیں',
       orderSent: 'آرڈر بھیج دیا گیا', weWillCall: 'ہم جلد واٹس ایپ پر کنفرم کریں گے۔',
       yourOrderId: 'آپ کا آرڈر آئی ڈی', copyOrder: 'آرڈر ٹیکسٹ کاپی کریں', copied: 'کاپی ہو گیا',
@@ -141,6 +141,18 @@ function $(sel, root) { return (root || document).querySelector(sel); }
   function findProduct(id) { for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].id === id) return PRODUCTS[i]; return null; }
   function variantPrice(p, vi) { return p.price + ((p.variants[vi] || {}).extraCost || 0); }
   function variantOldPrice(p, vi) { return p.oldPrice ? p.oldPrice + ((p.variants[vi] || {}).extraCost || 0) : 0; }
+  /* Optional "Size" selector (products.json "sizes", e.g. 30mm / 35mm). A size is a price-neutral
+     choice: it never changes the price, only which item the customer receives. */
+  function hasSizes(p) { return !!(p && p.sizes && p.sizes.length); }
+  /* Order-line option text, e.g. "Size: 30mm, Pack: 10 Pcs". English on purpose: it ends up in the
+     WhatsApp order the shop reads. Products without sizes / variantLabel keep the plain variant name. */
+  function optionText(p, vi, si) {
+    var bits = [];
+    if (hasSizes(p) && p.sizes[si]) bits.push('Size: ' + p.sizes[si].name);
+    var v = p.variants[vi] || {};
+    bits.push((p.variantLabel && p.variantLabel.en ? p.variantLabel.en + ': ' : '') + v.name);
+    return bits.join(', ');
+  }
   /* The discount the buyer can actually get on the cheapest variant. */
   function honestDiscount(p) {
     var min = 0;
@@ -209,7 +221,14 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       var vi = c.variant || 0;
       if (!p.variants[vi]) return;
       var qty = Math.max(1, Math.min(99, parseInt(c.qty, 10) || 1));
-      clean.push({ id: p.id, variant: vi, qty: qty });
+      var line = { id: p.id, variant: vi, qty: qty };
+      if (hasSizes(p)) {
+        /* A sized product needs a valid size. A line saved before the product had sizes carries an
+           index into the OLD option list, so it is dropped rather than guessed. */
+        if (typeof c.size !== 'number' || !p.sizes[c.size]) return;
+        line.size = c.size;
+      }
+      clean.push(line);
     });
     return clean;
   }
@@ -219,7 +238,8 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     return {
       product: p,
       variant: p.variants[c.variant],
-      title: p.title.en + ' — ' + p.variants[c.variant].name,
+      size: hasSizes(p) ? p.sizes[c.size] : undefined,
+      title: p.title.en + ' — ' + optionText(p, c.variant, c.size),
       unit: variantPrice(p, c.variant),
       qty: c.qty
     };
@@ -328,12 +348,12 @@ function $(sel, root) { return (root || document).querySelector(sel); }
   }
 
   /* ============================================================ PRODUCT PDP */
-  var modal = { productId: null, variantIndex: 0, qty: 1, imageIndex: 0 };
+  var modal = { productId: null, variantIndex: 0, sizeIndex: 0, qty: 1, imageIndex: 0 };
 
   function openProductModal(id) {
     var p = findProduct(id);
     if (!p) return;
-    modal = { productId: id, variantIndex: 0, qty: 1, imageIndex: 0 };
+    modal = { productId: id, variantIndex: 0, sizeIndex: 0, qty: 1, imageIndex: 0 };
     var node = $('#pdpModal');
     var main = $('#pdpMainImg');
     main.src = imgSrc(p.images[0]);
@@ -355,6 +375,27 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       });
     } else { thumbs.style.display = 'none'; }
 
+    /* Size selector: shown only for products that define "sizes" (first size preselected). */
+    var sizeSet = $('#sizeSet'), sizePills = $('#sizePills');
+    if (sizeSet && sizePills) {
+      sizePills.textContent = '';
+      sizeSet.hidden = !hasSizes(p);
+      if (hasSizes(p)) {
+        var sizeLegend = $('#sizeLegend');
+        if (sizeLegend) sizeLegend.textContent = t('size');
+        p.sizes.forEach(function (sz, i) {
+          sizePills.appendChild(el('button', {
+            type: 'button', role: 'radio', 'aria-checked': i === 0 ? 'true' : 'false',
+            class: 'variant-pill' + (i === 0 ? ' selected' : ''),
+            onclick: function () { selectSize(i); }
+          }, [document.createTextNode(L(sz) || sz.name)]));
+        });
+      }
+    }
+
+    /* Option / Pack selector: the heading is "Pack" when the product sets variantLabel. */
+    var variantLegend = $('#variantLegend');
+    if (variantLegend) variantLegend.textContent = p.variantLabel ? L(p.variantLabel) : 'Select option';
     var pills = $('#variantPills');
     pills.textContent = '';
     p.variants.forEach(function (v, i) {
@@ -402,13 +443,21 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       b.setAttribute('aria-pressed', idx === i ? 'true' : 'false');
     });
   }
-  function selectVariant(i) {
-    modal.variantIndex = i;
-    $$('#variantPills .variant-pill').forEach(function (b, idx) {
+  /* Highlight pill i inside one selector group (#sizePills / #variantPills). */
+  function markSelected(groupSelector, i) {
+    $$(groupSelector + ' .variant-pill').forEach(function (b, idx) {
       b.classList.toggle('selected', idx === i);
       b.setAttribute('aria-checked', idx === i ? 'true' : 'false');
     });
+  }
+  function selectVariant(i) {
+    modal.variantIndex = i;
+    markSelected('#variantPills', i);
     updatePriceDisplay();
+  }
+  function selectSize(i) {
+    modal.sizeIndex = i;
+    markSelected('#sizePills', i);
   }
   function updatePriceDisplay() {
     var p = findProduct(modal.productId);
@@ -430,15 +479,24 @@ function $(sel, root) { return (root || document).querySelector(sel); }
   function addFromModal() {
     var p = findProduct(modal.productId);
     if (!p) return;
-    addToCart(p.id, modal.variantIndex, modal.qty);
+    addToCart(p.id, modal.variantIndex, modal.qty, modal.sizeIndex);
     closeOverlay($('#pdpModal'));
     toggleCartDrawer(true);
   }
-  function addToCart(id, vi, qty) {
+  /* si = size index; only meaningful (and only stored) for products that define sizes. */
+  function addToCart(id, vi, qty, si) {
+    var p = findProduct(id);
+    var size = hasSizes(p) ? (p.sizes[si] ? si : 0) : undefined;
     var existing = null;
-    for (var i = 0; i < cart.length; i++) if (cart[i].id === id && cart[i].variant === vi) existing = cart[i];
+    for (var i = 0; i < cart.length; i++) {
+      if (cart[i].id === id && cart[i].variant === vi && cart[i].size === size) existing = cart[i];
+    }
     if (existing) existing.qty = Math.min(99, existing.qty + qty);
-    else cart.push({ id: id, variant: vi, qty: qty });
+    else {
+      var line = { id: id, variant: vi, qty: qty };
+      if (size !== undefined) line.size = size;
+      cart.push(line);
+    }
     saveCart(); updateCartUI(); toast(t('added'), 'success');
   }
 
@@ -1032,7 +1090,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     var id = parseInt(page.dataset.productId, 10);
     var p = findProduct(id);
     if (!p) return false;
-    modal = { productId: id, variantIndex: 0, qty: 1, imageIndex: 0 };
+    modal = { productId: id, variantIndex: 0, sizeIndex: 0, qty: 1, imageIndex: 0 };
 
     $$('.pdp-thumb').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -1041,14 +1099,16 @@ function $(sel, root) { return (root || document).querySelector(sel); }
         $$('.pdp-thumb').forEach(function (x) { x.classList.toggle('active', x === b); });
       });
     });
+    $$('#sizePills .variant-pill').forEach(function (b) {
+      b.addEventListener('click', function () {
+        modal.sizeIndex = parseInt(b.dataset.sizeIndex, 10);
+        markSelected('#sizePills', modal.sizeIndex);
+      });
+    });
     $$('#variantPills .variant-pill').forEach(function (b) {
       b.addEventListener('click', function () {
         modal.variantIndex = parseInt(b.dataset.variantIndex, 10);
-        $$('#variantPills .variant-pill').forEach(function (x) {
-          var on = x === b;
-          x.classList.toggle('selected', on);
-          x.setAttribute('aria-checked', on ? 'true' : 'false');
-        });
+        markSelected('#variantPills', modal.variantIndex);
         var now = variantPrice(p, modal.variantIndex), was = variantOldPrice(p, modal.variantIndex);
         $('#pdpPriceCurrent').textContent = money(now);
         var oldEl = $('.pdp-price-old');
@@ -1062,7 +1122,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     if (buyNow) {
       buyNow.addEventListener('click', function (e) {
         e.preventDefault();
-        addToCart(id, modal.variantIndex, parseInt($('#qtyDisplay').textContent, 10) || 1);
+        addToCart(id, modal.variantIndex, parseInt($('#qtyDisplay').textContent, 10) || 1, modal.sizeIndex);
         openCheckoutModal();
       });
     }
@@ -1085,7 +1145,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       else if (a === 'add-from-modal') { e.preventDefault(); addFromModal(); }
       else if (a === 'add-from-page') {
         e.preventDefault();
-        addToCart(modal.productId, modal.variantIndex, parseInt(($('#qtyDisplay') || {}).textContent, 10) || 1);
+        addToCart(modal.productId, modal.variantIndex, parseInt(($('#qtyDisplay') || {}).textContent, 10) || 1, modal.sizeIndex);
         toggleCartDrawer(true);
       }
       else if (a === 'open-checkout') { e.preventDefault(); openCheckoutModal(); }
@@ -1164,7 +1224,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
      and by tests/store.test.mjs. It is NOT required for the UI (all UI wiring
      goes through data-action attributes and event listeners). */
   window.HRL = {
-    openProductModal: openProductModal, selectVariant: selectVariant, changeQty: changeQty,
+    openProductModal: openProductModal, selectVariant: selectVariant, selectSize: selectSize, changeQty: changeQty,
     addFromModal: addFromModal, addToCart: addToCart, onSearchInput: onSearchInput,
     filterCategory: filterCategory, submitOrder: submitOrder,
     openCheckoutModal: openCheckoutModal, closeCheckoutModal: closeCheckoutModal,

@@ -30,6 +30,39 @@
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="Hall Road Lahore" href="/sitemap.xml">
 
+<!-- Critical header CSS, inlined so the sticky header lays out correctly on first paint (and even if
+     /styles.css is slow or fails to load). It sits BEFORE the stylesheet link on purpose: styles.css is the
+     source of truth and, loading after this block, wins any conflict - including its mobile overrides.
+     This is a copy of the header rules in styles.css ("4. Header", the header part of "16. Responsive", and
+     .menu-btn-head in "22. Info & Navigation Sidebar Drawer"): if you change the header there, mirror it here. -->
+<style>
+.header-content{box-sizing:border-box;max-width:var(--maxw,1200px);margin:0 auto;padding:10px 14px 12px;display:flex;flex-direction:column;gap:10px}
+.header-top-row{display:flex;align-items:center;gap:10px;width:100%;min-width:0}
+.menu-btn-head{box-sizing:border-box;width:40px;height:40px;min-width:40px;padding:0;border-radius:11px;background:#fff;color:var(--ink,#0f172a);border:1.5px solid var(--line-2,#cbd5e1);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0}
+.menu-btn-head svg{width:18px;height:18px;display:block;flex-shrink:0}
+.brand-link{display:inline-flex;align-items:center;justify-content:flex-start;margin-right:auto;min-width:0;flex-shrink:1;line-height:0}
+html[dir="rtl"] .brand-link{margin-right:0;margin-left:auto}
+.brand-logo-img{height:36px;width:auto;max-width:195px;display:block;object-fit:contain}
+.header-actions{display:inline-flex;align-items:center;gap:8px;flex-shrink:0}
+.lang-toggle{box-sizing:border-box;height:38px;min-width:44px;background:#fff;border:1.5px solid var(--line-2,#cbd5e1);border-radius:999px;padding:0 13px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;color:var(--ink,#0f172a);display:inline-flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0}
+.cart-btn-head{box-sizing:border-box;height:38px;background:var(--ink,#0f172a);color:#fff;border:none;padding:0 14px;border-radius:999px;font-family:inherit;font-weight:700;font-size:13.5px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;line-height:1;white-space:nowrap;flex-shrink:0}
+.cart-btn-head svg{width:17px;height:17px;display:block;flex-shrink:0}
+.cart-count{box-sizing:border-box;background:var(--green,#25d366);color:#000;font-size:11px;font-weight:900;height:20px;min-width:22px;padding:0 6px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.search-bar{box-sizing:border-box;width:100%;max-width:none;height:42px;display:flex;align-items:center;gap:10px;padding:0 16px;border:1.5px solid var(--line-2,#cbd5e1);border-radius:999px;background:var(--bg,#f8fafc)}
+.search-icon{position:static;transform:none;width:16px;height:16px;color:#64748b;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;pointer-events:none;line-height:0}
+.search-icon svg{width:16px;height:16px;display:block}
+.search-bar .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.search-bar input{flex:1;width:100%;height:100%;padding:0;border:none;border-radius:0;background:transparent;font-family:inherit;font-size:13.5px;color:var(--ink,#0f172a)}
+@media (max-width:768px){
+  .header-content{padding:10px 12px 12px}
+  .header-top-row{gap:8px}
+  .brand-logo-img{height:31px;max-width:165px}
+  .lang-toggle{height:36px;padding:0 11px;font-size:12.5px}
+  .cart-btn-head{height:36px;padding:0 12px;font-size:13px;gap:6px}
+  .search-bar{height:40px;padding:0 14px}
+}
+</style>
+
 <link rel="stylesheet" href="/styles.css">
 
 <script type="application/ld+json">
@@ -168,13 +201,13 @@
     {
       "@type": "ListItem",
       "position": 16,
-      "name": "Solar Panel Water Drain Clips - Stainless Steel (10 Pcs)",
+      "name": "Solar Panel Water Drain Clips - Stainless Steel",
       "url": "https://hallroadlahore.com/products/solar-panel-water-drain-clip-stainless-steel-10pcs.html"
     },
     {
       "@type": "ListItem",
       "position": 17,
-      "name": "Solar Panel Water Drain Clips - Plastic (10 Pcs)",
+      "name": "Solar Panel Water Drain Clips - Plastic",
       "url": "https://hallroadlahore.com/products/solar-panel-water-drain-clip-plastic-10pcs.html"
     }
   ]
@@ -185,7 +218,11 @@
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- 1. HEADER (Row 1: Sidebar Menu + Brand + Language + Cart | Row 2: Search) -->
+<!-- 1. MOVING TICKER  2. PROMO BAR  3. HEADER (Row 1: Sidebar Menu + Brand + Language + Cart | Row 2: Search)
+     The ticker lanes and the promo text are filled in by renderTicker() / renderPromo() in app.js from
+     site.config.js (ui.ticker / ui.promo); renderPromo() removes the bar when the promo text is empty. -->
+<div class="top-ticker-wrapper"><div class="ticker-move-container"><div class="ticker-single-line" id="tickerA"></div><div class="ticker-single-line" id="tickerB" aria-hidden="true"></div></div></div>
+<div class="promo-flash"></div>
 <header class="site-header">
   <div class="header-content">
     <div class="header-top-row">
@@ -216,10 +253,10 @@
   </div>
 </header>
 
-<!-- 2. CATEGORY TABS -->
+<!-- 4. CATEGORY TABS -->
 <div class="category-tabs-container" id="categoryTabs" role="group" aria-label="Filter by category"></div>
 
-<!-- 3. PRODUCTS -->
+<!-- 5. PRODUCTS -->
 <main id="main" class="catalog-container">
   <div class="catalog-toolbar">
     <h1 class="section-heading" id="catalogHeading">All Products</h1>
@@ -259,9 +296,16 @@
         <span class="pdp-save" id="pdpSave"></span>
       </div>
 
-      <fieldset class="variant-set">
-        <legend>Select option</legend>
-        <div class="variant-pills" id="variantPills" role="radiogroup" aria-label="Product options"></div>
+      <!-- Size selector: hidden by default, shown by openProductModal() only for products that define "sizes" -->
+      <fieldset class="variant-set" id="sizeSet" hidden>
+        <legend id="sizeLegend">Size</legend>
+        <div class="variant-pills" id="sizePills" role="radiogroup" aria-labelledby="sizeLegend"></div>
+      </fieldset>
+
+      <!-- Option / Pack selector: the legend becomes "Pack" for products that set "variantLabel" -->
+      <fieldset class="variant-set" id="variantSet">
+        <legend id="variantLegend">Select option</legend>
+        <div class="variant-pills" id="variantPills" role="radiogroup" aria-labelledby="variantLegend"></div>
       </fieldset>
 
       <div class="pdp-qty-row">
