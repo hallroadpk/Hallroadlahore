@@ -929,8 +929,9 @@ window.PRODUCTS = [
       "Warranty": "7 days"
     },
     "images": [
-      "images/products/solar-drain-clip-steel-1.svg",
-      "images/products/solar-drain-clip-steel-2.svg"
+      "images/products/solar-drain-clip-steel-1.jpg",
+      "images/products/solar-drain-clip-steel-2.jpg",
+      "images/products/solar-drain-clip-steel-3.jpg"
     ],
     "variants": [
       {
@@ -986,8 +987,9 @@ window.PRODUCTS = [
       "Installation": "Clip-on, no tools"
     },
     "images": [
-      "images/products/solar-drain-clip-plastic-1.svg",
-      "images/products/solar-drain-clip-plastic-2.svg"
+      "images/products/solar-drain-clip-plastic-1.jpg",
+      "images/products/solar-drain-clip-plastic-2.jpg",
+      "images/products/solar-drain-clip-plastic-3.jpg"
     ],
     "variants": [
       {
@@ -997,117 +999,6 @@ window.PRODUCTS = [
       {
         "name": "20 Pcs",
         "extraCost": 450
-      }
-    ]
-  },
-  {
-    "id": 18,
-    "slug": "bundle-energy-1-5kw-with-steel-drain-clips",
-    "sku": "HRL-BUN-018",
-    "brand": "Energy",
-    "category": "Bundles",
-    "stock": 6,
-    "warranty": "7 days shop warranty on both items.",
-    "title": {
-      "en": "Bundle: Energy 1.5KW PV Inverter + Stainless Steel Drain Clips (10 Pcs)",
-      "ur": "بنڈل: انرجی 1.5KW انورٹر + اسٹیل ڈرین کلپ (10 عدد)"
-    },
-    "price": 11990,
-    "oldPrice": 12700,
-    "summary": {
-      "en": "Starter solar kit - Energy 1.5KW direct solar inverter (1-3 panels) plus 10x stainless steel water drain clips. Save Rs. 360 vs buying separately. Perfect for first-time solar users.",
-      "ur": "اسٹارٹر کٹ - انرجی 1.5KW انورٹر + 10 اسٹیل ڈرین کلپ۔ الگ خریدنے سے 360 روپے بچت۔"
-    },
-    "features": {
-      "en": [
-        "1x Energy 1.5KW PV Inverter (battery-free, 1-3 panels)",
-        "10x Stainless Steel Water Drain Clips (30-35mm)",
-        "Bundle saves Rs. 360 vs separate purchase",
-        "All items tested before dispatch",
-        "Single COD parcel, same 24h dispatch",
-        "WhatsApp support for sizing help"
-      ],
-      "ur": [
-        "1x انرجی 1.5KW انورٹر",
-        "10x اسٹیل ڈرین کلپ",
-        "360 روپے بچت",
-        "سنگل پارسل"
-      ]
-    },
-    "specs": {
-      "Includes": "Energy 1.5KW PV Inverter + 10x Stainless Steel Clips",
-      "Inverter Panels": "1-3 x 585W",
-      "Clip Material": "Stainless Steel 304",
-      "Saving": "Rs. 360",
-      "Dispatch": "Within 24 hours"
-    },
-    "images": [
-      "images/products/bundle-energy-1-5kw-steel-clips-1.svg",
-      "images/products/bundle-energy-1-5kw-steel-clips-2.svg"
-    ],
-    "variants": [
-      {
-        "name": "10 Pcs Clips Bundle",
-        "extraCost": 0
-      },
-      {
-        "name": "20 Pcs Clips Bundle",
-        "extraCost": 800
-      }
-    ]
-  },
-  {
-    "id": 19,
-    "slug": "bundle-simko-3-2kw-with-steel-drain-clips",
-    "sku": "HRL-BUN-019",
-    "brand": "Simko",
-    "category": "Bundles",
-    "stock": 5,
-    "warranty": "7 days shop warranty on both items.",
-    "title": {
-      "en": "Bundle: Simko 3.2KW PV Inverter Black Panther + Stainless Steel Drain Clips (10 Pcs)",
-      "ur": "بنڈل: سمکو 3.2KW بلیک پینتھر + اسٹیل ڈرین کلپ (10 عدد)"
-    },
-    "price": 17500,
-    "oldPrice": 18200,
-    "summary": {
-      "en": "Pro home-kit - Simko 3.2KW Black Panther direct solar inverter (2-4 panels) plus 10x stainless steel drain clips. Save Rs. 350. Runs 1HP water motor, fridge, washing machine and lights without battery.",
-      "ur": "پرو کٹ - سمکو 3.2KW بلیک پینتھر + 10 اسٹیل ڈرین کلپ۔ 350 روپے بچت۔"
-    },
-    "features": {
-      "en": [
-        "1x Simko 3.2KW Black Panther PV Inverter (2-4 panels, 2000W max)",
-        "10x Stainless Steel Water Drain Clips (30-35mm)",
-        "Bundle saves Rs. 350 vs separate purchase",
-        "Ideal for home & shop - 1HP motor + household loads",
-        "Dual fans, full protection, digital display",
-        "Single COD parcel"
-      ],
-      "ur": [
-        "1x سمکو 3.2KW بلیک پینتھر",
-        "10x اسٹیل ڈرین کلپ",
-        "350 روپے بچت"
-      ]
-    },
-    "specs": {
-      "Includes": "Simko 3.2KW Black Panther + 10x Stainless Steel Clips",
-      "Inverter Panels": "2-4 x 585W (2000W max)",
-      "Inverter Input": "80V-210V DC, 230V AC",
-      "Clip Material": "Stainless Steel 304",
-      "Saving": "Rs. 350"
-    },
-    "images": [
-      "images/products/bundle-simko-3-2kw-steel-clips-1.svg",
-      "images/products/bundle-simko-3-2kw-steel-clips-2.svg"
-    ],
-    "variants": [
-      {
-        "name": "10 Pcs Clips Bundle",
-        "extraCost": 0
-      },
-      {
-        "name": "20 Pcs Clips Bundle",
-        "extraCost": 800
       }
     ]
   }
@@ -1137,10 +1028,5 @@ window.CATEGORIES = [
     "id": "WaterHeaters",
     "en": "Water Heaters",
     "ur": "واٹر ہیٹرز"
-  },
-  {
-    "id": "Bundles",
-    "en": "Bundles & Kits",
-    "ur": "بنڈلز اور کٹس"
   }
 ];

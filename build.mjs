@@ -207,23 +207,24 @@ ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ''}
 }
 
 function siteHeader(active) {
-  const nav = [['/', 'Shop', 'shop'], ['/tools/solar-calculator.html', 'Solar Calculator', 'calc'],
-               ['/about.html', 'About', 'about'], ['/shipping.html', 'Shipping', 'ship'],
-               ['/returns.html', 'Returns', 'ret']];
   return `<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="header-content">
-    <a class="brand-link" href="/" aria-label="Hall Road Lahore - home">
-      <img src="/images/logo.svg" alt="Hall Road Lahore" width="220" height="52" class="brand-logo-img">
-    </a>
-    <nav class="site-nav" aria-label="Main">
-      ${nav.map(([href, label, key]) =>
-        `<a href="${href}"${key === active ? ' aria-current="page"' : ''}>${label}</a>`).join('\n      ')}
-    </nav>
-    <button class="cart-btn-head" type="button" data-action="open-cart" aria-label="Open cart">
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-      Cart <span class="cart-count" id="cartBadge" aria-live="polite">0</span>
-    </button>
+    <div class="header-top-row">
+      <button class="menu-btn-head" type="button" data-action="open-sidebar" aria-label="Open menu and store information" aria-controls="infoSidebar" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h14"/></svg>
+      </button>
+      <a class="brand-link" href="/" aria-label="Hall Road Lahore - home">
+        <img src="/images/logo.svg" alt="Hall Road Lahore" width="195" height="36" class="brand-logo-img">
+      </a>
+      <div class="header-actions">
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">اردو</button>
+        <button class="cart-btn-head" type="button" data-action="open-cart" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <span data-i18n="cart">Cart</span> <span class="cart-count" id="cartBadge" aria-live="polite">0</span>
+        </button>
+      </div>
+    </div>
   </div>
 </header>`;
 }
@@ -240,12 +241,16 @@ const FOOTER = `<footer class="site-footer">
         <li><a href="/">All products</a></li>
         <li><a href="/#Inverters">Inverters</a></li>
         <li><a href="/#Chargers">Battery chargers</a></li>
+        <li><a href="/#Solar">Solar &amp; MPPT</a></li>
+        <li><a href="/#WaterHeaters">Water heaters</a></li>
         <li><a href="/tools/solar-calculator.html">Solar calculator</a></li>
       </ul>
     </div>
     <div>
       <h3>Help</h3>
       <ul>
+        <li><a href="/track.html">Track your order</a></li>
+        <li><a href="/blog/">Buying guides</a></li>
         <li><a href="/shipping.html">Shipping &amp; delivery</a></li>
         <li><a href="/returns.html">Returns &amp; warranty</a></li>
         <li><a href="/privacy.html">Privacy policy</a></li>

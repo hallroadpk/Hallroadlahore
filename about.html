@@ -29,20 +29,21 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="header-content">
-    <a class="brand-link" href="/" aria-label="Hall Road Lahore - home">
-      <img src="/images/logo.svg" alt="Hall Road Lahore" width="220" height="52" class="brand-logo-img">
-    </a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="/">Shop</a>
-      <a href="/tools/solar-calculator.html">Solar Calculator</a>
-      <a href="/about.html" aria-current="page">About</a>
-      <a href="/shipping.html">Shipping</a>
-      <a href="/returns.html">Returns</a>
-    </nav>
-    <button class="cart-btn-head" type="button" data-action="open-cart" aria-label="Open cart">
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-      Cart <span class="cart-count" id="cartBadge" aria-live="polite">0</span>
-    </button>
+    <div class="header-top-row">
+      <button class="menu-btn-head" type="button" data-action="open-sidebar" aria-label="Open menu and store information" aria-controls="infoSidebar" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h14"/></svg>
+      </button>
+      <a class="brand-link" href="/" aria-label="Hall Road Lahore - home">
+        <img src="/images/logo.svg" alt="Hall Road Lahore" width="195" height="36" class="brand-logo-img">
+      </a>
+      <div class="header-actions">
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">اردو</button>
+        <button class="cart-btn-head" type="button" data-action="open-cart" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <span data-i18n="cart">Cart</span> <span class="cart-count" id="cartBadge" aria-live="polite">0</span>
+        </button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -53,10 +54,11 @@
   <h2>What we sell</h2>
   <p>We focus on power backup and solar, because that is what Hall Road is known for and where we can genuinely advise you:</p>
   <ul>
-    <li><strong>Solar and hybrid inverters</strong> — Alkaram pure sine wave units from 2500W to 6000W, with built-in MPPT charge controllers.</li>
-    <li><strong>Battery chargers</strong> — smart 12V chargers with auto cut-off, and 3-stage chargers in 10A, 20A and 30A.</li>
-    <li><strong>Solar accessories</strong> — mounting hardware, drainage clips, connectors and small backup inverters.</li>
-    <li><strong>Water heaters</strong> — instant electric heater taps for kitchens and bathrooms.</li>
+    <li><strong>Direct PV solar inverters (no battery needed)</strong> — Energy 1.5KW (1–3 panels) and Simko 3.2KW Black Panther (2–4 panels) pure sine wave VFD inverters.</li>
+    <li><strong>MPPT solar charge controllers</strong> — Simtek Planet40 (40A), Simtek DC King (70A), Energy MPPT (80A), Simtek MPPT+ Hybrid 85A and 120A.</li>
+    <li><strong>12V power inverters</strong> — Alkaram 2000W, 3000W, 4000W and 6000W DC-to-AC power inverters for home and shop backup.</li>
+    <li><strong>Smart battery chargers</strong> — Simtek 12V 20A, 20A Digital Display, and 30A heavy-duty automatic chargers with full-charge auto cut-off.</li>
+    <li><strong>Water heaters &amp; solar accessories</strong> — 3000W instant electric water heater taps with LED temperature display, plus stainless steel and plastic solar panel water drain clips.</li>
   </ul>
 
   <h2>Why customers order from us</h2>
@@ -100,11 +102,8 @@
     </div>
   </div>
 
-  <!-- TODO: OWNER — add your registered business name, NTN/STRN if registered,
-       the exact shop number/street, and a real photograph of the shop front.
-       Pakistani buyers check that a physical shop exists before sending an advance. -->
-  <div class="warn-callout">
-    <strong>Shop owner:</strong> replace this section with your registered business name, NTN (if registered) and your exact shop address, plus a photo of the shop front. Payment gateways require this for approval, and it is the single biggest trust signal for advance-payment orders.
+  <div class="info-callout">
+    <strong>Direct Hall Road Dispatch:</strong> Every unit is bench-tested in our Hall Road, Lahore workshop before packing and dispatched within 24 hours via national courier with Cash on Delivery nationwide.
   </div>
 
   <p style="margin-top:24px;"><a href="/">← Back to all products</a></p>

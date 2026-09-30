@@ -35,7 +35,7 @@
   /* ------------------------------------------------------------------- i18n */
   var STRINGS = {
     en: {
-      addToCart: 'Add to Cart', viewDetails: 'View Details', cart: 'Cart', total: 'Total',
+      addToCart: 'Add to Cart', viewDetails: 'View Details', cart: 'Cart', menu: 'Menu & Info', total: 'Total',
       shipping: 'Shipping', free: 'Free', checkout: 'Proceed to Checkout', yourCart: 'Your Shopping Cart',
       sortBy: 'Sort by', sortFeatured: 'Featured', sortPriceLow: 'Price: Low to High', sortPriceHigh: 'Price: High to Low',
       shipFrom: 'From %f - by region', quickWa: 'WhatsApp',
@@ -60,7 +60,7 @@
       orderSummary: 'Order summary', items: 'items'
     },
     ur: {
-      addToCart: 'کارٹ میں شامل کریں', viewDetails: 'تفصیلات دیکھیں', cart: 'کارٹ', total: 'کل رقم',
+      addToCart: 'کارٹ میں شامل کریں', viewDetails: 'تفصیلات دیکھیں', cart: 'کارٹ', menu: 'مینو اور معلومات', total: 'کل رقم',
       shipping: 'ڈیلیوری', free: 'مفت', checkout: 'چیک آؤٹ کریں', yourCart: 'آپ کا کارٹ',
       sortBy: 'ترتیب', sortFeatured: 'فیچرڈ', sortPriceLow: 'قیمت: کم سے زیادہ', sortPriceHigh: 'قیمت: زیادہ سے کم',
       shipFrom: '%f سے - علاقے کے مطابق', quickWa: 'واٹس ایپ',
@@ -282,16 +282,19 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     if (lastFocused && lastFocused.focus) lastFocused.focus();
   }
   function anyOverlayOpen() {
-    return $$('.pdp-overlay.open, .cart-drawer.open, .modal-overlay.open').length > 0;
+    return $$('.pdp-overlay.open, .cart-drawer.open, .info-sidebar.open, .modal-overlay.open').length > 0;
   }
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       var co = $('#checkoutModal'); if (co && co.classList.contains('open')) { closeOverlay(co); return; }
       var pdp = $('#pdpModal'); if (pdp && pdp.classList.contains('open')) { closeOverlay(pdp); return; }
       var dr = $('#cartDrawer'); if (dr && dr.classList.contains('open')) { toggleCartDrawer(false); return; }
+      var sb = $('#infoSidebar'); if (sb && sb.classList.contains('open')) { toggleSidebar(false); return; }
     }
     if (e.key === 'Tab') {
-      var open = $$('.pdp-overlay.open, .modal-overlay.open').pop() || ($('#cartDrawer') && $('#cartDrawer').classList.contains('open') ? $('#cartDrawer') : null);
+      var open = $$('.pdp-overlay.open, .modal-overlay.open').pop() ||
+                 ($('#cartDrawer') && $('#cartDrawer').classList.contains('open') ? $('#cartDrawer') : null) ||
+                 ($('#infoSidebar') && $('#infoSidebar').classList.contains('open') ? $('#infoSidebar') : null);
       if (!open) return;
       var f = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', open)
         .filter(function (n) { return n.offsetParent !== null || n === document.activeElement; });
@@ -307,6 +310,21 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     if (!d) return;
     if (show) { openOverlay(d); if (o) o.classList.add('open'); }
     else { closeOverlay(d); if (o) o.classList.remove('open'); }
+  }
+
+  function toggleSidebar(show) {
+    var sb = $('#infoSidebar'), o = $('#sidebarOverlay');
+    if (!sb) return;
+    var btn = $('[data-action="open-sidebar"]');
+    if (show) {
+      openOverlay(sb);
+      if (o) o.classList.add('open');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    } else {
+      closeOverlay(sb);
+      if (o) o.classList.remove('open');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
   }
 
   /* ============================================================ PRODUCT PDP */
@@ -485,10 +503,13 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       b.classList.toggle('active', on);
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
+    $$('[data-sidebar-cat]').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.sidebarCat === cat);
+    });
     var h = $('#catalogHeading');
     if (h) {
       var c = CATEGORIES.filter(function (x) { return x.id === cat; })[0];
-      h.textContent = cat === 'All' ? (lang === 'ur' ? 'فیچرڈ کیٹلاگ' : 'Featured Catalog') : L(c);
+      h.textContent = cat === 'All' ? (lang === 'ur' ? 'تمام پروڈکٹس' : 'All Products') : L(c);
     }
     renderProducts();
   }
@@ -843,6 +864,150 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     $$('[data-phone-display]').forEach(function (n) { n.textContent = (CFG.contact && CFG.contact.phoneDisplay) || ''; });
   }
 
+  function ensureSidebar() {
+    var hc = $('.header-top-row') || $('.header-content');
+    if (hc && !hc.querySelector('[data-action="open-sidebar"]')) {
+      var mbtn = el('button', {
+        class: 'menu-btn-head', type: 'button', 'data-action': 'open-sidebar',
+        'aria-label': 'Open menu and store information', 'aria-controls': 'infoSidebar', 'aria-expanded': 'false',
+        html: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>'
+      });
+      hc.insertBefore(mbtn, hc.firstChild);
+    }
+    if (!$('#sidebarOverlay')) {
+      document.body.appendChild(el('div', { class: 'info-sidebar-overlay', id: 'sidebarOverlay' }));
+    }
+    if (!$('#infoSidebar')) {
+      var sb = el('aside', {
+        class: 'info-sidebar', id: 'infoSidebar', role: 'dialog',
+        'aria-modal': 'true', 'aria-labelledby': 'infoSidebarTitle', 'aria-hidden': 'true'
+      }, [
+        el('div', { class: 'info-sidebar-header' }, [
+          el('div', { class: 'info-sidebar-top' }, [
+            el('div', {}, [
+              el('h2', { id: 'infoSidebarTitle', class: 'info-sidebar-brand', text: (CFG.brand && CFG.brand.name) || 'Hall Road Lahore' }),
+              el('p', { id: 'infoSidebarSub', class: 'info-sidebar-sub', text: 'All Store Information, Categories & Policies' })
+            ]),
+            el('button', { type: 'button', class: 'info-sidebar-close', 'data-action': 'close-sidebar', 'aria-label': 'Close menu', text: '✕' })
+          ]),
+          el('div', { class: 'info-sidebar-status', id: 'infoSidebarStatus' }, [
+            el('span', { class: 'dot', 'aria-hidden': 'true' }),
+            el('span', { text: 'Mon–Sat 9:00am–5:00pm • 24h Dispatch Nationwide' })
+          ]),
+          el('div', { class: 'info-sidebar-quick' }, [
+            el('a', { class: 'info-quick-btn', href: '/track.html', text: 'Track Order' }),
+            el('a', { class: 'info-quick-btn', href: '/tools/solar-calculator.html', text: 'Solar Calc' }),
+            el('button', { type: 'button', class: 'info-quick-btn', 'data-action': 'toggle-lang', text: 'اردو / EN' })
+          ])
+        ]),
+        el('div', { class: 'info-sidebar-body', id: 'infoSidebarBody' }, [
+          el('div', {}, [
+            el('div', { class: 'sidebar-section-title', text: 'Shop by Category' }),
+            el('div', { class: 'sidebar-cat-list', id: 'sidebarCategories' })
+          ]),
+          el('div', {
+            html: '<div class="sidebar-section-title">Complete Store Information</div>' +
+              '<div class="sidebar-info-cards" id="sidebarInfoCards">' +
+                '<details class="sidebar-info-card" open><summary>Shipping &amp; Delivery Charges</summary>' +
+                '<div class="sidebar-info-card-body"><p>Dispatched within 24 hours (Mon–Sat). Delivered in 2–5 working days nationwide.</p>' +
+                '<div class="sidebar-rate-row"><span>Lahore (same / next day)</span><strong>Rs. 150</strong></div>' +
+                '<div class="sidebar-rate-row"><span>Punjab</span><strong>Rs. 200</strong></div>' +
+                '<div class="sidebar-rate-row"><span>Sindh / KPK / Balochistan</span><strong>Rs. 250</strong></div>' +
+                '<div class="sidebar-rate-row"><span>AJK / Gilgit-Baltistan</span><strong>Rs. 350</strong></div>' +
+                '<p><a href="/shipping.html">Full shipping details →</a></p></div></details>' +
+                '<details class="sidebar-info-card"><summary>Payment Methods &amp; COD</summary>' +
+                '<div class="sidebar-info-card-body"><ul>' +
+                '<li><strong>Cash on Delivery (COD):</strong> Pay cash to the rider when your parcel reaches your doorstep anywhere in Pakistan.</li>' +
+                '<li><strong>JazzCash / EasyPaisa Advance:</strong> Send 30% advance to confirm the order; the rest is paid on delivery.</li>' +
+                '</ul></div></details>' +
+                '<details class="sidebar-info-card"><summary>Warranty &amp; 7-Day Returns</summary>' +
+                '<div class="sidebar-info-card-body"><ul>' +
+                '<li><strong>Simtek MPPT 85A &amp; 120A:</strong> 12 months official warranty</li>' +
+                '<li><strong>Simtek DC King 70A:</strong> 6 months official warranty</li>' +
+                '<li><strong>Simtek Planet40 &amp; Chargers:</strong> 3 months official warranty</li>' +
+                '<li><strong>Alkaram Inverters (2000W–6000W):</strong> 6 months shop warranty</li>' +
+                '<li><strong>Direct PV Inverters &amp; Water Heater Tap:</strong> 7 days check/replacement warranty</li>' +
+                '<li><strong>7-Day Returns:</strong> We pay return shipping on manufacturing defects.</li>' +
+                '</ul><p><a href="/returns.html">Full returns &amp; warranty policy →</a></p></div></details>' +
+                '<details class="sidebar-info-card"><summary>Solar &amp; Inverter Sizing Guide</summary>' +
+                '<div class="sidebar-info-card-body"><ul>' +
+                '<li><strong>Direct Solar (No Battery):</strong> Energy 1.5KW (1–3 × 585W panels) or Simko 3.2KW Black Panther (2–4 × 585W panels).</li>' +
+                '<li><strong>MPPT Controllers:</strong> 40A (70 VOC), 70A (110 VOC), 80A (100 VOC), 85A (150 VOC), 120A (170 VOC).</li>' +
+                '<li><strong>12V Battery Inverters:</strong> Alkaram 2000W, 3000W, 4000W &amp; 6000W.</li>' +
+                '</ul><p><a href="/tools/solar-calculator.html">Open Solar Size Calculator →</a></p></div></details>' +
+              '</div>'
+          }),
+          el('div', {}, [
+            el('div', { class: 'sidebar-section-title', text: 'All Pages & Buying Guides' }),
+            el('nav', { class: 'sidebar-nav-grid', 'aria-label': 'All site pages' }, [
+              el('a', { class: 'sidebar-nav-link', href: '/', text: 'Shop Catalog' }),
+              el('a', { class: 'sidebar-nav-link', href: '/track.html', text: 'Track Order' }),
+              el('a', { class: 'sidebar-nav-link', href: '/tools/solar-calculator.html', text: 'Solar Calculator' }),
+              el('a', { class: 'sidebar-nav-link', href: '/blog/', text: 'Buying Guides' }),
+              el('a', { class: 'sidebar-nav-link', href: '/blog/how-to-choose-a-solar-inverter-in-pakistan.html', text: 'Inverter Guide' }),
+              el('a', { class: 'sidebar-nav-link', href: '/blog/pure-sine-wave-vs-modified-sine-wave.html', text: 'Sine Wave Guide' }),
+              el('a', { class: 'sidebar-nav-link', href: '/about.html', text: 'About Us' }),
+              el('a', { class: 'sidebar-nav-link', href: '/#faq', text: 'FAQ' }),
+              el('a', { class: 'sidebar-nav-link', href: '/shipping.html', text: 'Shipping Policy' }),
+              el('a', { class: 'sidebar-nav-link', href: '/returns.html', text: 'Returns Policy' }),
+              el('a', { class: 'sidebar-nav-link', href: '/privacy.html', text: 'Privacy Policy' }),
+              el('a', { class: 'sidebar-nav-link', href: '/terms.html', text: 'Terms of Sale' })
+            ])
+          ]),
+          el('div', {
+            html: '<div class="sidebar-section-title">Direct Contact &amp; Support</div>' +
+              '<div class="sidebar-contact-box">' +
+                '<div class="sidebar-contact-row"><span class="k">WhatsApp / Phone</span><a class="v" href="tel:03396202062">0339 6202062</a></div>' +
+                '<div class="sidebar-contact-row"><span class="k">Email</span><a class="v" href="mailto:gpower.pk1@gmail.com">gpower.pk1@gmail.com</a></div>' +
+                '<div class="sidebar-contact-row"><span class="k">TikTok</span><a class="v" href="https://www.tiktok.com/@gpower.pk" target="_blank" rel="noopener">@gpower.pk</a></div>' +
+                '<div class="sidebar-contact-row"><span class="k">Working Hours</span><span class="v">Mon–Sat, 9am–5pm</span></div>' +
+                '<div class="sidebar-contact-row"><span class="k">Location</span><span class="v">Hall Road, Lahore</span></div>' +
+                '<a class="sidebar-wa-cta" href="https://wa.me/923396202062?text=Assalam%20o%20Alaikum!%20I%20have%20a%20question%20about%20hallroadlahore.com." target="_blank" rel="noopener">Chat on WhatsApp Now</a>' +
+              '</div>'
+          })
+        ])
+      ]);
+      document.body.appendChild(sb);
+    }
+  }
+
+  function renderSidebar() {
+    ensureSidebar();
+    var catHost = $('#sidebarCategories');
+    if (catHost) {
+      catHost.textContent = '';
+      var counts = { All: PRODUCTS.length };
+      PRODUCTS.forEach(function (p) { counts[p.category] = (counts[p.category] || 0) + 1; });
+      presentCategories().forEach(function (c) {
+        var isActive = currentCategory === c.id;
+        catHost.appendChild(el('button', {
+          type: 'button',
+          class: 'sidebar-cat-item' + (isActive ? ' active' : ''),
+          'data-sidebar-cat': c.id,
+          onclick: function () {
+            toggleSidebar(false);
+            if ($('#productGrid')) {
+              filterCategory(c.id);
+              var m = $('#main');
+              if (m && m.scrollIntoView) m.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              location.href = c.id === 'All' ? '/' : '/#' + c.id;
+            }
+          }
+        }, [
+          el('span', { text: L(c) }),
+          el('span', { class: 'sidebar-cat-count', text: String(counts[c.id] || 0) })
+        ]));
+      });
+    }
+    var sub = $('#infoSidebarSub');
+    if (sub) {
+      sub.textContent = lang === 'ur'
+        ? 'تمام اسٹور معلومات، کیٹیگریز، ڈیلیوری اور وارنٹی پالیسی'
+        : 'All Store Information, Categories & Policies';
+    }
+  }
+
   function applyLanguage(next) {
     lang = STRINGS[next] ? next : 'en';
     localStorage.setItem(LANG_KEY, lang);
@@ -853,10 +1018,11 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     var ph = $('#searchInput'); if (ph) ph.placeholder = t('searchPlaceholder');
     $$('[data-i18n]').forEach(function (n) { n.textContent = t(n.dataset.i18n); });
     renderTicker(); renderPromo(); renderCategoryTabs(); renderProducts();
-    renderReviews(); renderTrust();
-    if (currentCategory !== 'All') {
+    renderReviews(); renderTrust(); renderSidebar();
+    var h = $('#catalogHeading');
+    if (h) {
       var c = CATEGORIES.filter(function (x) { return x.id === currentCategory; })[0];
-      var h = $('#catalogHeading'); if (h && c) h.textContent = L(c);
+      h.textContent = currentCategory === 'All' ? (lang === 'ur' ? 'تمام پروڈکٹس' : 'All Products') : (c ? L(c) : h.textContent);
     }
   }
 
@@ -910,6 +1076,9 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       var a = trigger.dataset.action;
       if (a === 'open-cart') { e.preventDefault(); toggleCartDrawer(true); }
       else if (a === 'close-cart') { e.preventDefault(); toggleCartDrawer(false); }
+      else if (a === 'open-sidebar') { e.preventDefault(); toggleSidebar(true); }
+      else if (a === 'close-sidebar') { e.preventDefault(); toggleSidebar(false); }
+      else if (a === 'toggle-lang') { e.preventDefault(); applyLanguage(lang === 'ur' ? 'en' : 'ur'); }
       else if (a === 'qty-inc') { e.preventDefault(); changeQty(1); }
       else if (a === 'qty-dec') { e.preventDefault(); changeQty(-1); }
       else if (a === 'close-pdp') { e.preventDefault(); closeOverlay($('#pdpModal')); }
@@ -932,6 +1101,9 @@ function $(sel, root) { return (root || document).querySelector(sel); }
 
     var overlay = $('#cartOverlay');
     if (overlay) overlay.addEventListener('click', function () { toggleCartDrawer(false); });
+
+    var sbOverlay = $('#sidebarOverlay');
+    if (sbOverlay) sbOverlay.addEventListener('click', function () { toggleSidebar(false); });
 
     /* Close a modal when the backdrop itself is clicked. */
     $$('.pdp-overlay, .modal-overlay').forEach(function (o) {
@@ -968,6 +1140,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     renderTicker(); renderPromo(); renderReviews(); renderTrust();
     renderPaymentOptions(); renderWhatsappLinks(); renderPhoneLinks();
     renderCategoryTabs(); renderProducts(); updateCartUI();
+    ensureSidebar(); renderSidebar();
     initSort();
     bindActions();
     initStaticPage();
@@ -995,7 +1168,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     addFromModal: addFromModal, addToCart: addToCart, onSearchInput: onSearchInput,
     filterCategory: filterCategory, submitOrder: submitOrder,
     openCheckoutModal: openCheckoutModal, closeCheckoutModal: closeCheckoutModal,
-    toggleCartDrawer: toggleCartDrawer, saveCart: saveCart, updateCartUI: updateCartUI,
+    toggleCartDrawer: toggleCartDrawer, toggleSidebar: toggleSidebar, saveCart: saveCart, updateCartUI: updateCartUI,
     getCart: function () { return cart; }, setCart: function (c) { cart = c; },
     money: money, normalizePhone: normalizePhone, isValidPhone: isValidPhone,
     honestDiscount: honestDiscount, t: t, lang: function () { return lang; }
