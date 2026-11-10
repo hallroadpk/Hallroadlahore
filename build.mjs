@@ -18,11 +18,32 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SITE = 'https://hallroadlahore.com';
+const SITE_YEAR = '2026';
 const today = new Date().toISOString().slice(0, 10);
+const refreshDates = process.argv.includes('--refresh-sitemap');
 
 const raw = JSON.parse(fs.readFileSync(path.join(ROOT, 'products.json'), 'utf8'));
 const products = raw.products;
 const categories = raw.categories;
+
+/* Snapshot prior sitemap <lastmod> dates and prior generated product pages
+   before rebuilding, so unchanged pages keep their existing <lastmod> and
+   scheduled/CI runs of `npm run build` stay deterministic across dates. */
+const prevLastmod = new Map();
+const sitemapPath = path.join(ROOT, 'sitemap.xml');
+if (fs.existsSync(sitemapPath)) {
+  const prevXml = fs.readFileSync(sitemapPath, 'utf8');
+  for (const m of prevXml.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)) {
+    prevLastmod.set(m[1], m[2]);
+  }
+}
+const prevProductHtml = new Map();
+const productsDir = path.join(ROOT, 'products');
+if (fs.existsSync(productsDir)) {
+  for (const f of fs.readdirSync(productsDir)) {
+    if (f.endsWith('.html')) prevProductHtml.set(f.slice(0, -5), fs.readFileSync(path.join(productsDir, f), 'utf8'));
+  }
+}
 
 const warnings = [];
 const errors = [];
@@ -270,6 +291,7 @@ const FOOTER = `<footer class="site-footer">
     <div>
       <h3>Help</h3>
       <ul>
+        <li><a href="/about.html">About us</a></li>
         <li><a href="/track.html">Track your order</a></li>
         <li><a href="/blog/">Buying guides</a></li>
         <li><a href="/shipping.html">Shipping &amp; delivery</a></li>
@@ -288,15 +310,16 @@ const FOOTER = `<footer class="site-footer">
       </ul>
     </div>
   </div>
-  <p class="footer-legal">&copy; ${new Date().getFullYear()} hallroadlahore.com. Prices in PKR and subject to change. Warranty terms are listed on each product page.</p>
+  <p class="footer-legal">&copy; ${SITE_YEAR} hallroadlahore.com. Prices in PKR and subject to change. Warranty terms are listed on each product page.</p>
 </footer>
 <script src="/site.config.js"></script>
 <script src="/products.js"></script>
 <script src="/app.js" defer></script>`;
 
 /* --------------------------------------------------------- product pages */
-fs.rmSync(path.join(ROOT, 'products'), { recursive: true, force: true });
-fs.mkdirSync(path.join(ROOT, 'products'), { recursive: true });
+fs.rmSync(productsDir, { recursive: true, force: true });
+fs.mkdirSync(productsDir, { recursive: true });
+const changedProductUrls = new Set();
 
 for (const p of products) {
   const url = `${SITE}/products/${p.slug}.html`;
@@ -468,36 +491,18 @@ ${siteHeader('shop')}
 ${FOOTER}
 </body>
 </html>`;
+  if (prevProductHtml.get(p.slug) !== html) changedProductUrls.add(url);
   fs.writeFileSync(path.join(ROOT, 'products', `${p.slug}.html`), html);
 }
 
-/* --------------------------------------------------------------- sitemap.xml */
-const urls = [
-  { loc: `${SITE}/`, pri: '1.0' },
-  ...products.map(p => ({ loc: `${SITE}/products/${p.slug}.html`, pri: '0.8' })),
-  { loc: `${SITE}/track.html`, pri: '0.7' },
-  { loc: `${SITE}/tools/solar-calculator.html`, pri: '0.7' },
-  { loc: `${SITE}/blog/`, pri: '0.6' },
-  { loc: `${SITE}/blog/how-to-choose-a-solar-inverter-in-pakistan.html`, pri: '0.6' },
-  { loc: `${SITE}/blog/pure-sine-wave-vs-modified-sine-wave.html`, pri: '0.6' },
-  { loc: `${SITE}/about.html`, pri: '0.5' },
-  { loc: `${SITE}/shipping.html`, pri: '0.5' },
-  { loc: `${SITE}/returns.html`, pri: '0.5' },
-  { loc: `${SITE}/privacy.html`, pri: '0.3' },
-  { loc: `${SITE}/terms.html`, pri: '0.3' }
-];
-fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
-`<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(u => `  <url><loc>${u.loc}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>${u.pri}</priority></url>`).join('\n')}
-</urlset>
-`);
-
-/* ------------------------------------------------- homepage ItemList JSON-LD */
-/* The homepage embeds an ItemList of product URLs. Regenerate it from the
-   catalog so it never goes stale as products are added or removed. */
+/* ------------------------------------ homepage ItemList JSON-LD & SSR grid */
+/* The homepage embeds an ItemList of product URLs plus server-rendered fallback
+   cards inside #productGrid so first-wave HTML crawlers and no-JS visitors see
+   every product title, price and link. app.js replaces #productGrid with
+   interactive cards on boot. */
 const indexPath = path.join(ROOT, 'index.html');
-let indexHtml = fs.readFileSync(indexPath, 'utf8');
+const prevIndexHtml = fs.readFileSync(indexPath, 'utf8');
+let indexHtml = prevIndexHtml;
 const itemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
@@ -513,7 +518,56 @@ indexHtml = indexHtml.replace(
   /(<script type="application\/ld\+json" id="catalog-jsonld">)[\s\S]*?(<\/script>)/,
   (m, a, b) => a + '\n' + JSON.stringify(itemList, null, 2) + '\n' + b
 );
-fs.writeFileSync(indexPath, indexHtml);
+const ssrCards = products.map((p, i) => {
+  const disc = honestDiscount(p);
+  const stockTxt = p.stock <= 0 ? 'Out of stock' : (p.stock <= 5 ? `Only ${p.stock} left` : 'In stock');
+  const stockCls = p.stock <= 0 ? ' out' : (p.stock <= 5 ? ' low' : '');
+  return `    <a class="product-card" href="/products/${p.slug}.html">
+      ${disc > 0 ? `<span class="discount-badge">-${disc}%</span>` : ''}
+      <img class="product-image" src="${toSrc(p.images[0])}" alt="${escapeHtml(p.title.en)}" width="400" height="400"${i >= 4 ? ' loading="lazy"' : ' fetchpriority="high"'}>
+      <div>
+        <h3 class="product-title">${escapeHtml(p.title.en)}</h3>
+        <div class="price-box">
+          <span class="current-price">Rs. ${p.price.toLocaleString('en-PK')}</span>
+          ${p.oldPrice ? `<span class="old-price">Rs. ${p.oldPrice.toLocaleString('en-PK')}</span>` : ''}
+        </div>
+        <span class="stock-chip${stockCls}">${stockTxt}</span>
+      </div>
+      <span class="btn-add-cart">View Details</span>
+    </a>`;
+}).join('\n');
+indexHtml = indexHtml.replace(
+  /(<div class="product-grid" id="productGrid">)[\s\S]*?(<\/div>\s*<\/main>)/,
+  (m, a, b) => `${a}\n<!-- SSR_CATALOG_START -->\n${ssrCards}\n<!-- SSR_CATALOG_END -->\n  ${b}`
+);
+const indexChanged = indexHtml !== prevIndexHtml;
+if (indexChanged) fs.writeFileSync(indexPath, indexHtml);
+
+/* --------------------------------------------------------------- sitemap.xml */
+const urls = [
+  { loc: `${SITE}/`, pri: '1.0', changed: indexChanged || changedProductUrls.size > 0 },
+  ...products.map(p => {
+    const loc = `${SITE}/products/${p.slug}.html`;
+    return { loc, pri: '0.8', changed: changedProductUrls.has(loc) };
+  }),
+  { loc: `${SITE}/track.html`, pri: '0.7' },
+  { loc: `${SITE}/tools/solar-calculator.html`, pri: '0.7' },
+  { loc: `${SITE}/blog/`, pri: '0.6' },
+  { loc: `${SITE}/blog/how-to-choose-a-solar-inverter-in-pakistan.html`, pri: '0.6' },
+  { loc: `${SITE}/blog/pure-sine-wave-vs-modified-sine-wave.html`, pri: '0.6' },
+  { loc: `${SITE}/about.html`, pri: '0.5' },
+  { loc: `${SITE}/shipping.html`, pri: '0.5' },
+  { loc: `${SITE}/returns.html`, pri: '0.5' },
+  { loc: `${SITE}/privacy.html`, pri: '0.3' },
+  { loc: `${SITE}/terms.html`, pri: '0.3' }
+];
+const lastmodFor = (u) => (!refreshDates && !u.changed && prevLastmod.has(u.loc)) ? prevLastmod.get(u.loc) : today;
+fs.writeFileSync(sitemapPath,
+`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u => `  <url><loc>${u.loc}</loc><lastmod>${lastmodFor(u)}</lastmod><changefreq>weekly</changefreq><priority>${u.pri}</priority></url>`).join('\n')}
+</urlset>
+`);
 
 /* ------------------------------------------------------- prune orphaned art */
 /* Remove generated placeholder artwork (.svg) that no product references any

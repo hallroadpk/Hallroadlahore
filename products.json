@@ -572,12 +572,12 @@
       "price": 9999,
       "oldPrice": 13999,
       "summary": {
-        "en": "Alkaram 3000W modified sine wave inverter with digital display and USB - runs fridge, iron, all fans, washing machine and more from a 12V battery or solar setup.",
-        "ur": "الکرم 3000W انورٹر، ڈیجیٹل ڈسپلے اور USB کے ساتھ - 12V بیٹری سے فریج، استری، پنکھے، واشنگ مشین چلائیں۔"
+        "en": "Alkaram 3000W modified sine wave inverter with digital display and USB - runs fans, lights, TVs, laptops, routers and hand tools from a 12V battery or solar setup. (Use pure sine wave for inverter fridges or ACs.)",
+        "ur": "الکرم 3000W انورٹر، ڈیجیٹل ڈسپلے اور USB کے ساتھ - 12V بیٹری سے پنکھے، لائٹس، ٹی وی، لیپ ٹاپ، راؤٹر اور ٹولز چلائیں۔ (انورٹر فریج یا اے سی کے لیے پیور سائن ویو استعمال کریں۔)"
       },
       "features": {
         "en": [
-          "3000W output - fridge, iron, all fans, washing machine, drill",
+          "3000W peak output - fans, lights, LED TV, laptops, routers and drill",
           "12V DC to 220V AC conversion, efficiency over 90%",
           "Digital display: battery input, frequency, output, waveform",
           "USB charging port (DC 5V/1A)",
@@ -586,7 +586,7 @@
           "Overload and short circuit protection"
         ],
         "ur": [
-          "3000W آؤٹ پٹ - فریج، استری، پنکھے، واشنگ مشین، ڈرل",
+          "3000W پاور آؤٹ پٹ - پنکھے، لائٹس، ٹی وی، لیپ ٹاپ، راؤٹر اور ڈرل",
           "12V ڈی سی سے 220V اے سی، 90% سے زیادہ کارکردگی",
           "ڈیجیٹل ڈسپلے",
           "USB چارجنگ پورٹ",
@@ -690,27 +690,27 @@
       "price": 22999,
       "oldPrice": 24000,
       "summary": {
-        "en": "The flagship Alkaram 6000W: serious 12V DC to 220V AC power for washing machines, pumps and heavy appliances, with a digital screen for live status.",
-        "ur": "فلیگ شپ الکرم 6000W: واشنگ مشین، پمپ اور بھاری آلات کے لیے طاقتور 12V سے 220V تبدیلی، ڈیجیٹل اسکرین کے ساتھ۔"
+        "en": "The flagship Alkaram 6000W: high-capacity 12V DC to 220V AC modified sine wave power for multiple fans, lights, TVs, laptops and resistive appliances, with a digital screen for live status. (Use pure sine wave for inverter ACs/fridges.)",
+        "ur": "فلیگ شپ الکرم 6000W: پنکھوں، لائٹس، ٹی وی اور گھریلو/دفتری بیک اپ کے لیے طاقتور 12V سے 220V تبدیلی، ڈیجیٹل اسکرین کے ساتھ۔ (انورٹر اے سی یا فریج کے لیے پیور سائن ویو لیں۔)"
       },
       "features": {
         "en": [
-          "6000W high power output - washing machine, pump, heavy appliances",
+          "6000W peak power output - multiple fans, lights, TVs, chargers and tools",
           "12V DC to 220V AC conversion",
           "Digital screen shows real-time voltage and load",
           "Type-C port and big power switch",
           "Overload and short circuit protection",
           "Durable design for long-term use",
-          "Best for solar systems and heavy home or office backup"
+          "Best for budget solar backup of lighting, fans and electronics"
         ],
         "ur": [
-          "6000W ہائی پاور آؤٹ پٹ - واشنگ مشین، پمپ، بھاری آلات",
+          "6000W ہائی پاور آؤٹ پٹ - پنکھے، لائٹس، ٹی وی اور ٹولز",
           "12V ڈی سی سے 220V اے سی",
           "ڈیجیٹل اسکرین پر وولٹیج اور لوڈ",
           "ٹائپ-سی پورٹ اور بڑا پاور سوئچ",
           "اوور لوڈ اور شارٹ سرکٹ پروٹیکشن",
           "پائیدار ڈیزائن",
-          "سولر سسٹم اور بھاری بیک اپ کے لیے بہترین"
+          "لائٹس، پنکھوں اور الیکٹرانکس کے سولر بیک اپ کے لیے بہترین"
         ]
       },
       "specs": {

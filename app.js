@@ -287,8 +287,12 @@ function $(sel, root) { return (root || document).querySelector(sel); }
 
   /* ============================================================== OVERLAYS */
   var lastFocused = null;
+  var overlayStack = [];
   function openOverlay(node) {
+    if (!node) return;
     lastFocused = document.activeElement;
+    overlayStack = overlayStack.filter(function (n) { return n !== node; });
+    overlayStack.push(node);
     node.classList.add('open');
     node.setAttribute('aria-hidden', 'false');
     var focusable = node.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
@@ -296,6 +300,8 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     document.body.style.overflow = 'hidden';
   }
   function closeOverlay(node) {
+    if (!node) return;
+    overlayStack = overlayStack.filter(function (n) { return n !== node; });
     node.classList.remove('open');
     node.setAttribute('aria-hidden', 'true');
     if (!anyOverlayOpen()) document.body.style.overflow = '';
@@ -306,6 +312,14 @@ function $(sel, root) { return (root || document).querySelector(sel); }
   }
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
+      var top = overlayStack[overlayStack.length - 1];
+      if (top && top.classList.contains('open')) {
+        if (top.id === 'cartDrawer') toggleCartDrawer(false);
+        else if (top.id === 'infoSidebar') toggleSidebar(false);
+        else closeOverlay(top);
+        return;
+      }
+      var cfm = $('#confirmModal'); if (cfm && cfm.classList.contains('open')) { closeOverlay(cfm); return; }
       var co = $('#checkoutModal'); if (co && co.classList.contains('open')) { closeOverlay(co); return; }
       var pdp = $('#pdpModal'); if (pdp && pdp.classList.contains('open')) { closeOverlay(pdp); return; }
       var dr = $('#cartDrawer'); if (dr && dr.classList.contains('open')) { toggleCartDrawer(false); return; }
@@ -1219,7 +1233,8 @@ function $(sel, root) { return (root || document).querySelector(sel); }
                 '<li><strong>Simtek DC King 70A:</strong> 6 months official warranty</li>' +
                 '<li><strong>Simtek Planet40 &amp; Chargers:</strong> 3 months official warranty</li>' +
                 '<li><strong>Alkaram Inverters (2000W–6000W):</strong> 6 months shop warranty</li>' +
-                '<li><strong>Direct PV Inverters &amp; Water Heater Tap:</strong> 7 days check/replacement warranty</li>' +
+                '<li><strong>Direct PV Inverters (Energy 1.5KW &amp; Simko 3.2KW):</strong> 7 days shop replacement warranty</li>' +
+                '<li><strong>Instant Water Heater Tap:</strong> 12 months manufacturer replacement warranty</li>' +
                 '<li><strong>7-Day Returns:</strong> We pay return shipping on manufacturing defects.</li>' +
                 '</ul><p><a href="/returns.html">Full returns &amp; warranty policy →</a></p></div></details>' +
                 '<details class="sidebar-info-card"><summary>Solar &amp; Inverter Sizing Guide</summary>' +
@@ -1307,9 +1322,9 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     localStorage.setItem(LANG_KEY, lang);
     document.documentElement.lang = lang === 'ur' ? 'ur' : 'en';
     document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
-    /* Keep English-only static policy/guide pages left-to-right inside <main> so English
-       paragraphs and tables do not flip when Urdu is toggled in the header. */
-    var staticMain = document.body.classList.contains('page-static') ? $('#main') : null;
+    /* Keep English-only static policy/guide/product pages left-to-right inside <main> so English
+       paragraphs and spec tables do not flip when Urdu is toggled in the header. */
+    var staticMain = (document.body.classList.contains('page-static') || document.body.classList.contains('page-product')) ? $('#main') : null;
     if (staticMain) staticMain.setAttribute('dir', 'ltr');
     var faqSec = $('#faq');
     if (faqSec) faqSec.setAttribute('dir', 'ltr');
@@ -1319,6 +1334,16 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     if (btn) btn.textContent = lang === 'ur' ? 'English' : 'اردو';
     var ph = $('#searchInput'); if (ph) ph.placeholder = t('searchPlaceholder');
     $$('[data-i18n]').forEach(function (n) { n.textContent = t(n.dataset.i18n); });
+    var cartTitle = $('#cartDrawerTitle'); if (cartTitle) cartTitle.textContent = t('yourCart');
+    var coBtn = $('[data-action="open-checkout"]'); if (coBtn) coBtn.textContent = t('checkout');
+    var coTitle = $('#checkoutTitle'); if (coTitle) coTitle.textContent = t('completeOrder');
+    var revHead = $('#reviewsHeading'); if (revHead) revHead.textContent = lang === 'ur' ? 'کسٹمرز کی رائے' : 'What Our Customers Say';
+    var seoTitle = $('#catalogSeoTitle');
+    if (seoTitle) seoTitle.textContent = lang === 'ur'
+      ? 'سولر انورٹرز، MPPT کنٹرولرز اور بیٹری چارجرز — ہال روڈ لاہور'
+      : 'Solar Inverters, MPPT Controllers & Battery Chargers — Hall Road Lahore';
+    var submitBtn = $('#orderForm button[type="submit"]');
+    if (submitBtn) submitBtn.textContent = lang === 'ur' ? 'واٹس ایپ پر آرڈر کنفرم کریں' : 'Confirm Order via WhatsApp';
     var regSel = $('#custRegion');
     if (regSel && CFG.shipping && CFG.shipping.rates) {
       CFG.shipping.rates.forEach(function (r, idx) {
@@ -1472,14 +1497,6 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     /* Support deep links like /#Inverters or /#WaterHeaters (footer + breadcrumbs). */
     var hash = (location.hash || '').replace('#', '');
     if (hash && CATEGORIES.some(function (c) { return c.id === hash; })) filterCategory(hash);
-
-    /* Recover an order that was started but never handed to WhatsApp. */
-    try {
-      var pending = JSON.parse(localStorage.getItem('hallroad_pending') || 'null');
-      if (pending && Date.now() - pending.ts < 24 * 3600 * 1000) {
-        toast('You have an unsent order (' + pending.id + '). Tap the WhatsApp button to send it.');
-      }
-    } catch (e) {}
   }
 
   /* Expose a small, deliberate API. Used by the browser console for debugging

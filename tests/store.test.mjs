@@ -396,6 +396,131 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
      !!ld.getElementById('compareSection') && HTML.indexOf('"@type": "FAQPage"') !== -1);
 }
 
+/* ---------------- 13. SSR catalog, JSON-LD, footers, i18n, tracking, worker ---------------- */
+{
+  /* Raw homepage SSR fallback (before JS executes) */
+  const rawHome = new JSDOM(HTML).window.document;
+  const ssrLinks = [...rawHome.querySelectorAll('#productGrid a.product-card')];
+  ok(`Raw index.html pre-renders all ${CATALOG.length} crawlable SSR product cards before JS`,
+     ssrLinks.length === CATALOG.length && ssrLinks.every(a => /^\/products\/.+\.html$/.test(a.getAttribute('href') || '')),
+     `${ssrLinks.length} SSR cards`);
+  ok('Homepage <title> is concise (<= 65 chars) and <h1> is present',
+     rawHome.title.length <= 65 && !!rawHome.querySelector('main h1'),
+     `title=${rawHome.title.length}ch`);
+
+  /* JSON-LD, canonical URLs, and consistent footer across static/blog/tool/product pages */
+  const pagesToCheck = [
+    'index.html', 'about.html', 'track.html', 'shipping.html', 'returns.html',
+    'privacy.html', 'terms.html', 'tools/solar-calculator.html',
+    'blog/index.html', 'blog/how-to-choose-a-solar-inverter-in-pakistan.html',
+    'blog/pure-sine-wave-vs-modified-sine-wave.html', `products/${FIRST.slug}.html`
+  ];
+  let allJsonLdValid = true;
+  let allFootersComplete = true;
+  const footerIssues = [];
+  for (const rel of pagesToCheck) {
+    const doc = new JSDOM(read(rel)).window.document;
+    const scripts = [...doc.querySelectorAll('script[type="application/ld+json"]')];
+    if (!scripts.length) { allJsonLdValid = false; footerIssues.push(rel + ': no JSON-LD'); }
+    for (const s of scripts) {
+      try { JSON.parse(s.textContent); } catch { allJsonLdValid = false; footerIssues.push(rel + ': bad JSON-LD'); }
+    }
+    const footerHrefs = new Set([...doc.querySelectorAll('footer a')].map(a => a.getAttribute('href')));
+    for (const reqHref of ['/about.html', '/track.html', '/blog/', '/tools/solar-calculator.html', '/shipping.html', '/returns.html']) {
+      if (!footerHrefs.has(reqHref)) { allFootersComplete = false; footerIssues.push(`${rel} missing ${reqHref}`); }
+    }
+  }
+  ok('All core/blog/product pages have valid JSON-LD structured data', allJsonLdValid, footerIssues.join('; '));
+  ok('All core/blog/product pages share consistent footer links (About, Track, Blog, Calculator, Policies)', allFootersComplete, footerIssues.join('; '));
+
+  const blog1Ld = JSON.parse(new JSDOM(read('blog/how-to-choose-a-solar-inverter-in-pakistan.html')).window.document.querySelector('script[type="application/ld+json"]').textContent);
+  const blog2Ld = JSON.parse(new JSDOM(read('blog/pure-sine-wave-vs-modified-sine-wave.html')).window.document.querySelector('script[type="application/ld+json"]').textContent);
+  ok('Blog articles use own canonical URL in mainEntityOfPage',
+     blog1Ld.mainEntityOfPage === 'https://hallroadlahore.com/blog/how-to-choose-a-solar-inverter-in-pakistan.html' &&
+     blog2Ld.mainEntityOfPage === 'https://hallroadlahore.com/blog/pure-sine-wave-vs-modified-sine-wave.html');
+
+  /* Sitemap integrity */
+  const xml = read('sitemap.xml');
+  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+  const allExistOnDisk = locs.every(u => {
+    const rel = u.replace('https://hallroadlahore.com/', '') || 'index.html';
+    return fs.existsSync(path.join(ROOT, rel.endsWith('/') ? rel + 'index.html' : rel));
+  });
+  ok('sitemap.xml has 28 valid URLs and all exist on disk', locs.length === CATALOG.length + 11 && allExistOnDisk, `${locs.length} URLs`);
+
+  /* Escape closes #confirmModal */
+  const cfmLive = boot(HTML);
+  const cw = cfmLive.w, cd = cw.document;
+  cw.open = () => null;
+  cw.eval(`HRL.setCart([{id:${FIRST.id},variant:0,qty:1}]); HRL.saveCart(); HRL.updateCartUI(); HRL.openCheckoutModal();`);
+  cd.getElementById('custName').value = 'Ali Khan';
+  cd.getElementById('custPhone').value = '0300 1234567';
+  cd.getElementById('custCity').value = 'Lahore';
+  cd.getElementById('custAddress').value = 'House 1, Street 2, Model Town';
+  cd.getElementById('orderForm').dispatchEvent(new cw.Event('submit', { cancelable: true, bubbles: true }));
+  const openedCfm = cd.getElementById('confirmModal').classList.contains('open');
+  cd.dispatchEvent(new cw.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+  ok('Escape closes #confirmModal overlay', openedCfm && !cd.getElementById('confirmModal').classList.contains('open'));
+
+  /* Urdu / English toggle on product page preserves LTR on English specs & translates UI chrome */
+  const pgUr = boot(read(`products/${FIRST.slug}.html`));
+  const pdUr = pgUr.w.document;
+  pdUr.getElementById('langToggle').click();
+  const urActive = pdUr.documentElement.lang === 'ur' &&
+    pdUr.getElementById('main').getAttribute('dir') === 'ltr' &&
+    pdUr.getElementById('cartDrawerTitle').textContent !== 'Your Shopping Cart' &&
+    pdUr.getElementById('checkoutTitle').textContent !== 'Complete Your Order';
+  pdUr.getElementById('langToggle').click();
+  const enRestored = pdUr.documentElement.lang === 'en' &&
+    pdUr.getElementById('cartDrawerTitle').textContent === 'Your Shopping Cart' &&
+    pdUr.getElementById('checkoutTitle').textContent === 'Complete Your Order';
+  ok('Urdu toggle keeps English product specs LTR and restores English UI chrome cleanly', urActive && enRestored);
+
+  /* track.html: no fake age-based status progression & safe text rendering */
+  const oldDate = new Date(Date.now() - 10 * 24 * 3600 * 1000).toISOString();
+  const trackDom = new JSDOM(read('track.html'), {
+    runScripts: 'dangerously', url: 'https://hallroadlahore.com/track.html',
+    beforeParse(tw) {
+      tw.SITE_CONFIG = { contact: { whatsapp: '923396202062', phoneDisplay: '0339 6202062' } };
+      tw.localStorage.setItem('hallroad_orders', JSON.stringify([{
+        id: 'HRL-261001-9999', at: oldDate,
+        items: [{ title: '<img src=x onerror=alert(1)> Solar Inverter', qty: 1 }],
+        total: 10000, shippingFee: 150, grandTotal: 10150
+      }]));
+    }
+  });
+  const td = trackDom.window.document;
+  td.getElementById('orderId').value = 'HRL-261001-9999';
+  td.getElementById('trackForm').dispatchEvent(new trackDom.window.Event('submit', { cancelable: true, bubbles: true }));
+  const activeSteps = td.querySelectorAll('#trackSteps .track-step.active').length;
+  ok('track.html stays on Placed (step 1) without explicit status and escapes item text safely',
+     activeSteps === 1 && !td.querySelector('#trackResult img') &&
+     td.getElementById('trackResult').textContent.indexOf('<img src=x onerror=alert(1)>') !== -1,
+     `activeSteps=${activeSteps}`);
+
+  /* Cloudflare Worker accepts POST / and POST /orders */
+  const workerMod = await import('../functions/order-log-worker.js');
+  const kvStore = new Map();
+  const mockEnv = {
+    LIST_SECRET: 'sec123',
+    ORDERS: {
+      async put(k, v) { kvStore.set(k, v); },
+      async list() { return { keys: [...kvStore.keys()].map(name => ({ name })) }; },
+      async get(k) { return kvStore.get(k); }
+    }
+  };
+  const rRoot = await workerMod.default.fetch(new Request('https://w.example/', {
+    method: 'POST', body: JSON.stringify({ id: 'HRL-261110-1111', total: 5000 })
+  }), mockEnv);
+  const rOrders = await workerMod.default.fetch(new Request('https://w.example/orders', {
+    method: 'POST', body: JSON.stringify({ id: 'HRL-261110-2222', total: 6000 })
+  }), mockEnv);
+  const rList = await workerMod.default.fetch(new Request('https://w.example/?list=1&secret=sec123', { method: 'GET' }), mockEnv);
+  const listed = await rList.json();
+  ok('order-log-worker.js accepts both POST / and POST /orders and lists orders via ?list=1',
+     rRoot.status === 201 && rOrders.status === 201 && Array.isArray(listed) && listed.length === 2);
+}
+
 console.log('\n================ TESTS: hallroadlahore.com (built) ================\n');
 let pass = 0;
 for (const r of results) { if (r.pass) pass++; console.log(`${r.pass ? 'PASS' : 'FAIL'}  ${r.n}${r.d ? '  [' + r.d + ']' : ''}`); }
