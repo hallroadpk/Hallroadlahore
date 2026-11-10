@@ -23,7 +23,7 @@ jobs:
 
       - name: Generated files are up to date
         run: |
-          if ! git diff --exit-code -- products.js products/ sitemap.xml; then
+          if ! git diff --exit-code -- index.html products.js products/ sitemap.xml; then
             echo "::error::Generated files are stale. Run 'npm run build' and commit the result."
             exit 1
           fi

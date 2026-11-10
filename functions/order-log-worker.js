@@ -14,8 +14,8 @@
  *   4. Copy the Worker URL (https://<name>.<sub>.workers.dev) and set it as
  *      window.SITE_CONFIG.orderEndpoint in site.config.js.
  *
- * It also supports ?list=1 (with a secret) to dump recent orders, so you can
- * reconcile abandoned carts.
+ * It also supports GET /orders?secret=<LIST_SECRET> (or /?list=1&secret=...) to
+ * dump recent orders, so you can reconcile abandoned carts.
  * ========================================================================== */
 export default {
   async fetch(request, env) {
@@ -39,7 +39,7 @@ export default {
     }
 
     // List recent orders (protected by a shared secret so it is not public)
-    if (request.method === 'GET' && url.pathname === '/orders') {
+    if (request.method === 'GET' && (url.pathname === '/orders' || (url.pathname === '/' && url.searchParams.get('list') === '1'))) {
       const secret = url.searchParams.get('secret');
       if (!env.LIST_SECRET || secret !== env.LIST_SECRET) return json({ error: 'unauthorised' }, 401);
       const keys = await env.ORDERS.list();
@@ -50,8 +50,8 @@ export default {
       return json(out);
     }
 
-    // Receive an order
-    if (request.method === 'POST' && url.pathname === '/orders') {
+    // Receive an order (accepts either worker root POST / or POST /orders)
+    if (request.method === 'POST' && (url.pathname === '/orders' || url.pathname === '/')) {
       let order;
       try { order = await request.json(); }
       catch { return json({ error: 'bad json' }, 400); }

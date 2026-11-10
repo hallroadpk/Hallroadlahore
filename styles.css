@@ -494,8 +494,8 @@ html[dir="rtl"] .discount-badge { left: auto; right: 10px; }
   .current-price { font-size: 15px; }
   .pdp-main-img { height: 250px; }
   .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
-  .hero-banner { padding: 30px 16px; }
-  .hero-banner.hero-animated { padding: 32px 16px; }
+  .catalog-seo-title { font-size: 16px; }
+  .catalog-seo-sub { font-size: 12.5px; }
   .appliance-row { grid-template-columns: 1fr 70px 56px 34px; }
 }
 
@@ -510,7 +510,12 @@ html[dir="rtl"] .discount-badge { left: auto; right: 10px; }
   body { background: #fff; }
 }
 
-/* ---------- 18. Catalog toolbar (sort) ---------- */
+/* ---------- 18. Catalog intro & toolbar (sort) ---------- */
+.catalog-intro { margin-bottom: 12px; padding: 10px 14px; background: #fff; border: 1px solid var(--line); border-radius: 12px; }
+.catalog-seo-title { font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 3px; }
+.catalog-seo-sub { font-size: 13px; color: var(--muted); line-height: 1.45; }
+.catalog-seo-sub a { color: var(--green-dark); font-weight: 700; white-space: nowrap; }
+.catalog-seo-sub a:hover { text-decoration: underline; }
 .catalog-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
 .catalog-toolbar .section-heading { margin-bottom: 0; }
 .sort-select {
@@ -531,9 +536,7 @@ html[dir="rtl"] .discount-badge { left: auto; right: 10px; }
 }
 .product-card .wa-quick:hover { background: var(--green); color: #fff; }
 
-/* ---------- 20. Hero WhatsApp CTA ---------- */
-.hero-cta.wa { background: var(--green); color: #fff; border-color: var(--green); }
-.hero-cta.wa:hover { background: var(--green-dark); border-color: var(--green-dark); }
+/* ---------- 20. (Reserved) ---------- */
 
 /* ---------- 21. FAQ ---------- */
 .faq-section { max-width: 1080px; margin: 0 auto; padding: 44px 20px 10px; }

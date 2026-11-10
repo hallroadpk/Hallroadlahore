@@ -1,6 +1,10 @@
 # Domain Recovery & Google Indexing Checklist
 
-**Problem (diagnosed 2026-10-12):** `hallroadlahore.com` does not resolve anywhere.
+> **Status update (2026-11-10):** **Steps 1–3 are complete.** `hallroadlahore.com` (and `www.hallroadlahore.com`) resolves and serves HTTPS via GitHub Pages (`https_enforced: true`, certificate valid through 2026-12-27), and the old `ww1.hallroadlahore.com` Sedo parking page no longer resolves. **Step 4 (Google Search Console verification, sitemap submission & indexing request) is still required** — Google currently has 0 storefront pages indexed (`site:hallroadlahore.com` still shows only cached `ww1.hallroadlahore.com`). Also set `googleAnalytics4` / `metaPixel` / `tiktokPixel` and `orderEndpoint` in `site.config.js` once you create those accounts.
+
+---
+
+**Original problem (diagnosed 2026-10-12):** `hallroadlahore.com` does not resolve anywhere.
 Verisign's `.com` registry returns NXDOMAIN and the WHOIS record shows the domain
 status **`client hold`** — set by the registrar **NameSilo** on ~2026-10-08
 (domain registered 2026-09-22).

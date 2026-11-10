@@ -92,71 +92,121 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div><div class="footer-brand">Hall Road Lahore</div><p>G Power &amp; Electronics — Shop No. 1, Sarwar Centre, Hall Road, Lahore, Punjab, Pakistan.</p></div>
-    <div><h3>Shop</h3><ul><li><a href="/">All products</a></li><li><a href="/tools/solar-calculator.html">Solar calculator</a></li><li><a href="/track.html">Track order</a></li></ul></div>
+    <div><h3>Shop</h3><ul><li><a href="/">All products</a></li><li><a href="/#Inverters">Inverters</a></li><li><a href="/#Chargers">Battery chargers</a></li><li><a href="/#Solar">Solar &amp; MPPT</a></li><li><a href="/#WaterHeaters">Water heaters</a></li><li><a href="/tools/solar-calculator.html">Solar calculator</a></li></ul></div>
     <div><h3>Help</h3><ul>
-      <li><a href="/shipping.html">Shipping & delivery</a></li>
-      <li><a href="/returns.html">Returns & warranty</a></li>
+      <li><a href="/about.html">About us</a></li>
+      <li><a href="/track.html">Track your order</a></li>
+      <li><a href="/blog/">Buying guides</a></li>
+      <li><a href="/shipping.html">Shipping &amp; delivery</a></li>
+      <li><a href="/returns.html">Returns &amp; warranty</a></li>
       <li><a href="/privacy.html">Privacy policy</a></li>
       <li><a href="/terms.html">Terms of sale</a></li></ul></div>
     <div><h3>Contact</h3><ul>
       <li><a href="tel:03396202062"><span data-phone-display>0339 6202062</span></a></li>
       <li><a href="mailto:gpower.pk1@gmail.com">gpower.pk1@gmail.com</a></li>
+      <li><a href="https://www.tiktok.com/@gpower.pk" rel="noopener" target="_blank">TikTok @gpower.pk</a></li>
       <li>Mon-Sat, 9:00am to 5:00pm</li></ul></div>
   </div>
-  <p class="footer-legal">&copy; 2026 hallroadlahore.com. Prices in PKR and subject to change.</p>
+  <p class="footer-legal">&copy; 2026 hallroadlahore.com. Prices in PKR and subject to change. Warranty terms are listed on each product page.</p>
 </footer>
 <script src="/site.config.js"></script>
 <script src="/products.js"></script>
 <script>
 (function(){
   const $ = (s)=>document.querySelector(s);
+  const contact = (window.SITE_CONFIG && window.SITE_CONFIG.contact) || {};
+  const waNum = contact.whatsapp || '923396202062';
+  const phoneDisplay = contact.phoneDisplay || '0339 6202062';
   const form = $('#trackForm');
   const input = $('#orderId');
   const result = $('#trackResult');
   const steps = $('#trackSteps');
-  // Autofill from URL ?id=HRL-xxxxxx
   const params = new URLSearchParams(location.search);
   if(params.get('id')) input.value = params.get('id').trim().toUpperCase();
-  // Also try last order
   try {
     const last = JSON.parse(localStorage.getItem('hallroad_orders')||'[]').slice(-1)[0];
     if(!input.value && last && last.id) input.value = last.id;
   } catch(e){}
+
+  function addLine(parent, text) {
+    parent.appendChild(document.createTextNode(text));
+    parent.appendChild(document.createElement('br'));
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     const id = input.value.trim().toUpperCase();
-    if(!/^HRL-\d{6}(-\d{4})?$/.test(id)){ result.className='track-result notfound'; result.textContent='Please enter a valid Order ID like HRL-260930-4821.'; result.style.display='block'; steps.style.display='none'; return; }
+    result.textContent = '';
+    if(!/^HRL-\d{6}(-\d{4})?$/.test(id)){
+      result.className='track-result notfound';
+      result.textContent='Please enter a valid Order ID like HRL-260930-4821.';
+      result.style.display='block';
+      steps.style.display='none';
+      return;
+    }
     let orders = [];
     try { orders = JSON.parse(localStorage.getItem('hallroad_orders')||'[]'); } catch(e){}
     const order = orders.find(o=> (o.id||'').toUpperCase() === id);
     if(order){
       const ts = order.at || order.date;
-      const ageHours = (Date.now() - new Date(ts||Date.now()).getTime())/36e5;
-      let stage = 1;
-      if(order.status==='confirmed' || ageHours>2) stage=2;
-      if(order.status==='dispatched' || ageHours>24) stage=3;
-      if(order.status==='delivered' || ageHours>96) stage=4;
+      const stageMap = { placed: 1, confirmed: 2, dispatched: 3, delivered: 4 };
+      const stage = stageMap[String(order.status || '').toLowerCase()] || 1;
       const pkr = new Intl.NumberFormat('en-PK');
       const totalStr = order.grandTotal ? ('Rs. ' + pkr.format(order.grandTotal) + ' (incl. Rs. ' + pkr.format(order.shippingFee||0) + ' delivery)') : ('Rs. ' + pkr.format(order.total||0));
+      const itemsText = (order.items||[]).map(i=> (i.title||i.slug||'Product') + (i.qty ? ' ×'+i.qty : '')).join(', ').slice(0,160);
+
       result.className='track-result found';
-      result.innerHTML = '<strong>Order '+id+' found</strong><br>Placed: '+(ts?new Date(ts).toLocaleString():'recently')+'<br>Items: '+(order.items||[]).map(i=> (i.title||i.slug||'Product') + (i.qty ? ' ×'+i.qty : '')).join(', ').slice(0,160)+'<br>Total: '+totalStr+'<br><br>We send courier tracking on WhatsApp once dispatched. If you have not received it within 24h, <a href="https://wa.me/923396202062?text='+encodeURIComponent('Assalam o Alaikum, my order '+id+' status?')+'" target="_blank" rel="noopener">ask us on WhatsApp</a>.';
+      result.style.display='block';
+      const titleStrong = document.createElement('strong');
+      titleStrong.textContent = 'Order ' + id + ' found in this browser';
+      result.appendChild(titleStrong);
+      result.appendChild(document.createElement('br'));
+      addLine(result, 'Placed: ' + (ts ? new Date(ts).toLocaleString() : 'recently'));
+      addLine(result, 'Items: ' + itemsText);
+      addLine(result, 'Total: ' + totalStr);
+      result.appendChild(document.createElement('br'));
+      result.appendChild(document.createTextNode(
+        stage === 1
+          ? 'Status: Recorded locally. Live dispatch & courier tracking numbers are shared directly on WhatsApp once confirmed. '
+          : 'Status: ' + order.status + '. '
+      ));
+      const waLink = document.createElement('a');
+      waLink.href = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent('Assalam o Alaikum, please share tracking status for order ' + id);
+      waLink.target = '_blank';
+      waLink.rel = 'noopener';
+      waLink.textContent = 'Check live status on WhatsApp';
+      result.appendChild(waLink);
+
       steps.style.display='grid';
       steps.querySelectorAll('.track-step').forEach(el=>{
-        const s = parseInt(el.dataset.step);
-        el.classList.toggle('active', s<=stage);
+        const s = parseInt(el.dataset.step, 10);
+        el.classList.toggle('active', s <= stage);
       });
-      // update URL
       history.replaceState(null,'','?id='+encodeURIComponent(id));
     } else {
-      // not in this browser - give helpful fallback
       result.className='track-result notfound';
-      result.innerHTML = 'Order <strong>'+id+'</strong> not found in this browser. It may have been placed on another device or cleared. Please check your WhatsApp chat with <strong>0339 6202062</strong> - we send tracking there. <br><br><a href="https://wa.me/923396202062?text='+encodeURIComponent('Assalam o Alaikum, track my order '+id)+'" target="_blank" rel="noopener">Track on WhatsApp</a>';
+      result.style.display='block';
+      result.appendChild(document.createTextNode('Order '));
+      const idStrong = document.createElement('strong');
+      idStrong.textContent = id;
+      result.appendChild(idStrong);
+      result.appendChild(document.createTextNode(' was not found in this browser\'s saved orders (it may have been placed on another device or in private mode). Please check your WhatsApp chat with '));
+      const phoneStrong = document.createElement('strong');
+      phoneStrong.textContent = phoneDisplay;
+      result.appendChild(phoneStrong);
+      result.appendChild(document.createTextNode(' — we send dispatch & courier tracking there.'));
+      result.appendChild(document.createElement('br'));
+      result.appendChild(document.createElement('br'));
+      const waLink = document.createElement('a');
+      waLink.href = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent('Assalam o Alaikum, please track my order ' + id);
+      waLink.target = '_blank';
+      waLink.rel = 'noopener';
+      waLink.textContent = 'Track on WhatsApp';
+      result.appendChild(waLink);
       steps.style.display='none';
     }
   });
-  // auto-submit if id in URL
   if(input.value) form.dispatchEvent(new Event('submit'));
-  // render cart badge if app.js loaded? simple
   try { const c=JSON.parse(localStorage.getItem('hallroad_cart_v2')||'[]'); const b=$('#cartBadge'); if(b) b.textContent=c.reduce((a,i)=>a+(i.qty||1),0); } catch(e){}
 })();
 </script>
