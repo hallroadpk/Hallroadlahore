@@ -25,6 +25,11 @@
       "id": "WaterHeaters",
       "en": "Water Heaters",
       "ur": "واٹر ہیٹرز"
+    },
+    {
+      "id": "EcoFlow",
+      "en": "EcoFlow Power",
+      "ur": "ایکو فلو پاور"
     }
   ],
   "products": [
@@ -1059,6 +1064,915 @@
         {
           "name": "20 Pcs",
           "extraCost": 1600
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "slug": "ecoflow-river-2",
+      "sku": "HRL-EF-018",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow RIVER 2",
+        "ur": "EcoFlow RIVER 2 پورٹیبل پاور اسٹیشن"
+      },
+      "price": 35000,
+      "oldPrice": 39000,
+      "summary": {
+        "en": "Compact portable power station for phones, laptops and small appliances, with fast charging and multiple output ports.",
+        "ur": "فونز، لیپ ٹاپ اور چھوٹے آلات کے لیے کمپیکٹ پورٹیبل پاور اسٹیشن، تیز چارجنگ اور کئی آؤٹ پٹ پورٹس کے ساتھ۔"
+      },
+      "features": {
+        "en": [
+          "256Wh LiFePO4 battery",
+          "300W AC output",
+          "1 AC, 1 USB-A and 1 USB-C port",
+          "0–50% charge in 60 minutes"
+        ],
+        "ur": [
+          "256Wh LFP بیٹری",
+          "300W AC آؤٹ پٹ",
+          "1 AC، 1 USB-A اور 1 USB-C پورٹ",
+          "60 منٹ میں 0–50% چارج"
+        ]
+      },
+      "specs": {
+        "Capacity": "256Wh",
+        "AC Output": "300W",
+        "Ports": "1 AC / 1 USB-A / 1 USB-C",
+        "Charging": "0–50% in 60 min"
+      },
+      "images": [
+        "images/products/ecoflow-river-2-1.webp",
+        "images/products/ecoflow-river-2-2.webp",
+        "images/products/ecoflow-river-2-3.webp",
+        "images/products/ecoflow-river-2-4.webp",
+        "images/products/ecoflow-river-2-5.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "slug": "ecoflow-river-2-max",
+      "sku": "HRL-EF-019",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow RIVER 2 Max",
+        "ur": "EcoFlow RIVER 2 Max پورٹیبل پاور اسٹیشن"
+      },
+      "price": 52000,
+      "oldPrice": 59000,
+      "summary": {
+        "en": "Mid-size RIVER 2 power station for home backup and outdoor use, fully charging in about an hour.",
+        "ur": "گھر کے بیک اپ اور آؤٹ ڈور استعمال کے لیے درمیانے سائز کا RIVER 2، تقریباً ایک گھنٹے میں مکمل چارج۔"
+      },
+      "features": {
+        "en": [
+          "512Wh LiFePO4 battery",
+          "500W AC output",
+          "1 AC, 1 USB-A and 1 USB-C port",
+          "0–100% charge in 60 minutes"
+        ],
+        "ur": [
+          "512Wh LFP بیٹری",
+          "500W AC آؤٹ پٹ",
+          "1 AC، 1 USB-A اور 1 USB-C پورٹ",
+          "60 منٹ میں 0–100% چارج"
+        ]
+      },
+      "specs": {
+        "Capacity": "512Wh",
+        "AC Output": "500W",
+        "Ports": "1 AC / 1 USB-A / 1 USB-C",
+        "Charging": "0–100% in 60 min"
+      },
+      "images": [
+        "images/products/ecoflow-river-2-max-1.webp",
+        "images/products/ecoflow-river-2-max-2.webp",
+        "images/products/ecoflow-river-2-max-3.webp",
+        "images/products/ecoflow-river-2-max-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "slug": "ecoflow-river-2-pro",
+      "sku": "HRL-EF-020",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow RIVER 2 Pro",
+        "ur": "EcoFlow RIVER 2 Pro پورٹیبل پاور اسٹیشن"
+      },
+      "price": 82000,
+      "oldPrice": 89000,
+      "summary": {
+        "en": "Higher-capacity RIVER 2 model with more AC outlets for running several essentials during a power cut.",
+        "ur": "زیادہ گنجائش والا RIVER 2 ماڈل، بجلی گل ہونے پر کئی ضروری آلات چلانے کے لیے اضافی AC آؤٹ لیٹس۔"
+      },
+      "features": {
+        "en": [
+          "768Wh LiFePO4 battery",
+          "800W AC output",
+          "2 AC, 2 USB-A and 2 USB-C ports",
+          "0–100% charge in 70 minutes"
+        ],
+        "ur": [
+          "768Wh LFP بیٹری",
+          "800W AC آؤٹ پٹ",
+          "2 AC، 2 USB-A اور 2 USB-C پورٹس",
+          "70 منٹ میں 0–100% چارج"
+        ]
+      },
+      "specs": {
+        "Capacity": "768Wh",
+        "AC Output": "800W",
+        "Ports": "2 AC / 2 USB-A / 2 USB-C",
+        "Charging": "0–100% in 70 min"
+      },
+      "images": [
+        "images/products/ecoflow-river-2-pro-1.webp",
+        "images/products/ecoflow-river-2-pro-2.webp",
+        "images/products/ecoflow-river-2-pro-3.webp",
+        "images/products/ecoflow-river-2-pro-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "slug": "ecoflow-delta-2",
+      "sku": "HRL-EF-021",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow DELTA 2",
+        "ur": "EcoFlow DELTA 2 پورٹیبل پاور اسٹیشن"
+      },
+      "price": 106000,
+      "oldPrice": 119000,
+      "summary": {
+        "en": "A 1kWh home-backup power station with enough outlets for a fridge, fan, router and devices at the same time.",
+        "ur": "1kWh گھریلو بیک اپ پاور اسٹیشن، فریج، پنکھا، روٹر اور آلات ایک ساتھ چلانے کے لیے کافی پورٹس۔"
+      },
+      "features": {
+        "en": [
+          "1024Wh LiFePO4 battery",
+          "1800W AC output",
+          "4 AC, 2 USB-A and 2 USB-C ports",
+          "0–100% charge in 80 minutes"
+        ],
+        "ur": [
+          "1024Wh LFP بیٹری",
+          "1800W AC آؤٹ پٹ",
+          "4 AC، 2 USB-A اور 2 USB-C پورٹس",
+          "80 منٹ میں 0–100% چارج"
+        ]
+      },
+      "specs": {
+        "Capacity": "1024Wh",
+        "AC Output": "1800W",
+        "Ports": "4 AC / 2 USB-A / 2 USB-C",
+        "Charging": "0–100% in 80 min"
+      },
+      "images": [
+        "images/products/ecoflow-delta-2-1.webp",
+        "images/products/ecoflow-delta-2-2.webp",
+        "images/products/ecoflow-delta-2-3.webp",
+        "images/products/ecoflow-delta-2-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "slug": "ecoflow-delta-2-max",
+      "sku": "HRL-EF-022",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow DELTA 2 Max",
+        "ur": "EcoFlow DELTA 2 Max پورٹیبل پاور اسٹیشن"
+      },
+      "price": 211000,
+      "oldPrice": 229000,
+      "summary": {
+        "en": "A 2kWh power station with six AC outlets for whole-room backup and heavy home appliances.",
+        "ur": "2kWh پاور اسٹیشن، چھ AC آؤٹ لیٹس کے ساتھ پورے کمرے کے بیک اپ اور بھاری آلات کے لیے۔"
+      },
+      "features": {
+        "en": [
+          "2048Wh LiFePO4 battery",
+          "2400W AC output",
+          "6 AC, 2 USB-A and 2 USB-C ports",
+          "0–100% charge in 80 minutes"
+        ],
+        "ur": [
+          "2048Wh LFP بیٹری",
+          "2400W AC آؤٹ پٹ",
+          "6 AC، 2 USB-A اور 2 USB-C پورٹس",
+          "80 منٹ میں 0–100% چارج"
+        ]
+      },
+      "specs": {
+        "Capacity": "2048Wh",
+        "AC Output": "2400W",
+        "Ports": "6 AC / 2 USB-A / 2 USB-C",
+        "Charging": "0–100% in 80 min"
+      },
+      "images": [
+        "images/products/ecoflow-delta-2-max-1.webp",
+        "images/products/ecoflow-delta-2-max-2.webp",
+        "images/products/ecoflow-delta-2-max-3.webp",
+        "images/products/ecoflow-delta-2-max-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "slug": "ecoflow-delta-2-max-plus",
+      "sku": "HRL-EF-023",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow DELTA 2 Max Plus",
+        "ur": "EcoFlow DELTA 2 Max Plus پورٹیبل پاور اسٹیشن"
+      },
+      "price": 260000,
+      "oldPrice": 289000,
+      "summary": {
+        "en": "Extended DELTA 2 Max configuration for longer runtimes and larger home-backup setups.",
+        "ur": "طویل بیک اپ اور بڑے گھریلو سسٹمز کے لیے DELTA 2 Max کی توسیع شدہ کنفیگریشن۔"
+      },
+      "features": {
+        "en": [
+          "2048Wh LiFePO4 battery",
+          "2400W AC output",
+          "6 AC, 2 USB-A and 2 USB-C ports",
+          "0–100% charge in 80 minutes"
+        ],
+        "ur": [
+          "2048Wh LFP بیٹری",
+          "2400W AC آؤٹ پٹ",
+          "6 AC، 2 USB-A اور 2 USB-C پورٹس",
+          "80 منٹ میں 0–100% چارج"
+        ]
+      },
+      "specs": {
+        "Capacity": "2048Wh",
+        "AC Output": "2400W",
+        "Ports": "6 AC / 2 USB-A / 2 USB-C",
+        "Charging": "0–100% in 80 min"
+      },
+      "images": [
+        "images/products/ecoflow-delta-2-max-plus-1.webp",
+        "images/products/ecoflow-delta-2-max-plus-2.webp",
+        "images/products/ecoflow-delta-2-max-plus-3.webp",
+        "images/products/ecoflow-delta-2-max-plus-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "slug": "ecoflow-delta-pro",
+      "sku": "HRL-EF-024",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow DELTA Pro",
+        "ur": "EcoFlow DELTA Pro پورٹیبل پاور اسٹیشن"
+      },
+      "price": 399000,
+      "oldPrice": 449000,
+      "summary": {
+        "en": "A large portable home battery for whole-home backup, expansion with extra batteries and off-grid setups.",
+        "ur": "پورے گھر کے بیک اپ، اضافی بیٹریوں اور آف گرڈ سسٹمز کے لیے بڑی پورٹیبل ہوم بیٹری۔"
+      },
+      "features": {
+        "en": [
+          "3600Wh LiFePO4 battery",
+          "3600W AC output",
+          "6 AC, 2 USB-A and 2 USB-C ports",
+          "0–100% charge in 90 minutes"
+        ],
+        "ur": [
+          "3600Wh LFP بیٹری",
+          "3600W AC آؤٹ پٹ",
+          "6 AC، 2 USB-A اور 2 USB-C پورٹس",
+          "90 منٹ میں 0–100% چارج"
+        ]
+      },
+      "specs": {
+        "Capacity": "3600Wh",
+        "AC Output": "3600W",
+        "Ports": "6 AC / 2 USB-A / 2 USB-C",
+        "Charging": "0–100% in 90 min"
+      },
+      "images": [
+        "images/products/ecoflow-delta-pro-1.webp",
+        "images/products/ecoflow-delta-pro-2.webp",
+        "images/products/ecoflow-delta-pro-3.webp",
+        "images/products/ecoflow-delta-pro-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "slug": "ecoflow-delta-pro-extra-battery",
+      "sku": "HRL-EF-025",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow DELTA Pro Extra Battery",
+        "ur": "EcoFlow DELTA Pro اضافی بیٹری"
+      },
+      "price": 190000,
+      "oldPrice": 219000,
+      "summary": {
+        "en": "Add this smart extra battery to a DELTA Pro to increase capacity for longer outages and heavier loads.",
+        "ur": "طویل بجلی گل ہونے اور زیادہ لوڈ کے لیے DELTA Pro میں یہ اضافی بیٹری لگا کر گنجائش بڑھائیں۔"
+      },
+      "features": {
+        "en": [
+          "3600Wh expansion battery",
+          "3600W power rating",
+          "Designed for DELTA Pro",
+          "Scales home-backup capacity"
+        ],
+        "ur": [
+          "3600Wh اضافی بیٹری",
+          "3600W پاور ریٹنگ",
+          "DELTA Pro کے لیے موزوں",
+          "گھریلو بیک اپ کی گنجائش بڑھاتی ہے"
+        ]
+      },
+      "specs": {
+        "Capacity": "3600Wh",
+        "Power Rating": "3600W",
+        "Compatibility": "DELTA Pro"
+      },
+      "images": [
+        "images/products/ecoflow-delta-pro-extra-battery-1.webp",
+        "images/products/ecoflow-delta-pro-extra-battery-2.webp",
+        "images/products/ecoflow-delta-pro-extra-battery-3.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "slug": "ecoflow-delta-2-extra-battery",
+      "sku": "HRL-EF-026",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow DELTA 2 Extra Battery",
+        "ur": "EcoFlow DELTA 2 اضافی بیٹری"
+      },
+      "price": 65000,
+      "oldPrice": 69000,
+      "summary": {
+        "en": "Extra 1024Wh battery that connects to a DELTA 2 power station for longer backup at home or on site.",
+        "ur": "DELTA 2 سے منسلک 1024Wh اضافی بیٹری، گھر یا سائٹ پر طویل بیک اپ کے لیے۔"
+      },
+      "features": {
+        "en": [
+          "1024Wh expansion battery",
+          "1800W power rating",
+          "Designed for DELTA 2",
+          "Doubles available runtime"
+        ],
+        "ur": [
+          "1024Wh اضافی بیٹری",
+          "1800W پاور ریٹنگ",
+          "DELTA 2 کے لیے موزوں",
+          "چلنے کا وقت دگنا کرتی ہے"
+        ]
+      },
+      "specs": {
+        "Capacity": "1024Wh",
+        "Power Rating": "1800W",
+        "Compatibility": "DELTA 2"
+      },
+      "images": [
+        "images/products/ecoflow-delta-2-extra-battery-1.webp",
+        "images/products/ecoflow-delta-2-extra-battery-2.webp",
+        "images/products/ecoflow-delta-2-extra-battery-3.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "slug": "ecoflow-delta-max-extra-battery",
+      "sku": "HRL-EF-027",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow DELTA Max Extra Battery",
+        "ur": "EcoFlow DELTA Max اضافی بیٹری"
+      },
+      "price": 93000,
+      "oldPrice": 99000,
+      "summary": {
+        "en": "A 2016Wh expansion battery for the DELTA Max series when one unit is not enough for the load.",
+        "ur": "جب ایک یونٹ لوڈ کے لیے کافی نہ ہو تو DELTA Max سیریز کے لیے 2016Wh اضافی بیٹری۔"
+      },
+      "features": {
+        "en": [
+          "2016Wh expansion battery",
+          "2400W power rating",
+          "Designed for DELTA Max series",
+          "Expands capacity for heavy backups"
+        ],
+        "ur": [
+          "2016Wh اضافی بیٹری",
+          "2400W پاور ریٹنگ",
+          "DELTA Max سیریز کے لیے موزوں",
+          "بھاری بیک اپ کے لیے گنجائش بڑھاتی ہے"
+        ]
+      },
+      "specs": {
+        "Capacity": "2016Wh",
+        "Power Rating": "2400W",
+        "Compatibility": "DELTA Max series"
+      },
+      "images": [
+        "images/products/ecoflow-delta-max-extra-battery-1.webp",
+        "images/products/ecoflow-delta-max-extra-battery-2.webp",
+        "images/products/ecoflow-delta-max-extra-battery-3.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "slug": "ecoflow-glacier",
+      "sku": "HRL-EF-028",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow GLACIER Portable Refrigerator",
+        "ur": "EcoFlow GLACIER پورٹیبل ریفریجریٹر"
+      },
+      "price": 147000,
+      "oldPrice": 159000,
+      "summary": {
+        "en": "A dual-zone 40-litre portable fridge with an ice maker for road trips, camping and outdoor catering.",
+        "ur": "سفر، کیمپنگ اور آؤٹ ڈور کیٹرنگ کے لیے 40 لیٹر ڈوئل زون پورٹیبل فریج، آئس میکر کے ساتھ۔"
+      },
+      "features": {
+        "en": [
+          "40L portable refrigerator",
+          "Cooling from -20°C to 20°C",
+          "Dual-zone temperature control",
+          "Built-in ice maker"
+        ],
+        "ur": [
+          "40 لیٹر پورٹیبل ریفریجریٹر",
+          "-20°C سے 20°C تک کولنگ",
+          "ڈوئل زون درجہ حرارت کنٹرول",
+          "بلٹ ان آئس میکر"
+        ]
+      },
+      "specs": {
+        "Type": "Portable refrigerator",
+        "Capacity": "40L",
+        "Temperature Range": "-20°C to 20°C",
+        "Features": "Dual zone, ice maker"
+      },
+      "images": [
+        "images/products/ecoflow-glacier-1.webp",
+        "images/products/ecoflow-glacier-2.webp",
+        "images/products/ecoflow-glacier-3.webp",
+        "images/products/ecoflow-glacier-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "slug": "ecoflow-wave-2",
+      "sku": "HRL-EF-029",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow WAVE 2 Portable Air Conditioner",
+        "ur": "EcoFlow WAVE 2 پورٹیبل ایئر کنڈیشنر"
+      },
+      "price": 121000,
+      "oldPrice": 129000,
+      "summary": {
+        "en": "A portable 5100 BTU unit that cools or heats a room, tent or van without a fixed AC installation.",
+        "ur": "کمرے، خیمے یا وین کو ٹھنڈا یا گرم کرنے کے لیے 5100 BTU پورٹیبل یونٹ، بغیر مستقل انسٹالیشن کے۔"
+      },
+      "features": {
+        "en": [
+          "5100 BTU portable air conditioner",
+          "Cooling and heating in one unit",
+          "No permanent installation needed",
+          "Can run on an add-on battery"
+        ],
+        "ur": [
+          "5100 BTU پورٹیبل ایئر کنڈیشنر",
+          "ایک ہی یونٹ میں کولنگ اور ہیٹنگ",
+          "مستقل انسٹالیشن کی ضرورت نہیں",
+          "اضافی بیٹری پر چل سکتا ہے"
+        ]
+      },
+      "specs": {
+        "Type": "Portable air conditioner",
+        "Cooling": "5100 BTU",
+        "Functions": "Heating and cooling"
+      },
+      "images": [
+        "images/products/ecoflow-wave-2-1.webp",
+        "images/products/ecoflow-wave-2-2.webp",
+        "images/products/ecoflow-wave-2-3.webp",
+        "images/products/ecoflow-wave-2-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "slug": "ecoflow-wave-2-add-on-battery",
+      "sku": "HRL-EF-030",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow WAVE 2 Add-on Battery",
+        "ur": "EcoFlow WAVE 2 اضافی بیٹری"
+      },
+      "price": 74000,
+      "oldPrice": 79000,
+      "summary": {
+        "en": "Run the WAVE 2 air conditioner without a mains socket using this 1159Wh add-on battery.",
+        "ur": "اس 1159Wh اضافی بیٹری سے WAVE 2 ایئر کنڈیشنر کو بغیر بجلی کے ساکٹ کے چلائیں۔"
+      },
+      "features": {
+        "en": [
+          "1159Wh add-on battery",
+          "Designed for WAVE 2",
+          "Cordless cooling and heating",
+          "Ideal for camping and outdoor use"
+        ],
+        "ur": [
+          "1159Wh اضافی بیٹری",
+          "WAVE 2 کے لیے موزوں",
+          "بغیر تار کے کولنگ اور ہیٹنگ",
+          "کیمپنگ اور آؤٹ ڈور استعمال کے لیے مثالی"
+        ]
+      },
+      "specs": {
+        "Capacity": "1159Wh",
+        "Compatibility": "WAVE 2"
+      },
+      "images": [
+        "images/products/ecoflow-wave-2-add-on-battery-1.webp",
+        "images/products/ecoflow-wave-2-add-on-battery-2.webp",
+        "images/products/ecoflow-wave-2-add-on-battery-3.webp",
+        "images/products/ecoflow-wave-2-add-on-battery-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "slug": "ecoflow-rapid-power-bank-25000",
+      "sku": "HRL-EF-031",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow RAPID Power Bank (25,000mAh)",
+        "ur": "EcoFlow RAPID پاور بینک (25,000mAh)"
+      },
+      "price": 35000,
+      "oldPrice": 39000,
+      "summary": {
+        "en": "A large-capacity RAPID power bank for charging multiple devices, including laptops, on the move.",
+        "ur": "سفر کے دوران لیپ ٹاپ سمیت کئی آلات چارج کرنے کے لیے بڑی گنجائش والا RAPID پاور بینک۔"
+      },
+      "features": {
+        "en": [
+          "25,000mAh capacity",
+          "170W fast charging",
+          "2 USB-C and 1 USB-A ports",
+          "Charges laptops and phones quickly"
+        ],
+        "ur": [
+          "25,000mAh گنجائش",
+          "170W فاسٹ چارجنگ",
+          "2 USB-C اور 1 USB-A پورٹ",
+          "لیپ ٹاپ اور فونز تیزی سے چارج کرتا ہے"
+        ]
+      },
+      "specs": {
+        "Capacity": "25000mAh",
+        "Output": "170W",
+        "Ports": "2 USB-C / 1 USB-A"
+      },
+      "images": [
+        "images/products/ecoflow-rapid-power-bank-25000-1.webp",
+        "images/products/ecoflow-rapid-power-bank-25000-2.webp",
+        "images/products/ecoflow-rapid-power-bank-25000-3.webp",
+        "images/products/ecoflow-rapid-power-bank-25000-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "slug": "ecoflow-rapid-power-bank-20000",
+      "sku": "HRL-EF-032",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow RAPID Power Bank (20,000mAh)",
+        "ur": "EcoFlow RAPID پاور بینک (20,000mAh)"
+      },
+      "price": 28000,
+      "oldPrice": 31000,
+      "summary": {
+        "en": "A 20,000mAh fast-charging power bank with enough capacity for several phone charges and a laptop top-up.",
+        "ur": "20,000mAh فاسٹ چارجنگ پاور بینک، کئی بار فون چارج کرنے اور لیپ ٹاپ سپورٹ کے لیے۔"
+      },
+      "features": {
+        "en": [
+          "20,000mAh capacity",
+          "100W fast charging",
+          "2 USB-C and 1 USB-A ports",
+          "Multiple-device charging on the go"
+        ],
+        "ur": [
+          "20,000mAh گنجائش",
+          "100W فاسٹ چارجنگ",
+          "2 USB-C اور 1 USB-A پورٹ",
+          "سفر میں کئی آلات ایک ساتھ چارج"
+        ]
+      },
+      "specs": {
+        "Capacity": "20000mAh",
+        "Output": "100W",
+        "Ports": "2 USB-C / 1 USB-A"
+      },
+      "images": [
+        "images/products/ecoflow-rapid-power-bank-20000-1.webp",
+        "images/products/ecoflow-rapid-power-bank-20000-2.webp",
+        "images/products/ecoflow-rapid-power-bank-20000-3.webp",
+        "images/products/ecoflow-rapid-power-bank-20000-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "slug": "ecoflow-rapid-power-bank-10000",
+      "sku": "HRL-EF-033",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow RAPID Magnetic Power Bank (10,000mAh)",
+        "ur": "EcoFlow RAPID مقناطیسی پاور بینک (10,000mAh)"
+      },
+      "price": 15000,
+      "oldPrice": 17000,
+      "summary": {
+        "en": "Magnetic 10,000mAh power bank with Qi2 15W wireless charging, 65W wired output and EcoFlow app connectivity.",
+        "ur": "Qi2 15W وائرلیس چارجنگ، 65W وائرڈ آؤٹ پٹ اور EcoFlow ایپ کنیکٹیویٹی کے ساتھ مقناطیسی 10,000mAh پاور بینک۔"
+      },
+      "features": {
+        "en": [
+          "10,000mAh capacity",
+          "Qi2 15W wireless charging",
+          "65W wired fast charging",
+          "258g, EcoFlow app connectable"
+        ],
+        "ur": [
+          "10,000mAh گنجائش",
+          "Qi2 15W وائرلیس چارجنگ",
+          "65W وائرڈ فاسٹ چارجنگ",
+          "258g، EcoFlow ایپ سے منسلک"
+        ]
+      },
+      "specs": {
+        "Capacity": "10000mAh",
+        "Wireless Charging": "Qi2 15W",
+        "Wired Output": "65W",
+        "Weight": "258 g"
+      },
+      "images": [
+        "images/products/ecoflow-rapid-magnetic-10000-1.webp",
+        "images/products/ecoflow-rapid-magnetic-10000-2.webp",
+        "images/products/ecoflow-rapid-magnetic-10000-3.webp",
+        "images/products/ecoflow-rapid-magnetic-10000-4.webp",
+        "images/products/ecoflow-rapid-magnetic-10000-5.webp",
+        "images/products/ecoflow-rapid-magnetic-10000-6.webp",
+        "images/products/ecoflow-rapid-magnetic-10000-7.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "slug": "ecoflow-rapid-power-bank-10000-cable",
+      "sku": "HRL-EF-034",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow RAPID Power Bank (10,000mAh, Cable)",
+        "ur": "EcoFlow RAPID پاور بینک (10,000mAh، کیبل)"
+      },
+      "price": 17000,
+      "oldPrice": 19000,
+      "summary": {
+        "en": "A 10,000mAh power bank with an integrated USB-C cable, so there is one less cable to carry.",
+        "ur": "10,000mAh پاور بینک جس میں USB-C کیبل پہلے سے لگی ہے، اضافی کیبل لے جانے کی ضرورت نہیں۔"
+      },
+      "features": {
+        "en": [
+          "10,000mAh capacity",
+          "30W fast charging",
+          "Built-in USB-C cable",
+          "1 USB-C port"
+        ],
+        "ur": [
+          "10,000mAh گنجائش",
+          "30W فاسٹ چارجنگ",
+          "بلٹ ان USB-C کیبل",
+          "1 USB-C پورٹ"
+        ]
+      },
+      "specs": {
+        "Capacity": "10000mAh",
+        "Output": "30W",
+        "Ports": "1 USB-C with built-in cable"
+      },
+      "images": [
+        "images/products/ecoflow-rapid-power-bank-10000-cable-1.webp",
+        "images/products/ecoflow-rapid-power-bank-10000-cable-2.webp",
+        "images/products/ecoflow-rapid-power-bank-10000-cable-3.webp",
+        "images/products/ecoflow-rapid-power-bank-10000-cable-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "slug": "ecoflow-65w-gan-charger",
+      "sku": "HRL-EF-035",
+      "brand": "EcoFlow",
+      "category": "EcoFlow",
+      "stock": 0,
+      "warranty": "14 days shop replacement warranty.",
+      "title": {
+        "en": "EcoFlow 65W GaN Charger",
+        "ur": "EcoFlow 65W GaN چارجر"
+      },
+      "price": 10000,
+      "oldPrice": 12000,
+      "summary": {
+        "en": "A compact 65W GaN wall charger with three ports for charging a phone, tablet and laptop together.",
+        "ur": "تین پورٹس والا کمپیکٹ 65W GaN چارجر، فون، ٹیبلٹ اور لیپ ٹاپ ایک ساتھ چارج کرنے کے لیے۔"
+      },
+      "features": {
+        "en": [
+          "65W GaN charger",
+          "2 USB-C and 1 USB-A ports",
+          "Compact travel-friendly design",
+          "Charges phones and laptops"
+        ],
+        "ur": [
+          "65W GaN چارجر",
+          "2 USB-C اور 1 USB-A پورٹ",
+          "کمپیکٹ سفری ڈیزائن",
+          "فون اور لیپ ٹاپ چارج کرتا ہے"
+        ]
+      },
+      "specs": {
+        "Power": "65W",
+        "Ports": "2 USB-C / 1 USB-A",
+        "Technology": "GaN"
+      },
+      "images": [
+        "images/products/ecoflow-65w-gan-charger-1.webp",
+        "images/products/ecoflow-65w-gan-charger-2.webp",
+        "images/products/ecoflow-65w-gan-charger-3.webp",
+        "images/products/ecoflow-65w-gan-charger-4.webp"
+      ],
+      "variants": [
+        {
+          "name": "Standard",
+          "extraCost": 0
         }
       ]
     }

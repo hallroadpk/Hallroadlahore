@@ -146,7 +146,16 @@ const ART = {
     <path d="M400 320 L400 400 Q400 440 440 440 L500 440 Q540 440 540 480 L540 520" stroke="#94a3b8" stroke-width="34" fill="none" stroke-linecap="round"/>
     <rect x="500" y="516" width="80" height="40" rx="12" fill="#64748b"/>
     <path d="M540 570 Q534 600 540 630" stroke="#00c6ff" stroke-width="10" fill="none" stroke-linecap="round"/>
-    <circle cx="400" cy="470" r="30" fill="#1e293b"/><rect x="378" y="462" width="44" height="16" rx="8" fill="#25d366"/>`
+    <circle cx="400" cy="470" r="30" fill="#1e293b"/><rect x="378" y="462" width="44" height="16" rx="8" fill="#25d366"/>`,
+  EcoFlow: `
+    <rect x="200" y="250" width="400" height="260" rx="26" fill="#1e293b"/>
+    <rect x="228" y="278" width="344" height="120" rx="14" fill="#0f172a"/>
+    <rect x="252" y="300" width="150" height="74" rx="8" fill="#111827" stroke="#334155" stroke-width="4"/>
+    <text x="327" y="350" font-size="34" font-weight="800" fill="#25d366" text-anchor="middle" font-family="monospace">99%</text>
+    <rect x="430" y="302" width="120" height="22" rx="6" fill="#334155"/><rect x="430" y="338" width="120" height="22" rx="6" fill="#334155"/>
+    <circle cx="262" cy="450" r="16" fill="#ef4444"/><circle cx="318" cy="450" r="16" fill="#0f172a"/><circle cx="374" cy="450" r="16" fill="#0f172a"/>
+    <rect x="430" y="432" width="130" height="36" rx="8" fill="#0f172a"/>
+    <text x="400" y="556" font-size="22" font-weight="800" fill="#25d366" text-anchor="middle" letter-spacing="5" font-family="monospace">POWER STATION</text>`
 };
 
 function placeholderSvg(p, index) {
