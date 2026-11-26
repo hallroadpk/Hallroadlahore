@@ -38,7 +38,7 @@
       addToCart: 'Add to Cart', viewDetails: 'View Details', cart: 'Cart', menu: 'Menu & Info', total: 'Total',
       shipping: 'Shipping', free: 'Free', checkout: 'Proceed to Checkout', yourCart: 'Your Shopping Cart',
       sortBy: 'Sort by', sortFeatured: 'Featured', sortPriceLow: 'Price: Low to High', sortPriceHigh: 'Price: High to Low',
-      shipFrom: 'From %f - by region', quickWa: 'WhatsApp',
+      shipFrom: '%f nationwide', quickWa: 'WhatsApp',
       emptyCart: 'Your cart is empty.', completeOrder: 'Complete Your Order', fullName: 'Full Name',
       phone: 'WhatsApp / Mobile Number', city: 'City', address: 'Complete Delivery Address',
       payment: 'Payment Method', confirm: 'Confirm Order', noResults: 'No products found.',
@@ -68,7 +68,7 @@
       addToCart: 'کارٹ میں شامل کریں', viewDetails: 'تفصیلات دیکھیں', cart: 'کارٹ', menu: 'مینو اور معلومات', total: 'کل رقم',
       shipping: 'ڈیلیوری', free: 'مفت', checkout: 'چیک آؤٹ کریں', yourCart: 'آپ کا کارٹ',
       sortBy: 'ترتیب', sortFeatured: 'فیچرڈ', sortPriceLow: 'قیمت: کم سے زیادہ', sortPriceHigh: 'قیمت: زیادہ سے کم',
-      shipFrom: '%f سے - علاقے کے مطابق', quickWa: 'واٹس ایپ',
+      shipFrom: '%f پورے پاکستان', quickWa: 'واٹس ایپ',
       emptyCart: 'آپ کا کارٹ خالی ہے۔', completeOrder: 'آرڈر مکمل کریں', fullName: 'پورا نام',
       phone: 'واٹس ایپ / موبائل نمبر', city: 'شہر', address: 'مکمل ڈیلیوری ایڈریس',
       payment: 'ادائیگی کا طریقہ', confirm: 'آرڈر کنفرم کریں', noResults: 'کوئی پروڈکٹ نہیں ملی۔',
@@ -180,7 +180,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     return { text: t('inStock'), cls: '' };
   }
 
-  /* Shipping is charged by region; show the honest "from" fee everywhere. */
+  /* One flat nationwide delivery fee, shown honestly everywhere. */
   function lowestShipFee() {
     var rates = (CFG.shipping && CFG.shipping.rates) || [];
     var min = Infinity;
@@ -191,7 +191,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     var free = !CFG.shipping || CFG.shipping.freeShipping !== false;
     if (free) return t('free') + ' nationwide';
     var f = lowestShipFee();
-    return f != null ? t('shipFrom').replace('%f', money(f)) : 'By region - confirmed on WhatsApp';
+    return f != null ? t('shipFrom').replace('%f', money(f)) : 'Delivery charge confirmed on WhatsApp';
   }
 
   /* ================================================================ SORTING */
@@ -716,10 +716,11 @@ function $(sel, root) { return (root || document).querySelector(sel); }
 
   function autoDetectRegionFromCity(cityVal) {
     var sel = $('#custRegion');
-    if (!sel || sel.dataset.userTouched === '1') return;
+    /* One flat nationwide rate: there is no region to guess any more. */
+    if (!sel || sel.options.length < 2 || sel.dataset.userTouched === '1') return;
     var c = String(cityVal || '').toLowerCase().trim();
     if (!c) return;
-    var idx = 1; // default Punjab (200)
+    var idx = 0;
     if (c.indexOf('lahore') !== -1 || c === 'lhr') idx = 0;
     else if (/karachi|hyderabad|sukkur|larkana|peshawar|mardan|abbottabad|swat|kohat|quetta|gwadar|sindh|kpk|baloch/.test(c)) idx = 2;
     else if (/muzaffarabad|mirpur|rawalakot|kotli|gilgit|skardu|hunza|chitral|ajk|kashmir/.test(c)) idx = 3;
@@ -1278,10 +1279,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
               '<div class="sidebar-info-cards" id="sidebarInfoCards">' +
                 '<details class="sidebar-info-card" open><summary>Shipping &amp; Delivery Charges</summary>' +
                 '<div class="sidebar-info-card-body"><p>Dispatched within 24 hours (Mon–Sat). Delivered in 2–5 working days nationwide.</p>' +
-                '<div class="sidebar-rate-row"><span>Lahore (same / next day)</span><strong>Rs. 150</strong></div>' +
-                '<div class="sidebar-rate-row"><span>Punjab</span><strong>Rs. 200</strong></div>' +
-                '<div class="sidebar-rate-row"><span>Sindh / KPK / Balochistan</span><strong>Rs. 250</strong></div>' +
-                '<div class="sidebar-rate-row"><span>AJK / Gilgit-Baltistan</span><strong>Rs. 350</strong></div>' +
+                '<div class="sidebar-rate-row"><span>All Pakistan</span><strong>Rs. 449</strong></div>' +
                 '<p><a href="/shipping.html">Full shipping details →</a></p></div></details>' +
                 '<details class="sidebar-info-card"><summary>Payment Methods &amp; COD</summary>' +
                 '<div class="sidebar-info-card-body"><ul>' +

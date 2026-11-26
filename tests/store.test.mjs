@@ -218,8 +218,22 @@ ok('Escape closes modal', !d.getElementById('pdpModal').classList.contains('open
 }
 ok('FAQ section on homepage (>=6 questions)', d.querySelectorAll('#faq details').length >= 6,
    d.querySelectorAll('#faq details').length + ' questions');
-ok('Cart shipping shows real regional "from" fee', d.getElementById('cartShippingDisplay').textContent.indexOf('Rs. 150') !== -1,
+ok('Cart shipping shows the flat nationwide fee (Rs. 449)', d.getElementById('cartShippingDisplay').textContent.indexOf('Rs. 449') !== -1,
    d.getElementById('cartShippingDisplay').textContent);
+
+{
+  const rf = boot(HTML);
+  const rw = rf.w, rd = rw.document;
+  rw.eval(`HRL.setCart([{id:${FIRST.id},variant:0,qty:1}]); HRL.saveCart(); HRL.updateCartUI(); HRL.openCheckoutModal();`);
+  const regOpts = [...rd.querySelectorAll('#custRegion option')];
+  ok('Checkout has one flat nationwide delivery option at Rs. 449',
+     regOpts.length === 1 && regOpts[0].textContent.indexOf('Rs. 449') !== -1,
+     regOpts.map(o => o.textContent).join(' | '));
+  const sumText = rd.getElementById('orderSummary').textContent;
+  ok('Order summary adds Rs. 449 delivery to every order',
+     sumText.indexOf('Rs. 449') !== -1 && sumText.indexOf(money(FIRST.price + 449)) !== -1,
+     sumText.replace(/\\s+/g, ' ').slice(0, 160));
+}
 ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#productGrid .product-card .wa-quick').length === CATALOG.length);
 
 {
@@ -525,7 +539,7 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
       tw.localStorage.setItem('hallroad_orders', JSON.stringify([{
         id: 'HRL-261001-9999', at: oldDate,
         items: [{ title: '<img src=x onerror=alert(1)> Solar Inverter', qty: 1 }],
-        total: 10000, shippingFee: 150, grandTotal: 10150
+        total: 10000, shippingFee: 449, grandTotal: 10449
       }]));
     }
   });

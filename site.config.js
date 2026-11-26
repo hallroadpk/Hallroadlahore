@@ -49,10 +49,7 @@ window.SITE_CONFIG = {
   shipping: {
     freeShipping: false,
     rates: [
-      { id: "lahore", en: "Lahore (same day / next day)", ur: "لاہور (سیم ڈے / نیکسٹ ڈے)",       fee: 150 },
-      { id: "punjab", en: "Punjab (other cities)",        ur: "پنجاب (دیگر شہر)",               fee: 200 },
-      { id: "other",  en: "Sindh / KPK / Balochistan",    ur: "سندھ / کے پی کے / بلوچستان",      fee: 250 },
-      { id: "north",  en: "AJK / Gilgit-Baltistan",       ur: "آزاد کشمیر / گلگت بلتستان",       fee: 350 }
+      { id: "pakistan", en: "All Pakistan", ur: "پورے پاکستان", fee: 449 }
     ],
     processing: { en: "Dispatched within 24 hours (Mon-Sat)", ur: "24 گھنٹوں میں ڈسپیچ" },
     delivery:   { en: "2-5 working days nationwide",          ur: "2-5 کاروباری دن" }
