@@ -739,34 +739,42 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
   margin: 0 auto 18px;
   max-width: calc(var(--container-max, 1180px) + 32px);
   width: calc(100% - 32px);
-  min-height: 300px;
-  border-radius: 18px;
+  min-height: 380px;
+  border-radius: 20px;
   overflow: hidden;
-  background: #0b1016;
-  box-shadow: 0 18px 48px rgba(8, 15, 26, .28);
+  background: linear-gradient(120deg, #080d13 0%, #101c2a 52%, #0a121b 100%);
+  box-shadow: 0 20px 50px rgba(6, 14, 25, .32);
   isolation: isolate;
 }
-.brand-banner-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 62% center;
-  z-index: -2;
-}
-.brand-banner-shade {
+.brand-banner-glow {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgba(6, 12, 20, .92) 0%, rgba(6, 12, 20, .74) 38%, rgba(6, 12, 20, .12) 72%, rgba(6, 12, 20, .04) 100%);
+  background:
+    radial-gradient(circle at 74% 42%, rgba(37, 211, 102, .18), transparent 34%),
+    radial-gradient(circle at 96% 82%, rgba(72, 120, 190, .22), transparent 38%),
+    linear-gradient(90deg, rgba(5, 10, 17, .5) 0%, transparent 58%);
 }
-.brand-banner-content {
-  padding: clamp(28px, 5vw, 56px);
-  max-width: 620px;
-  color: #fff;
-  text-align: left;
+.brand-banner-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: .18;
+  background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(90deg, transparent 20%, #000 100%);
 }
+.brand-banner-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: 12px;
+  min-height: 380px;
+  padding: 32px clamp(24px, 4vw, 52px);
+}
+.brand-banner-content { color: #fff; text-align: left; }
 .brand-banner-kicker {
   display: inline-block;
   font-size: 12px;
@@ -777,24 +785,19 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
 }
 .brand-banner-content h2 {
   margin: 0 0 10px;
-  font-size: clamp(28px, 4.2vw, 46px);
+  font-size: clamp(30px, 4vw, 46px);
   line-height: 1.08;
   letter-spacing: -.02em;
   font-weight: 800;
 }
 .brand-banner-content p {
   margin: 0 0 22px;
-  max-width: 46ch;
+  max-width: 44ch;
   font-size: 15px;
   line-height: 1.6;
   color: #d6dee9;
 }
-.brand-banner-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 14px;
-}
+.brand-banner-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 .brand-banner-cta {
   appearance: none;
   border: 0;
@@ -810,23 +813,78 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
 }
 .brand-banner-cta:hover { background: #2ee37a; transform: translateY(-1px); }
 .brand-banner-cta:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
-.brand-banner-note {
-  font-size: 13px;
-  font-weight: 700;
-  color: #b6c4d6;
+.brand-banner-note { font-size: 13px; font-weight: 700; color: #b6c4d6; }
+
+/* The three product tiles that make the banner about products, not just text. */
+.brand-banner-products {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 100%;
+  min-height: 300px;
 }
-html[dir="rtl"] .brand-banner-content { text-align: right; margin-left: auto; }
-html[dir="rtl"] .brand-banner-shade {
-  background: linear-gradient(270deg, rgba(6, 12, 20, .92) 0%, rgba(6, 12, 20, .74) 38%, rgba(6, 12, 20, .12) 72%, rgba(6, 12, 20, .04) 100%);
+.brand-banner-product {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  text-decoration: none;
+  min-width: 0;
+  transition: transform .2s ease;
 }
-@media (max-width: 700px) {
-  .brand-banner { width: calc(100% - 20px); min-height: 280px; border-radius: 14px; }
-  .brand-banner-bg { object-position: 70% center; }
-  .brand-banner-shade { background: linear-gradient(0deg, rgba(6, 12, 20, .94) 0%, rgba(6, 12, 20, .7) 60%, rgba(6, 12, 20, .25) 100%); }
-  html[dir="rtl"] .brand-banner-shade { background: linear-gradient(0deg, rgba(6, 12, 20, .94) 0%, rgba(6, 12, 20, .7) 60%, rgba(6, 12, 20, .25) 100%); }
-  .brand-banner-content { padding: 24px 22px; display: flex; flex-direction: column; justify-content: flex-end; min-height: 280px; }
-  .brand-banner-content p { font-size: 14px; }
+.brand-banner-product:hover { transform: translateY(-6px); }
+.brand-banner-product:focus-visible { outline: 3px solid #25d366; outline-offset: 6px; border-radius: 12px; }
+.brand-banner-product img {
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 22px rgba(0, 0, 0, .55));
+}
+.brand-banner-product--pro { flex: 1.25 1 0; max-width: 250px; }
+.brand-banner-product--max { flex: .85 1 0; max-width: 170px; margin-bottom: 6px; }
+.brand-banner-product--river { flex: 1 1 0; max-width: 220px; margin-bottom: 12px; }
+.brand-banner-product img { width: 100%; height: auto; }
+.brand-banner-product-tag {
+  display: grid;
+  gap: 1px;
+  margin-top: -6px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 10px;
+  background: rgba(8, 16, 26, .78);
+  backdrop-filter: blur(6px);
+  text-align: center;
+  white-space: nowrap;
+}
+.brand-banner-product-tag strong { color: #fff; font-size: 12px; line-height: 1.2; }
+.brand-banner-product-tag em { color: #25d366; font-size: 12px; font-style: normal; font-weight: 800; line-height: 1.2; }
+
+html[dir="rtl"] .brand-banner-content { text-align: right; }
+html[dir="rtl"] .brand-banner-glow { background: radial-gradient(circle at 26% 42%, rgba(37, 211, 102, .18), transparent 34%), radial-gradient(circle at 4% 82%, rgba(72, 120, 190, .22), transparent 38%), linear-gradient(270deg, rgba(5, 10, 17, .5) 0%, transparent 58%); }
+html[dir="rtl"] .brand-banner-glow::after { mask-image: linear-gradient(270deg, transparent 20%, #000 100%); }
+
+@media (max-width: 900px) {
+  .brand-banner-layout { grid-template-columns: 1fr; gap: 8px; padding: 26px 24px 22px; }
+  .brand-banner { min-height: 0; }
+  .brand-banner-content h2 { font-size: clamp(28px, 6vw, 38px); }
+  .brand-banner-content p { margin-bottom: 16px; }
+  .brand-banner-products { min-height: 210px; align-items: flex-end; }
+  .brand-banner-product--pro { max-width: 190px; }
+  .brand-banner-product--max { max-width: 125px; }
+  .brand-banner-product--river { max-width: 170px; }
+  .brand-banner-product-tag { padding: 5px 8px; }
+  .brand-banner-product-tag strong, .brand-banner-product-tag em { font-size: 10px; }
+}
+@media (max-width: 520px) {
+  .brand-banner { width: calc(100% - 20px); border-radius: 14px; }
+  .brand-banner-layout { padding: 22px 18px 16px; }
+  .brand-banner-products { min-height: 170px; }
+  .brand-banner-note { font-size: 12px; }
+  .brand-banner-product--pro { max-width: 150px; }
+  .brand-banner-product--max { max-width: 100px; }
+  .brand-banner-product--river { max-width: 135px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .brand-banner-cta { transition: none; }
+  .brand-banner-cta, .brand-banner-product { transition: none; }
 }
