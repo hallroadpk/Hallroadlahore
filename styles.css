@@ -774,3 +774,169 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
   .brand-banner-logo { width: clamp(92px, 26vw, 130px); }
   .brand-banner::before { background: linear-gradient(90deg, rgba(4, 9, 15, .45) 0%, transparent 55%); }
 }
+
+/* ============================================================
+   22. Clean storefront skin — minimal, spacious, Apple-like
+   (visual-only overrides; structure and behaviour stay the same)
+   ============================================================ */
+:root { --maxw: 1200px; }
+body { background: #fff; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif; }
+
+/* Top utility strip: quiet, like the reference store */
+.top-ticker-wrapper { display: none; }
+.promo-flash {
+  background: #000; color: #fff; font-size: 12px; font-weight: 600;
+  letter-spacing: .01em; padding: 9px 16px; text-transform: none;
+}
+
+/* Header: white, thin, sticky, lots of breathing room */
+.site-header, header.site-header {
+  background: rgba(255, 255, 255, .92); border-bottom: 1px solid #e8e8ed;
+  box-shadow: none; backdrop-filter: saturate(180%) blur(18px);
+}
+.header-content { max-width: 1120px; margin: 0 auto; padding: 12px 20px; gap: 10px; }
+.header-top-row { gap: 14px; }
+.brand-logo-img, .brand-logo-svg { height: 28px; max-width: 170px; }
+.menu-btn-head {
+  width: 40px; height: 40px; padding: 0; border: 1px solid #e8e8ed;
+  border-radius: 50%; background: #fff; color: #1d1d1f;
+}
+.lang-toggle { height: 38px; border-color: #d2d2d7; border-radius: 999px; font-weight: 600; background: #fff; }
+.cart-btn-head { height: 38px; border-radius: 999px; padding: 0 16px; font-size: 13px; }
+.search-bar {
+  max-width: 520px; margin: 0 auto; height: 40px; background: #f5f5f7;
+  border: 1px solid transparent; border-radius: 999px; font-size: 14px;
+}
+.search-bar:focus-within { background: #fff; border-color: #1d1d1f; }
+
+/* Category chips */
+.category-tabs-container { max-width: 1120px; padding: 0 20px; margin-top: 18px; }
+.cat-btn {
+  background: #f5f5f7; border: 1px solid transparent; color: #1d1d1f;
+  border-radius: 999px; padding: 10px 20px; font-size: 13px; font-weight: 600;
+}
+.cat-btn:hover { background: #ebebef; }
+.cat-btn.active { background: #1d1d1f; border-color: #1d1d1f; color: #fff; }
+
+/* Catalogue intro and toolbar */
+.catalog-intro { background: transparent; border: 0; padding: 34px 0 8px; margin-bottom: 24px; }
+.catalog-seo-title {
+  font-size: clamp(28px, 4vw, 44px); font-weight: 700; line-height: 1.1;
+  letter-spacing: -.025em; color: #1d1d1f; margin-bottom: 10px;
+}
+.catalog-seo-sub { font-size: 14px; color: #6e6e73; line-height: 1.6; max-width: 80ch; }
+.catalog-seo-sub a { color: #1d1d1f; text-decoration: underline; text-underline-offset: 3px; }
+.section-heading { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
+.catalog-toolbar { margin-bottom: 24px; }
+.sort-select { border-radius: 999px; background-color: #f5f5f7; border-color: transparent; font-weight: 600; }
+
+/* Product grid: white cards, soft grey image wells, generous spacing */
+.product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 34px 22px; }
+.product-card {
+  background: transparent; border: 0; border-radius: 0; padding: 0; gap: 0;
+  box-shadow: none; transition: none;
+}
+.product-card:hover { transform: none; box-shadow: none; border-color: transparent; }
+.product-image {
+  width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain;
+  background: #f5f5f7; border-radius: 18px; padding: 22px;
+}
+.product-title {
+  font-size: 15px; font-weight: 600; line-height: 1.4; min-height: 0;
+  margin-top: 14px; color: #1d1d1f;
+}
+.price-box { margin-top: 6px; align-items: center; }
+.current-price, .pdp-price-current { font-size: 16px; font-weight: 700; color: #1d1d1f; }
+.old-price { font-size: 13px; color: #86868b; }
+.discount-badge {
+  top: 12px; left: 12px; background: #ffefec; color: #c9342c;
+  font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px;
+}
+.stock-chip { font-size: 11px; font-weight: 600; color: #24863f; }
+.stock-chip.out { color: #c9342c; }
+.btn-add-cart {
+  background: #1d1d1f; border-radius: 999px; padding: 11px 14px;
+  font-size: 13px; font-weight: 600; margin-top: 14px;
+}
+.btn-add-cart:hover { background: #333336; }
+.product-card .wa-quick {
+  background: #fff; border: 1px solid #d2d2d7; color: #1d1d1f;
+  border-radius: 999px; font-weight: 600;
+}
+
+/* Product detail page — two columns, big image, short copy */
+.pdp-page { background: #fff; }
+.pdp-page-grid {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  gap: 56px; max-width: 1120px; margin: 0 auto; padding: 44px 20px 72px;
+}
+.pdp-page-media { align-self: start; }
+.pdp-main-img {
+  width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain;
+  background: #f5f5f7; border-radius: 22px; padding: 36px;
+}
+.pdp-thumbs { background: transparent; border: 0; padding: 14px 0 0; gap: 10px; }
+.pdp-thumb {
+  width: 64px; height: 64px; border-radius: 12px; background: #f5f5f7;
+  border: 1px solid #e8e8ed; padding: 4px;
+}
+.pdp-thumb.active { border-color: #1d1d1f; }
+.pdp-page-info { padding-top: 12px; }
+.pdp-brand { font-size: 12px; letter-spacing: .06em; color: #6e6e73; }
+.pdp-title {
+  font-size: clamp(30px, 4vw, 44px); font-weight: 700; line-height: 1.1;
+  letter-spacing: -.025em; margin-bottom: 14px; color: #1d1d1f;
+}
+.pdp-summary { font-size: 16px; line-height: 1.65; color: #6e6e73; margin-bottom: 22px; }
+.pdp-price-row { border-bottom-color: #e8e8ed; padding-bottom: 18px; margin-bottom: 20px; }
+.pdp-price-current { font-size: 28px; font-weight: 700; }
+.pdp-price-old { font-size: 15px; color: #86868b; }
+.pdp-save { background: #ffefec; color: #c9342c; border-radius: 999px; font-weight: 700; padding: 5px 10px; }
+.pdp-section-label { font-size: 13px; font-weight: 700; color: #6e6e73; text-transform: uppercase; letter-spacing: .05em; }
+.variant-pill { border-radius: 999px; border-color: #d2d2d7; padding: 9px 16px; font-weight: 600; }
+.variant-pill.selected { background: #1d1d1f; color: #fff; border-color: #1d1d1f; }
+.qty-stepper { border-radius: 999px; border-color: #d2d2d7; overflow: hidden; }
+.checkout-btn.add-to-cart-btn {
+  background: #1d1d1f; color: #fff; border-radius: 999px;
+  height: 50px; font-size: 15px; font-weight: 600;
+}
+.whatsapp-order-link {
+  border: 1px solid #d2d2d7; border-radius: 999px;
+  color: #1d1d1f; font-weight: 600; text-align: center;
+}
+.detail-card, .spec-table, .feature-list { border-color: #e8e8ed; border-radius: 16px; }
+.related-section { max-width: 1120px; }
+.related-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.related-card { border-color: #e8e8ed; border-radius: 18px; background: #fff; }
+.related-title { font-size: 14px; font-weight: 600; }
+.related-price { font-size: 14px; font-weight: 700; color: #1d1d1f; }
+
+/* Modal quick view stays compact but matches the same palette */
+.pdp-card { border-radius: 22px; }
+.pdp-main-img { background: #f5f5f7; }
+.pdp-close-btn { background: #1d1d1f; }
+.pdp-price-current { color: #1d1d1f; }
+
+@media (max-width: 1050px) {
+  .product-grid, .related-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pdp-page-grid { gap: 32px; }
+}
+@media (max-width: 760px) {
+  .header-content { padding: 10px 14px; }
+  .header-top-row { gap: 8px; }
+  .search-bar { max-width: none; }
+  .category-tabs-container { padding: 0 14px; }
+  .catalog-container { padding: 0 14px; }
+  .product-grid, .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 14px; }
+  .product-image { padding: 14px; border-radius: 14px; }
+  .product-title { font-size: 14px; }
+  .pdp-page-grid { grid-template-columns: 1fr; padding: 24px 14px 48px; gap: 24px; }
+  .pdp-main-img { padding: 20px; border-radius: 16px; }
+  .pdp-title { font-size: 30px; }
+  .pdp-summary { font-size: 15px; }
+}
+@media (max-width: 420px) {
+  .product-grid, .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .current-price { font-size: 14px; }
+  .old-price { font-size: 11px; }
+}
