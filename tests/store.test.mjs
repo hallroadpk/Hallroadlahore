@@ -65,8 +65,19 @@ ok('Product cards are real <button>s', cards.length > 0 && cards[0].tagName === 
 {
   const steel = CATALOG.find(x => /drain clip/i.test(x.title.en) && /stainless/i.test(x.title.en));
   ok('Stainless drain clip uses its best (third) photo as the main image',
-     !!steel && /solar-drain-clip-steel-3\.jpg$/.test(steel.images[0]) && steel.images.length === 3,
+     !!steel && /solar-drain-clip-steel-3\.webp$/.test(steel.images[0]) && steel.images.length === 3,
      steel ? steel.images.join(' | ') : 'product missing');
+}
+
+{
+  const eco = CATALOG.filter(p => p.category === 'EcoFlow');
+  ok('Every product is in stock', CATALOG.every(p => p.stock > 0), `${CATALOG.filter(p => p.stock > 0).length}/${CATALOG.length}`);
+  ok('EcoFlow stock is set to 5 units', eco.every(p => p.stock === 5));
+  ok('EcoFlow warranty matches the global 7-day policy',
+     eco.every(p => p.warranty === '7 days shop replacement warranty.'));
+  const discounts = CATALOG.filter(p => p.oldPrice).map(p => honestDiscount(p));
+  ok('Every discount is a realistic 10%, 15% or 20%', discounts.every(x => [10, 15, 20].includes(x)),
+     [...new Set(discounts)].sort().join(', ') + '%');
 }
 
 /* category tabs: only categories that have products (+ All) */
@@ -96,10 +107,12 @@ w.eval(`HRL.openProductModal(${FIRST.id}); HRL.selectVariant(0);`);
 ok('Base price shown correctly', d.getElementById('pdpPriceCurrent').textContent === money(FIRST.price),
    d.getElementById('pdpPriceCurrent').textContent);
 const firstCard = d.querySelector('#productGrid .product-card');
-const badge = firstCard && firstCard.querySelector('.discount-badge');
-ok('Discount badge shows the honest minimum (' + honestDiscount(FIRST) + '%)',
-   honestDiscount(FIRST) === 0 ? !badge : (badge && badge.textContent === '-' + honestDiscount(FIRST) + '%'),
-   'badge=' + (badge ? badge.textContent : 'none'));
+ok('Product cards have no loud percentage badges',
+   d.querySelectorAll('#productGrid .discount-badge').length === 0);
+ok('Every product card shows a small brand mark',
+   d.querySelectorAll('#productGrid .product-card .product-brand-mark').length === CATALOG.length);
+ok('EcoFlow cards use the compact EcoFlow logo mark',
+   d.querySelectorAll('#productGrid .product-brand-mark.eco img[src*="ecoflow-logo"]').length === CATALOG.filter(p => p.brand === 'EcoFlow').length);
 
 /* ---------------- 4b. gallery dots + swipe ---------------- */
 const galleryP = CATALOG.find(p => p.images.length === 7) || CATALOG.find(p => p.images.length > 1);
@@ -279,7 +292,8 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
   w.eval('HRL.toggleSidebar(false);');
   ok('Sidebar closes on toggleSidebar(false)', !sb.classList.contains('open') && sbBtn.getAttribute('aria-expanded') === 'false');
   ok('No bundles in catalog (products only)', !CATALOG.some(p => p.category === 'Bundles') && CATALOG.length >= 17, `${CATALOG.length} products`);
-  ok('Every product image is a real photo (.jpg/.png, 0 .svg placeholders)', !CATALOG.some(p => p.images.some(img => img.endsWith('.svg'))));
+  ok('Every product image is WebP with a 400px variant (0 .svg placeholders)',
+     !CATALOG.some(p => p.images.some(img => !img.endsWith('.webp') || !fs.existsSync(path.join(ROOT, img.replace(/\.webp$/, '-400.webp'))))));
 }
 
 /* ---------------- 11. Size selector + pack options (products.json "sizes" / "variantLabel") ---------------- */
@@ -290,9 +304,9 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
   const packSummary = p => p.variants.map(v => `${v.name}=${p.price + v.extraCost}`).join(' / ');
 
   /* The requested update, pinned on purpose: both Solar Panel Water Drain Clips. */
-  ok('Drain clips (ids 16, 17): price Rs. 99, was Rs. 100',
-     clips.every(p => p && /Drain Clips/.test(p.title.en) && p.price === 99 && p.oldPrice === 100),
-     clips.map(p => p && `${p.price}/${p.oldPrice}`).join(' '));
+  ok('Drain clips (ids 16, 17): price Rs. 99 with no fake 1% discount',
+     clips.every(p => p && /Drain Clips/.test(p.title.en) && p.price === 99 && !p.oldPrice),
+     clips.map(p => p && `${p.price}/${p.oldPrice || 'none'}`).join(' '));
   ok('Drain clips: Size selector offers 30mm and 35mm',
      clips.every(p => p && JSON.stringify(p.sizes) === '[{"name":"30mm"},{"name":"35mm"}]'));
   ok('Drain clips: 1 / 10 / 20 Pcs at extraCost 0 / 800 / 1600 = Rs. 99 / 899 / 1,699',
@@ -468,11 +482,23 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
   ok('Homepage <title> is concise (<= 65 chars) and <h1> is present',
      rawHome.title.length <= 65 && !!rawHome.querySelector('main h1'),
      `title=${rawHome.title.length}ch`);
+  ok('EcoFlow banner links to its own collection page',
+     rawHome.querySelector('.brand-banner')?.getAttribute('href') === '/collections/ecoflow.html');
+
+  const ecoCollection = new JSDOM(read('collections/ecoflow.html')).window.document;
+  ok('EcoFlow collection page lists every EcoFlow product',
+     ecoCollection.querySelectorAll('#productGrid a.product-card').length === CATALOG.filter(p => p.category === 'EcoFlow').length);
+  const pg = new JSDOM(read(`products/${FIRST.slug}.html`)).window.document;
+  ok('Product page shows delivery/warranty proof under the price',
+     !!pg.querySelector('.pdp-trust-strip') && pg.querySelector('.pdp-trust-strip').textContent.includes('Rs. 449'));
+  ok('Product page has a sticky mobile buy bar',
+     !!pg.querySelector('.pdp-mobile-cta [data-action="add-from-page"]'));
 
   /* JSON-LD, canonical URLs, and consistent footer across static/blog/tool/product pages */
   const pagesToCheck = [
     'index.html', 'about.html', 'track.html', 'shipping.html', 'returns.html',
     'privacy.html', 'terms.html', 'tools/solar-calculator.html',
+    'collections/ecoflow.html', 'collections/inverters.html', 'collections/solar.html',
     'blog/index.html', 'blog/how-to-choose-a-solar-inverter-in-pakistan.html',
     'blog/pure-sine-wave-vs-modified-sine-wave.html', `products/${FIRST.slug}.html`
   ];
@@ -507,7 +533,7 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
     const rel = u.replace('https://hallroadlahore.com/', '') || 'index.html';
     return fs.existsSync(path.join(ROOT, rel.endsWith('/') ? rel + 'index.html' : rel));
   });
-  ok('sitemap.xml has 28 valid URLs and all exist on disk', locs.length === CATALOG.length + 11 && allExistOnDisk, `${locs.length} URLs`);
+  ok('sitemap.xml has every product, collection and core page', locs.length === CATALOG.length + 14 && allExistOnDisk, `${locs.length} URLs`);
 
   /* Escape closes #confirmModal */
   const cfmLive = boot(HTML);

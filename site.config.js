@@ -68,11 +68,16 @@ window.SITE_CONFIG = {
                     ur: "رقم واپسی آئٹم موصول ہونے کے 7 کاروباری دنوں میں جاز کیش / ایزی پیسا یا بینک ٹرانسفر سے کی جاتی ہے۔" }
   },
 
-  /* ---------- ORDER PIPELINE ---------- */
+  /* ---------- ORDER PIPELINE ----------
+     Paste the Cloudflare Worker URL here when ready. Until then every order is
+     still stored locally and sent via WhatsApp; failed POSTs are queued for retry. */
   orderEndpoint: "",
   orderEmail: "",
 
-  /* ---------- ANALYTICS ---------- */
+  /* ---------- ANALYTICS ----------
+     Paste IDs here when ready, e.g. googleAnalytics4: "G-ABC1234567".
+     Empty values load zero third-party scripts. Events already wired:
+     add_to_cart, begin_checkout, purchase. */
   analytics: {
     googleAnalytics4: "",
     metaPixel: "",

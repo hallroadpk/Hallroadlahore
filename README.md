@@ -36,7 +36,7 @@ There is **no runtime dependency and no build server**. Everything a visitor nee
 
 ### EcoFlow catalogue (price-list import)
 
-The 18 EcoFlow products were added from the EcoFlow Pakistan price list. The selling `price` is the **`RRP`** (never below it), and `oldPrice` is the struck-through "was" price calculated so the badge shows **15% off** for models up to Rs. 150,000 and **20% off** above that. The dealer **`RDP`** and the old **`Retailer Price`** column are deliberately not published. Stock is `0` until availability is confirmed in the warehouse — update `stock` in `products.json` and re-run the build before advertising these as in stock. Each model has a photo gallery; the seven RAPID Magnetic 10,000mAh angles were supplied by the shop owner. Some gallery shots are representative of the model family — replace them with exact SKU photos when available.
+The 18 EcoFlow products were added from the EcoFlow Pakistan price list. The selling `price` is **`RRP + 5%`** (rounded up to the nearest Rs. 100), and `oldPrice` is the struck-through "was" price calculated so the saving shows **15% off** for models up to Rs. 150,000 and **20% off** above that. The dealer **`RDP`** and the old **`Retailer Price`** column are deliberately not published. All products currently have stock; EcoFlow items are set to 5 units with the same **7-day replacement** policy as the rest of the store. Each model has a photo gallery; the seven RAPID Magnetic 10,000mAh angles were supplied by the shop owner. Some gallery shots are representative of the model family — replace them with exact SKU photos when available.
 
 ### Adding real product photos
 

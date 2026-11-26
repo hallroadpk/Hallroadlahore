@@ -192,6 +192,17 @@ function placeholderSvg(p, index) {
 }
 
 const toSrc = (x) => /^https?:/i.test(x) ? x : '/' + String(x).replace(/^\/+/, '');
+const thumbSrc = (x) => /\.webp$/i.test(x) ? x.replace(/\.webp$/, '-400.webp') : x;
+/* Small, quiet brand mark in the top corner of every product photo. */
+function brandMark(brand) {
+  if (brand === 'EcoFlow') {
+    return '<span class="product-brand-mark eco"><img src="/images/brand/ecoflow-logo-white.webp" alt="EcoFlow" width="52" height="30"></span>';
+  }
+  return `<span class="product-brand-mark">${escapeHtml(brand)}</span>`;
+}
+/* Keep generated product markup in sync with the single source of truth in site.config.js. */
+const siteConfigText = fs.readFileSync(path.join(ROOT, 'site.config.js'), 'utf8');
+const shippingFee = Number((siteConfigText.match(/shipping:[\s\S]*?fee:\s*(\d+)/) || [])[1] || 449);
 const toAbsUrl = (x) => /^https?:/i.test(x) ? x : SITE + '/' + String(x).replace(/^\/+/, '');
 
 function escapeXml(s) {
@@ -290,9 +301,9 @@ const FOOTER = `<footer class="site-footer">
       <h3>Shop</h3>
       <ul>
         <li><a href="/">All products</a></li>
-        <li><a href="/#Inverters">Inverters</a></li>
-        <li><a href="/#Chargers">Battery chargers</a></li>
-        <li><a href="/#Solar">Solar &amp; MPPT</a></li>
+        <li><a href="/collections/ecoflow.html">EcoFlow power</a></li>
+        <li><a href="/collections/inverters.html">Inverters</a></li>
+        <li><a href="/collections/solar.html">Solar &amp; MPPT</a></li>
         <li><a href="/#WaterHeaters">Water heaters</a></li>
         <li><a href="/tools/solar-calculator.html">Solar calculator</a></li>
       </ul>
@@ -347,7 +358,7 @@ for (const p of products) {
     seller: { '@type': 'Organization', name: 'G Power & Electronics (Hall Road Lahore)' },
     shippingDetails: {
       '@type': 'OfferShippingDetails',
-      shippingRate: { '@type': 'MonetaryAmount', value: 449, currency: 'PKR' },
+      shippingRate: { '@type': 'MonetaryAmount', value: shippingFee, currency: 'PKR' },
       shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'PK' }
     },
     hasMerchantReturnPolicy: {
@@ -403,12 +414,12 @@ ${siteHeader('shop')}
 
   <div class="pdp-page-grid">
     <div class="pdp-page-media">
-      <img id="pdpMainImg" class="pdp-main-img" src="${toSrc(p.images[0])}" alt="${escapeHtml(p.title.en)}" width="800" height="800" fetchpriority="high">
+      <img id="pdpMainImg" class="pdp-main-img" src="${toSrc(p.images[0])}" srcset="${toSrc(thumbSrc(p.images[0]))} 400w, ${toSrc(p.images[0])} 800w" sizes="(max-width: 760px) 92vw, 560px" alt="${escapeHtml(p.title.en)}" width="800" height="800" fetchpriority="high">
       <div class="pdp-dots" id="pdpDots" role="group" aria-label="Product image position">
         ${p.images.map((_, i) => `<button type="button" class="pdp-dot${i === 0 ? ' active' : ''}" data-dot-index="${i}" aria-label="Show image ${i + 1}" aria-current="${i === 0 ? 'true' : 'false'}"></button>`).join('\n        ')}
       </div>
       ${p.images.length > 1 ? `<div class="pdp-thumbs" role="group" aria-label="Product images">
-        ${p.images.map((img, i) => `<button type="button" class="pdp-thumb${i === 0 ? ' active' : ''}" data-image-index="${i}" aria-label="Show image ${i + 1}"><img src="${toSrc(img)}" alt="" width="80" height="80" loading="lazy"></button>`).join('\n        ')}
+        ${p.images.map((img, i) => `<button type="button" class="pdp-thumb${i === 0 ? ' active' : ''}" data-image-index="${i}" aria-label="Show image ${i + 1}"><img src="${toSrc(thumbSrc(img))}" alt="" width="80" height="80" loading="lazy"></button>`).join('\n        ')}
       </div>` : ''}
     </div>
 
@@ -426,6 +437,12 @@ ${siteHeader('shop')}
       <div class="stock-line" data-stock="${p.stock}">
         ${p.stock > 0 ? `<span class="stock-dot in"></span> In stock - ${p.stock} available, dispatched within 24 hours`
                       : `<span class="stock-dot out"></span> Out of stock - message us on WhatsApp for availability`}
+      </div>
+
+      <div class="pdp-trust-strip">
+        <span>Rs. ${shippingFee.toLocaleString('en-PK')} delivery anywhere in Pakistan</span>
+        <span>24h dispatch</span>
+        <span>7-day replacement</span>
       </div>
 
       <div class="pdp-buybox">
@@ -452,8 +469,8 @@ ${siteHeader('shop')}
           </div>
         </div>
 
-        <button type="button" class="checkout-btn add-to-cart-btn" data-action="add-from-page">Add to Cart</button>
-        <a class="whatsapp-order-link" href="#" data-action="buy-now" rel="nofollow">Order directly on WhatsApp</a>
+        ${p.stock > 0 ? `<button type="button" class="checkout-btn add-to-cart-btn" data-action="add-from-page">Add to Cart</button>` : ''}
+        <a class="whatsapp-order-link${p.stock > 0 ? '' : ' primary'}" href="#" data-action="${p.stock > 0 ? 'buy-now' : 'ask-whatsapp'}" data-product-id="${p.id}" rel="nofollow">${p.stock > 0 ? 'Order directly on WhatsApp' : 'Ask on WhatsApp for availability'}</a>
         <p class="buybox-note">Cash on Delivery available nationwide. Pay cash when the parcel reaches you.</p>
       </div>
 
@@ -493,18 +510,96 @@ ${siteHeader('shop')}
     <div class="related-grid">
       ${products.filter(x => x.category === p.category && x.id !== p.id).slice(0, 4).map(r => `
       <a class="related-card" href="/products/${r.slug}.html">
-        <img src="${toSrc(r.images[0])}" alt="${escapeHtml(r.title.en)}" width="200" height="200" loading="lazy">
+        <img src="${toSrc(thumbSrc(r.images[0]))}" srcset="${toSrc(thumbSrc(r.images[0]))} 400w, ${toSrc(r.images[0])} 800w" sizes="(max-width: 760px) 45vw, 260px" alt="${escapeHtml(r.title.en)}" width="200" height="200" loading="lazy">
         <div class="related-title">${escapeHtml(r.title.en)}</div>
         <div class="related-price">Rs. ${r.price.toLocaleString('en-PK')}</div>
       </a>`).join('\n      ')}
     </div>
   </section>
+
+  <div class="pdp-mobile-cta">
+    ${p.stock > 0 ? '<button type="button" class="checkout-btn" data-action="add-from-page">Add to Cart</button>' : ''}
+    <a class="whatsapp-order-link${p.stock > 0 ? '' : ' primary'}" href="#" data-action="${p.stock > 0 ? 'buy-now' : 'ask-whatsapp'}" data-product-id="${p.id}" rel="nofollow">${p.stock > 0 ? 'WhatsApp' : 'Ask on WhatsApp'}</a>
+  </div>
 </main>
 ${FOOTER}
 </body>
 </html>`;
   if (prevProductHtml.get(p.slug) !== html) changedProductUrls.add(url);
   fs.writeFileSync(path.join(ROOT, 'products', `${p.slug}.html`), html);
+}
+
+/* --------------------------------------------------------- collection pages */
+/* Short, crawlable buying hubs. The homepage chips are fast filters; these pages
+   give each range its own title, intro copy and internal links for SEO. */
+const collectionsDir = path.join(ROOT, 'collections');
+fs.mkdirSync(collectionsDir, { recursive: true });
+const collectionDefs = [
+  {
+    slug: 'ecoflow',
+    category: 'EcoFlow',
+    title: 'EcoFlow Power Stations & RAPID Power Banks',
+    description: 'Shop EcoFlow RIVER and DELTA portable power stations, extra batteries, RAPID magnetic power banks and GaN chargers in Pakistan. Flat Rs. 449 delivery, Cash on Delivery.',
+    intro: 'Portable power for Lahore, Karachi and every city in Pakistan. RIVER 2 series for phones and laptops; DELTA series for home backup and heavy appliances; RAPID magnetic power banks for everyday carry.'
+  },
+  {
+    slug: 'solar',
+    category: 'Solar',
+    title: 'Solar Accessories & MPPT Controllers',
+    description: 'Simtek MPPT solar charge controllers, solar panel water drain clips and other accessories from G Power & Electronics, Hall Road Lahore. Nationwide COD.',
+    intro: 'Bench-tested MPPT controllers and small solar accessories sourced directly from Hall Road. Not sure which controller fits your panels? Use our free solar calculator.'
+  },
+  {
+    slug: 'inverters',
+    category: 'Inverters',
+    title: 'Solar & Battery Inverters',
+    description: 'Energy and Simko pure sine PV inverters plus Alkaram battery inverters from Hall Road Lahore. Compare sizes, check warranty and order with Cash on Delivery.',
+    intro: 'From battery-free daytime solar inverters to 12V battery inverters for fans, lights and TVs. Every unit is tested before dispatch and backed by our returns policy.'
+  }
+];
+for (const c of collectionDefs) {
+  const list = products.filter(x => x.category === c.category);
+  const loc = `${SITE}/collections/${c.slug}.html`;
+  const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'WebPage', name: c.title, url: loc, description: c.description },
+      {
+        '@type': 'ItemList', name: c.title, numberOfItems: list.length,
+        itemListElement: list.map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x.title.en, url: `${SITE}/products/${x.slug}.html` }))
+      }
+    ]
+  });
+  const cards = list.map(x => `
+      <a class="product-card" href="/products/${x.slug}.html" aria-label="${escapeHtml(x.title.en)}, Rs. ${x.price.toLocaleString('en-PK')}">
+        ${brandMark(x.brand)}
+        <img class="product-image" src="${toSrc(thumbSrc(x.images[0]))}" srcset="${toSrc(thumbSrc(x.images[0]))} 400w, ${toSrc(x.images[0])} 800w" sizes="(max-width: 760px) 45vw, (max-width: 1050px) 30vw, 260px" alt="${escapeHtml(x.title.en)}" width="400" height="400" loading="lazy">
+        <h3 class="product-title">${escapeHtml(x.title.en)}</h3>
+        <div class="price-box"><span class="current-price">Rs. ${x.price.toLocaleString('en-PK')}</span></div>
+        <span class="btn-add-cart">View Details</span>
+      </a>`).join('\n      ');
+  const html = `${head({
+    title: `${c.title} | Hall Road Lahore`,
+    description: c.description,
+    canonical: loc,
+    image: `${SITE}/images/og-cover.png`,
+    jsonLd
+  })}
+<body class="page-static">
+${siteHeader(c.slug)}
+<main id="main" class="catalog-container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">${escapeHtml(c.title)}</li></ol></nav>
+  <div class="catalog-intro">
+    <h1 class="catalog-seo-title">${escapeHtml(c.title)}</h1>
+    <p class="catalog-seo-sub">${escapeHtml(c.intro)} <a href="/shipping.html">Flat Rs. ${shippingFee.toLocaleString('en-PK')} delivery nationwide →</a></p>
+  </div>
+  <div class="product-grid" id="productGrid">${cards}
+  </div>
+</main>
+${FOOTER}
+</body>
+</html>`;
+  fs.writeFileSync(path.join(collectionsDir, `${c.slug}.html`), html);
 }
 
 /* ------------------------------------ homepage ItemList JSON-LD & SSR grid */
@@ -531,12 +626,11 @@ indexHtml = indexHtml.replace(
   (m, a, b) => a + '\n' + JSON.stringify(itemList, null, 2) + '\n' + b
 );
 const ssrCards = products.map((p, i) => {
-  const disc = honestDiscount(p);
   const stockTxt = p.stock <= 0 ? 'Out of stock' : (p.stock <= 5 ? `Only ${p.stock} left` : 'In stock');
   const stockCls = p.stock <= 0 ? ' out' : (p.stock <= 5 ? ' low' : '');
   return `    <a class="product-card" href="/products/${p.slug}.html">
-      ${disc > 0 ? `<span class="discount-badge">-${disc}%</span>` : ''}
-      <img class="product-image" src="${toSrc(p.images[0])}" alt="${escapeHtml(p.title.en)}" width="400" height="400"${i >= 4 ? ' loading="lazy"' : ' fetchpriority="high"'}>
+      ${brandMark(p.brand)}
+      <img class="product-image" src="${toSrc(thumbSrc(p.images[0]))}" srcset="${toSrc(thumbSrc(p.images[0]))} 400w, ${toSrc(p.images[0])} 800w" sizes="(max-width: 760px) 45vw, (max-width: 1050px) 30vw, 260px" alt="${escapeHtml(p.title.en)}" width="400" height="400"${i >= 4 ? ' loading="lazy"' : ' fetchpriority="high"'}>
       <div>
         <h3 class="product-title">${escapeHtml(p.title.en)}</h3>
         <div class="price-box">
@@ -562,6 +656,7 @@ const urls = [
     const loc = `${SITE}/products/${p.slug}.html`;
     return { loc, pri: '0.8', changed: changedProductUrls.has(loc) };
   }),
+  ...collectionDefs.map(c => ({ loc: `${SITE}/collections/${c.slug}.html`, pri: '0.7' })),
   { loc: `${SITE}/track.html`, pri: '0.7' },
   { loc: `${SITE}/tools/solar-calculator.html`, pri: '0.7' },
   { loc: `${SITE}/blog/`, pri: '0.6' },
