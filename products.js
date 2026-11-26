@@ -43,10 +43,10 @@ window.PRODUCTS = [
       "Options": "Without shower (Rs. 4,499) / With shower set (Rs. 5,499)"
     },
     "images": [
-      "images/products/instant-electric-water-heater-tap-1.jpg",
-      "images/products/instant-electric-water-heater-tap-2.jpg",
-      "images/products/instant-electric-water-heater-tap-3.jpg",
-      "images/products/instant-electric-water-heater-tap-4.jpg"
+      "images/products/instant-electric-water-heater-tap-1.webp",
+      "images/products/instant-electric-water-heater-tap-2.webp",
+      "images/products/instant-electric-water-heater-tap-3.webp",
+      "images/products/instant-electric-water-heater-tap-4.webp"
     ],
     "variants": [
       {
@@ -72,7 +72,7 @@ window.PRODUCTS = [
       "ur": "سمٹیک Planet40 40A MPPT سولر چارج کنٹرولر (70 VOC)"
     },
     "price": 8000,
-    "oldPrice": 10500,
+    "oldPrice": 10000,
     "summary": {
       "en": "Economical high-efficiency MPPT solar charge controller, 40A output, 70V VOC, for 12V battery systems. Can run DC loads up to 20A without a battery.",
       "ur": "کفایتی اور موثر MPPT سولر چارج کنٹرولر، 40A آؤٹ پٹ، 70V VOC، 12V بیٹری سسٹم کے لیے۔ بیٹری کے بغیر 20A تک DC لوڈ چلا سکتا ہے۔"
@@ -108,10 +108,10 @@ window.PRODUCTS = [
       "DC load": "up to 20A (battery-free)"
     },
     "images": [
-      "images/products/simtek-planet40-1.jpg",
-      "images/products/simtek-planet40-2.jpg",
-      "images/products/simtek-planet40-3.jpg",
-      "images/products/simtek-planet40-4.jpg"
+      "images/products/simtek-planet40-1.webp",
+      "images/products/simtek-planet40-2.webp",
+      "images/products/simtek-planet40-3.webp",
+      "images/products/simtek-planet40-4.webp"
     ],
     "variants": [
       {
@@ -133,7 +133,7 @@ window.PRODUCTS = [
       "ur": "سیمٹیک ڈی کِنگ 70A MPPT سولر چارج کنٹرولر (110 VOC)"
     },
     "price": 14700,
-    "oldPrice": 18000,
+    "oldPrice": 18400,
     "summary": {
       "en": "ECO Series high-efficiency MPPT controller, 110 VOC, 70A output, for 12V and 24V battery systems. Runs DC loads up to 50A without a battery, with low-battery cutoff.",
       "ur": "ای سی او سیریز کا موثر MPPT کنٹرولر، 110 VOC، 70A آؤٹ پٹ، 12V اور 24V بیٹری سسٹم کے لیے۔ بیٹری کے بغیر 50A تک DC لوڈ چلا سکتا ہے۔"
@@ -170,9 +170,9 @@ window.PRODUCTS = [
       "Display": "Dual LED + digital"
     },
     "images": [
-      "images/products/simtek-dc-king-70a-1.jpg",
-      "images/products/simtek-dc-king-70a-2.jpg",
-      "images/products/simtek-dc-king-70a-3.jpg"
+      "images/products/simtek-dc-king-70a-1.webp",
+      "images/products/simtek-dc-king-70a-2.webp",
+      "images/products/simtek-dc-king-70a-3.webp"
     ],
     "variants": [
       {
@@ -194,7 +194,7 @@ window.PRODUCTS = [
       "ur": "سیمٹیک MPPT پلس ہائبرڈ 85A سولر چارج کنٹرولر (150 VOC)"
     },
     "price": 16800,
-    "oldPrice": 23500,
+    "oldPrice": 21000,
     "summary": {
       "en": "Simtek's MPPT Plus Hybrid flagship: 150 VOC, 85A output, automatic 12V/24V detection and a dual LCD & LED display for larger solar setups.",
       "ur": "سیمٹیک کا فلیگ شپ MPPT پلس ہائبرڈ: 150 VOC، 85A آؤٹ پٹ، خودکار 12V/24V ڈیٹیکشن اور ڈوئل LCD و LED ڈسپلے۔"
@@ -230,9 +230,9 @@ window.PRODUCTS = [
       "Display": "Dual LCD + LED"
     },
     "images": [
-      "images/products/simtek-mppt-plus-85a-1.png",
-      "images/products/simtek-mppt-plus-85a-2.png",
-      "images/products/simtek-mppt-plus-85a-3.jpg"
+      "images/products/simtek-mppt-plus-85a-1.webp",
+      "images/products/simtek-mppt-plus-85a-2.webp",
+      "images/products/simtek-mppt-plus-85a-3.webp"
     ],
     "variants": [
       {
@@ -254,7 +254,6 @@ window.PRODUCTS = [
       "ur": "سیمٹیک ڈیجیٹل بیٹری چارجر 12V 20A (ڈیجیٹل میٹر کے ساتھ)"
     },
     "price": 7990,
-    "oldPrice": 8500,
     "summary": {
       "en": "Fully automatic 12V 20A switch-mode charger with a digital meter showing live voltage, current and charging status. Wide 80V-245V AC input for unstable areas.",
       "ur": "مکمل خودکار 12V 20A چارجر، ڈیجیٹل میٹر پر وولٹیج، کرنٹ اور چارجنگ اسٹیٹس نظر آتی ہے۔ 80V-245V AC ان پٹ۔"
@@ -290,9 +289,9 @@ window.PRODUCTS = [
       "Display": "Digital meter + LED indicators"
     },
     "images": [
-      "images/products/simtek-digital-charger-12v-20a-1.jpg",
-      "images/products/simtek-digital-charger-12v-20a-2.jpg",
-      "images/products/simtek-digital-charger-12v-20a-3.jpg"
+      "images/products/simtek-digital-charger-12v-20a-1.webp",
+      "images/products/simtek-digital-charger-12v-20a-2.webp",
+      "images/products/simtek-digital-charger-12v-20a-3.webp"
     ],
     "variants": [
       {
@@ -314,7 +313,6 @@ window.PRODUCTS = [
       "ur": "سیمٹیک بیٹری چارجر 12V 30A (3 سٹیج)"
     },
     "price": 11550,
-    "oldPrice": 12500,
     "summary": {
       "en": "Fully automatic 12V 30A charger with 3-stage intelligent charging (bulk, absorption, float). Wide 80V-245V AC input, works as a DC power supply too.",
       "ur": "مکمل خودکار 12V 30A چارجر، 3 سٹیج ذہین چارجنگ (بلک، ایبزارپشن، فلوٹ)۔ 80V-245V AC ان پٹ، DC پاور سپلائی بھی۔"
@@ -350,9 +348,9 @@ window.PRODUCTS = [
       "Display": "LED indicators"
     },
     "images": [
-      "images/products/simtek-charger-12v-30a-1.jpg",
-      "images/products/simtek-charger-12v-30a-2.jpg",
-      "images/products/simtek-charger-12v-30a-3.jpg"
+      "images/products/simtek-charger-12v-30a-1.webp",
+      "images/products/simtek-charger-12v-30a-2.webp",
+      "images/products/simtek-charger-12v-30a-3.webp"
     ],
     "variants": [
       {
@@ -374,7 +372,7 @@ window.PRODUCTS = [
       "ur": "سیمٹیک MPPT پلس ہائبرڈ 120A سولر چارج کنٹرولر (170 VOC)"
     },
     "price": 23300,
-    "oldPrice": 29600,
+    "oldPrice": 29100,
     "summary": {
       "en": "Simtek's most powerful MPPT Plus Hybrid: 170 VOC, 120A output, automatic 12V/24V detection and dual LCD & LED display for large solar arrays.",
       "ur": "سیمٹیک کا سب سے طاقتور MPPT پلس ہائبرڈ: 170 VOC، 120A آؤٹ پٹ، خودکار 12V/24V ڈیٹیکشن اور ڈوئل LCD و LED ڈسپلے۔"
@@ -408,9 +406,9 @@ window.PRODUCTS = [
       "Display": "Dual LCD + LED"
     },
     "images": [
-      "images/products/simtek-mppt-plus-120a-1.png",
-      "images/products/simtek-mppt-plus-120a-2.png",
-      "images/products/simtek-mppt-plus-120a-3.png"
+      "images/products/simtek-mppt-plus-120a-1.webp",
+      "images/products/simtek-mppt-plus-120a-2.webp",
+      "images/products/simtek-mppt-plus-120a-3.webp"
     ],
     "variants": [
       {
@@ -432,7 +430,7 @@ window.PRODUCTS = [
       "ur": "سیمٹیک بیٹری چارجر 12V 20A مکمل خودکار"
     },
     "price": 6750,
-    "oldPrice": 8000,
+    "oldPrice": 7900,
     "summary": {
       "en": "Fully automatic 12V 20A charger for all lead-acid batteries. Wide 80V-245V AC input, LED status indicators, full protection - the dependable everyday charger.",
       "ur": "تمام لیڈ ایسڈ بیٹریز کے لیے مکمل خودکار 12V 20A چارجر۔ 80V-245V AC ان پٹ، LED انڈیکیٹرز، مکمل پروٹیکشن۔"
@@ -463,7 +461,7 @@ window.PRODUCTS = [
       "Display": "LED indicators"
     },
     "images": [
-      "images/products/simtek-charger-12v-20a-basic-1.jpg"
+      "images/products/simtek-charger-12v-20a-basic-1.webp"
     ],
     "variants": [
       {
@@ -485,7 +483,7 @@ window.PRODUCTS = [
       "ur": "الکرم پاور انورٹر 2000W - 12V ڈی سی سے 220V اے سی"
     },
     "price": 4999,
-    "oldPrice": 5999,
+    "oldPrice": 5900,
     "summary": {
       "en": "Compact Alkaram 2000W modified sine wave inverter, 12V DC to 220V AC with digital display and dual USB - ideal for fans, lights, TV and charging.",
       "ur": "کمپیکٹ الکرم 2000W انورٹر، 12V ڈی سی سے 220V اے سی، ڈیجیٹل ڈسپلے اور ڈوئل USB - پنکھے، لائٹس، ٹی وی کے لیے۔"
@@ -519,8 +517,8 @@ window.PRODUCTS = [
       "USB": "DC 5V/1A dual"
     },
     "images": [
-      "images/products/alkaram-2000w-1.jpg",
-      "images/products/alkaram-2000w-2.jpg"
+      "images/products/alkaram-2000w-1.webp",
+      "images/products/alkaram-2000w-2.webp"
     ],
     "variants": [
       {
@@ -542,7 +540,7 @@ window.PRODUCTS = [
       "ur": "الکرم پاور انورٹر 3000W PI-3000W"
     },
     "price": 9999,
-    "oldPrice": 13999,
+    "oldPrice": 12500,
     "summary": {
       "en": "Alkaram 3000W modified sine wave inverter with digital display and USB - runs fans, lights, TVs, laptops, routers and hand tools from a 12V battery or solar setup. (Use pure sine wave for inverter fridges or ACs.)",
       "ur": "الکرم 3000W انورٹر، ڈیجیٹل ڈسپلے اور USB کے ساتھ - 12V بیٹری سے پنکھے، لائٹس، ٹی وی، لیپ ٹاپ، راؤٹر اور ٹولز چلائیں۔ (انورٹر فریج یا اے سی کے لیے پیور سائن ویو استعمال کریں۔)"
@@ -577,9 +575,9 @@ window.PRODUCTS = [
       "USB": "DC 5V/1A"
     },
     "images": [
-      "images/products/alkaram-3000w-1.png",
-      "images/products/alkaram-3000w-2.jpg",
-      "images/products/alkaram-3000w-3.png"
+      "images/products/alkaram-3000w-1.webp",
+      "images/products/alkaram-3000w-2.webp",
+      "images/products/alkaram-3000w-3.webp"
     ],
     "variants": [
       {
@@ -601,7 +599,7 @@ window.PRODUCTS = [
       "ur": "الکرم پاور انورٹر 4000W PI-4000W"
     },
     "price": 13999,
-    "oldPrice": 15999,
+    "oldPrice": 15600,
     "summary": {
       "en": "Alkaram 4000W inverter with display screen, USB and Type-C - heavy-duty 12V to 220V conversion for bigger home backup setups.",
       "ur": "الکرم 4000W انورٹر، ڈسپلے اسکرین، USB اور ٹائپ-سی کے ساتھ - بڑے گھریلو بیک اپ کے لیے۔"
@@ -636,9 +634,9 @@ window.PRODUCTS = [
       "Ports": "USB + Type-C"
     },
     "images": [
-      "images/products/alkaram-4000w-1.jpg",
-      "images/products/alkaram-4000w-2.jpg",
-      "images/products/alkaram-4000w-3.jpg"
+      "images/products/alkaram-4000w-1.webp",
+      "images/products/alkaram-4000w-2.webp",
+      "images/products/alkaram-4000w-3.webp"
     ],
     "variants": [
       {
@@ -660,7 +658,6 @@ window.PRODUCTS = [
       "ur": "الکرم پاور انورٹر 6000W - ڈسپلے اسکرین کے ساتھ"
     },
     "price": 22999,
-    "oldPrice": 24000,
     "summary": {
       "en": "The flagship Alkaram 6000W: high-capacity 12V DC to 220V AC modified sine wave power for multiple fans, lights, TVs, laptops and resistive appliances, with a digital screen for live status. (Use pure sine wave for inverter ACs/fridges.)",
       "ur": "فلیگ شپ الکرم 6000W: پنکھوں، لائٹس، ٹی وی اور گھریلو/دفتری بیک اپ کے لیے طاقتور 12V سے 220V تبدیلی، ڈیجیٹل اسکرین کے ساتھ۔ (انورٹر اے سی یا فریج کے لیے پیور سائن ویو لیں۔)"
@@ -695,8 +692,8 @@ window.PRODUCTS = [
       "Ports": "USB Type-C"
     },
     "images": [
-      "images/products/alkaram-6000w-1.jpg",
-      "images/products/alkaram-6000w-2.jpg"
+      "images/products/alkaram-6000w-1.webp",
+      "images/products/alkaram-6000w-2.webp"
     ],
     "variants": [
       {
@@ -753,9 +750,9 @@ window.PRODUCTS = [
       "Warranty": "7 days"
     },
     "images": [
-      "images/products/energy-1-5kw-pv-inverter-1.jpg",
-      "images/products/energy-1-5kw-pv-inverter-2.jpg",
-      "images/products/energy-1-5kw-pv-inverter-3.jpg"
+      "images/products/energy-1-5kw-pv-inverter-1.webp",
+      "images/products/energy-1-5kw-pv-inverter-2.webp",
+      "images/products/energy-1-5kw-pv-inverter-3.webp"
     ],
     "variants": [
       {
@@ -777,7 +774,7 @@ window.PRODUCTS = [
       "ur": "انرجی MPPT 80A سولر چارج کنٹرولر 12V/24V"
     },
     "price": 8500,
-    "oldPrice": 13000,
+    "oldPrice": 10600,
     "summary": {
       "en": "Advanced MPPT 80A controller with up to 98% conversion efficiency. Supports 12V/24V auto, 100V VOC, up to 2400W (24V). Works with lead-acid, tubular and AGM batteries. 3-stage smart charging plus batteryless output.",
       "ur": "جدید MPPT 80A کنٹرولر، 98% کارکردگی، 12V/24V آٹو، 100V VOC، 2400W تک۔ تمام بیٹری اقسام کے ساتھ۔"
@@ -814,9 +811,9 @@ window.PRODUCTS = [
       "Battery Types": "Tubular, Lead Acid, AGM"
     },
     "images": [
-      "images/products/energy-mppt-80a-1.jpg",
-      "images/products/energy-mppt-80a-2.jpg",
-      "images/products/energy-mppt-80a-3.jpg"
+      "images/products/energy-mppt-80a-1.webp",
+      "images/products/energy-mppt-80a-2.webp",
+      "images/products/energy-mppt-80a-3.webp"
     ],
     "variants": [
       {
@@ -838,7 +835,7 @@ window.PRODUCTS = [
       "ur": "سمکو 3.2KW پی وی انورٹر بلیک پینتھر - ڈائریکٹ سولر"
     },
     "price": 17000,
-    "oldPrice": 21500,
+    "oldPrice": 21200,
     "summary": {
       "en": "Powerful 3.2KW direct solar inverter for 2-4 x 585W panels. 80-210V DC input, 230V 8.5A AC output, max PV 2000W. Dual thermally-controlled fans, overload/short-circuit protection and real-time display. Runs fans, lights, fridge, TV, washing machine without battery.",
       "ur": "طاقتور 3.2KW ڈائریکٹ سولر انورٹر، 2-4 x 585W پینل، 80-210V DC ان پٹ، 230V آؤٹ پٹ۔ پنکھے، لائٹس، فریج، ٹی وی بغیر بیٹری چلائے۔"
@@ -874,9 +871,9 @@ window.PRODUCTS = [
       "Cooling": "Dual thermally controlled fans"
     },
     "images": [
-      "images/products/simko-3-2kw-pv-inverter-1.jpg",
-      "images/products/simko-3-2kw-pv-inverter-2.jpg",
-      "images/products/simko-3-2kw-pv-inverter-3.jpg"
+      "images/products/simko-3-2kw-pv-inverter-1.webp",
+      "images/products/simko-3-2kw-pv-inverter-2.webp",
+      "images/products/simko-3-2kw-pv-inverter-3.webp"
     ],
     "variants": [
       {
@@ -898,7 +895,6 @@ window.PRODUCTS = [
       "ur": "سولر پینل واٹر ڈرین کلپ - اسٹینلیس اسٹیل"
     },
     "price": 99,
-    "oldPrice": 100,
     "summary": {
       "en": "Stainless steel water drain clips that prevent mud and water accumulation at the bottom edge of solar panels. Improves self-cleaning during rain, prevents hot-spot and increases panel life. Fits framed panels 30-35mm, no tools needed.",
       "ur": "اسٹینلیس اسٹیل ڈرین کلپ جو پانی اور مٹی کو پینل کے نیچے جمع ہونے سے روکتا ہے۔ بارش میں خودکار صفائی، پینل کی زندگی بڑھائے۔"
@@ -929,9 +925,9 @@ window.PRODUCTS = [
       "Warranty": "7 days"
     },
     "images": [
-      "images/products/solar-drain-clip-steel-3.jpg",
-      "images/products/solar-drain-clip-steel-1.jpg",
-      "images/products/solar-drain-clip-steel-2.jpg"
+      "images/products/solar-drain-clip-steel-3.webp",
+      "images/products/solar-drain-clip-steel-1.webp",
+      "images/products/solar-drain-clip-steel-2.webp"
     ],
     "sizes": [
       {
@@ -973,7 +969,6 @@ window.PRODUCTS = [
       "ur": "سولر پینل واٹر ڈرین کلپ - پلاسٹک"
     },
     "price": 99,
-    "oldPrice": 100,
     "summary": {
       "en": "Economical plastic water drain clips for solar panels. Same drain function as stainless steel at a lower price - snaps onto 30-35mm frames and guides trapped water off the panel edge.",
       "ur": "سستی پلاسٹک ڈرین کلپ، اسی طرح پانی نکالتی ہے، کم قیمت میں۔"
@@ -1003,9 +998,9 @@ window.PRODUCTS = [
       "Installation": "Clip-on, no tools"
     },
     "images": [
-      "images/products/solar-drain-clip-plastic-1.jpg",
-      "images/products/solar-drain-clip-plastic-2.jpg",
-      "images/products/solar-drain-clip-plastic-3.jpg"
+      "images/products/solar-drain-clip-plastic-1.webp",
+      "images/products/solar-drain-clip-plastic-2.webp",
+      "images/products/solar-drain-clip-plastic-3.webp"
     ],
     "sizes": [
       {
@@ -1040,14 +1035,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-018",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow RIVER 2 Portable Power Station",
       "ur": "EcoFlow RIVER 2 پورٹیبل پاور اسٹیشن"
     },
-    "price": 39000,
-    "oldPrice": 45900,
+    "price": 41000,
+    "oldPrice": 48300,
     "summary": {
       "en": "Compact portable power station for phones, laptops and small appliances, with fast charging and multiple output ports.",
       "ur": "فونز، لیپ ٹاپ اور چھوٹے آلات کے لیے کمپیکٹ پورٹیبل پاور اسٹیشن، تیز چارجنگ اور کئی آؤٹ پٹ پورٹس کے ساتھ۔"
@@ -1091,14 +1086,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-019",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow RIVER 2 Max",
       "ur": "EcoFlow RIVER 2 Max پورٹیبل پاور اسٹیشن"
     },
-    "price": 59000,
-    "oldPrice": 69400,
+    "price": 62000,
+    "oldPrice": 73000,
     "summary": {
       "en": "Mid-size RIVER 2 power station for home backup and outdoor use, fully charging in about an hour.",
       "ur": "گھر کے بیک اپ اور آؤٹ ڈور استعمال کے لیے درمیانے سائز کا RIVER 2، تقریباً ایک گھنٹے میں مکمل چارج۔"
@@ -1142,14 +1137,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-020",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow RIVER 2 Pro",
       "ur": "EcoFlow RIVER 2 Pro پورٹیبل پاور اسٹیشن"
     },
-    "price": 89000,
-    "oldPrice": 104700,
+    "price": 93500,
+    "oldPrice": 110000,
     "summary": {
       "en": "Higher-capacity RIVER 2 model with more AC outlets for running several essentials during a power cut.",
       "ur": "زیادہ گنجائش والا RIVER 2 ماڈل، بجلی گل ہونے پر کئی ضروری آلات چلانے کے لیے اضافی AC آؤٹ لیٹس۔"
@@ -1193,14 +1188,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-021",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow DELTA 2",
       "ur": "EcoFlow DELTA 2 پورٹیبل پاور اسٹیشن"
     },
-    "price": 119000,
-    "oldPrice": 140000,
+    "price": 125000,
+    "oldPrice": 147100,
     "summary": {
       "en": "A 1kWh home-backup power station with enough outlets for a fridge, fan, router and devices at the same time.",
       "ur": "1kWh گھریلو بیک اپ پاور اسٹیشن، فریج، پنکھا، روٹر اور آلات ایک ساتھ چلانے کے لیے کافی پورٹس۔"
@@ -1244,14 +1239,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-022",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow DELTA 2 Max",
       "ur": "EcoFlow DELTA 2 Max پورٹیبل پاور اسٹیشن"
     },
-    "price": 229000,
-    "oldPrice": 286200,
+    "price": 240500,
+    "oldPrice": 300700,
     "summary": {
       "en": "A 2kWh power station with six AC outlets for whole-room backup and heavy home appliances.",
       "ur": "2kWh پاور اسٹیشن، چھ AC آؤٹ لیٹس کے ساتھ پورے کمرے کے بیک اپ اور بھاری آلات کے لیے۔"
@@ -1295,14 +1290,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-023",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow DELTA 2 Max Plus",
       "ur": "EcoFlow DELTA 2 Max Plus پورٹیبل پاور اسٹیشن"
     },
-    "price": 289000,
-    "oldPrice": 361200,
+    "price": 303500,
+    "oldPrice": 379400,
     "summary": {
       "en": "Extended DELTA 2 Max configuration for longer runtimes and larger home-backup setups.",
       "ur": "طویل بیک اپ اور بڑے گھریلو سسٹمز کے لیے DELTA 2 Max کی توسیع شدہ کنفیگریشن۔"
@@ -1346,14 +1341,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-024",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow DELTA Pro",
       "ur": "EcoFlow DELTA Pro پورٹیبل پاور اسٹیشن"
     },
-    "price": 449000,
-    "oldPrice": 561200,
+    "price": 471500,
+    "oldPrice": 589400,
     "summary": {
       "en": "A large portable home battery for whole-home backup, expansion with extra batteries and off-grid setups.",
       "ur": "پورے گھر کے بیک اپ، اضافی بیٹریوں اور آف گرڈ سسٹمز کے لیے بڑی پورٹیبل ہوم بیٹری۔"
@@ -1397,14 +1392,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-025",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow DELTA Pro Extra Battery",
       "ur": "EcoFlow DELTA Pro اضافی بیٹری"
     },
-    "price": 219000,
-    "oldPrice": 273800,
+    "price": 230000,
+    "oldPrice": 287500,
     "summary": {
       "en": "Add this smart extra battery to a DELTA Pro to increase capacity for longer outages and heavier loads.",
       "ur": "طویل بجلی گل ہونے اور زیادہ لوڈ کے لیے DELTA Pro میں یہ اضافی بیٹری لگا کر گنجائش بڑھائیں۔"
@@ -1446,14 +1441,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-026",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow DELTA 2 Extra Battery",
       "ur": "EcoFlow DELTA 2 اضافی بیٹری"
     },
-    "price": 69000,
-    "oldPrice": 81200,
+    "price": 72500,
+    "oldPrice": 85300,
     "summary": {
       "en": "Extra 1024Wh battery that connects to a DELTA 2 power station for longer backup at home or on site.",
       "ur": "DELTA 2 سے منسلک 1024Wh اضافی بیٹری، گھر یا سائٹ پر طویل بیک اپ کے لیے۔"
@@ -1495,14 +1490,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-027",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow DELTA Max Extra Battery",
       "ur": "EcoFlow DELTA Max اضافی بیٹری"
     },
-    "price": 99000,
-    "oldPrice": 116500,
+    "price": 104000,
+    "oldPrice": 122400,
     "summary": {
       "en": "A 2016Wh expansion battery for the DELTA Max series when one unit is not enough for the load.",
       "ur": "جب ایک یونٹ لوڈ کے لیے کافی نہ ہو تو DELTA Max سیریز کے لیے 2016Wh اضافی بیٹری۔"
@@ -1544,14 +1539,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-028",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow GLACIER Portable Refrigerator",
       "ur": "EcoFlow GLACIER پورٹیبل ریفریجریٹر"
     },
-    "price": 159000,
-    "oldPrice": 198800,
+    "price": 167000,
+    "oldPrice": 208800,
     "summary": {
       "en": "A dual-zone 40-litre portable fridge with an ice maker for road trips, camping and outdoor catering.",
       "ur": "سفر، کیمپنگ اور آؤٹ ڈور کیٹرنگ کے لیے 40 لیٹر ڈوئل زون پورٹیبل فریج، آئس میکر کے ساتھ۔"
@@ -1595,14 +1590,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-029",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow WAVE 2 Portable Air Conditioner",
       "ur": "EcoFlow WAVE 2 پورٹیبل ایئر کنڈیشنر"
     },
-    "price": 129000,
-    "oldPrice": 151800,
+    "price": 135500,
+    "oldPrice": 159500,
     "summary": {
       "en": "A portable 5100 BTU unit that cools or heats a room, tent or van without a fixed AC installation.",
       "ur": "کمرے، خیمے یا وین کو ٹھنڈا یا گرم کرنے کے لیے 5100 BTU پورٹیبل یونٹ، بغیر مستقل انسٹالیشن کے۔"
@@ -1645,14 +1640,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-030",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow WAVE 2 Add-on Battery",
       "ur": "EcoFlow WAVE 2 اضافی بیٹری"
     },
-    "price": 79000,
-    "oldPrice": 92900,
+    "price": 83000,
+    "oldPrice": 97700,
     "summary": {
       "en": "Run the WAVE 2 air conditioner without a mains socket using this 1159Wh add-on battery.",
       "ur": "اس 1159Wh اضافی بیٹری سے WAVE 2 ایئر کنڈیشنر کو بغیر بجلی کے ساکٹ کے چلائیں۔"
@@ -1694,14 +1689,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-031",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow RAPID Power Bank (25,000mAh)",
       "ur": "EcoFlow RAPID پاور بینک (25,000mAh)"
     },
-    "price": 39000,
-    "oldPrice": 45900,
+    "price": 41000,
+    "oldPrice": 48300,
     "summary": {
       "en": "A large-capacity RAPID power bank for charging multiple devices, including laptops, on the move.",
       "ur": "سفر کے دوران لیپ ٹاپ سمیت کئی آلات چارج کرنے کے لیے بڑی گنجائش والا RAPID پاور بینک۔"
@@ -1744,14 +1739,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-032",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow RAPID Power Bank (20,000mAh)",
       "ur": "EcoFlow RAPID پاور بینک (20,000mAh)"
     },
-    "price": 31000,
-    "oldPrice": 36500,
+    "price": 32600,
+    "oldPrice": 38400,
     "summary": {
       "en": "A 20,000mAh fast-charging power bank with enough capacity for several phone charges and a laptop top-up.",
       "ur": "20,000mAh فاسٹ چارجنگ پاور بینک، کئی بار فون چارج کرنے اور لیپ ٹاپ سپورٹ کے لیے۔"
@@ -1794,14 +1789,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-033",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow RAPID Magnetic Power Bank (10,000mAh)",
       "ur": "EcoFlow RAPID مقناطیسی پاور بینک (10,000mAh)"
     },
-    "price": 17000,
-    "oldPrice": 20000,
+    "price": 17900,
+    "oldPrice": 21100,
     "summary": {
       "en": "Magnetic 10,000mAh power bank with Qi2 15W wireless charging, 65W wired output and EcoFlow app connectivity.",
       "ur": "Qi2 15W وائرلیس چارجنگ، 65W وائرڈ آؤٹ پٹ اور EcoFlow ایپ کنیکٹیویٹی کے ساتھ مقناطیسی 10,000mAh پاور بینک۔"
@@ -1848,14 +1843,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-034",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow RAPID Power Bank (10,000mAh, Cable)",
       "ur": "EcoFlow RAPID پاور بینک (10,000mAh، کیبل)"
     },
-    "price": 19000,
-    "oldPrice": 22400,
+    "price": 20000,
+    "oldPrice": 23600,
     "summary": {
       "en": "A 10,000mAh power bank with an integrated USB-C cable, so there is one less cable to carry.",
       "ur": "10,000mAh پاور بینک جس میں USB-C کیبل پہلے سے لگی ہے، اضافی کیبل لے جانے کی ضرورت نہیں۔"
@@ -1898,14 +1893,14 @@ window.PRODUCTS = [
     "sku": "HRL-EF-035",
     "brand": "EcoFlow",
     "category": "EcoFlow",
-    "stock": 0,
-    "warranty": "14 days shop replacement warranty.",
+    "stock": 5,
+    "warranty": "7 days shop replacement warranty.",
     "title": {
       "en": "EcoFlow 65W GaN Charger",
       "ur": "EcoFlow 65W GaN چارجر"
     },
-    "price": 12000,
-    "oldPrice": 14100,
+    "price": 12600,
+    "oldPrice": 14900,
     "summary": {
       "en": "A compact 65W GaN wall charger with three ports for charging a phone, tablet and laptop together.",
       "ur": "تین پورٹس والا کمپیکٹ 65W GaN چارجر، فون، ٹیبلٹ اور لیپ ٹاپ ایک ساتھ چارج کرنے کے لیے۔"

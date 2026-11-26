@@ -913,3 +913,57 @@ body { background: #fff; color: #1d1d1f; font-family: -apple-system, BlinkMacSys
   .current-price { font-size: 14px; }
   .old-price { font-size: 11px; }
 }
+
+/* ------------------------------------------------------------- 24. Conversion polish */
+/* Use the self-hosted brand face consistently with the minimal skin. */
+body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+
+/* Tiny proof strip directly under the price — answers shipping/returns doubts early. */
+.pdp-trust-strip {
+  display: flex; flex-wrap: wrap; gap: 8px 14px; margin: -4px 0 18px;
+  font-size: 12px; font-weight: 600; color: #6e6e73;
+}
+.pdp-trust-strip span { display: inline-flex; align-items: center; gap: 6px; }
+.pdp-trust-strip span::before {
+  content: '✓'; color: #24863f; font-size: 11px; font-weight: 800;
+}
+
+/* Stock-aware WhatsApp primary action. */
+.whatsapp-order-link.primary {
+  background: #25d366; border-color: #25d366; color: #052e16; font-weight: 700;
+}
+.whatsapp-order-link.primary:hover { background: #1ebb57; border-color: #1ebb57; }
+
+/* Sticky mobile buy bar on crawlable product pages. */
+.pdp-mobile-cta { display: none; }
+@media (max-width: 760px) {
+  .pdp-mobile-cta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 400;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,.96); backdrop-filter: blur(12px);
+    border-top: 1px solid #e8e8ed; box-shadow: 0 -4px 18px rgba(0,0,0,.06);
+  }
+  .pdp-mobile-cta:has(> :only-child) { grid-template-columns: 1fr; }
+  .pdp-mobile-cta .checkout-btn,
+  .pdp-mobile-cta .whatsapp-order-link {
+    height: 46px; display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 999px; margin: 0; font-weight: 700;
+  }
+  .pdp-page { padding-bottom: 74px; }
+}
+
+/* Quiet brand mark on product photos — replaces loud percentage badges. */
+.product-card { position: relative; }
+.product-brand-mark {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  pointer-events: none; display: inline-flex; align-items: center;
+  font-size: 10px; font-weight: 700; letter-spacing: .02em; color: #1d1d1f;
+  background: rgba(255,255,255,.86); backdrop-filter: blur(6px);
+  border: 1px solid rgba(0,0,0,.05); border-radius: 999px; padding: 3px 8px;
+}
+.product-brand-mark.eco { background: transparent; border: 0; padding: 2px; }
+.product-brand-mark.eco img {
+  width: 52px; height: auto; display: block;
+  filter: brightness(0); opacity: .82;
+}

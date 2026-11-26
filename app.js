@@ -23,6 +23,7 @@
 
   var CART_KEY = 'hallroad_cart_v2';
   var ORDERS_KEY = 'hallroad_orders';
+  var ORDERS_QUEUE_KEY = 'hallroad_orders_queue';
   var LANG_KEY = 'hallroad_lang';
   var FALLBACK_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><rect width="800" height="800" fill="#f1f5f9"/>' +
@@ -131,11 +132,21 @@
     i.addEventListener('error', function () {
       if (i.dataset.fellback) return;
       i.dataset.fellback = '1';
+      i.removeAttribute('srcset');
       i.src = FALLBACK_IMG;
     });
     return i;
   }
   function imgSrc(x) { return /^https?:/i.test(x) ? x : '/' + String(x).replace(/^\/+/, ''); }
+  function thumbSrc(x) { return /\.webp$/i.test(x) ? x.replace(/\.webp$/, '-400.webp') : x; }
+  function brandMarkNode(brand) {
+    if (brand === 'EcoFlow') {
+      return el('span', { class: 'product-brand-mark eco' }, [
+        el('img', { src: '/images/brand/ecoflow-logo-white.webp', alt: 'EcoFlow', width: 52, height: 30 })
+      ]);
+    }
+    return el('span', { class: 'product-brand-mark', text: brand });
+  }
 function $(sel, root) { return (root || document).querySelector(sel); }
   function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
@@ -385,6 +396,8 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     $('#pdpTitle').textContent = L(p.title);
     $('#pdpBrand').textContent = p.brand + ' · SKU ' + p.sku;
     $('#pdpSummary').textContent = L(p.summary);
+    var deliveryNote = $('#pdpDeliveryNote');
+    if (deliveryNote) deliveryNote.textContent = shipNote() + ' delivery';
 
     var thumbs = $('#pdpThumbs');
     thumbs.textContent = '';
@@ -482,15 +495,29 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     }
 
     var stickyBar = node ? node.querySelector('.sticky-cart-bar') : null;
-    if (stickyBar && !stickyBar.querySelector('[data-action="buy-from-modal"]')) {
+    if (stickyBar) {
+      stickyBar.textContent = '';
       stickyBar.style.display = 'grid';
-      stickyBar.style.gridTemplateColumns = '1fr 1fr';
       stickyBar.style.gap = '10px';
-      stickyBar.appendChild(el('button', {
-        class: 'checkout-btn', type: 'button', 'data-action': 'buy-from-modal',
-        style: 'background:var(--ink);color:#fff;',
-        text: lang === 'ur' ? 'فوری آرڈر (COD)' : 'Buy Now (COD)'
-      }));
+      if (p.stock > 0) {
+        stickyBar.style.gridTemplateColumns = '1fr 1fr';
+        stickyBar.appendChild(el('button', {
+          class: 'checkout-btn', type: 'button', 'data-action': 'add-from-modal',
+          text: t('addToCart')
+        }));
+        stickyBar.appendChild(el('button', {
+          class: 'checkout-btn', type: 'button', 'data-action': 'buy-from-modal',
+          style: 'background:var(--ink);color:#fff;',
+          text: lang === 'ur' ? 'فوری آرڈر (COD)' : 'Buy Now (COD)'
+        }));
+      } else {
+        stickyBar.style.gridTemplateColumns = '1fr';
+        stickyBar.appendChild(el('button', {
+          class: 'checkout-btn', type: 'button', 'data-action': 'ask-whatsapp', 'data-product-id': p.id,
+          style: 'background:var(--ink);color:#fff;',
+          text: lang === 'ur' ? 'واٹس ایپ پر پوچھیں' : 'Ask on WhatsApp'
+        }));
+      }
     }
 
     var warr = $('#pdpWarranty');
@@ -557,7 +584,12 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     p = p || findProduct(modal.productId);
     if (!p || !p.images[i]) return;
     modal.imageIndex = i;
-    $('#pdpMainImg').src = imgSrc(p.images[i]);
+    var main = $('#pdpMainImg');
+    var src = imgSrc(p.images[i]);
+    main.src = src;
+    if (main.hasAttribute('srcset')) {
+      main.setAttribute('srcset', imgSrc(thumbSrc(p.images[i])) + ' 400w, ' + src + ' 800w');
+    }
     $$('.pdp-thumb').forEach(function (b, idx) { b.classList.toggle('active', idx === i); });
     syncDots(i);
   }
@@ -623,6 +655,10 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       cart.push(line);
     }
     saveCart(); updateCartUI(); toast(t('added'), 'success');
+    trackEvent('add_to_cart', {
+      currency: 'PKR', value: cartTotal(),
+      items: cart.map(function (c) { var l = cartLine(c); return { item_id: l.product.sku, item_name: l.title, quantity: c.qty, price: l.unit }; })
+    });
   }
 
   /* =============================================================== CATALOG */
@@ -646,17 +682,20 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     grid.textContent = '';
     if (!list.length) { grid.appendChild(el('p', { class: 'empty-state', text: t('noResults') })); return; }
     list.forEach(function (p, idx) {
-      var d = honestDiscount(p);
       var st = stockLabel(p);
-      var waMsg = 'Assalam o Alaikum! I want to order: ' + (lang === 'ur' && p.title.ur ? p.title.ur : p.title.en) +
+      var waMsg = (p.stock > 0 ? 'Assalam o Alaikum! I want to order: ' : 'Assalam o Alaikum! Is this available: ') +
+                  (lang === 'ur' && p.title.ur ? p.title.ur : p.title.en) +
                   ' - ' + money(p.price) + ' (hallroadlahore.com)';
+      var cardImg = img(imgSrc(thumbSrc(p.images[0])), p.title.en, { class: 'product-image', w: 400, h: 400, eager: idx < 4 });
+      cardImg.setAttribute('srcset', imgSrc(thumbSrc(p.images[0])) + ' 400w, ' + imgSrc(p.images[0]) + ' 800w');
+      cardImg.setAttribute('sizes', '(max-width: 760px) 45vw, (max-width: 1050px) 30vw, 260px');
       var card = el('button', {
         class: 'product-card', type: 'button',
         'aria-label': p.title.en + ', ' + money(p.price),
         onclick: function () { openProductModal(p.id); }
       }, [
-        d > 0 ? el('span', { class: 'discount-badge', text: '-' + d + '%' }) : null,
-        img(imgSrc(p.images[0]), p.title.en, { class: 'product-image', w: 400, h: 400, eager: idx < 4 }),
+        brandMarkNode(p.brand),
+        cardImg,
         el('div', {}, [
           el('h3', { class: 'product-title', text: lang === 'ur' && p.title.ur ? p.title.ur : p.title.en }),
           el('div', { class: 'price-box' }, [
@@ -667,7 +706,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
         ]),
         el('span', { class: 'btn-add-cart', text: t('viewDetails'), 'aria-hidden': 'true' }),
         el('span', {
-          class: 'wa-quick', text: t('quickWa'), 'aria-hidden': 'true', title: 'Order on WhatsApp',
+          class: 'wa-quick', text: p.stock > 0 ? t('quickWa') : 'Ask', 'aria-hidden': 'true', title: p.stock > 0 ? 'Order on WhatsApp' : 'Ask on WhatsApp',
           onclick: function (ev) {
             ev.stopPropagation();
             var num = (CFG.contact && CFG.contact.whatsapp) || '923396202062';
@@ -732,6 +771,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
 
   function openCheckoutModal() {
     if (!cart.length) { toast(t('errCart'), 'error'); return; }
+    trackEvent('begin_checkout', { currency: 'PKR', value: cartTotal() });
     toggleCartDrawer(false);
     ensureCartAndCheckout();
     var m = $('#checkoutModal');
@@ -869,8 +909,8 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     showConfirmation(order, waUrl);
   }
 
-  /* Orders are always recorded locally and optionally POSTed, so a blocked popup
-     can never silently destroy a sale. */
+  /* Orders are always recorded locally. If the worker is configured, we also POST
+     them and keep a small retry queue so an offline moment never loses an order. */
   function logOrder(order) {
     try {
       var all = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
@@ -879,14 +919,43 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     } catch (e) { /* storage full / private mode — non-fatal */ }
 
     var endpoint = CFG.orderEndpoint;
-    if (endpoint) {
-      try {
-        fetch(endpoint, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(order), mode: 'cors', keepalive: true
-        }).catch(function () { /* offline is fine; WhatsApp is the primary channel */ });
-      } catch (e) { /* ignore */ }
-    }
+    if (!endpoint) return;
+    postOrder(order, endpoint, false);
+  }
+
+  function postOrder(order, endpoint, queued) {
+    try {
+      fetch(endpoint, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(order), mode: 'cors', keepalive: true
+      }).then(function (res) {
+        if (queued && res && res.ok) removeFromOrderQueue(order.id);
+      }).catch(function () { if (!queued) pushToOrderQueue(order); });
+    } catch (e) { if (!queued) pushToOrderQueue(order); }
+  }
+
+  function pushToOrderQueue(order) {
+    try {
+      var q = JSON.parse(localStorage.getItem(ORDERS_QUEUE_KEY) || '[]');
+      if (!q.some(function (o) { return o.id === order.id; })) q.push(order);
+      localStorage.setItem(ORDERS_QUEUE_KEY, JSON.stringify(q.slice(-20)));
+    } catch (e) {}
+  }
+
+  function removeFromOrderQueue(id) {
+    try {
+      var q = JSON.parse(localStorage.getItem(ORDERS_QUEUE_KEY) || '[]');
+      localStorage.setItem(ORDERS_QUEUE_KEY, JSON.stringify(q.filter(function (o) { return o.id !== id; })));
+    } catch (e) {}
+  }
+
+  function flushOrderQueue() {
+    var endpoint = CFG.orderEndpoint;
+    if (!endpoint) return;
+    var q = [];
+    try { q = JSON.parse(localStorage.getItem(ORDERS_QUEUE_KEY) || '[]'); } catch (e) {}
+    if (!q.length) return;
+    q.forEach(function (order) { postOrder(order, endpoint, true); });
   }
 
   function showConfirmation(order, waUrl) {
@@ -1308,6 +1377,9 @@ function $(sel, root) { return (root || document).querySelector(sel); }
             el('div', { class: 'sidebar-section-title', text: 'All Pages & Buying Guides' }),
             el('nav', { class: 'sidebar-nav-grid', 'aria-label': 'All site pages' }, [
               el('a', { class: 'sidebar-nav-link', href: '/', text: 'Shop Catalog' }),
+              el('a', { class: 'sidebar-nav-link', href: '/collections/ecoflow.html', text: 'EcoFlow Power' }),
+              el('a', { class: 'sidebar-nav-link', href: '/collections/inverters.html', text: 'Inverters' }),
+              el('a', { class: 'sidebar-nav-link', href: '/collections/solar.html', text: 'Solar & MPPT' }),
               el('a', { class: 'sidebar-nav-link', href: '/track.html', text: 'Track Order' }),
               el('a', { class: 'sidebar-nav-link', href: '/tools/solar-calculator.html', text: 'Solar Calculator' }),
               el('a', { class: 'sidebar-nav-link', href: '/blog/', text: 'Buying Guides' }),
@@ -1483,6 +1555,15 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       else if (a === 'close-pdp') { e.preventDefault(); closeOverlay($('#pdpModal')); }
       else if (a === 'add-from-modal') { e.preventDefault(); addFromModal(); }
       else if (a === 'buy-from-modal') { e.preventDefault(); buyFromModal(); }
+      else if (a === 'ask-whatsapp') {
+        e.preventDefault();
+        var pid = parseInt(trigger.dataset.productId, 10) || modal.productId;
+        var ap = findProduct(pid);
+        if (!ap) return;
+        var num = (CFG.contact && CFG.contact.whatsapp) || '923396202062';
+        var msg = 'Assalam o Alaikum! Is ' + ap.title.en + ' (SKU ' + ap.sku + ') available?';
+        window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      }
       else if (a === 'quick-view') {
         e.preventDefault();
         var pid = parseInt(trigger.dataset.productId, 10);
@@ -1568,6 +1649,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       });
     }
     initStaticPage();
+    flushOrderQueue();
     initAnalytics();
     applyLanguage(lang);
 
