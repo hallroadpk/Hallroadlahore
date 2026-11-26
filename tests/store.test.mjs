@@ -62,6 +62,13 @@ ok(`Catalog renders ${CATALOG.length} product card(s)`, cards.length === CATALOG
 ok('No runtime errors on load', errs.length === 0, errs.join(' | ') || 'clean');
 ok('Product cards are real <button>s', cards.length > 0 && cards[0].tagName === 'BUTTON');
 
+{
+  const steel = CATALOG.find(x => /drain clip/i.test(x.title.en) && /stainless/i.test(x.title.en));
+  ok('Stainless drain clip uses its best (third) photo as the main image',
+     !!steel && /solar-drain-clip-steel-3\.jpg$/.test(steel.images[0]) && steel.images.length === 3,
+     steel ? steel.images.join(' | ') : 'product missing');
+}
+
 /* category tabs: only categories that have products (+ All) */
 const presentCats = ['All', ...new Set(CATALOG.map(p => p.category))];
 ok('Category tabs only show populated categories', d.querySelectorAll('#categoryTabs .cat-btn').length === presentCats.length,
@@ -440,14 +447,14 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
   ok('Critical <style> is placed BEFORE /styles.css, so the full stylesheet still wins',
      !!styleEl && !!cssLink && (styleEl.compareDocumentPosition(cssLink) & 4) !== 0);   // 4 = DOCUMENT_POSITION_FOLLOWING
 
-  /* Shop identity, comparison table, FAQPage schema, clean sitemap */
+  /* Shop identity, FAQPage schema, clean sitemap */
   const sitemapXml = read('sitemap.xml');
   ok('sitemap.xml contains no fragment (#) URLs', sitemapXml.indexOf('#') === -1);
   ok('Store identity includes G Power & Electronics and Shop No. 1, Sarwar Centre, Hall Road, Lahore',
      live.w.SITE_CONFIG.brand.legalName === 'G Power & Electronics' &&
      ld.body.textContent.indexOf('Shop No. 1, Sarwar Centre, Hall Road') !== -1);
-  ok('Homepage includes Quick Comparison table (#compareSection) and FAQPage JSON-LD',
-     !!ld.getElementById('compareSection') && HTML.indexOf('"@type": "FAQPage"') !== -1);
+  ok('Homepage has no Quick Comparison table and still has FAQPage JSON-LD',
+     !ld.getElementById('compareSection') && HTML.indexOf('"@type": "FAQPage"') !== -1);
 }
 
 /* ---------------- 13. SSR catalog, JSON-LD, footers, i18n, tracking, worker ---------------- */

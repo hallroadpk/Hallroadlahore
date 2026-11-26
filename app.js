@@ -1387,8 +1387,6 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     if (staticMain) staticMain.setAttribute('dir', 'ltr');
     var faqSec = $('#faq');
     if (faqSec) faqSec.setAttribute('dir', 'ltr');
-    var cmpSec = $('#compareSection');
-    if (cmpSec) cmpSec.setAttribute('dir', 'ltr');
     var btn = $('#langToggle');
     if (btn) btn.textContent = lang === 'ur' ? 'English' : 'اردو';
     var ph = $('#searchInput'); if (ph) ph.placeholder = t('searchPlaceholder');

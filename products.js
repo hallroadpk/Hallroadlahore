@@ -929,9 +929,9 @@ window.PRODUCTS = [
       "Warranty": "7 days"
     },
     "images": [
+      "images/products/solar-drain-clip-steel-3.jpg",
       "images/products/solar-drain-clip-steel-1.jpg",
-      "images/products/solar-drain-clip-steel-2.jpg",
-      "images/products/solar-drain-clip-steel-3.jpg"
+      "images/products/solar-drain-clip-steel-2.jpg"
     ],
     "sizes": [
       {
