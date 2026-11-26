@@ -50,7 +50,7 @@ Everything the shop needs to know lives in `site.config.js`, and every place you
 
 - `contact.whatsapp` / `phoneDisplay` — where orders and enquiries go
 - `payment.advanceAccount` — the JazzCash/EasyPaisa account (shown only after an order is confirmed, never publicly)
-- `shipping.freeShipping` / `rates` — the old site said "Free Shipping Nationwide". Decide if that is true.
+- `shipping.freeShipping` / `rates` — currently one flat `Rs. 449` delivery fee for all Pakistan (`freeShipping: false`).
 - `policy.*` — warranty default, return window, who pays return shipping
 - `orderEndpoint` — paste your Cloudflare Worker URL (see below) so orders are also logged server-side
 - `analytics.*` — paste GA4 / Meta / TikTok IDs to switch tracking on (off by default)

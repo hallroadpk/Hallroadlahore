@@ -347,7 +347,7 @@ for (const p of products) {
     seller: { '@type': 'Organization', name: 'G Power & Electronics (Hall Road Lahore)' },
     shippingDetails: {
       '@type': 'OfferShippingDetails',
-      shippingRate: { '@type': 'MonetaryAmount', value: 150, currency: 'PKR' },
+      shippingRate: { '@type': 'MonetaryAmount', value: 449, currency: 'PKR' },
       shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'PK' }
     },
     hasMerchantReturnPolicy: {
