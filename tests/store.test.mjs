@@ -126,6 +126,14 @@ ok('Swiping right in quick view moves to the previous photo and dot', activeDot(
   ok('Static page swipe advances the photo and dot', activeDot(pd) === 6);
 }
 
+{
+  const soloP = CATALOG.find(p => p.images.length === 1);
+  if (soloP) {
+    const sp = boot(read(`products/${soloP.slug}.html`));
+    ok('Single-photo product still shows exactly one dot', sp.w.document.querySelectorAll('#pdpDots .pdp-dot').length === 1);
+  }
+}
+
 /* ---------------- 5. phone validation + WhatsApp + cart safety ---------------- */
 function fillForm(phone) {
   d.getElementById('custName').value = 'Ali Khan';

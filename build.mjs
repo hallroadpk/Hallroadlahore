@@ -404,9 +404,9 @@ ${siteHeader('shop')}
   <div class="pdp-page-grid">
     <div class="pdp-page-media">
       <img id="pdpMainImg" class="pdp-main-img" src="${toSrc(p.images[0])}" alt="${escapeHtml(p.title.en)}" width="800" height="800" fetchpriority="high">
-      ${p.images.length > 1 ? `<div class="pdp-dots" id="pdpDots" role="group" aria-label="Product image position">
+      <div class="pdp-dots" id="pdpDots" role="group" aria-label="Product image position">
         ${p.images.map((_, i) => `<button type="button" class="pdp-dot${i === 0 ? ' active' : ''}" data-dot-index="${i}" aria-label="Show image ${i + 1}" aria-current="${i === 0 ? 'true' : 'false'}"></button>`).join('\n        ')}
-      </div>` : ''}
+      </div>
       ${p.images.length > 1 ? `<div class="pdp-thumbs" role="group" aria-label="Product images">
         ${p.images.map((img, i) => `<button type="button" class="pdp-thumb${i === 0 ? ' active' : ''}" data-image-index="${i}" aria-label="Show image ${i + 1}"><img src="${toSrc(img)}" alt="" width="80" height="80" loading="lazy"></button>`).join('\n        ')}
       </div>` : ''}
