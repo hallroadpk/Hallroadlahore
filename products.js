@@ -1043,7 +1043,7 @@ window.PRODUCTS = [
     "stock": 0,
     "warranty": "14 days shop replacement warranty.",
     "title": {
-      "en": "EcoFlow RIVER 2",
+      "en": "EcoFlow RIVER 2 Portable Power Station",
       "ur": "EcoFlow RIVER 2 پورٹیبل پاور اسٹیشن"
     },
     "price": 39000,
@@ -1076,8 +1076,7 @@ window.PRODUCTS = [
       "images/products/ecoflow-river-2-1.webp",
       "images/products/ecoflow-river-2-2.webp",
       "images/products/ecoflow-river-2-3.webp",
-      "images/products/ecoflow-river-2-4.webp",
-      "images/products/ecoflow-river-2-5.webp"
+      "images/products/ecoflow-river-2-4.webp"
     ],
     "variants": [
       {
