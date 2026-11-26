@@ -735,6 +735,7 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
 
 /* ------------------------------------------------------------- EcoFlow banner */
 .brand-banner {
+  position: relative;
   display: block;
   margin: 0 auto 18px;
   max-width: calc(var(--container-max, 1180px) + 32px);
@@ -748,6 +749,44 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
   width: 100%;
   height: auto;
 }
+.brand-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(4, 9, 15, .46) 0%, rgba(4, 9, 15, .16) 38%, transparent 60%);
+  pointer-events: none;
+}
+.brand-banner-caption {
+  position: absolute;
+  top: 50%;
+  left: clamp(20px, 5%, 64px);
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #fff;
+  text-align: left;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .72);
+  pointer-events: none;
+}
+.brand-banner-caption-brand {
+  font-size: clamp(30px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .08em;
+}
+.brand-banner-caption-tagline {
+  font-size: clamp(14px, 1.7vw, 20px);
+  font-weight: 700;
+  color: #25d366;
+}
+.brand-banner-caption-note {
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 600;
+  color: #d5dfec;
+}
 @media (max-width: 700px) {
   .brand-banner { width: calc(100% - 20px); border-radius: 10px; }
+  .brand-banner-caption { top: 26px; left: 18px; transform: none; gap: 4px; }
+  .brand-banner::before { background: linear-gradient(180deg, rgba(4, 9, 15, .5) 0%, transparent 58%); }
 }
