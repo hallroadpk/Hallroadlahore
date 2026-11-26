@@ -399,6 +399,21 @@ function $(sel, root) { return (root || document).querySelector(sel); }
       });
     } else { thumbs.style.display = 'none'; }
 
+    /* One dot per photo, kept in sync with thumbnails and swipes. */
+    var dots = $('#pdpDots');
+    if (dots) {
+      dots.textContent = '';
+      if (p.images.length > 1) {
+        p.images.forEach(function (_, i) {
+          dots.appendChild(el('button', {
+            type: 'button', class: 'pdp-dot' + (i === 0 ? ' active' : ''),
+            'aria-label': 'Show image ' + (i + 1), 'aria-current': i === 0 ? 'true' : 'false',
+            onclick: function () { selectImage(i); }
+          }));
+        });
+      }
+    }
+
     /* Size selector: shown only for products that define "sizes" (first size preselected). */
     var sizeSet = $('#sizeSet'), sizePills = $('#sizePills');
     if (sizeSet && sizePills) {
@@ -501,14 +516,52 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     openOverlay(node);
   }
 
+  function syncDots(i) {
+    $$('#pdpDots .pdp-dot').forEach(function (d, idx) {
+      d.classList.toggle('active', idx === i);
+      d.setAttribute('aria-current', idx === i ? 'true' : 'false');
+    });
+  }
+
+  /* Swipe left/right on the main photo moves to the next/previous picture. */
+  function bindImageSwipe(imgEl, getCount, onStep) {
+    if (!imgEl) return;
+    imgEl.setAttribute('draggable', 'false');
+    var startX = null, startY = null;
+    imgEl.addEventListener('touchstart', function (e) {
+      var t = e.changedTouches[0];
+      startX = t.clientX; startY = t.clientY;
+    }, { passive: true });
+    imgEl.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var t = e.changedTouches[0], dx = t.clientX - startX, dy = t.clientY - startY;
+      startX = null; startY = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        var count = getCount();
+        if (count > 1) onStep(dx < 0 ? 1 : -1, count);
+      }
+    }, { passive: true });
+  }
+
   function selectImage(i) {
     var p = findProduct(modal.productId);
+    if (!p || !p.images[i]) return;
     modal.imageIndex = i;
     $('#pdpMainImg').src = imgSrc(p.images[i]);
     $$('#pdpThumbs .pdp-thumb').forEach(function (b, idx) {
       b.classList.toggle('active', idx === i);
       b.setAttribute('aria-pressed', idx === i ? 'true' : 'false');
     });
+    syncDots(i);
+  }
+
+  function selectStaticImage(i, p) {
+    p = p || findProduct(modal.productId);
+    if (!p || !p.images[i]) return;
+    modal.imageIndex = i;
+    $('#pdpMainImg').src = imgSrc(p.images[i]);
+    $$('.pdp-thumb').forEach(function (b, idx) { b.classList.toggle('active', idx === i); });
+    syncDots(i);
   }
   /* Highlight pill i inside one selector group (#sizePills / #variantPills). */
   function markSelected(groupSelector, i) {
@@ -1380,10 +1433,16 @@ function $(sel, root) { return (root || document).querySelector(sel); }
 
     $$('.pdp-thumb').forEach(function (b) {
       b.addEventListener('click', function () {
-        var i = parseInt(b.dataset.imageIndex, 10);
-        $('#pdpMainImg').src = imgSrc(p.images[i]);
-        $$('.pdp-thumb').forEach(function (x) { x.classList.toggle('active', x === b); });
+        selectStaticImage(parseInt(b.dataset.imageIndex, 10), p);
       });
+    });
+    $$('#pdpDots .pdp-dot').forEach(function (d) {
+      d.addEventListener('click', function () {
+        selectStaticImage(parseInt(d.dataset.dotIndex, 10), p);
+      });
+    });
+    bindImageSwipe($('#pdpMainImg'), function () { return p.images.length; }, function (step, count) {
+      selectStaticImage((modal.imageIndex + step + count) % count, p);
     });
     $$('#sizePills .variant-pill').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -1506,6 +1565,14 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     renderCategoryTabs(); renderProducts(); updateCartUI();
     initSort();
     bindActions();
+    if ($('#pdpModal')) {
+      bindImageSwipe($('#pdpMainImg'), function () {
+        var p = findProduct(modal.productId);
+        return p ? p.images.length : 0;
+      }, function (step, count) {
+        selectImage((modal.imageIndex + step + count) % count);
+      });
+    }
     initStaticPage();
     initAnalytics();
     applyLanguage(lang);

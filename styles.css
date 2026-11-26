@@ -830,7 +830,7 @@ body { background: #fff; color: #1d1d1f; font-family: -apple-system, BlinkMacSys
 .catalog-toolbar { margin-bottom: 24px; }
 .sort-select { border-radius: 999px; background-color: #f5f5f7; border-color: transparent; font-weight: 600; }
 
-/* Product grid: white cards, soft grey image wells, generous spacing */
+/* Product grid: white image wells everywhere, generous spacing */
 .product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 34px 22px; }
 .product-card {
   background: transparent; border: 0; border-radius: 0; padding: 0; gap: 0;
@@ -839,7 +839,7 @@ body { background: #fff; color: #1d1d1f; font-family: -apple-system, BlinkMacSys
 .product-card:hover { transform: none; box-shadow: none; border-color: transparent; }
 .product-image {
   width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain;
-  background: #f5f5f7; border-radius: 18px; padding: 22px;
+  background: #fff; border: 1px solid #e8e8ed; border-radius: 18px; padding: 22px;
 }
 .product-title {
   font-size: 15px; font-weight: 600; line-height: 1.4; min-height: 0;
@@ -873,11 +873,21 @@ body { background: #fff; color: #1d1d1f; font-family: -apple-system, BlinkMacSys
 .pdp-page-media { align-self: start; }
 .pdp-main-img {
   width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain;
-  background: #f5f5f7; border-radius: 22px; padding: 36px;
+  background: #fff; border: 1px solid #e8e8ed; border-radius: 22px; padding: 36px;
+  touch-action: pan-y; user-select: none; -webkit-user-drag: none;
 }
+/* Swipe position dots: one dot per product photo, active dot is dark. */
+.pdp-dots { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 0 0; }
+.pdp-dots:empty { display: none; }
+.pdp-dot {
+  width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%;
+  background: #d2d2d7; cursor: pointer; transition: background .18s ease, transform .18s ease;
+}
+.pdp-dot.active { background: #1d1d1f; transform: scale(1.25); }
+.pdp-dot:focus-visible { outline: 2px solid #1d1d1f; outline-offset: 3px; }
 .pdp-thumbs { background: transparent; border: 0; padding: 14px 0 0; gap: 10px; }
 .pdp-thumb {
-  width: 64px; height: 64px; border-radius: 12px; background: #f5f5f7;
+  width: 64px; height: 64px; border-radius: 12px; background: #fff;
   border: 1px solid #e8e8ed; padding: 4px;
 }
 .pdp-thumb.active { border-color: #1d1d1f; }
@@ -913,7 +923,9 @@ body { background: #fff; color: #1d1d1f; font-family: -apple-system, BlinkMacSys
 
 /* Modal quick view stays compact but matches the same palette */
 .pdp-card { border-radius: 22px; }
-.pdp-main-img { background: #f5f5f7; }
+.pdp-main-img { background: #fff; }
+#pdpModal .pdp-dots { padding: 10px 0 0; }
+#pdpModal .pdp-main-img { border: 0; border-radius: 0; padding: 10px; }
 .pdp-close-btn { background: #1d1d1f; }
 .pdp-price-current { color: #1d1d1f; }
 
