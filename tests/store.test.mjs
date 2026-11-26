@@ -94,6 +94,38 @@ ok('Discount badge shows the honest minimum (' + honestDiscount(FIRST) + '%)',
    honestDiscount(FIRST) === 0 ? !badge : (badge && badge.textContent === '-' + honestDiscount(FIRST) + '%'),
    'badge=' + (badge ? badge.textContent : 'none'));
 
+/* ---------------- 4b. gallery dots + swipe ---------------- */
+const galleryP = CATALOG.find(p => p.images.length === 7) || CATALOG.find(p => p.images.length > 1);
+const activeDot = doc => [...doc.querySelectorAll('#pdpDots .pdp-dot')].findIndex(x => x.classList.contains('active'));
+function swipe(win, img, fromX, toX) {
+  const start = new win.Event('touchstart'); start.changedTouches = [{ clientX: fromX, clientY: 100 }];
+  const end = new win.Event('touchend'); end.changedTouches = [{ clientX: toX, clientY: 100 }];
+  img.dispatchEvent(start); img.dispatchEvent(end);
+}
+w.eval(`HRL.openProductModal(${galleryP.id});`);
+ok('Quick view shows one dot per product photo', d.querySelectorAll('#pdpDots .pdp-dot').length === galleryP.images.length,
+   `${d.querySelectorAll('#pdpDots .pdp-dot').length} dots / ${galleryP.images.length} photos`);
+d.querySelectorAll('#pdpDots .pdp-dot')[3].click();
+ok('Clicking a dot switches the photo and activates that dot',
+   activeDot(d) === 3 && d.getElementById('pdpMainImg').src.indexOf(galleryP.images[3]) !== -1);
+d.querySelectorAll('#pdpThumbs .pdp-thumb')[1].click();
+ok('Thumbnail selection keeps the dots in sync', activeDot(d) === 1);
+swipe(w, d.getElementById('pdpMainImg'), 300, 100);
+ok('Swiping left in quick view moves to the next photo and dot', activeDot(d) === 2);
+swipe(w, d.getElementById('pdpMainImg'), 100, 300);
+ok('Swiping right in quick view moves to the previous photo and dot', activeDot(d) === 1);
+
+{
+  const pg = boot(read(`products/${galleryP.slug}.html`));
+  const pd = pg.w.document;
+  ok('Static product page shows one dot per photo', pd.querySelectorAll('#pdpDots .pdp-dot').length === galleryP.images.length,
+     `${pd.querySelectorAll('#pdpDots .pdp-dot').length} dots / ${galleryP.images.length} photos`);
+  pd.querySelectorAll('#pdpDots .pdp-dot')[5].click();
+  ok('Static page dots switch the main photo', activeDot(pd) === 5 && pd.getElementById('pdpMainImg').src.indexOf(galleryP.images[5]) !== -1);
+  swipe(pg.w, pd.getElementById('pdpMainImg'), 300, 100);
+  ok('Static page swipe advances the photo and dot', activeDot(pd) === 6);
+}
+
 /* ---------------- 5. phone validation + WhatsApp + cart safety ---------------- */
 function fillForm(phone) {
   d.getElementById('custName').value = 'Ali Khan';
