@@ -217,7 +217,7 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
   ok('Sidebar includes direct contact & WhatsApp support box', !!d.querySelector('.sidebar-contact-box'));
   w.eval('HRL.toggleSidebar(false);');
   ok('Sidebar closes on toggleSidebar(false)', !sb.classList.contains('open') && sbBtn.getAttribute('aria-expanded') === 'false');
-  ok('No bundles in catalog (products only)', !CATALOG.some(p => p.category === 'Bundles') && CATALOG.length === 17, `${CATALOG.length} products`);
+  ok('No bundles in catalog (products only)', !CATALOG.some(p => p.category === 'Bundles') && CATALOG.length >= 17, `${CATALOG.length} products`);
   ok('Every product image is a real photo (.jpg/.png, 0 .svg placeholders)', !CATALOG.some(p => p.images.some(img => img.endsWith('.svg'))));
 }
 

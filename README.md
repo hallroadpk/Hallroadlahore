@@ -34,6 +34,10 @@ There is **no runtime dependency and no build server**. Everything a visitor nee
 | `variantLabel` | *(optional)* `{ "en": "Pack", "ur": "پیک" }` — the heading above the `variants` buttons. Defaults to "Select option". |
 | `sizes` | *(optional)* a Size selector, e.g. `[{ "name": "30mm" }, { "name": "35mm" }]`. A size never changes the price; the choice is shown in the cart and in the WhatsApp order. Leave it out for products that come in one size. |
 
+### EcoFlow catalogue (price-list import)
+
+The 18 EcoFlow products were added from the EcoFlow Pakistan price list. The **`Retailer Price`** is the selling price, **`RRP`** is stored as `oldPrice`, and the dealer **`RDP`** is deliberately not published. Stock is `0` until availability is confirmed in the warehouse — update `stock` in `products.json` and re-run the build before advertising these as in stock. Each model has a photo gallery; the seven RAPID Magnetic 10,000mAh angles were supplied by the shop owner. Some gallery shots are representative of the model family — replace them with exact SKU photos when available.
+
 ### Adding real product photos
 
 Put your compressed photos in `images/products/` (e.g. `my-inverter-1.webp`), then point the product's `images` array at them in `products.json` and `npm run build`. The build only generates a placeholder when the file does **not** exist, so your photo wins. Compress first (e.g. squoosh.app → WebP, ~800px wide).
