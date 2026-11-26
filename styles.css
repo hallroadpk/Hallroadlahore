@@ -749,13 +749,13 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(270deg, rgba(4, 9, 15, .52) 0%, rgba(4, 9, 15, .18) 30%, transparent 58%);
+  background: linear-gradient(90deg, rgba(4, 9, 15, .52) 0%, rgba(4, 9, 15, .18) 30%, transparent 58%);
   pointer-events: none;
 }
 .brand-banner-caption {
   position: absolute;
   top: clamp(12px, 3%, 24px);
-  right: clamp(12px, 3%, 28px);
+  left: clamp(12px, 3%, 28px);
   padding: 8px 10px;
   border-radius: 10px;
   background: rgba(4, 9, 15, .42);
@@ -770,7 +770,7 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
 }
 @media (max-width: 700px) {
   .brand-banner { width: calc(100% - 20px); border-radius: 10px; }
-  .brand-banner-caption { top: 10px; right: 10px; padding: 6px 8px; }
+  .brand-banner-caption { top: 10px; left: 10px; padding: 6px 8px; }
   .brand-banner-logo { width: clamp(92px, 26vw, 130px); }
-  .brand-banner::before { background: linear-gradient(270deg, rgba(4, 9, 15, .45) 0%, transparent 55%); }
+  .brand-banner::before { background: linear-gradient(90deg, rgba(4, 9, 15, .45) 0%, transparent 55%); }
 }
