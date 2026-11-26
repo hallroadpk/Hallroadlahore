@@ -57,7 +57,12 @@
       step2: 'Our team confirms stock and delivery time on WhatsApp.',
       step3: 'The rider calls you before delivery. Pay cash on delivery.',
       advanceTitle: 'Advance payment details', advanceBody: 'Only send an advance after our team confirms your order on WhatsApp.',
-      orderSummary: 'Order summary', items: 'items'
+      orderSummary: 'Order summary', items: 'items',
+      ecoflowKicker: 'ECOFLOW · PORTABLE POWER',
+      ecoflowTitle: 'Power that goes where you do',
+      ecoflowText: 'Portable stations, extra batteries, air conditioners and chargers — all in one place.',
+      ecoflowCta: 'Shop all EcoFlow →',
+      ecoflowNote: '18 products · up to 20% off'
     },
     ur: {
       addToCart: 'کارٹ میں شامل کریں', viewDetails: 'تفصیلات دیکھیں', cart: 'کارٹ', menu: 'مینو اور معلومات', total: 'کل رقم',
@@ -82,7 +87,12 @@
       step2: 'ہماری ٹیم واٹس ایپ پر اسٹاک اور ڈیلیوری ٹائم کنفرم کرے گی۔',
       step3: 'رائیڈر ڈیلیوری سے پہلے کال کرے گا۔ ڈیلیوری پر کیش ادا کریں۔',
       advanceTitle: 'ایڈوانس ادائیگی کی تفصیل', advanceBody: 'آرڈر واٹس ایپ پر کنفرم ہونے کے بعد ہی ایڈوانس بھیجیں۔',
-      orderSummary: 'آرڈر کا خلاصہ', items: 'اشیاء'
+      orderSummary: 'آرڈر کا خلاصہ', items: 'اشیاء',
+      ecoflowKicker: 'ایکو فلو · پورٹیبل پاور',
+      ecoflowTitle: 'طاقت جو آپ کے ساتھ چلے',
+      ecoflowText: 'پورٹیبل پاور اسٹیشنز، اضافی بیٹریاں، ایئر کنڈیشنر اور چارجرز — سب ایک جگہ۔',
+      ecoflowCta: 'تمام ایکو فلو دیکھیں →',
+      ecoflowNote: '18 پروڈکٹس · 20% تک چھوٹ'
     }
   };
 
@@ -1429,6 +1439,12 @@ function $(sel, root) { return (root || document).querySelector(sel); }
         e.preventDefault();
         addToCart(modal.productId, modal.variantIndex, parseInt(($('#qtyDisplay') || {}).textContent, 10) || 1, modal.sizeIndex);
         toggleCartDrawer(true);
+      }
+      else if (a === 'filter-ecoflow') {
+        e.preventDefault();
+        filterCategory('EcoFlow');
+        var main = $('#main');
+        if (main && main.scrollIntoView) main.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
       else if (a === 'open-checkout') { e.preventDefault(); openCheckoutModal(); }
       else if (a === 'close-checkout') { e.preventDefault(); closeCheckoutModal(); }
