@@ -1079,8 +1079,8 @@
         "en": "EcoFlow RIVER 2",
         "ur": "EcoFlow RIVER 2 پورٹیبل پاور اسٹیشن"
       },
-      "price": 35000,
-      "oldPrice": 39000,
+      "price": 39000,
+      "oldPrice": 45900,
       "summary": {
         "en": "Compact portable power station for phones, laptops and small appliances, with fast charging and multiple output ports.",
         "ur": "فونز، لیپ ٹاپ اور چھوٹے آلات کے لیے کمپیکٹ پورٹیبل پاور اسٹیشن، تیز چارجنگ اور کئی آؤٹ پٹ پورٹس کے ساتھ۔"
@@ -1131,8 +1131,8 @@
         "en": "EcoFlow RIVER 2 Max",
         "ur": "EcoFlow RIVER 2 Max پورٹیبل پاور اسٹیشن"
       },
-      "price": 52000,
-      "oldPrice": 59000,
+      "price": 59000,
+      "oldPrice": 69400,
       "summary": {
         "en": "Mid-size RIVER 2 power station for home backup and outdoor use, fully charging in about an hour.",
         "ur": "گھر کے بیک اپ اور آؤٹ ڈور استعمال کے لیے درمیانے سائز کا RIVER 2، تقریباً ایک گھنٹے میں مکمل چارج۔"
@@ -1182,8 +1182,8 @@
         "en": "EcoFlow RIVER 2 Pro",
         "ur": "EcoFlow RIVER 2 Pro پورٹیبل پاور اسٹیشن"
       },
-      "price": 82000,
-      "oldPrice": 89000,
+      "price": 89000,
+      "oldPrice": 104700,
       "summary": {
         "en": "Higher-capacity RIVER 2 model with more AC outlets for running several essentials during a power cut.",
         "ur": "زیادہ گنجائش والا RIVER 2 ماڈل، بجلی گل ہونے پر کئی ضروری آلات چلانے کے لیے اضافی AC آؤٹ لیٹس۔"
@@ -1233,8 +1233,8 @@
         "en": "EcoFlow DELTA 2",
         "ur": "EcoFlow DELTA 2 پورٹیبل پاور اسٹیشن"
       },
-      "price": 106000,
-      "oldPrice": 119000,
+      "price": 119000,
+      "oldPrice": 140000,
       "summary": {
         "en": "A 1kWh home-backup power station with enough outlets for a fridge, fan, router and devices at the same time.",
         "ur": "1kWh گھریلو بیک اپ پاور اسٹیشن، فریج، پنکھا، روٹر اور آلات ایک ساتھ چلانے کے لیے کافی پورٹس۔"
@@ -1284,8 +1284,8 @@
         "en": "EcoFlow DELTA 2 Max",
         "ur": "EcoFlow DELTA 2 Max پورٹیبل پاور اسٹیشن"
       },
-      "price": 211000,
-      "oldPrice": 229000,
+      "price": 229000,
+      "oldPrice": 286200,
       "summary": {
         "en": "A 2kWh power station with six AC outlets for whole-room backup and heavy home appliances.",
         "ur": "2kWh پاور اسٹیشن، چھ AC آؤٹ لیٹس کے ساتھ پورے کمرے کے بیک اپ اور بھاری آلات کے لیے۔"
@@ -1335,8 +1335,8 @@
         "en": "EcoFlow DELTA 2 Max Plus",
         "ur": "EcoFlow DELTA 2 Max Plus پورٹیبل پاور اسٹیشن"
       },
-      "price": 260000,
-      "oldPrice": 289000,
+      "price": 289000,
+      "oldPrice": 361200,
       "summary": {
         "en": "Extended DELTA 2 Max configuration for longer runtimes and larger home-backup setups.",
         "ur": "طویل بیک اپ اور بڑے گھریلو سسٹمز کے لیے DELTA 2 Max کی توسیع شدہ کنفیگریشن۔"
@@ -1386,8 +1386,8 @@
         "en": "EcoFlow DELTA Pro",
         "ur": "EcoFlow DELTA Pro پورٹیبل پاور اسٹیشن"
       },
-      "price": 399000,
-      "oldPrice": 449000,
+      "price": 449000,
+      "oldPrice": 561200,
       "summary": {
         "en": "A large portable home battery for whole-home backup, expansion with extra batteries and off-grid setups.",
         "ur": "پورے گھر کے بیک اپ، اضافی بیٹریوں اور آف گرڈ سسٹمز کے لیے بڑی پورٹیبل ہوم بیٹری۔"
@@ -1437,8 +1437,8 @@
         "en": "EcoFlow DELTA Pro Extra Battery",
         "ur": "EcoFlow DELTA Pro اضافی بیٹری"
       },
-      "price": 190000,
-      "oldPrice": 219000,
+      "price": 219000,
+      "oldPrice": 273800,
       "summary": {
         "en": "Add this smart extra battery to a DELTA Pro to increase capacity for longer outages and heavier loads.",
         "ur": "طویل بجلی گل ہونے اور زیادہ لوڈ کے لیے DELTA Pro میں یہ اضافی بیٹری لگا کر گنجائش بڑھائیں۔"
@@ -1486,8 +1486,8 @@
         "en": "EcoFlow DELTA 2 Extra Battery",
         "ur": "EcoFlow DELTA 2 اضافی بیٹری"
       },
-      "price": 65000,
-      "oldPrice": 69000,
+      "price": 69000,
+      "oldPrice": 81200,
       "summary": {
         "en": "Extra 1024Wh battery that connects to a DELTA 2 power station for longer backup at home or on site.",
         "ur": "DELTA 2 سے منسلک 1024Wh اضافی بیٹری، گھر یا سائٹ پر طویل بیک اپ کے لیے۔"
@@ -1535,8 +1535,8 @@
         "en": "EcoFlow DELTA Max Extra Battery",
         "ur": "EcoFlow DELTA Max اضافی بیٹری"
       },
-      "price": 93000,
-      "oldPrice": 99000,
+      "price": 99000,
+      "oldPrice": 116500,
       "summary": {
         "en": "A 2016Wh expansion battery for the DELTA Max series when one unit is not enough for the load.",
         "ur": "جب ایک یونٹ لوڈ کے لیے کافی نہ ہو تو DELTA Max سیریز کے لیے 2016Wh اضافی بیٹری۔"
@@ -1584,8 +1584,8 @@
         "en": "EcoFlow GLACIER Portable Refrigerator",
         "ur": "EcoFlow GLACIER پورٹیبل ریفریجریٹر"
       },
-      "price": 147000,
-      "oldPrice": 159000,
+      "price": 159000,
+      "oldPrice": 198800,
       "summary": {
         "en": "A dual-zone 40-litre portable fridge with an ice maker for road trips, camping and outdoor catering.",
         "ur": "سفر، کیمپنگ اور آؤٹ ڈور کیٹرنگ کے لیے 40 لیٹر ڈوئل زون پورٹیبل فریج، آئس میکر کے ساتھ۔"
@@ -1635,8 +1635,8 @@
         "en": "EcoFlow WAVE 2 Portable Air Conditioner",
         "ur": "EcoFlow WAVE 2 پورٹیبل ایئر کنڈیشنر"
       },
-      "price": 121000,
-      "oldPrice": 129000,
+      "price": 129000,
+      "oldPrice": 151800,
       "summary": {
         "en": "A portable 5100 BTU unit that cools or heats a room, tent or van without a fixed AC installation.",
         "ur": "کمرے، خیمے یا وین کو ٹھنڈا یا گرم کرنے کے لیے 5100 BTU پورٹیبل یونٹ، بغیر مستقل انسٹالیشن کے۔"
@@ -1685,8 +1685,8 @@
         "en": "EcoFlow WAVE 2 Add-on Battery",
         "ur": "EcoFlow WAVE 2 اضافی بیٹری"
       },
-      "price": 74000,
-      "oldPrice": 79000,
+      "price": 79000,
+      "oldPrice": 92900,
       "summary": {
         "en": "Run the WAVE 2 air conditioner without a mains socket using this 1159Wh add-on battery.",
         "ur": "اس 1159Wh اضافی بیٹری سے WAVE 2 ایئر کنڈیشنر کو بغیر بجلی کے ساکٹ کے چلائیں۔"
@@ -1734,8 +1734,8 @@
         "en": "EcoFlow RAPID Power Bank (25,000mAh)",
         "ur": "EcoFlow RAPID پاور بینک (25,000mAh)"
       },
-      "price": 35000,
-      "oldPrice": 39000,
+      "price": 39000,
+      "oldPrice": 45900,
       "summary": {
         "en": "A large-capacity RAPID power bank for charging multiple devices, including laptops, on the move.",
         "ur": "سفر کے دوران لیپ ٹاپ سمیت کئی آلات چارج کرنے کے لیے بڑی گنجائش والا RAPID پاور بینک۔"
@@ -1784,8 +1784,8 @@
         "en": "EcoFlow RAPID Power Bank (20,000mAh)",
         "ur": "EcoFlow RAPID پاور بینک (20,000mAh)"
       },
-      "price": 28000,
-      "oldPrice": 31000,
+      "price": 31000,
+      "oldPrice": 36500,
       "summary": {
         "en": "A 20,000mAh fast-charging power bank with enough capacity for several phone charges and a laptop top-up.",
         "ur": "20,000mAh فاسٹ چارجنگ پاور بینک، کئی بار فون چارج کرنے اور لیپ ٹاپ سپورٹ کے لیے۔"
@@ -1834,8 +1834,8 @@
         "en": "EcoFlow RAPID Magnetic Power Bank (10,000mAh)",
         "ur": "EcoFlow RAPID مقناطیسی پاور بینک (10,000mAh)"
       },
-      "price": 15000,
-      "oldPrice": 17000,
+      "price": 17000,
+      "oldPrice": 20000,
       "summary": {
         "en": "Magnetic 10,000mAh power bank with Qi2 15W wireless charging, 65W wired output and EcoFlow app connectivity.",
         "ur": "Qi2 15W وائرلیس چارجنگ، 65W وائرڈ آؤٹ پٹ اور EcoFlow ایپ کنیکٹیویٹی کے ساتھ مقناطیسی 10,000mAh پاور بینک۔"
@@ -1888,8 +1888,8 @@
         "en": "EcoFlow RAPID Power Bank (10,000mAh, Cable)",
         "ur": "EcoFlow RAPID پاور بینک (10,000mAh، کیبل)"
       },
-      "price": 17000,
-      "oldPrice": 19000,
+      "price": 19000,
+      "oldPrice": 22400,
       "summary": {
         "en": "A 10,000mAh power bank with an integrated USB-C cable, so there is one less cable to carry.",
         "ur": "10,000mAh پاور بینک جس میں USB-C کیبل پہلے سے لگی ہے، اضافی کیبل لے جانے کی ضرورت نہیں۔"
@@ -1938,8 +1938,8 @@
         "en": "EcoFlow 65W GaN Charger",
         "ur": "EcoFlow 65W GaN چارجر"
       },
-      "price": 10000,
-      "oldPrice": 12000,
+      "price": 12000,
+      "oldPrice": 14100,
       "summary": {
         "en": "A compact 65W GaN wall charger with three ports for charging a phone, tablet and laptop together.",
         "ur": "تین پورٹس والا کمپیکٹ 65W GaN چارجر، فون، ٹیبلٹ اور لیپ ٹاپ ایک ساتھ چارج کرنے کے لیے۔"
