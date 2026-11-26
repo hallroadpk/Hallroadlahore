@@ -486,8 +486,9 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
      rawHome.querySelector('.brand-banner')?.getAttribute('href') === '/collections/ecoflow.html');
 
   const ecoCollection = new JSDOM(read('collections/ecoflow.html')).window.document;
-  ok('EcoFlow collection page lists every EcoFlow product',
-     ecoCollection.querySelectorAll('#productGrid a.product-card').length === CATALOG.filter(p => p.category === 'EcoFlow').length);
+  ok('EcoFlow collection page lists only EcoFlow products',
+     ecoCollection.querySelectorAll('#collectionGrid a.product-card').length === CATALOG.filter(p => p.category === 'EcoFlow').length &&
+     !ecoCollection.querySelector('#productGrid'));
   const pg = new JSDOM(read(`products/${FIRST.slug}.html`)).window.document;
   ok('Product page shows delivery/warranty proof under the price',
      !!pg.querySelector('.pdp-trust-strip') && pg.querySelector('.pdp-trust-strip').textContent.includes('Rs. 449'));

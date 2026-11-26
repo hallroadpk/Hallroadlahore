@@ -593,7 +593,7 @@ ${siteHeader(c.slug)}
     <h1 class="catalog-seo-title">${escapeHtml(c.title)}</h1>
     <p class="catalog-seo-sub">${escapeHtml(c.intro)} <a href="/shipping.html">Flat Rs. ${shippingFee.toLocaleString('en-PK')} delivery nationwide →</a></p>
   </div>
-  <div class="product-grid" id="productGrid">${cards}
+  <div class="product-grid" id="collectionGrid">${cards}
   </div>
 </main>
 ${FOOTER}
