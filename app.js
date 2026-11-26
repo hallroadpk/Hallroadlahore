@@ -403,15 +403,13 @@ function $(sel, root) { return (root || document).querySelector(sel); }
     var dots = $('#pdpDots');
     if (dots) {
       dots.textContent = '';
-      if (p.images.length > 1) {
-        p.images.forEach(function (_, i) {
-          dots.appendChild(el('button', {
-            type: 'button', class: 'pdp-dot' + (i === 0 ? ' active' : ''),
-            'aria-label': 'Show image ' + (i + 1), 'aria-current': i === 0 ? 'true' : 'false',
-            onclick: function () { selectImage(i); }
-          }));
-        });
-      }
+      p.images.forEach(function (_, i) {
+        dots.appendChild(el('button', {
+          type: 'button', class: 'pdp-dot' + (i === 0 ? ' active' : ''),
+          'aria-label': 'Show image ' + (i + 1), 'aria-current': i === 0 ? 'true' : 'false',
+          onclick: function () { selectImage(i); }
+        }));
+      });
     }
 
     /* Size selector: shown only for products that define "sizes" (first size preselected). */
