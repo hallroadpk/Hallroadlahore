@@ -769,24 +769,15 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
   text-shadow: 0 2px 14px rgba(0, 0, 0, .72);
   pointer-events: none;
 }
-.brand-banner-caption-brand {
-  font-size: clamp(30px, 5vw, 64px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: .08em;
-}
-.brand-banner-caption-tagline {
-  font-size: clamp(14px, 1.7vw, 20px);
-  font-weight: 700;
-  color: #25d366;
-}
-.brand-banner-caption-note {
-  font-size: clamp(11px, 1.1vw, 13px);
-  font-weight: 600;
-  color: #d5dfec;
+.brand-banner-logo {
+  display: block;
+  width: clamp(180px, 22vw, 300px);
+  height: auto;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, .7));
 }
 @media (max-width: 700px) {
   .brand-banner { width: calc(100% - 20px); border-radius: 10px; }
-  .brand-banner-caption { top: 26px; left: 18px; transform: none; gap: 4px; }
+  .brand-banner-caption { top: 26px; left: 18px; transform: none; }
+  .brand-banner-logo { width: clamp(130px, 34vw, 190px); }
   .brand-banner::before { background: linear-gradient(180deg, rgba(4, 9, 15, .5) 0%, transparent 58%); }
 }
