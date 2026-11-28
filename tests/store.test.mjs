@@ -30,6 +30,12 @@ function honestDiscount(p) {
     return was > 0 ? Math.round(((was - now) / was) * 100) : 0;
   }));
 }
+/* Discount at the base variant — the price shown on cards and default PDP. */
+function baseDiscount(p) {
+  const v = p.variants[0] || {};
+  const now = p.price + (v.extraCost || 0), was = p.oldPrice ? p.oldPrice + (v.extraCost || 0) : 0;
+  return was > 0 ? Math.round(((was - now) / was) * 100) : 0;
+}
 
 const results = [];
 const ok = (n, cond, d) => results.push({ n, pass: !!cond, d: d || '' });
@@ -75,7 +81,7 @@ ok('Product cards are real <button>s', cards.length > 0 && cards[0].tagName === 
   ok('EcoFlow stock is set to 5 units', eco.every(p => p.stock === 5));
   ok('EcoFlow warranty matches the global 7-day policy',
      eco.every(p => p.warranty === '7 days shop replacement warranty.'));
-  const discounts = CATALOG.filter(p => p.oldPrice).map(p => honestDiscount(p));
+  const discounts = CATALOG.filter(p => p.oldPrice).map(p => baseDiscount(p));
   ok('Every discount is a realistic 10%, 15% or 20%', discounts.every(x => [10, 15, 20].includes(x)),
      [...new Set(discounts)].sort().join(', ') + '%');
 }
@@ -109,10 +115,27 @@ ok('Base price shown correctly', d.getElementById('pdpPriceCurrent').textContent
 const firstCard = d.querySelector('#productGrid .product-card');
 ok('Product cards have no loud percentage badges',
    d.querySelectorAll('#productGrid .discount-badge').length === 0);
-ok('Every product card shows a small brand mark',
-   d.querySelectorAll('#productGrid .product-card .product-brand-mark').length === CATALOG.length);
+const NO_MARK = new Set(['energy-mppt-80a-solar-charge-controller']);
+const DISCOUNT_MARK = new Set([
+  'instant-electric-water-heater-tap-digital-display',
+  'solar-panel-water-drain-clip-stainless-steel-10pcs',
+  'solar-panel-water-drain-clip-plastic-10pcs',
+]);
+ok('Branded cards show a small transparent brand mark (unbranded + Energy MPPT excluded)',
+   d.querySelectorAll('#productGrid .product-card .product-brand-mark').length ===
+     CATALOG.filter(p => !NO_MARK.has(p.slug) && !DISCOUNT_MARK.has(p.slug)).length);
 ok('EcoFlow cards use the compact EcoFlow logo mark',
    d.querySelectorAll('#productGrid .product-brand-mark.eco img[src*="ecoflow-logo"]').length === CATALOG.filter(p => p.brand === 'EcoFlow').length);
+ok('EcoFlow logo mark is small (36px wide)',
+   [...d.querySelectorAll('#productGrid .product-brand-mark.eco img')].every(img => img.getAttribute('width') === '36'));
+ok('Unbranded cards (water tap + drain clips) show a transparent discount mark instead of a brand',
+   d.querySelectorAll('#productGrid .product-discount-mark').length === DISCOUNT_MARK.size &&
+   [...d.querySelectorAll('#productGrid .product-discount-mark')].every(el => /^(15|20)% OFF$/.test(el.textContent.trim())));
+ok('Energy MPPT card has no mark (photo already carries the logo)',
+   !d.querySelector('#productGrid .product-card[aria-label*="Energy MPPT"] .product-brand-mark') &&
+   !d.querySelector('#productGrid .product-card[aria-label*="Energy MPPT"] .product-discount-mark'));
+ok('No G Power brand mark remains on cards',
+   ![...d.querySelectorAll('#productGrid .product-brand-mark')].some(el => el.textContent.trim() === 'G Power'));
 
 /* ---------------- 4b. gallery dots + swipe ---------------- */
 const galleryP = CATALOG.find(p => p.images.length === 7) || CATALOG.find(p => p.images.length > 1);
@@ -304,8 +327,8 @@ ok('Product cards have WhatsApp quick-order button', d.querySelectorAll('#produc
   const packSummary = p => p.variants.map(v => `${v.name}=${p.price + v.extraCost}`).join(' / ');
 
   /* The requested update, pinned on purpose: both Solar Panel Water Drain Clips. */
-  ok('Drain clips (ids 16, 17): price Rs. 99 with no fake 1% discount',
-     clips.every(p => p && /Drain Clips/.test(p.title.en) && p.price === 99 && !p.oldPrice),
+  ok('Drain clips (ids 16, 17): price Rs. 99 / was Rs. 124 (20% off, no fake 1% discount)',
+     clips.every(p => p && /Drain Clips/.test(p.title.en) && p.price === 99 && p.oldPrice === 124 && baseDiscount(p) === 20),
      clips.map(p => p && `${p.price}/${p.oldPrice || 'none'}`).join(' '));
   ok('Drain clips: Size selector offers 30mm and 35mm',
      clips.every(p => p && JSON.stringify(p.sizes) === '[{"name":"30mm"},{"name":"35mm"}]'));

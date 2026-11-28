@@ -86,7 +86,7 @@ for (const p of products) {
   const maxDisc = Math.max(...p.variants.map(v => discount(p, v)));
   const minDisc = Math.min(...p.variants.map(v => discount(p, v)));
   if (maxDisc > 55) warnings.push(`${p.slug}: advertised discount up to ${maxDisc}% - make sure the "was" price is a price you really sold at`);
-  if (maxDisc - minDisc > 12) warnings.push(`${p.slug}: discount varies ${minDisc}%-${maxDisc}% across variants - the grid shows the honest minimum (${minDisc}%)`);
+  if (maxDisc - minDisc > 12) warnings.push(`${p.slug}: discount varies ${minDisc}%-${maxDisc}% across variants - cards/PDP show the base variant (${discount(p, p.variants[0])}%), quick view recomputes per variant`);
 }
 
 function discount(p, v) {
@@ -98,6 +98,13 @@ function discount(p, v) {
 /* The badge must show a discount the buyer can actually get at the base variant. */
 function honestDiscount(p) {
   return Math.min(...p.variants.map(v => discount(p, v)));
+}
+/* Discount at the base (first) variant — the price shown on cards and the
+   default PDP view. Multi-pack variants dilute the % (same Rs saving on a
+   larger price), so cards/PDP badges use the base rate; the quick-view
+   modal recomputes honestly per selected variant. */
+function baseDiscount(p) {
+  return discount(p, p.variants[0]);
 }
 
 /* ------------------------------------------------------------- placeholder art */
@@ -193,12 +200,27 @@ function placeholderSvg(p, index) {
 
 const toSrc = (x) => /^https?:/i.test(x) ? x : '/' + String(x).replace(/^\/+/, '');
 const thumbSrc = (x) => /\.webp$/i.test(x) ? x.replace(/\.webp$/, '-400.webp') : x;
-/* Small, quiet brand mark in the top corner of every product photo. */
-function brandMark(brand) {
-  if (brand === 'EcoFlow') {
-    return '<span class="product-brand-mark eco"><img src="/images/brand/ecoflow-logo-white.webp" alt="EcoFlow" width="52" height="30"></span>';
+/* Small transparent mark in the top-left of every product photo.
+   - EcoFlow: compact logo (36px) with transparent background.
+   - Unbranded products (water tap, drain clips): discount text instead of a
+     brand, because the photo has no logo to show.
+   - Energy MPPT: no mark at all — the product photo already carries the logo. */
+const NO_CARD_MARK_SLUGS = new Set(['energy-mppt-80a-solar-charge-controller']);
+const DISCOUNT_CARD_MARK_SLUGS = new Set([
+  'instant-electric-water-heater-tap-digital-display',
+  'solar-panel-water-drain-clip-stainless-steel-10pcs',
+  'solar-panel-water-drain-clip-plastic-10pcs',
+]);
+function brandMark(product) {
+  if (NO_CARD_MARK_SLUGS.has(product.slug)) return '';
+  if (DISCOUNT_CARD_MARK_SLUGS.has(product.slug)) {
+    const pct = baseDiscount(product);
+    return pct > 0 ? `<span class="product-discount-mark">${pct}% OFF</span>` : '';
   }
-  return `<span class="product-brand-mark">${escapeHtml(brand)}</span>`;
+  if (product.brand === 'EcoFlow') {
+    return '<span class="product-brand-mark eco"><img src="/images/brand/ecoflow-logo-white.webp" alt="EcoFlow" width="36" height="21"></span>';
+  }
+  return `<span class="product-brand-mark">${escapeHtml(product.brand)}</span>`;
 }
 /* Keep generated product markup in sync with the single source of truth in site.config.js. */
 const siteConfigText = fs.readFileSync(path.join(ROOT, 'site.config.js'), 'utf8');
@@ -431,7 +453,7 @@ ${siteHeader('shop')}
       <div class="pdp-price-row">
         <span class="pdp-price-current" id="pdpPriceCurrent">Rs. ${p.price.toLocaleString('en-PK')}</span>
         ${p.oldPrice ? `<span class="pdp-price-old">Rs. ${p.oldPrice.toLocaleString('en-PK')}</span>` : ''}
-        ${honestDiscount(p) > 0 ? `<span class="pdp-save">Save ${honestDiscount(p)}%</span>` : ''}
+        ${baseDiscount(p) > 0 ? `<span class="pdp-save">Save ${baseDiscount(p)}%</span>` : ''}
       </div>
 
       <div class="stock-line" data-stock="${p.stock}">
@@ -572,7 +594,7 @@ for (const c of collectionDefs) {
   });
   const cards = list.map(x => `
       <a class="product-card" href="/products/${x.slug}.html" aria-label="${escapeHtml(x.title.en)}, Rs. ${x.price.toLocaleString('en-PK')}">
-        ${brandMark(x.brand)}
+        ${brandMark(x)}
         <img class="product-image" src="${toSrc(thumbSrc(x.images[0]))}" srcset="${toSrc(thumbSrc(x.images[0]))} 400w, ${toSrc(x.images[0])} 800w" sizes="(max-width: 760px) 45vw, (max-width: 1050px) 30vw, 260px" alt="${escapeHtml(x.title.en)}" width="400" height="400" loading="lazy">
         <h3 class="product-title">${escapeHtml(x.title.en)}</h3>
         <div class="price-box"><span class="current-price">Rs. ${x.price.toLocaleString('en-PK')}</span></div>
@@ -629,7 +651,7 @@ const ssrCards = products.map((p, i) => {
   const stockTxt = p.stock <= 0 ? 'Out of stock' : (p.stock <= 5 ? `Only ${p.stock} left` : 'In stock');
   const stockCls = p.stock <= 0 ? ' out' : (p.stock <= 5 ? ' low' : '');
   return `    <a class="product-card" href="/products/${p.slug}.html">
-      ${brandMark(p.brand)}
+      ${brandMark(p)}
       <img class="product-image" src="${toSrc(thumbSrc(p.images[0]))}" srcset="${toSrc(thumbSrc(p.images[0]))} 400w, ${toSrc(p.images[0])} 800w" sizes="(max-width: 760px) 45vw, (max-width: 1050px) 30vw, 260px" alt="${escapeHtml(p.title.en)}" width="400" height="400"${i >= 4 ? ' loading="lazy"' : ' fetchpriority="high"'}>
       <div>
         <h3 class="product-title">${escapeHtml(p.title.en)}</h3>

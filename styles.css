@@ -953,17 +953,29 @@ body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Seg
   .pdp-page { padding-bottom: 74px; }
 }
 
-/* Quiet brand mark on product photos — replaces loud percentage badges. */
+/* Quiet transparent mark on product photos — blends into the photo, no pill.
+   Top-left is the professional spot; small size keeps it a watermark, not a badge. */
 .product-card { position: relative; }
 .product-brand-mark {
-  position: absolute; top: 10px; left: 10px; z-index: 2;
+  position: absolute; top: 8px; left: 8px; z-index: 2;
   pointer-events: none; display: inline-flex; align-items: center;
-  font-size: 10px; font-weight: 700; letter-spacing: .02em; color: #1d1d1f;
-  background: rgba(255,255,255,.86); backdrop-filter: blur(6px);
-  border: 1px solid rgba(0,0,0,.05); border-radius: 999px; padding: 3px 8px;
+  font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: #1d1d1f; opacity: .85;
+  background: transparent; border: 0; border-radius: 0; padding: 0;
+  text-shadow: 0 1px 2px rgba(255,255,255,.95), 0 0 8px rgba(255,255,255,.95);
 }
-.product-brand-mark.eco { background: transparent; border: 0; padding: 2px; }
+.product-brand-mark.eco { background: transparent; border: 0; padding: 0; opacity: .8; }
 .product-brand-mark.eco img {
-  width: 52px; height: auto; display: block;
-  filter: brightness(0); opacity: .82;
+  width: 36px; height: auto; display: block;
+  filter: brightness(0);
 }
+/* Unbranded photos (water tap, drain clips): discount text in the same spot. */
+.product-discount-mark {
+  position: absolute; top: 8px; left: 8px; z-index: 2;
+  pointer-events: none; display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 800; letter-spacing: .04em; color: #c9342c;
+  background: transparent; border: 0; padding: 0;
+  text-shadow: 0 1px 2px rgba(255,255,255,.95), 0 0 8px rgba(255,255,255,.95);
+}
+html[dir="rtl"] .product-brand-mark,
+html[dir="rtl"] .product-discount-mark { left: auto; right: 8px; }
