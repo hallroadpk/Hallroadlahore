@@ -1674,10 +1674,10 @@ window.PRODUCTS = [
       "Compatibility": "WAVE 2"
     },
     "images": [
-      "images/products/ecoflow-wave-2-add-on-battery-1.webp",
-      "images/products/ecoflow-wave-2-add-on-battery-2.webp",
       "images/products/ecoflow-wave-2-add-on-battery-3.webp",
-      "images/products/ecoflow-wave-2-add-on-battery-4.webp"
+      "images/products/ecoflow-wave-2-add-on-battery-4.webp",
+      "images/products/ecoflow-wave-2-add-on-battery-2.webp",
+      "images/products/ecoflow-wave-2-add-on-battery-1.webp"
     ],
     "variants": [
       {

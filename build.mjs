@@ -220,6 +220,9 @@ function brandMark(product) {
   if (product.brand === 'EcoFlow') {
     return '<span class="product-brand-mark eco"><img src="/images/brand/ecoflow-logo-white.webp" alt="EcoFlow" width="36" height="21"></span>';
   }
+  if (product.brand === 'Simtek') {
+    return '<span class="product-brand-mark simtek"><img src="/images/brand/simtek-logo.webp" alt="Simtek" width="44" height="10"></span>';
+  }
   return `<span class="product-brand-mark">${escapeHtml(product.brand)}</span>`;
 }
 /* Keep generated product markup in sync with the single source of truth in site.config.js. */
@@ -648,8 +651,8 @@ indexHtml = indexHtml.replace(
   (m, a, b) => a + '\n' + JSON.stringify(itemList, null, 2) + '\n' + b
 );
 const ssrCards = products.map((p, i) => {
-  const stockTxt = p.stock <= 0 ? 'Out of stock' : (p.stock <= 5 ? `Only ${p.stock} left` : 'In stock');
-  const stockCls = p.stock <= 0 ? ' out' : (p.stock <= 5 ? ' low' : '');
+  const stockTxt = p.stock <= 0 ? 'Out of stock' : (p.stock <= 3 ? `Only ${p.stock} left` : 'In stock');
+  const stockCls = p.stock <= 0 ? ' out' : (p.stock <= 3 ? ' low' : '');
   return `    <a class="product-card" href="/products/${p.slug}.html">
       ${brandMark(p)}
       <img class="product-image" src="${toSrc(thumbSrc(p.images[0]))}" srcset="${toSrc(thumbSrc(p.images[0]))} 400w, ${toSrc(p.images[0])} 800w" sizes="(max-width: 760px) 45vw, (max-width: 1050px) 30vw, 260px" alt="${escapeHtml(p.title.en)}" width="400" height="400"${i >= 4 ? ' loading="lazy"' : ' fetchpriority="high"'}>

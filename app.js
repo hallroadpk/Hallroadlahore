@@ -161,6 +161,11 @@
         el('img', { src: '/images/brand/ecoflow-logo-white.webp', alt: 'EcoFlow', width: 36, height: 21 })
       ]);
     }
+    if (product.brand === 'Simtek') {
+      return el('span', { class: 'product-brand-mark simtek' }, [
+        el('img', { src: '/images/brand/simtek-logo.webp', alt: 'Simtek', width: 44, height: 10 })
+      ]);
+    }
     return el('span', { class: 'product-brand-mark', text: product.brand });
   }
 function $(sel, root) { return (root || document).querySelector(sel); }
@@ -203,7 +208,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
   function stockLabel(p) {
     if (p.stock === undefined) return null;
     if (p.stock <= 0) return { text: t('outStock'), cls: 'out' };
-    if (p.stock <= 5) return { text: t('lowStock').replace('%n', p.stock), cls: 'low' };
+    if (p.stock <= 3) return { text: t('lowStock').replace('%n', p.stock), cls: 'low' };
     return { text: t('inStock'), cls: '' };
   }
 

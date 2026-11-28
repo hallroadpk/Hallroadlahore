@@ -969,6 +969,10 @@ body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Seg
   width: 36px; height: auto; display: block;
   filter: brightness(0);
 }
+.product-brand-mark.simtek { background: transparent; border: 0; padding: 0; opacity: .88; }
+.product-brand-mark.simtek img {
+  width: 44px; height: auto; display: block;
+}
 /* Unbranded photos (water tap, drain clips): discount text in the same spot. */
 .product-discount-mark {
   position: absolute; top: 8px; left: 8px; z-index: 2;
