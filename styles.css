@@ -698,14 +698,18 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
 .brand-banner {
   position: relative;
   display: block;
-  margin: 0 auto 18px;
+  margin: 0 auto 12px;
   max-width: calc(var(--container-max, 1180px) + 32px);
   width: calc(100% - 32px);
   border-radius: 14px;
   overflow: hidden;
   background: #0b1016;
 }
-.brand-banner > img:first-child { display: block; width: 100%; height: auto; }
+.brand-banner > img:first-child { display: block; width: 100%; height: 210px; object-fit: cover; object-position: center; }
+@media (max-width: 760px) {
+  .brand-banner > img:first-child { height: 140px; }
+}
+.brand-banner-logo.simtek-banner-logo { filter: brightness(0) invert(1); }
 .brand-banner::before {
   content: '';
   position: absolute;
