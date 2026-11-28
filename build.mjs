@@ -221,7 +221,7 @@ function brandMark(product) {
     return '<span class="product-brand-mark eco"><img src="/images/brand/ecoflow-logo-white.webp" alt="EcoFlow" width="36" height="21"></span>';
   }
   if (product.brand === 'Simtek') {
-    return '<span class="product-brand-mark simtek"><img src="/images/brand/simtek-logo.webp" alt="Simtek" width="44" height="10"></span>';
+    return '<span class="product-brand-mark simtek"><img src="/images/brand/simtek-logo.webp" alt="Simtek" width="52" height="19"></span>';
   }
   return `<span class="product-brand-mark">${escapeHtml(product.brand)}</span>`;
 }
