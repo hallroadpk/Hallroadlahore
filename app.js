@@ -139,13 +139,29 @@
   }
   function imgSrc(x) { return /^https?:/i.test(x) ? x : '/' + String(x).replace(/^\/+/, ''); }
   function thumbSrc(x) { return /\.webp$/i.test(x) ? x.replace(/\.webp$/, '-400.webp') : x; }
-  function brandMarkNode(brand) {
-    if (brand === 'EcoFlow') {
+  /* Small transparent top-left mark on every card. Keep in sync with build.mjs brandMark(). */
+  var NO_CARD_MARK_SLUGS = { 'energy-mppt-80a-solar-charge-controller': true };
+  var DISCOUNT_CARD_MARK_SLUGS = {
+    'instant-electric-water-heater-tap-digital-display': true,
+    'solar-panel-water-drain-clip-stainless-steel-10pcs': true,
+    'solar-panel-water-drain-clip-plastic-10pcs': true
+  };
+  function baseDiscount(p) {
+    var now = variantPrice(p, 0), was = variantOldPrice(p, 0);
+    return was > now ? Math.round(((was - now) / was) * 100) : 0;
+  }
+  function brandMarkNode(product) {
+    if (NO_CARD_MARK_SLUGS[product.slug]) return null;
+    if (DISCOUNT_CARD_MARK_SLUGS[product.slug]) {
+      var pct = baseDiscount(product);
+      return pct > 0 ? el('span', { class: 'product-discount-mark', text: pct + '% OFF' }) : null;
+    }
+    if (product.brand === 'EcoFlow') {
       return el('span', { class: 'product-brand-mark eco' }, [
-        el('img', { src: '/images/brand/ecoflow-logo-white.webp', alt: 'EcoFlow', width: 52, height: 30 })
+        el('img', { src: '/images/brand/ecoflow-logo-white.webp', alt: 'EcoFlow', width: 36, height: 21 })
       ]);
     }
-    return el('span', { class: 'product-brand-mark', text: brand });
+    return el('span', { class: 'product-brand-mark', text: product.brand });
   }
 function $(sel, root) { return (root || document).querySelector(sel); }
   function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
@@ -694,7 +710,7 @@ function $(sel, root) { return (root || document).querySelector(sel); }
         'aria-label': p.title.en + ', ' + money(p.price),
         onclick: function () { openProductModal(p.id); }
       }, [
-        brandMarkNode(p.brand),
+        brandMarkNode(p),
         cardImg,
         el('div', {}, [
           el('h3', { class: 'product-title', text: lang === 'ur' && p.title.ur ? p.title.ur : p.title.en }),

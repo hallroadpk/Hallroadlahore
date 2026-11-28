@@ -13,6 +13,7 @@ window.PRODUCTS = [
       "ur": "انسٹنٹ الیکٹرک واٹر ہیٹر ٹیپ - ڈیجیٹل ڈسپلے"
     },
     "price": 4499,
+    "oldPrice": 5600,
     "summary": {
       "en": "Instant hot water within 3 seconds for kitchens and bathrooms. 3000W heating element with a digital LED temperature display. Available with or without a handheld shower set.",
       "ur": "رسوئی اور باتھ روم کے لیے 3 سیکنڈ میں گرم پانی۔ 3000W ہیٹنگ ایلیمینٹ اور ڈیجیٹل LED ٹمپریچر ڈسپلے۔ شاور سیٹ کے ساتھ یا بغیر دستیاب۔"
@@ -895,6 +896,7 @@ window.PRODUCTS = [
       "ur": "سولر پینل واٹر ڈرین کلپ - اسٹینلیس اسٹیل"
     },
     "price": 99,
+    "oldPrice": 124,
     "summary": {
       "en": "Stainless steel water drain clips that prevent mud and water accumulation at the bottom edge of solar panels. Improves self-cleaning during rain, prevents hot-spot and increases panel life. Fits framed panels 30-35mm, no tools needed.",
       "ur": "اسٹینلیس اسٹیل ڈرین کلپ جو پانی اور مٹی کو پینل کے نیچے جمع ہونے سے روکتا ہے۔ بارش میں خودکار صفائی، پینل کی زندگی بڑھائے۔"
@@ -969,6 +971,7 @@ window.PRODUCTS = [
       "ur": "سولر پینل واٹر ڈرین کلپ - پلاسٹک"
     },
     "price": 99,
+    "oldPrice": 124,
     "summary": {
       "en": "Economical plastic water drain clips for solar panels. Same drain function as stainless steel at a lower price - snaps onto 30-35mm frames and guides trapped water off the panel edge.",
       "ur": "سستی پلاسٹک ڈرین کلپ، اسی طرح پانی نکالتی ہے، کم قیمت میں۔"
