@@ -208,7 +208,6 @@ function $(sel, root) { return (root || document).querySelector(sel); }
   function stockLabel(p) {
     if (p.stock === undefined) return null;
     if (p.stock <= 0) return { text: t('outStock'), cls: 'out' };
-    if (p.stock <= 3) return { text: t('lowStock').replace('%n', p.stock), cls: 'low' };
     return { text: t('inStock'), cls: '' };
   }
 

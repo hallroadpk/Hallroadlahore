@@ -651,8 +651,8 @@ indexHtml = indexHtml.replace(
   (m, a, b) => a + '\n' + JSON.stringify(itemList, null, 2) + '\n' + b
 );
 const ssrCards = products.map((p, i) => {
-  const stockTxt = p.stock <= 0 ? 'Out of stock' : (p.stock <= 3 ? `Only ${p.stock} left` : 'In stock');
-  const stockCls = p.stock <= 0 ? ' out' : (p.stock <= 3 ? ' low' : '');
+  const stockTxt = p.stock <= 0 ? 'Out of stock' : 'In stock';
+  const stockCls = p.stock <= 0 ? ' out' : '';
   return `    <a class="product-card" href="/products/${p.slug}.html">
       ${brandMark(p)}
       <img class="product-image" src="${toSrc(thumbSrc(p.images[0]))}" srcset="${toSrc(thumbSrc(p.images[0]))} 400w, ${toSrc(p.images[0])} 800w" sizes="(max-width: 760px) 45vw, (max-width: 1050px) 30vw, 260px" alt="${escapeHtml(p.title.en)}" width="400" height="400"${i >= 4 ? ' loading="lazy"' : ' fetchpriority="high"'}>
