@@ -163,7 +163,7 @@
     }
     if (product.brand === 'Simtek') {
       return el('span', { class: 'product-brand-mark simtek' }, [
-        el('img', { src: '/images/brand/simtek-logo.webp', alt: 'Simtek', width: 44, height: 10 })
+        el('img', { src: '/images/brand/simtek-logo.webp', alt: 'Simtek', width: 52, height: 19 })
       ]);
     }
     return el('span', { class: 'product-brand-mark', text: product.brand });
