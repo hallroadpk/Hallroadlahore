@@ -709,7 +709,15 @@ html[dir="rtl"] .info-sidebar { left: auto; right: 0; transform: translateX(100%
 @media (max-width: 760px) {
   .brand-banner > img:first-child { height: 140px; }
 }
-.brand-banner-logo.simtek-banner-logo { filter: brightness(0) invert(1); }
+.brand-banner-logo {
+  display: block;
+  width: clamp(72px, 11vw, 130px);
+  height: auto;
+  background: transparent;
+  opacity: .85;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, .55));
+}
+.brand-banner-logo.simtek-banner-logo { filter: brightness(0) invert(1) drop-shadow(0 2px 10px rgba(0, 0, 0, .55)); opacity: .88; }
 .brand-banner::before {
   content: '';
   position: absolute;
